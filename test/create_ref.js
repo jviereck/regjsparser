@@ -4,18 +4,18 @@ var parse = require('../parser').parse;
 
 var parseTests = JSON.parse(fs.readFileSync('test/parse_input.json') || '[]');
 
-var arr = parseTests.map(function(string) {
-    var res;
+var arr = parseTests.map(function(input) {
+    var result;
     try {
-        res = parse(string);
-    } catch (e) {
-        res = {
+        result = parse(input);
+    } catch (error) {
+        result = {
             type: 'error',
-            name: e.name,
-            message: e.message,
-            input: string
+            name: error.name,
+            message: error.message,
+            input: input
         };
     }
-    return res;
+    return result;
 });
 fs.writeFileSync('test/parse_output.json', JSON.stringify(arr, null, 2));
