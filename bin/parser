@@ -12,7 +12,7 @@
     if (/^(?:-h|--help|undefined)$/.test(first)) {
       log([
         '\nUsage:\n',
-        '\regjsparser [regex ...]',
+        '\tregjsparser [regex ...]',
         '\tregjsparser [-h | --help]',
         '\nExamples:\n',
         '\tregjsparser \'^foo.bar$\'',
