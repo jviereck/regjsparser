@@ -2,10 +2,16 @@
 
 Parsing the JavaScript's RegExp in JavaScript.
 
+## Installation
+
+```bash
+npm install regexp.js-parser
+```
+
 ## Usage
 
 ```js
-var parse = require('../parser').parse;
+var parse = require('regexp.js-parser').parse;
 
 var parseTree = parse('^a'); // /^a/
 console.log(parseTree);
@@ -41,13 +47,13 @@ console.log(parseTree);
 
 Run the command
 
-```
+```bash
 npm test
 ```
 
 To create a new reference file, execute
 
-```
+```bash
 node test/create_ref.js
 ```
 
