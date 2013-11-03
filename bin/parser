@@ -12,11 +12,11 @@
     if (/^(?:-h|--help|undefined)$/.test(first)) {
       log([
         '\nUsage:\n',
-        '\tregexp.js-parser [regex ...]',
-        '\tregexp.js-parser [-h | --help]',
+        '\regjsparser [regex ...]',
+        '\tregjsparser [-h | --help]',
         '\nExamples:\n',
-        '\tregexp.js-parser \'^foo.bar$\'',
-        '\tregexp.js-parser \'[a-zA-Z0-9]\''
+        '\tregjsparser \'^foo.bar$\'',
+        '\tregjsparser \'[a-zA-Z0-9]\''
       ].join('\n'));
       return process.exit(1);
     }
