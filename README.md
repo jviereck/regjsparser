@@ -1,17 +1,17 @@
-# RegExp.JS - Parser
+# RegJSParser
 
 Parsing the JavaScript's RegExp in JavaScript.
 
 ## Installation
 
 ```bash
-npm install regexp.js-parser
+npm install regjsparser
 ```
 
 ## Usage
 
 ```js
-var parse = require('regexp.js-parser').parse;
+var parse = require('regjsparser').parse;
 
 var parseTree = parse('^a'); // /^a/
 console.log(parseTree);

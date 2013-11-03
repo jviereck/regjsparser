@@ -1,5 +1,5 @@
 {
-  "name": "regexp.js-parser",
+  "name": "regjsparser",
   "version": "0.0.1",
   "author": "'Juilan Viereck' <julian.viereck@gmail.com>",
   "license": "BSD",
