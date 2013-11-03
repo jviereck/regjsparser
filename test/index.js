@@ -10,11 +10,22 @@ if (parseTests.length !== parseResult.length) {
 }
 
 parseTests.forEach(function(input, idx) {
-    var par = parse(input);
-    var res = parseResult[idx];
+    var par;
+    try {
+        par = parse(input);
+    } catch (error) {
+        par = {
+            type: 'error',
+            name: error.name,
+            message: error.message,
+            input: input
+        };
+    }
 
-    if (JSON.stringify(par) !== JSON.stringify(res)) {
-        throw new Error('Failure parsing string ' + input + ':' + JSON.stringify(par) + '\n' + JSON.stringify(res));
+    var resuls = parseResult[idx];
+
+    if (JSON.stringify(par) !== JSON.stringify(resuls)) {
+        throw new Error('Failure parsing string ' + input + ':' + JSON.stringify(par) + '\n' + JSON.stringify(resuls));
     } else {
         console.log('PASSED TEST: ' + input);
     }
