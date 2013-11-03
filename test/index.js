@@ -10,7 +10,18 @@ if (parseTests.length !== parseResult.length) {
 }
 
 parseTests.forEach(function(input, idx) {
-    var par = parse(input);
+    var par;
+    try {
+        par = parse(input);
+    } catch (e) {
+        par = {
+        type: 'error',
+            name: e.name,
+            message: e.message,
+            input: input
+        };
+    }
+
     var res = parseResult[idx];
 
     if (JSON.stringify(par) !== JSON.stringify(res)) {
