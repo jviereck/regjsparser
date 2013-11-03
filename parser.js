@@ -838,17 +838,11 @@ function parse(str) {
         return new SyntaxError(str);
     }
 
-    try {
-        var result = parseDisjunction();
-        result.lastMatchIdx = lastMatchIdx;
+    var result = parseDisjunction();
+    result.lastMatchIdx = lastMatchIdx;
 
-        if (result.to !== str.length) {
-            throw syntaxError('Could not parse entire input - got stuck: ' + str);
-        }
-    } catch(e) {
-        return {
-            error: e
-        };
+    if (result.to !== str.length) {
+        throw syntaxError('Could not parse entire input - got stuck: ' + str);
     }
 
     return result;
