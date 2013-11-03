@@ -1,6 +1,6 @@
 // RegExp.JS Parser
 //
-// ============================================================================
+// ==================================================================
 //
 // See ECMA-262 Standard: 15.10.1
 //
@@ -841,14 +841,14 @@ function parse(str) {
     try {
         var result = parseDisjunction();
         result.lastMatchIdx = lastMatchIdx;
+
+        if (result.to !== str.length) {
+            throw syntaxError('Could not parse entire input - got stuck: ' + str);
+        }
     } catch(e) {
         return {
             error: e
         };
-    }
-
-    if (result.to !== str.length) {
-        throw syntaxError('Could not parse entire input - got stuck.');
     }
 
     return result;
