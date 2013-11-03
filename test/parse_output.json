@@ -1,0 +1,788 @@
+[
+  {
+    "type": "alternative",
+    "terms": [
+      {
+        "type": "assertion",
+        "sub": "start",
+        "from": 0,
+        "to": 1,
+        "raw": "^"
+      },
+      {
+        "type": "character",
+        "char": "a",
+        "from": 1,
+        "to": 2,
+        "raw": "a"
+      }
+    ],
+    "from": 0,
+    "to": 2,
+    "raw": "^a",
+    "lastMatchIdx": 0
+  },
+  {
+    "type": "alternative",
+    "terms": [
+      {
+        "type": "character",
+        "char": "a",
+        "from": 0,
+        "to": 1,
+        "raw": "a"
+      }
+    ],
+    "from": 0,
+    "to": 1,
+    "raw": "a",
+    "lastMatchIdx": 0
+  },
+  {
+    "type": "disjunction",
+    "alternatives": [
+      {
+        "type": "alternative",
+        "terms": [
+          {
+            "type": "character",
+            "char": "a",
+            "from": 0,
+            "to": 1,
+            "raw": "a"
+          }
+        ],
+        "from": 0,
+        "to": 1,
+        "raw": "a"
+      },
+      {
+        "type": "alternative",
+        "terms": [
+          {
+            "type": "character",
+            "char": "b",
+            "from": 2,
+            "to": 3,
+            "raw": "b"
+          },
+          {
+            "type": "character",
+            "char": "c",
+            "from": 3,
+            "to": 4,
+            "raw": "c"
+          }
+        ],
+        "from": 2,
+        "to": 4,
+        "raw": "bc"
+      }
+    ],
+    "from": 0,
+    "to": 4,
+    "raw": "a|bc",
+    "lastMatchIdx": 0
+  },
+  {
+    "type": "alternative",
+    "terms": [
+      {
+        "type": "characterClass",
+        "classRanges": [
+          {
+            "type": "character",
+            "char": "a",
+            "from": 1,
+            "to": 2,
+            "raw": "a"
+          }
+        ],
+        "negative": false,
+        "from": 0,
+        "to": 3,
+        "raw": "[a]"
+      }
+    ],
+    "from": 0,
+    "to": 3,
+    "raw": "[a]",
+    "lastMatchIdx": 0
+  },
+  {
+    "type": "alternative",
+    "terms": [
+      {
+        "type": "characterClass",
+        "classRanges": [
+          {
+            "type": "character",
+            "char": "a",
+            "from": 1,
+            "to": 2,
+            "raw": "a"
+          },
+          {
+            "type": "character",
+            "char": "-",
+            "from": 2,
+            "to": 3,
+            "raw": "-"
+          }
+        ],
+        "negative": false,
+        "from": 0,
+        "to": 4,
+        "raw": "[a-]"
+      }
+    ],
+    "from": 0,
+    "to": 4,
+    "raw": "[a-]",
+    "lastMatchIdx": 0
+  },
+  {
+    "type": "alternative",
+    "terms": [
+      {
+        "type": "characterClass",
+        "classRanges": [
+          {
+            "type": "characterClassRange",
+            "min": {
+              "type": "character",
+              "char": "A",
+              "from": 1,
+              "to": 2,
+              "raw": "A"
+            },
+            "max": {
+              "type": "character",
+              "char": "Z",
+              "from": 3,
+              "to": 4,
+              "raw": "Z"
+            },
+            "from": 2,
+            "to": 4,
+            "raw": "-Z"
+          },
+          {
+            "type": "characterClassRange",
+            "min": {
+              "type": "character",
+              "char": "a",
+              "from": 4,
+              "to": 5,
+              "raw": "a"
+            },
+            "max": {
+              "type": "character",
+              "char": "z",
+              "from": 6,
+              "to": 7,
+              "raw": "z"
+            },
+            "from": 5,
+            "to": 7,
+            "raw": "-z"
+          },
+          {
+            "type": "characterClassRange",
+            "min": {
+              "type": "character",
+              "char": "0",
+              "from": 7,
+              "to": 8,
+              "raw": "0"
+            },
+            "max": {
+              "type": "character",
+              "char": "9",
+              "from": 9,
+              "to": 10,
+              "raw": "9"
+            },
+            "from": 8,
+            "to": 10,
+            "raw": "-9"
+          },
+          {
+            "type": "character",
+            "char": "_",
+            "from": 10,
+            "to": 11,
+            "raw": "_"
+          }
+        ],
+        "negative": false,
+        "from": 0,
+        "to": 12,
+        "raw": "[A-Za-z0-9_]"
+      }
+    ],
+    "from": 0,
+    "to": 12,
+    "raw": "[A-Za-z0-9_]",
+    "lastMatchIdx": 0
+  },
+  {
+    "type": "alternative",
+    "terms": [
+      {
+        "type": "characterClass",
+        "classRanges": [
+          {
+            "type": "escape",
+            "name": "identifier",
+            "value": "\\",
+            "from": 2,
+            "to": 3,
+            "raw": "\\"
+          }
+        ],
+        "negative": false,
+        "from": 0,
+        "to": 4,
+        "raw": "[\\\\]"
+      }
+    ],
+    "from": 0,
+    "to": 4,
+    "raw": "[\\\\]",
+    "lastMatchIdx": 0
+  },
+  {
+    "type": "alternative",
+    "terms": [
+      {
+        "type": "characterClass",
+        "classRanges": [
+          {
+            "type": "escape",
+            "name": "null",
+            "value": "",
+            "from": 1,
+            "to": 5,
+            "raw": "\\000"
+          },
+          {
+            "type": "character",
+            "char": "1",
+            "from": 5,
+            "to": 6,
+            "raw": "1"
+          }
+        ],
+        "negative": false,
+        "from": 0,
+        "to": 7,
+        "raw": "[\\0001]"
+      }
+    ],
+    "from": 0,
+    "to": 7,
+    "raw": "[\\0001]",
+    "lastMatchIdx": 0
+  },
+  {
+    "type": "alternative",
+    "terms": [
+      {
+        "type": "characterClass",
+        "classRanges": [
+          {
+            "type": "escape",
+            "name": "unicode",
+            "value": "0020",
+            "from": 2,
+            "to": 7,
+            "raw": "u0020"
+          }
+        ],
+        "negative": false,
+        "from": 0,
+        "to": 8,
+        "raw": "[\\u0020]"
+      }
+    ],
+    "from": 0,
+    "to": 8,
+    "raw": "[\\u0020]",
+    "lastMatchIdx": 0
+  },
+  {
+    "type": "alternative",
+    "terms": [
+      {
+        "type": "characterClass",
+        "classRanges": [
+          {
+            "type": "character",
+            "char": " ",
+            "from": 1,
+            "to": 2,
+            "raw": " "
+          },
+          {
+            "type": "escape",
+            "name": "unicode",
+            "value": "0020",
+            "from": 3,
+            "to": 8,
+            "raw": "u0020"
+          }
+        ],
+        "negative": false,
+        "from": 0,
+        "to": 9,
+        "raw": "[ \\u0020]"
+      }
+    ],
+    "from": 0,
+    "to": 9,
+    "raw": "[ \\u0020]",
+    "lastMatchIdx": 0
+  },
+  {
+    "type": "alternative",
+    "terms": [
+      {
+        "type": "characterClass",
+        "classRanges": [
+          {
+            "type": "character",
+            "char": " ",
+            "from": 1,
+            "to": 2,
+            "raw": " "
+          },
+          {
+            "type": "escapeChar",
+            "value": "f",
+            "from": 2,
+            "to": 4,
+            "raw": "\\f"
+          },
+          {
+            "type": "escapeChar",
+            "value": "n",
+            "from": 4,
+            "to": 6,
+            "raw": "\\n"
+          }
+        ],
+        "negative": false,
+        "from": 0,
+        "to": 7,
+        "raw": "[ \\f\\n]"
+      }
+    ],
+    "from": 0,
+    "to": 7,
+    "raw": "[ \\f\\n]",
+    "lastMatchIdx": 0
+  },
+  {
+    "type": "alternative",
+    "terms": [
+      {
+        "type": "characterClass",
+        "classRanges": [
+          {
+            "type": "escape",
+            "name": "unicode",
+            "value": "0008",
+            "from": 1,
+            "to": 3,
+            "raw": "\\b"
+          }
+        ],
+        "negative": false,
+        "from": 0,
+        "to": 4,
+        "raw": "[\\b]"
+      }
+    ],
+    "from": 0,
+    "to": 4,
+    "raw": "[\\b]",
+    "lastMatchIdx": 0
+  },
+  {
+    "error": {}
+  },
+  {
+    "type": "alternative",
+    "terms": [
+      {
+        "type": "escape",
+        "name": "unicode",
+        "value": "0020",
+        "from": 1,
+        "to": 6,
+        "raw": "u0020"
+      }
+    ],
+    "from": 0,
+    "to": 6,
+    "raw": "\\u0020",
+    "lastMatchIdx": 0
+  },
+  {
+    "type": "alternative",
+    "terms": [
+      {
+        "type": "escape",
+        "name": "octal",
+        "value": "1",
+        "from": 0,
+        "to": 2,
+        "raw": "\\1"
+      }
+    ],
+    "from": 0,
+    "to": 2,
+    "raw": "\\1",
+    "lastMatchIdx": 0
+  },
+  {
+    "type": "alternative",
+    "terms": [
+      {
+        "type": "group",
+        "behavior": "normal",
+        "disjunction": {
+          "type": "alternative",
+          "terms": [
+            {
+              "type": "escape",
+              "name": "octal",
+              "value": "1",
+              "from": 1,
+              "to": 3,
+              "raw": "\\1"
+            }
+          ],
+          "from": 1,
+          "to": 3,
+          "raw": "\\1"
+        },
+        "from": 0,
+        "to": 4,
+        "raw": "(\\1)",
+        "matchIdx": 1,
+        "lastMatchIdx": 1
+      }
+    ],
+    "from": 0,
+    "to": 4,
+    "raw": "(\\1)",
+    "lastMatchIdx": 1
+  },
+  {
+    "type": "alternative",
+    "terms": [
+      {
+        "type": "group",
+        "behavior": "normal",
+        "disjunction": {
+          "type": "alternative",
+          "terms": [
+            {
+              "type": "dot",
+              "from": 1,
+              "to": 2,
+              "raw": "."
+            }
+          ],
+          "from": 1,
+          "to": 2,
+          "raw": "."
+        },
+        "from": 0,
+        "to": 3,
+        "raw": "(.)",
+        "matchIdx": 1,
+        "lastMatchIdx": 1
+      },
+      {
+        "type": "ref",
+        "ref": 1,
+        "from": 3,
+        "to": 5,
+        "raw": "\\1"
+      }
+    ],
+    "from": 0,
+    "to": 5,
+    "raw": "(.)\\1",
+    "lastMatchIdx": 1
+  },
+  {
+    "type": "alternative",
+    "terms": [
+      {
+        "type": "group",
+        "behavior": "normal",
+        "disjunction": {
+          "type": "alternative",
+          "terms": [
+            {
+              "type": "character",
+              "char": "x",
+              "from": 1,
+              "to": 2,
+              "raw": "x"
+            }
+          ],
+          "from": 1,
+          "to": 2,
+          "raw": "x"
+        },
+        "from": 0,
+        "to": 3,
+        "raw": "(x)",
+        "matchIdx": 1,
+        "lastMatchIdx": 1
+      }
+    ],
+    "from": 0,
+    "to": 3,
+    "raw": "(x)",
+    "lastMatchIdx": 1
+  },
+  {
+    "type": "alternative",
+    "terms": [
+      {
+        "type": "group",
+        "behavior": "ignore",
+        "disjunction": {
+          "type": "alternative",
+          "terms": [
+            {
+              "type": "character",
+              "char": "x",
+              "from": 3,
+              "to": 4,
+              "raw": "x"
+            }
+          ],
+          "from": 3,
+          "to": 4,
+          "raw": "x"
+        },
+        "from": 0,
+        "to": 5,
+        "raw": "(?:x)"
+      }
+    ],
+    "from": 0,
+    "to": 5,
+    "raw": "(?:x)",
+    "lastMatchIdx": 0
+  },
+  {
+    "type": "alternative",
+    "terms": [
+      {
+        "type": "character",
+        "char": "x",
+        "from": 0,
+        "to": 1,
+        "raw": "x"
+      },
+      {
+        "type": "group",
+        "behavior": "lookahead",
+        "disjunction": {
+          "type": "alternative",
+          "terms": [
+            {
+              "type": "character",
+              "char": "y",
+              "from": 4,
+              "to": 5,
+              "raw": "y"
+            }
+          ],
+          "from": 4,
+          "to": 5,
+          "raw": "y"
+        },
+        "from": 1,
+        "to": 6,
+        "raw": "(?=y)"
+      }
+    ],
+    "from": 0,
+    "to": 6,
+    "raw": "x(?=y)",
+    "lastMatchIdx": 0
+  },
+  {
+    "type": "alternative",
+    "terms": [
+      {
+        "type": "character",
+        "char": "x",
+        "from": 0,
+        "to": 1,
+        "raw": "x"
+      },
+      {
+        "type": "group",
+        "behavior": "negativeLookahead",
+        "disjunction": {
+          "type": "alternative",
+          "terms": [
+            {
+              "type": "character",
+              "char": "y",
+              "from": 4,
+              "to": 5,
+              "raw": "y"
+            }
+          ],
+          "from": 4,
+          "to": 5,
+          "raw": "y"
+        },
+        "from": 1,
+        "to": 6,
+        "raw": "(?!y)"
+      }
+    ],
+    "from": 0,
+    "to": 6,
+    "raw": "x(?!y)",
+    "lastMatchIdx": 0
+  },
+  {
+    "error": {}
+  },
+  {
+    "type": "alternative",
+    "terms": [
+      {
+        "type": "quantifier",
+        "min": 0,
+        "greedy": true,
+        "child": {
+          "type": "group",
+          "behavior": "normal",
+          "disjunction": {
+            "type": "alternative",
+            "terms": [
+              {
+                "type": "character",
+                "char": "a",
+                "from": 1,
+                "to": 2,
+                "raw": "a"
+              }
+            ],
+            "from": 1,
+            "to": 2,
+            "raw": "a"
+          },
+          "from": 0,
+          "to": 3,
+          "raw": "(a)",
+          "matchIdx": 1,
+          "lastMatchIdx": 1
+        },
+        "from": 3,
+        "to": 4,
+        "raw": "*",
+        "firstMatchIdx": 1,
+        "lastMatchIdx": 1
+      }
+    ],
+    "from": 0,
+    "to": 4,
+    "raw": "(a)*",
+    "lastMatchIdx": 1
+  },
+  {
+    "type": "alternative",
+    "terms": [
+      {
+        "type": "quantifier",
+        "min": 0,
+        "greedy": true,
+        "child": {
+          "type": "character",
+          "char": "a",
+          "from": 0,
+          "to": 1,
+          "raw": "a"
+        },
+        "from": 1,
+        "to": 2,
+        "raw": "*"
+      }
+    ],
+    "from": 0,
+    "to": 2,
+    "raw": "a*",
+    "lastMatchIdx": 0
+  },
+  {
+    "error": {}
+  },
+  {
+    "type": "alternative",
+    "terms": [
+      {
+        "type": "character",
+        "char": "a",
+        "from": 0,
+        "to": 1,
+        "raw": "a"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "disjunction": {
+          "type": "alternative",
+          "terms": [
+            {
+              "type": "dot",
+              "from": 2,
+              "to": 3,
+              "raw": "."
+            }
+          ],
+          "from": 2,
+          "to": 3,
+          "raw": "."
+        },
+        "from": 1,
+        "to": 4,
+        "raw": "(.)",
+        "matchIdx": 1,
+        "lastMatchIdx": 1
+      },
+      {
+        "type": "character",
+        "char": "a",
+        "from": 4,
+        "to": 5,
+        "raw": "a"
+      },
+      {
+        "type": "ref",
+        "ref": 1,
+        "from": 5,
+        "to": 7,
+        "raw": "\\1"
+      }
+    ],
+    "from": 0,
+    "to": 7,
+    "raw": "a(.)a\\1",
+    "lastMatchIdx": 1
+  }
+]

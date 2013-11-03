@@ -1,0 +1,17 @@
+{
+  "name": "regexp.js-parser",
+  "version": "0.0.1",
+  "author": "'Juilan Viereck' <julian.viereck@gmail.com>",
+  "license": "BSD",
+  "main": "./parser",
+  "homepage": "https://github.com/jviereck/regexp.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:jviereck/regexp.js-parser.git"
+  },
+  "dependencies": {
+  },
+  "scripts": {
+    "test": "node test/index.js"
+  }
+}
