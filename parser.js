@@ -112,7 +112,8 @@
 //      CharacterEscape
 //      CharacterClassEscape
 
-function parse(str) {
+function parse(str, flags) {
+  var hasUnicodeFlag = (flags || "").indexOf("u") !== -1;
   var pos = 0;
   var lastMatchIdx = 0;
   var lastMatchClosed = 0;
@@ -132,6 +133,24 @@ function parse(str) {
   }
 
   function createCharacter(matches) {
+    if (hasUnicodeFlag){
+      var _char = matches[0];
+      var first = _char.charCodeAt(0), second;
+      if (_char.length === 1 && first >= 0xD800 && first <= 0xDBFF ) {
+        second = lookahead().charCodeAt(0);
+        if (second >= 0xDC00 && second <= 0xDFFF) {
+          // Unicode surrogate pair
+          pos++;
+          return addRaw({
+            type: 'escape',
+            name: 'codePoint',
+            value: (((first - 0xD800) * 0x400 + second - 0xDC00 + 0x10000)).toString(16).toUpperCase(),
+            from: pos - 2,
+            to: pos
+          });
+        }
+      }
+    }
     return addRaw({
       type: 'character',
       char: matches[0],
@@ -531,6 +550,32 @@ function parse(str) {
       return parseGroup('(?:', 'ignore', '(', 'normal');
     }
   }
+    
+  function parseUnicodeSurrogatePairExcape(firstEscape) {
+    if (hasUnicodeFlag) {
+      var first, second;
+      if (firstEscape.type == 'escape' &&
+        (first = parseInt(firstEscape.value, 16)) >= 0xD800 && first <= 0xDBFF &&
+        current('\\') && next('u') ) {
+        var prevPos = pos;
+        pos++;
+        var secondEscape = parseClassEscape();
+        if (secondEscape.type == 'escape' &&
+          (second = parseInt(secondEscape.value, 16)) >= 0xDC00 && second <= 0xDFFF) {
+          // Unicode surrogate pair
+          firstEscape.to = secondEscape.to;
+          firstEscape.value = ((first - 0xD800) * 0x400 + second - 0xDC00 + 0x10000).toString(16).toUpperCase();
+          firstEscape.type = 'escape';
+          firstEscape.name = 'codePoint';
+          addRaw(firstEscape);
+        }
+        else {
+          pos = prevPos;
+        }
+      }
+    }
+    return firstEscape;
+  }
 
   function parseClassEscape() {
     return parseAtomEscape(true);
@@ -654,7 +699,7 @@ function parse(str) {
       return createEscaped('hex', res[1], 1);
     } else if (res = matchReg(/^u([0-9a-fA-F]{4})/)) {
       // UnicodeEscapeSequence
-      return createEscaped('unicode', res[1], 1);
+      return parseUnicodeSurrogatePairExcape(createEscaped('unicode', res[1], 1));
     } else if (res = matchReg(/^u\{([0-9a-fA-F]{1,6})\}/)) {
       // RegExpUnicodeEscapeSequence (ES6 Unicode code point escape)
       return createEscaped('codePoint', res[1], 3);
@@ -740,7 +785,7 @@ function parse(str) {
   }
 
   function parseHelperClassRanges(atom) {
-    var from = pos, to, res;
+    var from, to, res;
     if (current('-') && !next(']')) {
       // ClassAtom - ClassAtom ClassRanges
       skip('-');
@@ -754,6 +799,7 @@ function parse(str) {
       if (!classRanges) {
         throw syntaxError('classRanges');
       }
+      from = atom.from;
       if (classRanges.type === 'empty') {
         return [createClassRange(atom, res, from, to)];
       }
@@ -833,7 +879,8 @@ function parse(str) {
       if (!res) {
         throw syntaxError('classEscape');
       }
-      return res;
+
+      return parseUnicodeSurrogatePairExcape(res);
     }
   }
 

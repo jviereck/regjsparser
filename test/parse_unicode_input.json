@@ -1,0 +1,18 @@
+[
+  "[\uD83D\uDCA9-\uD83D\uDCAB]",
+  "[\\uD83D\\uDCA9-\\uD83D\\uDCAB]",
+  "[a-b\uD83D\uDCA9-\uD83D\uDCAB]",
+  "[a-b\\uD83D\\uDCA9-\\uD83D\\uDCAB]",
+  "[\uD83D\uDCA9-\uD83D\uDCABa-b]",
+  "[\\uD83D\\uDCA9-\\uD83D\\uDCABa-b]",
+  "[\uD83D\uDCA9\uD83D\uDCAB]",
+  "[\\uD83D\\uDCA9\\uD83D\\uDCAB]",
+  "[a-b\uD83D\uDCA9\uD83D\uDCAB]",
+  "[a-b\\uD83D\\uDCA9\\uD83D\\uDCAB]",
+  "[\uD83D\uDCA9\uD83D\uDCABa-b]",
+  "[\\uD83D\\uDCA9\\uD83D\\uDCABa-b]",
+  "\uD83D\uDCA9",
+  "\\uD83D\\uDCA9",
+  "(?:\uD83D\uDCA9)",
+  "(?:\\uD83D\\uDCA9)"
+]
