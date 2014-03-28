@@ -551,7 +551,7 @@ function parse(str, flags) {
     }
   }
     
-  function parseUnicodeSurrogatePairExcape(firstEscape) {
+  function parseUnicodeSurrogatePairEscape(firstEscape) {
     if (hasUnicodeFlag) {
       var first, second;
       if (firstEscape.type == 'escape' &&
@@ -699,7 +699,7 @@ function parse(str, flags) {
       return createEscaped('hex', res[1], 1);
     } else if (res = matchReg(/^u([0-9a-fA-F]{4})/)) {
       // UnicodeEscapeSequence
-      return parseUnicodeSurrogatePairExcape(createEscaped('unicode', res[1], 1));
+      return parseUnicodeSurrogatePairEscape(createEscaped('unicode', res[1], 1));
     } else if (res = matchReg(/^u\{([0-9a-fA-F]{1,6})\}/)) {
       // RegExpUnicodeEscapeSequence (ES6 Unicode code point escape)
       return createEscaped('codePoint', res[1], 3);
@@ -880,7 +880,7 @@ function parse(str, flags) {
         throw syntaxError('classEscape');
       }
 
-      return parseUnicodeSurrogatePairExcape(res);
+      return parseUnicodeSurrogatePairEscape(res);
     }
   }
 
