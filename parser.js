@@ -56,12 +56,12 @@
 //      CharacterEscape
 //      CharacterClassEscape
 //
-// CharacterEscape ::
+// CharacterEscape[U] ::
 //      ControlEscape
 //      c ControlLetter
 //      HexEscapeSequence
-//      UnicodeEscapeSequence
-//      IdentityEscape
+//      RegExpUnicodeEscapeSequence[?U] (ES6)
+//      IdentityEscape[?U]
 //
 // ControlEscape ::
 //      one of f n r t v
@@ -112,7 +112,8 @@
 //      CharacterEscape
 //      CharacterClassEscape
 
-function parse(str) {
+function parse(str, flags) {
+  var hasUnicodeFlag = (flags || "").indexOf("u") !== -1;
   var pos = 0;
   var lastMatchIdx = 0;
   var lastMatchClosed = 0;
@@ -132,6 +133,24 @@ function parse(str) {
   }
 
   function createCharacter(matches) {
+    if (hasUnicodeFlag){
+      var _char = matches[0];
+      var first = _char.charCodeAt(0), second;
+      if (_char.length === 1 && first >= 0xD800 && first <= 0xDBFF ) {
+        second = lookahead().charCodeAt(0);
+        if (second >= 0xDC00 && second <= 0xDFFF) {
+          // Unicode surrogate pair
+          pos++;
+          return addRaw({
+            type: 'escape',
+            name: 'codePoint',
+            value: (((first - 0xD800) * 0x400 + second - 0xDC00 + 0x10000)).toString(16).toUpperCase(),
+            from: pos - 2,
+            to: pos
+          });
+        }
+      }
+    }
     return addRaw({
       type: 'character',
       char: matches[0],
@@ -531,6 +550,32 @@ function parse(str) {
       return parseGroup('(?:', 'ignore', '(', 'normal');
     }
   }
+    
+  function parseUnicodeSurrogatePairEscape(firstEscape) {
+    if (hasUnicodeFlag) {
+      var first, second;
+      if (firstEscape.type == 'escape' &&
+        (first = parseInt(firstEscape.value, 16)) >= 0xD800 && first <= 0xDBFF &&
+        current('\\') && next('u') ) {
+        var prevPos = pos;
+        pos++;
+        var secondEscape = parseClassEscape();
+        if (secondEscape.type == 'escape' &&
+          (second = parseInt(secondEscape.value, 16)) >= 0xDC00 && second <= 0xDFFF) {
+          // Unicode surrogate pair
+          firstEscape.to = secondEscape.to;
+          firstEscape.value = ((first - 0xD800) * 0x400 + second - 0xDC00 + 0x10000).toString(16).toUpperCase();
+          firstEscape.type = 'escape';
+          firstEscape.name = 'codePoint';
+          addRaw(firstEscape);
+        }
+        else {
+          pos = prevPos;
+        }
+      }
+    }
+    return firstEscape;
+  }
 
   function parseClassEscape() {
     return parseAtomEscape(true);
@@ -631,7 +676,7 @@ function parse(str) {
     } else if (res = matchReg(/^[dDsSwW]/)) {
       return createEscapedChar(res[0]);
     }
-     return false;
+    return false;
   }
 
   function parseCharacterEscape() {
@@ -644,19 +689,22 @@ function parse(str) {
 
     var res;
     if (res = matchReg(/^[fnrtv]/)) {
-    //      ControlEscape
+      // ControlEscape
       return createEscapedChar(res[0]);
     } else if (res = matchReg(/^c([a-zA-Z])/)) {
-    //      c ControlLetter
+      // c ControlLetter
       return createEscaped('controlLetter', res[1], 1);
     } else if (res = matchReg(/^x([0-9a-fA-F]{2})/)) {
-    //      HexEscapeSequence
+      // HexEscapeSequence
       return createEscaped('hex', res[1], 1);
-    } else  if (res = matchReg(/^u([0-9a-fA-F]{4})/)) {
-    //      UnicodeEscapeSequence
-      return createEscaped('unicode', res[1], 1);
+    } else if (res = matchReg(/^u([0-9a-fA-F]{4})/)) {
+      // UnicodeEscapeSequence
+      return parseUnicodeSurrogatePairEscape(createEscaped('unicode', res[1], 1));
+    } else if (res = matchReg(/^u\{([0-9a-fA-F]{1,6})\}/)) {
+      // RegExpUnicodeEscapeSequence (ES6 Unicode code point escape)
+      return createEscaped('codePoint', res[1], 3);
     } else {
-    //      IdentityEscape
+      // IdentityEscape
       return parseIdentityEscape();
     }
   }
@@ -689,10 +737,10 @@ function parse(str) {
     }
 
     if (match(ZWJ)) {
-    //      <ZWJ>
+      // <ZWJ>
       return createEscaped('identifier', ZWJ);
     } else if (match(ZWNJ)) {
-    //      <ZWNJ>
+      // <ZWNJ>
       return createEscaped('identifier', ZWNJ);
     }
 
@@ -737,9 +785,9 @@ function parse(str) {
   }
 
   function parseHelperClassRanges(atom) {
-    var from = pos, to, res;
+    var from, to, res;
     if (current('-') && !next(']')) {
-    //      ClassAtom - ClassAtom ClassRanges
+      // ClassAtom - ClassAtom ClassRanges
       skip('-');
 
       res = parseClassAtom();
@@ -751,6 +799,7 @@ function parse(str) {
       if (!classRanges) {
         throw syntaxError('classRanges');
       }
+      from = atom.from;
       if (classRanges.type === 'empty') {
         return [createClassRange(atom, res, from, to)];
       }
@@ -777,12 +826,12 @@ function parse(str) {
     }
 
     if (current(']')) {
-    //      ClassAtom
+      // ClassAtom
       return [atom];
     }
 
-    //      ClassAtom NonemptyClassRangesNoDash
-    //      ClassAtom - ClassAtom ClassRanges
+    // ClassAtom NonemptyClassRangesNoDash
+    // ClassAtom - ClassAtom ClassRanges
     return parseHelperClassRanges(atom);
   }
 
@@ -801,8 +850,8 @@ function parse(str) {
       return res;
     }
 
-    //      ClassAtomNoDash NonemptyClassRangesNoDash
-    //      ClassAtomNoDash - ClassAtom ClassRanges
+    // ClassAtomNoDash NonemptyClassRangesNoDash
+    // ClassAtomNoDash - ClassAtom ClassRanges
     return parseHelperClassRanges(res);
   }
 
@@ -830,7 +879,8 @@ function parse(str) {
       if (!res) {
         throw syntaxError('classEscape');
       }
-      return res;
+
+      return parseUnicodeSurrogatePairEscape(res);
     }
   }
 
@@ -856,6 +906,8 @@ function nodeToCharCode(node) {
     case 'escape':
       switch (node.name) {
         case 'unicode':
+          return parseInt(node.value, 16);
+        case 'codePoint':
           return parseInt(node.value, 16);
         case 'controlLetter':
           return node.value.charCodeAt(0) % 32;
