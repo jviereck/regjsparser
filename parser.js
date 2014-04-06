@@ -135,7 +135,8 @@ function parse(str, flags) {
   function createCharacter(matches) {
     if (hasUnicodeFlag){
       var _char = matches[0];
-      var first = _char.charCodeAt(0), second;
+      var first = _char.charCodeAt(0);
+      var second;
       if (_char.length === 1 && first >= 0xD800 && first <= 0xDBFF ) {
         second = lookahead().charCodeAt(0);
         if (second >= 0xDC00 && second <= 0xDFFF) {
@@ -550,7 +551,7 @@ function parse(str, flags) {
       return parseGroup('(?:', 'ignore', '(', 'normal');
     }
   }
-    
+
   function parseUnicodeSurrogatePairEscape(firstEscape) {
     if (hasUnicodeFlag) {
       var first, second;
