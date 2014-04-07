@@ -16,7 +16,8 @@ if (parseTests.length !== parseResult.length) {
 }
 
 parseTests.forEach(function(re, idx) {
-  var input = re.input, flags = re.flags;
+  var input = re.input;
+  var flags = re.flags;
   var par;
   try {
     par = parse(input, flags);
