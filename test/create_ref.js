@@ -1,4 +1,5 @@
 var fs = require('fs');
+var jsesc = require('jsesc');
 
 var parse = require('../parser').parse;
 
@@ -19,7 +20,10 @@ function mapInput(inputFile, outputFile, flags) {
     }
     return result;
   });
-  fs.writeFileSync(outputFile, JSON.stringify(arr, null, 2));
+
+  fs.writeFileSync(outputFile, jsesc(arr, {
+    json: true, compact: false, indent: '  '
+  }));
 }
 
 mapInput('test/parse_input.json', 'test/parse_output.json', '');

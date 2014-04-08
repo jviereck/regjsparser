@@ -13,7 +13,7 @@
               "value": "1F4A9",
               "from": 1,
               "to": 3,
-              "raw": "💩"
+              "raw": "\uD83D\uDCA9"
             },
             "max": {
               "type": "escape",
@@ -21,22 +21,22 @@
               "value": "1F4AB",
               "from": 4,
               "to": 6,
-              "raw": "💫"
+              "raw": "\uD83D\uDCAB"
             },
             "from": 1,
             "to": 6,
-            "raw": "💩-💫"
+            "raw": "\uD83D\uDCA9-\uD83D\uDCAB"
           }
         ],
         "negative": false,
         "from": 0,
         "to": 7,
-        "raw": "[💩-💫]"
+        "raw": "[\uD83D\uDCA9-\uD83D\uDCAB]"
       }
     ],
     "from": 0,
     "to": 7,
-    "raw": "[💩-💫]",
+    "raw": "[\uD83D\uDCA9-\uD83D\uDCAB]",
     "lastMatchIdx": 0
   },
   {
@@ -113,7 +113,7 @@
               "value": "1F4A9",
               "from": 4,
               "to": 6,
-              "raw": "💩"
+              "raw": "\uD83D\uDCA9"
             },
             "max": {
               "type": "escape",
@@ -121,22 +121,22 @@
               "value": "1F4AB",
               "from": 7,
               "to": 9,
-              "raw": "💫"
+              "raw": "\uD83D\uDCAB"
             },
             "from": 4,
             "to": 9,
-            "raw": "💩-💫"
+            "raw": "\uD83D\uDCA9-\uD83D\uDCAB"
           }
         ],
         "negative": false,
         "from": 0,
         "to": 10,
-        "raw": "[a-b💩-💫]"
+        "raw": "[a-b\uD83D\uDCA9-\uD83D\uDCAB]"
       }
     ],
     "from": 0,
     "to": 10,
-    "raw": "[a-b💩-💫]",
+    "raw": "[a-b\uD83D\uDCA9-\uD83D\uDCAB]",
     "lastMatchIdx": 0
   },
   {
@@ -213,7 +213,7 @@
               "value": "1F4A9",
               "from": 1,
               "to": 3,
-              "raw": "💩"
+              "raw": "\uD83D\uDCA9"
             },
             "max": {
               "type": "escape",
@@ -221,11 +221,11 @@
               "value": "1F4AB",
               "from": 4,
               "to": 6,
-              "raw": "💫"
+              "raw": "\uD83D\uDCAB"
             },
             "from": 1,
             "to": 6,
-            "raw": "💩-💫"
+            "raw": "\uD83D\uDCA9-\uD83D\uDCAB"
           },
           {
             "type": "characterClassRange",
@@ -251,12 +251,12 @@
         "negative": false,
         "from": 0,
         "to": 10,
-        "raw": "[💩-💫a-b]"
+        "raw": "[\uD83D\uDCA9-\uD83D\uDCABa-b]"
       }
     ],
     "from": 0,
     "to": 10,
-    "raw": "[💩-💫a-b]",
+    "raw": "[\uD83D\uDCA9-\uD83D\uDCABa-b]",
     "lastMatchIdx": 0
   },
   {
@@ -331,7 +331,7 @@
             "value": "1F4A9",
             "from": 1,
             "to": 3,
-            "raw": "💩"
+            "raw": "\uD83D\uDCA9"
           },
           {
             "type": "escape",
@@ -339,18 +339,18 @@
             "value": "1F4AB",
             "from": 3,
             "to": 5,
-            "raw": "💫"
+            "raw": "\uD83D\uDCAB"
           }
         ],
         "negative": false,
         "from": 0,
         "to": 6,
-        "raw": "[💩💫]"
+        "raw": "[\uD83D\uDCA9\uD83D\uDCAB]"
       }
     ],
     "from": 0,
     "to": 6,
-    "raw": "[💩💫]",
+    "raw": "[\uD83D\uDCA9\uD83D\uDCAB]",
     "lastMatchIdx": 0
   },
   {
@@ -419,7 +419,7 @@
             "value": "1F4A9",
             "from": 4,
             "to": 6,
-            "raw": "💩"
+            "raw": "\uD83D\uDCA9"
           },
           {
             "type": "escape",
@@ -427,18 +427,18 @@
             "value": "1F4AB",
             "from": 6,
             "to": 8,
-            "raw": "💫"
+            "raw": "\uD83D\uDCAB"
           }
         ],
         "negative": false,
         "from": 0,
         "to": 9,
-        "raw": "[a-b💩💫]"
+        "raw": "[a-b\uD83D\uDCA9\uD83D\uDCAB]"
       }
     ],
     "from": 0,
     "to": 9,
-    "raw": "[a-b💩💫]",
+    "raw": "[a-b\uD83D\uDCA9\uD83D\uDCAB]",
     "lastMatchIdx": 0
   },
   {
@@ -507,7 +507,7 @@
             "value": "1F4A9",
             "from": 1,
             "to": 3,
-            "raw": "💩"
+            "raw": "\uD83D\uDCA9"
           },
           {
             "type": "escape",
@@ -515,7 +515,7 @@
             "value": "1F4AB",
             "from": 3,
             "to": 5,
-            "raw": "💫"
+            "raw": "\uD83D\uDCAB"
           },
           {
             "type": "characterClassRange",
@@ -541,12 +541,12 @@
         "negative": false,
         "from": 0,
         "to": 9,
-        "raw": "[💩💫a-b]"
+        "raw": "[\uD83D\uDCA9\uD83D\uDCABa-b]"
       }
     ],
     "from": 0,
     "to": 9,
-    "raw": "[💩💫a-b]",
+    "raw": "[\uD83D\uDCA9\uD83D\uDCABa-b]",
     "lastMatchIdx": 0
   },
   {
@@ -612,12 +612,12 @@
         "value": "1F4A9",
         "from": 0,
         "to": 2,
-        "raw": "💩"
+        "raw": "\uD83D\uDCA9"
       }
     ],
     "from": 0,
     "to": 2,
-    "raw": "💩",
+    "raw": "\uD83D\uDCA9",
     "lastMatchIdx": 0
   },
   {
@@ -652,21 +652,21 @@
               "value": "1F4A9",
               "from": 3,
               "to": 5,
-              "raw": "💩"
+              "raw": "\uD83D\uDCA9"
             }
           ],
           "from": 3,
           "to": 5,
-          "raw": "💩"
+          "raw": "\uD83D\uDCA9"
         },
         "from": 0,
         "to": 6,
-        "raw": "(?:💩)"
+        "raw": "(?:\uD83D\uDCA9)"
       }
     ],
     "from": 0,
     "to": 6,
-    "raw": "(?:💩)",
+    "raw": "(?:\uD83D\uDCA9)",
     "lastMatchIdx": 0
   },
   {
