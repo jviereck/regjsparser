@@ -1,4 +1,5 @@
 var fs = require('fs');
+var jsesc = require('jsesc');
 
 var parse = require('../parser').parse;
 
@@ -32,7 +33,13 @@ parseTests.forEach(function(re, idx) {
 
   var resuls = parseResult[idx];
 
-  if (JSON.stringify(par) !== JSON.stringify(resuls)) {
+  var stringify = function(obj) {
+    return jsesc(obj, {
+      json: true, compact: false, indent: '  '
+    });
+  }
+
+  if (stringify(par) !== stringify(resuls)) {
     throw new Error('Failure parsing string ' + input + (flags ? '(' + flags + ')' : '') + ':' + JSON.stringify(par) + '\n' + JSON.stringify(resuls));
   } else {
     console.log('PASSED TEST: ' + input);
