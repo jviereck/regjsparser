@@ -51,21 +51,21 @@
               "type": "escape",
               "name": "codePoint",
               "value": "1F4A9",
-              "from": 2,
+              "from": 1,
               "to": 13,
-              "raw": "uD83D\\uDCA9"
+              "raw": "\\uD83D\\uDCA9"
             },
             "max": {
               "type": "escape",
               "name": "codePoint",
               "value": "1F4AB",
-              "from": 15,
+              "from": 14,
               "to": 26,
-              "raw": "uD83D\\uDCAB"
+              "raw": "\\uD83D\\uDCAB"
             },
-            "from": 2,
+            "from": 1,
             "to": 26,
-            "raw": "uD83D\\uDCA9-\\uD83D\\uDCAB"
+            "raw": "\\uD83D\\uDCA9-\\uD83D\\uDCAB"
           }
         ],
         "negative": false,
@@ -171,21 +171,21 @@
               "type": "escape",
               "name": "codePoint",
               "value": "1F4A9",
-              "from": 5,
+              "from": 4,
               "to": 16,
-              "raw": "uD83D\\uDCA9"
+              "raw": "\\uD83D\\uDCA9"
             },
             "max": {
               "type": "escape",
               "name": "codePoint",
               "value": "1F4AB",
-              "from": 18,
+              "from": 17,
               "to": 29,
-              "raw": "uD83D\\uDCAB"
+              "raw": "\\uD83D\\uDCAB"
             },
-            "from": 5,
+            "from": 4,
             "to": 29,
-            "raw": "uD83D\\uDCA9-\\uD83D\\uDCAB"
+            "raw": "\\uD83D\\uDCA9-\\uD83D\\uDCAB"
           }
         ],
         "negative": false,
@@ -271,21 +271,21 @@
               "type": "escape",
               "name": "codePoint",
               "value": "1F4A9",
-              "from": 2,
+              "from": 1,
               "to": 13,
-              "raw": "uD83D\\uDCA9"
+              "raw": "\\uD83D\\uDCA9"
             },
             "max": {
               "type": "escape",
               "name": "codePoint",
               "value": "1F4AB",
-              "from": 15,
+              "from": 14,
               "to": 26,
-              "raw": "uD83D\\uDCAB"
+              "raw": "\\uD83D\\uDCAB"
             },
-            "from": 2,
+            "from": 1,
             "to": 26,
-            "raw": "uD83D\\uDCA9-\\uD83D\\uDCAB"
+            "raw": "\\uD83D\\uDCA9-\\uD83D\\uDCAB"
           },
           {
             "type": "characterClassRange",
@@ -363,17 +363,17 @@
             "type": "escape",
             "name": "codePoint",
             "value": "1F4A9",
-            "from": 2,
+            "from": 1,
             "to": 13,
-            "raw": "uD83D\\uDCA9"
+            "raw": "\\uD83D\\uDCA9"
           },
           {
             "type": "escape",
             "name": "codePoint",
             "value": "1F4AB",
-            "from": 14,
+            "from": 13,
             "to": 25,
-            "raw": "uD83D\\uDCAB"
+            "raw": "\\uD83D\\uDCAB"
           }
         ],
         "negative": false,
@@ -471,17 +471,17 @@
             "type": "escape",
             "name": "codePoint",
             "value": "1F4A9",
-            "from": 5,
+            "from": 4,
             "to": 16,
-            "raw": "uD83D\\uDCA9"
+            "raw": "\\uD83D\\uDCA9"
           },
           {
             "type": "escape",
             "name": "codePoint",
             "value": "1F4AB",
-            "from": 17,
+            "from": 16,
             "to": 28,
-            "raw": "uD83D\\uDCAB"
+            "raw": "\\uD83D\\uDCAB"
           }
         ],
         "negative": false,
@@ -559,17 +559,17 @@
             "type": "escape",
             "name": "codePoint",
             "value": "1F4A9",
-            "from": 2,
+            "from": 1,
             "to": 13,
-            "raw": "uD83D\\uDCA9"
+            "raw": "\\uD83D\\uDCA9"
           },
           {
             "type": "escape",
             "name": "codePoint",
             "value": "1F4AB",
-            "from": 14,
+            "from": 13,
             "to": 25,
-            "raw": "uD83D\\uDCAB"
+            "raw": "\\uD83D\\uDCAB"
           },
           {
             "type": "characterClassRange",
@@ -627,9 +627,9 @@
         "type": "escape",
         "name": "codePoint",
         "value": "1F4A9",
-        "from": 1,
+        "from": 0,
         "to": 12,
-        "raw": "uD83D\\uDCA9"
+        "raw": "\\uD83D\\uDCA9"
       }
     ],
     "from": 0,
@@ -682,9 +682,9 @@
               "type": "escape",
               "name": "codePoint",
               "value": "1F4A9",
-              "from": 4,
+              "from": 3,
               "to": 15,
-              "raw": "uD83D\\uDCA9"
+              "raw": "\\uD83D\\uDCA9"
             }
           ],
           "from": 3,
