@@ -344,6 +344,7 @@ function parse(str, flags) {
 
   function parseAlternative() {
     var res = [], from = pos;
+    var term;
 
     // Alternative ::
     //      [empty]
@@ -418,7 +419,7 @@ function parse(str, flags) {
       matchIdx = lastMatchIdx;
     }
 
-    res = parseDisjunction();
+    var res = parseDisjunction();
     if (!res) {
       throw syntaxError('disjunction');
     }
@@ -536,7 +537,7 @@ function parse(str, flags) {
     }
     else if (match('\\')) {
       //      \ AtomEscape
-      var res = parseAtomEscape();
+      res = parseAtomEscape();
       if (!res) {
         throw syntaxError('atomEscape');
       }
@@ -608,11 +609,6 @@ function parse(str, flags) {
     }
 
     res = parseCharacterEscape();
-    if (res) {
-      return res;
-    }
-
-    res = parseCharacterClassEscape();
     if (res) {
       return res;
     }
