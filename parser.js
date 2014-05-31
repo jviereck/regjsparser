@@ -77,8 +77,9 @@
 //
 // DecimalEscape ::
 //      DecimalIntegerLiteral [lookahead ∉ DecimalDigit]
-//      CharacterClassEscape :: one of
-//      d D s S w W
+//
+// CharacterClassEscape ::
+//      one of d D s S w W
 //
 // CharacterClass ::
 //      [ [lookahead ∉ {^}] ClassRanges ]
