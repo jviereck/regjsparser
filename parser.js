@@ -269,7 +269,7 @@
 
       // See 15.10.2.15:
       if (charCodeMin > charCodeMax) {
-        throw syntaxError('invalid range in character class');
+        throw SyntaxError('invalid range in character class');
       }
 
       return addRaw({
@@ -294,7 +294,7 @@
 
     function skip(value) {
       if (!match(value)) {
-        throw syntaxError('character: ' + value);
+        throw SyntaxError('character: ' + value);
       }
     }
 
@@ -388,7 +388,7 @@
 
       var atom = parseAtom();
       if (!atom) {
-        throw syntaxError('Expected atom')
+        throw SyntaxError('Expected atom')
         // return createEmpty();
       }
       var quantifier = parseQuantifier() || false;
@@ -424,7 +424,7 @@
 
       var res = parseDisjunction();
       if (!res) {
-        throw syntaxError('disjunction');
+        throw SyntaxError('disjunction');
       }
       skip(')');
       var group = createGroup(type, res, from, pos);
@@ -501,7 +501,7 @@
         min = parseInt(res[1], 10);
         max = parseInt(res[2], 10);
         if (min > max) {
-          throw syntaxError('numbers out of order in {} quantifier');
+          throw SyntaxError('numbers out of order in {} quantifier');
         }
         quantifier = createQuantifier(min, max, res.from, res.to);
       }
@@ -542,7 +542,7 @@
         //      \ AtomEscape
         res = parseAtomEscape();
         if (!res) {
-          throw syntaxError('atomEscape');
+          throw SyntaxError('atomEscape');
         }
         return res;
       }
@@ -607,7 +607,7 @@
           // CharSet containing the one character <BS> (Unicode value 0008).
           return createEscaped('unicode', '0008', -2);
         } else if (match('B')) {
-          throw syntaxError('\\B not possible inside of CharacterClass');
+          throw SyntaxError('\\B not possible inside of CharacterClass');
         }
       }
 
@@ -778,7 +778,7 @@
       } else {
         res = parseNonemptyClassRanges();
         if (!res) {
-          throw syntaxError('nonEmptyClassRanges');
+          throw SyntaxError('nonEmptyClassRanges');
         }
         return res;
       }
@@ -792,12 +792,12 @@
 
         res = parseClassAtom();
         if (!res) {
-          throw syntaxError('classAtom');
+          throw SyntaxError('classAtom');
         }
         to = pos;
         var classRanges = parseClassRanges();
         if (!classRanges) {
-          throw syntaxError('classRanges');
+          throw SyntaxError('classRanges');
         }
         from = atom.from;
         if (classRanges.type === 'empty') {
@@ -808,7 +808,7 @@
 
       res = parseNonemptyClassRangesNoDash();
       if (!res) {
-        throw syntaxError('nonEmptyClassRangesNoDash');
+        throw SyntaxError('nonEmptyClassRangesNoDash');
       }
 
       return [atom].concat(res);
@@ -822,7 +822,7 @@
 
       var atom = parseClassAtom();
       if (!atom) {
-        throw syntaxError('classAtom');
+        throw SyntaxError('classAtom');
       }
 
       if (current(']')) {
@@ -843,7 +843,7 @@
 
       var res = parseClassAtom();
       if (!res) {
-        throw syntaxError('classAtom');
+        throw SyntaxError('classAtom');
       }
       if (current(']')) {
         //      ClassAtom
@@ -877,22 +877,18 @@
       } else if (match('\\')) {
         res = parseClassEscape();
         if (!res) {
-          throw syntaxError('classEscape');
+          throw SyntaxError('classEscape');
         }
 
         return parseUnicodeSurrogatePairEscape(res);
       }
     }
 
-    function syntaxError(str) {
-      return new SyntaxError(str);
-    }
-
     var result = parseDisjunction();
     result.lastMatchIdx = lastMatchIdx;
 
     if (result.to !== str.length) {
-      throw syntaxError('Could not parse entire input - got stuck: ' + str);
+      throw SyntaxError('Could not parse entire input - got stuck: ' + str);
     }
 
     return result;
