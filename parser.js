@@ -612,9 +612,6 @@
       }
 
       res = parseCharacterEscape();
-      if (res) {
-        return res;
-      }
 
       return res;
     }
