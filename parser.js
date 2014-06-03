@@ -136,11 +136,11 @@
     }
 
     function createCharacter(matches) {
-      if (hasUnicodeFlag){
-        var _char = matches[0];
-        var first = _char.charCodeAt(0);
+      var _char = matches[0];
+      var first = _char.charCodeAt(0);
+      if (hasUnicodeFlag) {
         var second;
-        if (_char.length === 1 && first >= 0xD800 && first <= 0xDBFF ) {
+        if (_char.length === 1 && first >= 0xD800 && first <= 0xDBFF) {
           second = lookahead().charCodeAt(0);
           if (second >= 0xDC00 && second <= 0xDFFF) {
             // Unicode surrogate pair
@@ -148,7 +148,7 @@
             return addRaw({
               type: 'escape',
               name: 'codePoint',
-              value: ((first - 0xD800) * 0x400 + second - 0xDC00 + 0x10000).toString(16).toUpperCase(),
+              codePoint: (first - 0xD800) * 0x400 + second - 0xDC00 + 0x10000,
               from: pos - 2,
               to: pos
             });
@@ -157,7 +157,7 @@
       }
       return addRaw({
         type: 'character',
-        char: matches[0],
+        codePoint: first,
         from: pos - 1,
         to: pos
       });
@@ -188,12 +188,12 @@
       });
     }
 
-    function createEscaped(name, value, fromOffset) {
+    function createEscaped(name, codePoint, value, fromOffset) {
       fromOffset = fromOffset || 0;
       return addRaw({
         type: 'escape',
+        codePoint: codePoint,
         name: name,
-        value: value,
         from: pos - (value.length + fromOffset),
         to: pos
       });
@@ -264,11 +264,8 @@
     }
 
     function createClassRange(min, max, from, to) {
-      var charCodeMin = nodeToCharCode(min);
-      var charCodeMax = nodeToCharCode(max);
-
       // See 15.10.2.15:
-      if (charCodeMin > charCodeMax) {
+      if (min.codePoint > max.codePoint) {
         throw SyntaxError('invalid range in character class');
       }
 
@@ -560,16 +557,16 @@
       if (hasUnicodeFlag) {
         var first, second;
         if (firstEscape.type == 'escape' &&
-          (first = parseInt(firstEscape.value, 16)) >= 0xD800 && first <= 0xDBFF &&
+          (first = firstEscape.codePoint) >= 0xD800 && first <= 0xDBFF &&
           current('\\') && next('u') ) {
           var prevPos = pos;
           pos++;
           var secondEscape = parseClassEscape();
           if (secondEscape.type == 'escape' &&
-            (second = parseInt(secondEscape.value, 16)) >= 0xDC00 && second <= 0xDFFF) {
+            (second = secondEscape.codePoint) >= 0xDC00 && second <= 0xDFFF) {
             // Unicode surrogate pair
             firstEscape.to = secondEscape.to;
-            firstEscape.value = ((first - 0xD800) * 0x400 + second - 0xDC00 + 0x10000).toString(16).toUpperCase();
+            firstEscape.codePoint = (first - 0xD800) * 0x400 + second - 0xDC00 + 0x10000;
             firstEscape.type = 'escape';
             firstEscape.name = 'codePoint';
             addRaw(firstEscape);
@@ -605,7 +602,7 @@
           // 15.10.2.19
           // The production ClassEscape :: b evaluates by returning the
           // CharSet containing the one character <BS> (Unicode value 0008).
-          return createEscaped('unicode', '0008', -2);
+          return createEscaped('unicode', 0x0008, '\\b');
         } else if (match('B')) {
           throw SyntaxError('\\B not possible inside of CharacterClass');
         }
@@ -643,7 +640,7 @@
           // the '01' should be matched.
           incr(-res[0].length);
           if (res = matchReg(/^[0-7]{1,3}/)) {
-            return createEscaped('octal', res[0], 1);
+            return createEscaped('octal', parseInt(res[0], 8), res[0], 1);
           } else {
             // If we end up here, we have a case like /\91/. Then the
             // first slash is to be ignored and the 9 & 1 to be treated
@@ -666,12 +663,12 @@
         match = res[0];
         if (/^0{1,3}$/.test(match)) {
           // If they are all zeros, then only take the first one.
-          return createEscaped('null', '', match.length + 1);
+          return createEscaped('null', 0x0000, '0', match.length + 1);
         } else {
-          return createEscaped('octal', match, 1);
+          return createEscaped('octal', parseInt(match, 8), match, 1);
         }
       } else if (res = matchReg(/^[dDsSwW]/)) {
-        return createEscapedChar(res[0]);
+        return createEscapedChar(res[0], res);
       }
       return false;
     }
@@ -690,16 +687,18 @@
         return createEscapedChar(res[0]);
       } else if (res = matchReg(/^c([a-zA-Z])/)) {
         // c ControlLetter
-        return createEscaped('controlLetter', res[1], 2);
+        return createEscaped('controlLetter', res[1].charCodeAt(0) % 32, res[1], 2);
       } else if (res = matchReg(/^x([0-9a-fA-F]{2})/)) {
         // HexEscapeSequence
-        return createEscaped('hex', res[1], 2);
+        return createEscaped('hex', parseInt(res[1], 16), res[1], 2);
       } else if (res = matchReg(/^u([0-9a-fA-F]{4})/)) {
         // UnicodeEscapeSequence
-        return parseUnicodeSurrogatePairEscape(createEscaped('unicode', res[1], 2));
+        return parseUnicodeSurrogatePairEscape(
+          createEscaped('unicode', parseInt(res[1], 16), res[1], 2)
+        );
       } else if (res = matchReg(/^u\{([0-9a-fA-F]{1,6})\}/)) {
         // RegExpUnicodeEscapeSequence (ES6 Unicode code point escape)
-        return createEscaped('codePoint', res[1], 4);
+        return createEscaped('codePoint', parseInt(res[1], 16), res[1], 4);
       } else {
         // IdentityEscape
         return parseIdentityEscape();
@@ -728,17 +727,19 @@
       var ZWNJ = '\u200D';
 
       var res;
+      var tmp;
 
       if (!isIdentifierPart(lookahead())) {
-        return createEscaped('identifier', incr(), 1);
+        tmp = incr();
+        return createEscaped('identifier', tmp.charCodeAt(0), tmp, 1);
       }
 
       if (match(ZWJ)) {
         // <ZWJ>
-        return createEscaped('identifier', ZWJ);
+        return createEscaped('identifier', 0x200C, ZWJ);
       } else if (match(ZWNJ)) {
         // <ZWNJ>
-        return createEscaped('identifier', ZWNJ);
+        return createEscaped('identifier', 0x200D, ZWNJ);
       }
 
       return null;
@@ -891,40 +892,7 @@
     return result;
   };
 
-  function nodeToCharCode(node) {
-    switch (node.type) {
-      case 'character':
-        return node.char.charCodeAt(0);
-
-      case 'escape':
-        switch (node.name) {
-          case 'unicode':
-            return parseInt(node.value, 16);
-          case 'codePoint':
-            return parseInt(node.value, 16);
-          case 'controlLetter':
-            return node.value.charCodeAt(0) % 32;
-          case 'identifier':
-            return node.value.charCodeAt(0);
-          case 'octal':
-            return parseInt(node.value, 8);
-          case 'hex':
-            return parseInt(node.value, 16);
-          case 'null':
-            return 0;
-          default:
-            throw new Error('Unsupported node escape name: ' + node.name);
-        }
-
-      default:
-        throw new Error('Unkown nodeType: ' + node.type);
-    }
-
-    return null;
-  }
-
   var regjsparser = {
-    nodeToCharCode: nodeToCharCode,
     parse: parse
   };
 
