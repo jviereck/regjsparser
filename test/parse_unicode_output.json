@@ -89,14 +89,14 @@
             "type": "characterClassRange",
             "min": {
               "type": "character",
-              "char": "a",
+              "symbol": "a",
               "from": 1,
               "to": 2,
               "raw": "a"
             },
             "max": {
               "type": "character",
-              "char": "b",
+              "symbol": "b",
               "from": 3,
               "to": 4,
               "raw": "b"
@@ -149,14 +149,14 @@
             "type": "characterClassRange",
             "min": {
               "type": "character",
-              "char": "a",
+              "symbol": "a",
               "from": 1,
               "to": 2,
               "raw": "a"
             },
             "max": {
               "type": "character",
-              "char": "b",
+              "symbol": "b",
               "from": 3,
               "to": 4,
               "raw": "b"
@@ -231,14 +231,14 @@
             "type": "characterClassRange",
             "min": {
               "type": "character",
-              "char": "a",
+              "symbol": "a",
               "from": 6,
               "to": 7,
               "raw": "a"
             },
             "max": {
               "type": "character",
-              "char": "b",
+              "symbol": "b",
               "from": 8,
               "to": 9,
               "raw": "b"
@@ -291,14 +291,14 @@
             "type": "characterClassRange",
             "min": {
               "type": "character",
-              "char": "a",
+              "symbol": "a",
               "from": 26,
               "to": 27,
               "raw": "a"
             },
             "max": {
               "type": "character",
-              "char": "b",
+              "symbol": "b",
               "from": 28,
               "to": 29,
               "raw": "b"
@@ -397,14 +397,14 @@
             "type": "characterClassRange",
             "min": {
               "type": "character",
-              "char": "a",
+              "symbol": "a",
               "from": 1,
               "to": 2,
               "raw": "a"
             },
             "max": {
               "type": "character",
-              "char": "b",
+              "symbol": "b",
               "from": 3,
               "to": 4,
               "raw": "b"
@@ -451,14 +451,14 @@
             "type": "characterClassRange",
             "min": {
               "type": "character",
-              "char": "a",
+              "symbol": "a",
               "from": 1,
               "to": 2,
               "raw": "a"
             },
             "max": {
               "type": "character",
-              "char": "b",
+              "symbol": "b",
               "from": 3,
               "to": 4,
               "raw": "b"
@@ -521,14 +521,14 @@
             "type": "characterClassRange",
             "min": {
               "type": "character",
-              "char": "a",
+              "symbol": "a",
               "from": 5,
               "to": 6,
               "raw": "a"
             },
             "max": {
               "type": "character",
-              "char": "b",
+              "symbol": "b",
               "from": 7,
               "to": 8,
               "raw": "b"
@@ -575,14 +575,14 @@
             "type": "characterClassRange",
             "min": {
               "type": "character",
-              "char": "a",
+              "symbol": "a",
               "from": 25,
               "to": 26,
               "raw": "a"
             },
             "max": {
               "type": "character",
-              "char": "b",
+              "symbol": "b",
               "from": 27,
               "to": 28,
               "raw": "b"

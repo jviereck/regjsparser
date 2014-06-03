@@ -29,7 +29,7 @@ console.log(parseTree);
       },
       {
         "type": "character",
-        "char": "a",
+        "symbol": "a",
         "from": 1,
         "to": 2,
         "raw": "a"
