@@ -136,8 +136,8 @@
     }
 
     function createCharacter(matches) {
-      if (hasUnicodeFlag){
-        var _char = matches[0];
+      var _char = matches[0];
+      if (hasUnicodeFlag) {
         var first = _char.charCodeAt(0);
         var second;
         if (_char.length === 1 && first >= 0xD800 && first <= 0xDBFF ) {
@@ -157,7 +157,7 @@
       }
       return addRaw({
         type: 'character',
-        char: matches[0],
+        symbol: _char,
         from: pos - 1,
         to: pos
       });
@@ -894,7 +894,7 @@
   function nodeToCharCode(node) {
     switch (node.type) {
       case 'character':
-        return node.char.charCodeAt(0);
+        return node.symbol.charCodeAt(0);
 
       case 'escape':
         switch (node.name) {
