@@ -620,8 +620,7 @@
     function parseDecimalEscape() {
       // DecimalEscape ::
       //      DecimalIntegerLiteral [lookahead ∉ DecimalDigit]
-      //      CharacterClassEscape :: one of
-      //      d D s S w W
+      //      CharacterClassEscape :: one of d D s S w W
 
       var res, match;
 
