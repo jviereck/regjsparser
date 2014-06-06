@@ -146,8 +146,7 @@
             // Unicode surrogate pair
             pos++;
             return addRaw({
-              type: 'escape',
-              name: 'codePoint',
+              type: 'character',
               codePoint: (first - 0xD800) * 0x400 + second - 0xDC00 + 0x10000,
               from: pos - 2,
               to: pos
