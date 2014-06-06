@@ -15,5 +15,11 @@
   },
   "scripts": {
     "test": "node test/index.js"
-  }
+  },
+  "files": [
+    "bin/",
+    "LICENSE.BSD",
+    "parser.js",
+    "README.md"
+  ]
 }
