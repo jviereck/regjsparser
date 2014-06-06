@@ -126,11 +126,11 @@
       return node;
     }
 
-    function createAssertion(sub) {
+    function createAssertion(name, rawLength) {
       return addRaw({
         type: 'assertion',
-        sub:  sub,
-        from: pos - 1,
+        name:  name,
+        from: pos - rawLength,
         to: pos
       });
     }
@@ -450,11 +450,13 @@
       var res, from = pos;
 
       if (match('^')) {
-        return createAssertion('start');
+        return createAssertion('start', 1 /* rawLength */);
       } else if (match('$')) {
-        return createAssertion('end');
-      } else if (res = matchReg(/^\\(b|B)/)) {
-        return createEscapedChar(res[1]);
+        return createAssertion('end', 1 /* rawLength */);
+      } else if (match('\\b')) {
+        return createAssertion('boundary', 2 /* rawLength */);
+      } else if (match('\\B')) {
+        return createAssertion('not-boundary', 2 /* rawLength */);
       } else {
         return parseGroup('(?=', 'lookahead', '(?!', 'negativeLookahead');
       }
