@@ -8,16 +8,14 @@
           {
             "type": "characterClassRange",
             "min": {
-              "type": "escape",
-              "name": "codePoint",
+              "type": "character",
               "codePoint": 128169,
               "from": 1,
               "to": 3,
               "raw": "\uD83D\uDCA9"
             },
             "max": {
-              "type": "escape",
-              "name": "codePoint",
+              "type": "character",
               "codePoint": 128171,
               "from": 4,
               "to": 6,
@@ -108,16 +106,14 @@
           {
             "type": "characterClassRange",
             "min": {
-              "type": "escape",
-              "name": "codePoint",
+              "type": "character",
               "codePoint": 128169,
               "from": 4,
               "to": 6,
               "raw": "\uD83D\uDCA9"
             },
             "max": {
-              "type": "escape",
-              "name": "codePoint",
+              "type": "character",
               "codePoint": 128171,
               "from": 7,
               "to": 9,
@@ -208,16 +204,14 @@
           {
             "type": "characterClassRange",
             "min": {
-              "type": "escape",
-              "name": "codePoint",
+              "type": "character",
               "codePoint": 128169,
               "from": 1,
               "to": 3,
               "raw": "\uD83D\uDCA9"
             },
             "max": {
-              "type": "escape",
-              "name": "codePoint",
+              "type": "character",
               "codePoint": 128171,
               "from": 4,
               "to": 6,
@@ -326,16 +320,14 @@
         "type": "characterClass",
         "classRanges": [
           {
-            "type": "escape",
-            "name": "codePoint",
+            "type": "character",
             "codePoint": 128169,
             "from": 1,
             "to": 3,
             "raw": "\uD83D\uDCA9"
           },
           {
-            "type": "escape",
-            "name": "codePoint",
+            "type": "character",
             "codePoint": 128171,
             "from": 3,
             "to": 5,
@@ -414,16 +406,14 @@
             "raw": "a-b"
           },
           {
-            "type": "escape",
-            "name": "codePoint",
+            "type": "character",
             "codePoint": 128169,
             "from": 4,
             "to": 6,
             "raw": "\uD83D\uDCA9"
           },
           {
-            "type": "escape",
-            "name": "codePoint",
+            "type": "character",
             "codePoint": 128171,
             "from": 6,
             "to": 8,
@@ -502,16 +492,14 @@
         "type": "characterClass",
         "classRanges": [
           {
-            "type": "escape",
-            "name": "codePoint",
+            "type": "character",
             "codePoint": 128169,
             "from": 1,
             "to": 3,
             "raw": "\uD83D\uDCA9"
           },
           {
-            "type": "escape",
-            "name": "codePoint",
+            "type": "character",
             "codePoint": 128171,
             "from": 3,
             "to": 5,
@@ -607,8 +595,7 @@
     "type": "alternative",
     "terms": [
       {
-        "type": "escape",
-        "name": "codePoint",
+        "type": "character",
         "codePoint": 128169,
         "from": 0,
         "to": 2,
@@ -647,8 +634,7 @@
           "type": "alternative",
           "terms": [
             {
-              "type": "escape",
-              "name": "codePoint",
+              "type": "character",
               "codePoint": 128169,
               "from": 3,
               "to": 5,
