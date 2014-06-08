@@ -45,16 +45,16 @@ console.log(parseTree);
 
 ## Testing
 
-Run the command
+To run the tests, run the following command:
 
 ```bash
 npm test
 ```
 
-To create a new reference file, execute
+To create a new reference file, execute…
 
 ```bash
-node test/create_ref.js
+node test/update-fixtures.js
 ```
 
-from the repo top directory.
+…from the repo top directory.
