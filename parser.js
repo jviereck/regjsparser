@@ -126,15 +126,29 @@
       return node;
     }
 
-    function createAssertion(name, rawLength) {
+    function createAssertion(kind, rawLength) {
       return addRaw({
         type: 'assertion',
-        name:  name,
+        kind:  kind,
         range: [
           pos - rawLength,
           pos
         ]
       });
+    }
+
+    function createValue(kind, codePoint, from, to) {
+      return addRaw({
+        type: 'value',
+        kind: kind,
+        codePoint: codePoint,
+        range: [from, to]
+      });
+    }
+
+    function createEscaped(kind, codePoint, value, fromOffset) {
+      fromOffset = fromOffset || 0;
+      return createValue(kind, codePoint, pos - (value.length + fromOffset), pos);
     }
 
     function createCharacter(matches) {
@@ -147,25 +161,14 @@
           if (second >= 0xDC00 && second <= 0xDFFF) {
             // Unicode surrogate pair
             pos++;
-            return addRaw({
-              type: 'character',
-              codePoint: (first - 0xD800) * 0x400 + second - 0xDC00 + 0x10000,
-              range: [
-                pos - 2,
-                pos
-              ]
-            });
+            return createValue(
+                'character',
+                (first - 0xD800) * 0x400 + second - 0xDC00 + 0x10000,
+                pos - 2, pos);
           }
         }
       }
-      return addRaw({
-        type: 'character',
-        codePoint: first,
-        range: [
-          pos - 1,
-          pos
-        ]
-      });
+      return createValue('character', first, pos - 1, pos);
     }
 
     function createDisjunction(alternatives, from, to) {
@@ -189,24 +192,11 @@
       });
     }
 
-    function createDot(name) {
+    function createDot() {
       return addRaw({
         type: 'dot',
         range: [
           pos - 1,
-          pos
-        ]
-      });
-    }
-
-    function createEscaped(name, codePoint, value, fromOffset) {
-      fromOffset = fromOffset || 0;
-      return addRaw({
-        type: 'escape',
-        codePoint: codePoint,
-        name: name,
-        range: [
-          pos - (value.length + fromOffset),
           pos
         ]
       });
@@ -449,7 +439,7 @@
 
       var res = parseDisjunction();
       if (!res) {
-        throw SyntaxError('disjunction');
+        throw SyntaxError('Expected disjunction');
       }
       skip(')');
       var group = createGroup(type, res, from, pos);
@@ -586,19 +576,19 @@
     function parseUnicodeSurrogatePairEscape(firstEscape) {
       if (hasUnicodeFlag) {
         var first, second;
-        if (firstEscape.type == 'escape' &&
+        if (firstEscape.kind == 'unicode' &&
           (first = firstEscape.codePoint) >= 0xD800 && first <= 0xDBFF &&
           current('\\') && next('u') ) {
           var prevPos = pos;
           pos++;
           var secondEscape = parseClassEscape();
-          if (secondEscape.type == 'escape' &&
+          if (secondEscape.kind == 'unicode' &&
             (second = secondEscape.codePoint) >= 0xDC00 && second <= 0xDFFF) {
             // Unicode surrogate pair
             firstEscape.range[1] = secondEscape.range[1];
             firstEscape.codePoint = (first - 0xD800) * 0x400 + second - 0xDC00 + 0x10000;
-            firstEscape.type = 'escape';
-            firstEscape.name = 'codePoint';
+            firstEscape.type = 'value';
+            firstEscape.kind = 'unicode';
             addRaw(firstEscape);
           }
           else {
