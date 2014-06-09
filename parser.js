@@ -129,7 +129,7 @@
     function createAssertion(kind, rawLength) {
       return addRaw({
         type: 'assertion',
-        kind:  kind,
+        kind: kind,
         range: [
           pos - rawLength,
           pos
@@ -576,19 +576,19 @@
     function parseUnicodeSurrogatePairEscape(firstEscape) {
       if (hasUnicodeFlag) {
         var first, second;
-        if (firstEscape.kind == 'unicode' &&
+        if (firstEscape.kind == 'unicodeEscape' &&
           (first = firstEscape.codePoint) >= 0xD800 && first <= 0xDBFF &&
           current('\\') && next('u') ) {
           var prevPos = pos;
           pos++;
           var secondEscape = parseClassEscape();
-          if (secondEscape.kind == 'unicode' &&
+          if (secondEscape.kind == 'unicodeEscape' &&
             (second = secondEscape.codePoint) >= 0xDC00 && second <= 0xDFFF) {
             // Unicode surrogate pair
             firstEscape.range[1] = secondEscape.range[1];
             firstEscape.codePoint = (first - 0xD800) * 0x400 + second - 0xDC00 + 0x10000;
             firstEscape.type = 'value';
-            firstEscape.kind = 'unicode';
+            firstEscape.kind = 'unicodeCodePointEscape';
             addRaw(firstEscape);
           }
           else {
@@ -622,7 +622,7 @@
           // 15.10.2.19
           // The production ClassEscape :: b evaluates by returning the
           // CharSet containing the one character <BS> (Unicode value 0008).
-          return createEscaped('unicode', 0x0008, '\\b');
+          return createEscaped('singleEscape', 0x0008, '\\b');
         } else if (match('B')) {
           throw SyntaxError('\\B not possible inside of CharacterClass');
         }
@@ -709,15 +709,15 @@
         return createEscaped('controlLetter', res[1].charCodeAt(0) % 32, res[1], 2);
       } else if (res = matchReg(/^x([0-9a-fA-F]{2})/)) {
         // HexEscapeSequence
-        return createEscaped('hex', parseInt(res[1], 16), res[1], 2);
+        return createEscaped('hexadecimalEscape', parseInt(res[1], 16), res[1], 2);
       } else if (res = matchReg(/^u([0-9a-fA-F]{4})/)) {
         // UnicodeEscapeSequence
         return parseUnicodeSurrogatePairEscape(
-          createEscaped('unicode', parseInt(res[1], 16), res[1], 2)
+          createEscaped('unicodeEscape', parseInt(res[1], 16), res[1], 2)
         );
       } else if (res = matchReg(/^u\{([0-9a-fA-F]{1,6})\}/)) {
         // RegExpUnicodeEscapeSequence (ES6 Unicode code point escape)
-        return createEscaped('codePoint', parseInt(res[1], 16), res[1], 4);
+        return createEscaped('unicodeCodePointEscape', parseInt(res[1], 16), res[1], 4);
       } else {
         // IdentityEscape
         return parseIdentityEscape();
