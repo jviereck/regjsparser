@@ -162,13 +162,13 @@
             // Unicode surrogate pair
             pos++;
             return createValue(
-                'character',
+                'symbol',
                 (first - 0xD800) * 0x400 + second - 0xDC00 + 0x10000,
                 pos - 2, pos);
           }
         }
       }
-      return createValue('character', first, pos - 1, pos);
+      return createValue('symbol', first, pos - 1, pos);
     }
 
     function createDisjunction(alternatives, from, to) {
