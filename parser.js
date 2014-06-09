@@ -122,7 +122,7 @@
     var lastMatchClosed = 0;
 
     function addRaw(node) {
-      node.raw = str.substring(node.from, node.to);
+      node.raw = str.substring(node.range[0], node.range[1]);
       return node;
     }
 
@@ -130,8 +130,10 @@
       return addRaw({
         type: 'assertion',
         name:  name,
-        from: pos - rawLength,
-        to: pos
+        range: [
+          pos - rawLength,
+          pos
+        ]
       });
     }
 
@@ -148,8 +150,10 @@
             return addRaw({
               type: 'character',
               codePoint: (first - 0xD800) * 0x400 + second - 0xDC00 + 0x10000,
-              from: pos - 2,
-              to: pos
+              range: [
+                pos - 2,
+                pos
+              ]
             });
           }
         }
@@ -157,8 +161,10 @@
       return addRaw({
         type: 'character',
         codePoint: first,
-        from: pos - 1,
-        to: pos
+        range: [
+          pos - 1,
+          pos
+        ]
       });
     }
 
@@ -166,24 +172,30 @@
       return addRaw({
         type: 'disjunction',
         alternatives: alternatives,
-        from: from,
-        to: to
+        range: [
+          from,
+          to
+        ]
       });
     }
 
     function createEmpty() {
       return addRaw({
         type: 'empty',
-        from: pos,
-        to: pos
+        range: [
+          pos,
+          pos
+        ]
       });
     }
 
     function createDot(name) {
       return addRaw({
         type: 'dot',
-        from: pos - 1,
-        to: pos
+        range: [
+          pos - 1,
+          pos
+        ]
       });
     }
 
@@ -193,8 +205,10 @@
         type: 'escape',
         codePoint: codePoint,
         name: name,
-        from: pos - (value.length + fromOffset),
-        to: pos
+        range: [
+          pos - (value.length + fromOffset),
+          pos
+        ]
       });
     }
 
@@ -202,8 +216,10 @@
       return addRaw({
         type: 'escapeChar',
         value: value,
-        from: pos - 2,
-        to: pos
+        range: [
+          pos - 2,
+          pos
+        ]
       });
     }
 
@@ -211,8 +227,10 @@
       return addRaw({
         type: 'ref',
         ref: parseInt(ref, 10),
-        from: pos - 1 - ref.length,
-        to: pos
+        range: [
+          pos - 1 - ref.length,
+          pos
+        ]
       });
     }
 
@@ -221,8 +239,10 @@
         type: 'group',
         behavior: behavior,
         disjunction: disjunction,
-        from: from,
-        to: to
+        range: [
+          from,
+          to
+        ]
       });
     }
 
@@ -238,8 +258,10 @@
         max: max,
         greedy: true,
         child: null, // set later on,
-        from: from,
-        to: to
+        range: [
+          from,
+          to
+        ]
       });
     }
 
@@ -247,8 +269,10 @@
       return addRaw({
         type: 'alternative',
         terms: terms,
-        from: from,
-        to: to
+        range: [
+          from,
+          to
+        ]
       });
     }
 
@@ -257,8 +281,10 @@
         type: 'characterClass',
         classRanges: classRanges,
         negative: negative,
-        from: from,
-        to: to
+        range: [
+          from,
+          to
+        ]
       });
     }
 
@@ -272,8 +298,10 @@
         type: 'characterClassRange',
         min: min,
         max: max,
-        from: from,
-        to: to
+        range: [
+          from,
+          to
+        ]
       });
     }
 
@@ -316,9 +344,10 @@
       var subStr = str.substring(pos);
       var res = subStr.match(regExp);
       if (res) {
-        res.from = pos;
+        res.range = [];
+        res.range[0] = pos;
         incr(res[0].length);
-        res.to = pos;
+        res.range[1] = pos;
       }
       return res;
     }
@@ -489,11 +518,11 @@
       }
       else if (res = matchReg(/^\{([0-9]+)\}/)) {
         min = parseInt(res[1], 10);
-        quantifier = createQuantifier(min, min, res.from, res.to);
+        quantifier = createQuantifier(min, min, res.range[0], res.range[1]);
       }
       else if (res = matchReg(/^\{([0-9]+),\}/)) {
         min = parseInt(res[1], 10);
-        quantifier = createQuantifier(min, undefined, res.from, res.to);
+        quantifier = createQuantifier(min, undefined, res.range[0], res.range[1]);
       }
       else if (res = matchReg(/^\{([0-9]+),([0-9]+)\}/)) {
         min = parseInt(res[1], 10);
@@ -501,13 +530,13 @@
         if (min > max) {
           throw SyntaxError('numbers out of order in {} quantifier');
         }
-        quantifier = createQuantifier(min, max, res.from, res.to);
+        quantifier = createQuantifier(min, max, res.range[0], res.range[1]);
       }
 
       if (quantifier) {
         if (match('?')) {
           quantifier.greedy = false;
-          quantifier.to += 1;
+          quantifier.range[1] += 1;
         }
       }
 
@@ -566,7 +595,7 @@
           if (secondEscape.type == 'escape' &&
             (second = secondEscape.codePoint) >= 0xDC00 && second <= 0xDFFF) {
             // Unicode surrogate pair
-            firstEscape.to = secondEscape.to;
+            firstEscape.range[1] = secondEscape.range[1];
             firstEscape.codePoint = (first - 0xD800) * 0x400 + second - 0xDC00 + 0x10000;
             firstEscape.type = 'escape';
             firstEscape.name = 'codePoint';
@@ -797,7 +826,7 @@
         if (!classRanges) {
           throw SyntaxError('classRanges');
         }
-        from = atom.from;
+        from = atom.range[0];
         if (classRanges.type === 'empty') {
           return [createClassRange(atom, res, from, to)];
         }
@@ -885,7 +914,7 @@
     var result = parseDisjunction();
     result.lastMatchIdx = lastMatchIdx;
 
-    if (result.to !== str.length) {
+    if (result.range[1] !== str.length) {
       throw SyntaxError('Could not parse entire input - got stuck: ' + str);
     }
 

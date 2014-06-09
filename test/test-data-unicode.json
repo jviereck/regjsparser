@@ -10,30 +10,40 @@
             "min": {
               "type": "character",
               "codePoint": 128169,
-              "from": 1,
-              "to": 3,
+              "range": [
+                1,
+                3
+              ],
               "raw": "\uD83D\uDCA9"
             },
             "max": {
               "type": "character",
               "codePoint": 128171,
-              "from": 4,
-              "to": 6,
+              "range": [
+                4,
+                6
+              ],
               "raw": "\uD83D\uDCAB"
             },
-            "from": 1,
-            "to": 6,
+            "range": [
+              1,
+              6
+            ],
             "raw": "\uD83D\uDCA9-\uD83D\uDCAB"
           }
         ],
         "negative": false,
-        "from": 0,
-        "to": 7,
+        "range": [
+          0,
+          7
+        ],
         "raw": "[\uD83D\uDCA9-\uD83D\uDCAB]"
       }
     ],
-    "from": 0,
-    "to": 7,
+    "range": [
+      0,
+      7
+    ],
     "raw": "[\uD83D\uDCA9-\uD83D\uDCAB]",
     "lastMatchIdx": 0
   },
@@ -49,31 +59,41 @@
               "type": "escape",
               "codePoint": 128169,
               "name": "codePoint",
-              "from": 1,
-              "to": 13,
+              "range": [
+                1,
+                13
+              ],
               "raw": "\\uD83D\\uDCA9"
             },
             "max": {
               "type": "escape",
               "codePoint": 128171,
               "name": "codePoint",
-              "from": 14,
-              "to": 26,
+              "range": [
+                14,
+                26
+              ],
               "raw": "\\uD83D\\uDCAB"
             },
-            "from": 1,
-            "to": 26,
+            "range": [
+              1,
+              26
+            ],
             "raw": "\\uD83D\\uDCA9-\\uD83D\\uDCAB"
           }
         ],
         "negative": false,
-        "from": 0,
-        "to": 27,
+        "range": [
+          0,
+          27
+        ],
         "raw": "[\\uD83D\\uDCA9-\\uD83D\\uDCAB]"
       }
     ],
-    "from": 0,
-    "to": 27,
+    "range": [
+      0,
+      27
+    ],
     "raw": "[\\uD83D\\uDCA9-\\uD83D\\uDCAB]",
     "lastMatchIdx": 0
   },
@@ -88,19 +108,25 @@
             "min": {
               "type": "character",
               "codePoint": 97,
-              "from": 1,
-              "to": 2,
+              "range": [
+                1,
+                2
+              ],
               "raw": "a"
             },
             "max": {
               "type": "character",
               "codePoint": 98,
-              "from": 3,
-              "to": 4,
+              "range": [
+                3,
+                4
+              ],
               "raw": "b"
             },
-            "from": 1,
-            "to": 4,
+            "range": [
+              1,
+              4
+            ],
             "raw": "a-b"
           },
           {
@@ -108,30 +134,40 @@
             "min": {
               "type": "character",
               "codePoint": 128169,
-              "from": 4,
-              "to": 6,
+              "range": [
+                4,
+                6
+              ],
               "raw": "\uD83D\uDCA9"
             },
             "max": {
               "type": "character",
               "codePoint": 128171,
-              "from": 7,
-              "to": 9,
+              "range": [
+                7,
+                9
+              ],
               "raw": "\uD83D\uDCAB"
             },
-            "from": 4,
-            "to": 9,
+            "range": [
+              4,
+              9
+            ],
             "raw": "\uD83D\uDCA9-\uD83D\uDCAB"
           }
         ],
         "negative": false,
-        "from": 0,
-        "to": 10,
+        "range": [
+          0,
+          10
+        ],
         "raw": "[a-b\uD83D\uDCA9-\uD83D\uDCAB]"
       }
     ],
-    "from": 0,
-    "to": 10,
+    "range": [
+      0,
+      10
+    ],
     "raw": "[a-b\uD83D\uDCA9-\uD83D\uDCAB]",
     "lastMatchIdx": 0
   },
@@ -146,19 +182,25 @@
             "min": {
               "type": "character",
               "codePoint": 97,
-              "from": 1,
-              "to": 2,
+              "range": [
+                1,
+                2
+              ],
               "raw": "a"
             },
             "max": {
               "type": "character",
               "codePoint": 98,
-              "from": 3,
-              "to": 4,
+              "range": [
+                3,
+                4
+              ],
               "raw": "b"
             },
-            "from": 1,
-            "to": 4,
+            "range": [
+              1,
+              4
+            ],
             "raw": "a-b"
           },
           {
@@ -167,31 +209,41 @@
               "type": "escape",
               "codePoint": 128169,
               "name": "codePoint",
-              "from": 4,
-              "to": 16,
+              "range": [
+                4,
+                16
+              ],
               "raw": "\\uD83D\\uDCA9"
             },
             "max": {
               "type": "escape",
               "codePoint": 128171,
               "name": "codePoint",
-              "from": 17,
-              "to": 29,
+              "range": [
+                17,
+                29
+              ],
               "raw": "\\uD83D\\uDCAB"
             },
-            "from": 4,
-            "to": 29,
+            "range": [
+              4,
+              29
+            ],
             "raw": "\\uD83D\\uDCA9-\\uD83D\\uDCAB"
           }
         ],
         "negative": false,
-        "from": 0,
-        "to": 30,
+        "range": [
+          0,
+          30
+        ],
         "raw": "[a-b\\uD83D\\uDCA9-\\uD83D\\uDCAB]"
       }
     ],
-    "from": 0,
-    "to": 30,
+    "range": [
+      0,
+      30
+    ],
     "raw": "[a-b\\uD83D\\uDCA9-\\uD83D\\uDCAB]",
     "lastMatchIdx": 0
   },
@@ -206,19 +258,25 @@
             "min": {
               "type": "character",
               "codePoint": 128169,
-              "from": 1,
-              "to": 3,
+              "range": [
+                1,
+                3
+              ],
               "raw": "\uD83D\uDCA9"
             },
             "max": {
               "type": "character",
               "codePoint": 128171,
-              "from": 4,
-              "to": 6,
+              "range": [
+                4,
+                6
+              ],
               "raw": "\uD83D\uDCAB"
             },
-            "from": 1,
-            "to": 6,
+            "range": [
+              1,
+              6
+            ],
             "raw": "\uD83D\uDCA9-\uD83D\uDCAB"
           },
           {
@@ -226,30 +284,40 @@
             "min": {
               "type": "character",
               "codePoint": 97,
-              "from": 6,
-              "to": 7,
+              "range": [
+                6,
+                7
+              ],
               "raw": "a"
             },
             "max": {
               "type": "character",
               "codePoint": 98,
-              "from": 8,
-              "to": 9,
+              "range": [
+                8,
+                9
+              ],
               "raw": "b"
             },
-            "from": 6,
-            "to": 9,
+            "range": [
+              6,
+              9
+            ],
             "raw": "a-b"
           }
         ],
         "negative": false,
-        "from": 0,
-        "to": 10,
+        "range": [
+          0,
+          10
+        ],
         "raw": "[\uD83D\uDCA9-\uD83D\uDCABa-b]"
       }
     ],
-    "from": 0,
-    "to": 10,
+    "range": [
+      0,
+      10
+    ],
     "raw": "[\uD83D\uDCA9-\uD83D\uDCABa-b]",
     "lastMatchIdx": 0
   },
@@ -265,20 +333,26 @@
               "type": "escape",
               "codePoint": 128169,
               "name": "codePoint",
-              "from": 1,
-              "to": 13,
+              "range": [
+                1,
+                13
+              ],
               "raw": "\\uD83D\\uDCA9"
             },
             "max": {
               "type": "escape",
               "codePoint": 128171,
               "name": "codePoint",
-              "from": 14,
-              "to": 26,
+              "range": [
+                14,
+                26
+              ],
               "raw": "\\uD83D\\uDCAB"
             },
-            "from": 1,
-            "to": 26,
+            "range": [
+              1,
+              26
+            ],
             "raw": "\\uD83D\\uDCA9-\\uD83D\\uDCAB"
           },
           {
@@ -286,30 +360,40 @@
             "min": {
               "type": "character",
               "codePoint": 97,
-              "from": 26,
-              "to": 27,
+              "range": [
+                26,
+                27
+              ],
               "raw": "a"
             },
             "max": {
               "type": "character",
               "codePoint": 98,
-              "from": 28,
-              "to": 29,
+              "range": [
+                28,
+                29
+              ],
               "raw": "b"
             },
-            "from": 26,
-            "to": 29,
+            "range": [
+              26,
+              29
+            ],
             "raw": "a-b"
           }
         ],
         "negative": false,
-        "from": 0,
-        "to": 30,
+        "range": [
+          0,
+          30
+        ],
         "raw": "[\\uD83D\\uDCA9-\\uD83D\\uDCABa-b]"
       }
     ],
-    "from": 0,
-    "to": 30,
+    "range": [
+      0,
+      30
+    ],
     "raw": "[\\uD83D\\uDCA9-\\uD83D\\uDCABa-b]",
     "lastMatchIdx": 0
   },
@@ -322,26 +406,34 @@
           {
             "type": "character",
             "codePoint": 128169,
-            "from": 1,
-            "to": 3,
+            "range": [
+              1,
+              3
+            ],
             "raw": "\uD83D\uDCA9"
           },
           {
             "type": "character",
             "codePoint": 128171,
-            "from": 3,
-            "to": 5,
+            "range": [
+              3,
+              5
+            ],
             "raw": "\uD83D\uDCAB"
           }
         ],
         "negative": false,
-        "from": 0,
-        "to": 6,
+        "range": [
+          0,
+          6
+        ],
         "raw": "[\uD83D\uDCA9\uD83D\uDCAB]"
       }
     ],
-    "from": 0,
-    "to": 6,
+    "range": [
+      0,
+      6
+    ],
     "raw": "[\uD83D\uDCA9\uD83D\uDCAB]",
     "lastMatchIdx": 0
   },
@@ -355,27 +447,35 @@
             "type": "escape",
             "codePoint": 128169,
             "name": "codePoint",
-            "from": 1,
-            "to": 13,
+            "range": [
+              1,
+              13
+            ],
             "raw": "\\uD83D\\uDCA9"
           },
           {
             "type": "escape",
             "codePoint": 128171,
             "name": "codePoint",
-            "from": 13,
-            "to": 25,
+            "range": [
+              13,
+              25
+            ],
             "raw": "\\uD83D\\uDCAB"
           }
         ],
         "negative": false,
-        "from": 0,
-        "to": 26,
+        "range": [
+          0,
+          26
+        ],
         "raw": "[\\uD83D\\uDCA9\\uD83D\\uDCAB]"
       }
     ],
-    "from": 0,
-    "to": 26,
+    "range": [
+      0,
+      26
+    ],
     "raw": "[\\uD83D\\uDCA9\\uD83D\\uDCAB]",
     "lastMatchIdx": 0
   },
@@ -390,44 +490,58 @@
             "min": {
               "type": "character",
               "codePoint": 97,
-              "from": 1,
-              "to": 2,
+              "range": [
+                1,
+                2
+              ],
               "raw": "a"
             },
             "max": {
               "type": "character",
               "codePoint": 98,
-              "from": 3,
-              "to": 4,
+              "range": [
+                3,
+                4
+              ],
               "raw": "b"
             },
-            "from": 1,
-            "to": 4,
+            "range": [
+              1,
+              4
+            ],
             "raw": "a-b"
           },
           {
             "type": "character",
             "codePoint": 128169,
-            "from": 4,
-            "to": 6,
+            "range": [
+              4,
+              6
+            ],
             "raw": "\uD83D\uDCA9"
           },
           {
             "type": "character",
             "codePoint": 128171,
-            "from": 6,
-            "to": 8,
+            "range": [
+              6,
+              8
+            ],
             "raw": "\uD83D\uDCAB"
           }
         ],
         "negative": false,
-        "from": 0,
-        "to": 9,
+        "range": [
+          0,
+          9
+        ],
         "raw": "[a-b\uD83D\uDCA9\uD83D\uDCAB]"
       }
     ],
-    "from": 0,
-    "to": 9,
+    "range": [
+      0,
+      9
+    ],
     "raw": "[a-b\uD83D\uDCA9\uD83D\uDCAB]",
     "lastMatchIdx": 0
   },
@@ -442,46 +556,60 @@
             "min": {
               "type": "character",
               "codePoint": 97,
-              "from": 1,
-              "to": 2,
+              "range": [
+                1,
+                2
+              ],
               "raw": "a"
             },
             "max": {
               "type": "character",
               "codePoint": 98,
-              "from": 3,
-              "to": 4,
+              "range": [
+                3,
+                4
+              ],
               "raw": "b"
             },
-            "from": 1,
-            "to": 4,
+            "range": [
+              1,
+              4
+            ],
             "raw": "a-b"
           },
           {
             "type": "escape",
             "codePoint": 128169,
             "name": "codePoint",
-            "from": 4,
-            "to": 16,
+            "range": [
+              4,
+              16
+            ],
             "raw": "\\uD83D\\uDCA9"
           },
           {
             "type": "escape",
             "codePoint": 128171,
             "name": "codePoint",
-            "from": 16,
-            "to": 28,
+            "range": [
+              16,
+              28
+            ],
             "raw": "\\uD83D\\uDCAB"
           }
         ],
         "negative": false,
-        "from": 0,
-        "to": 29,
+        "range": [
+          0,
+          29
+        ],
         "raw": "[a-b\\uD83D\\uDCA9\\uD83D\\uDCAB]"
       }
     ],
-    "from": 0,
-    "to": 29,
+    "range": [
+      0,
+      29
+    ],
     "raw": "[a-b\\uD83D\\uDCA9\\uD83D\\uDCAB]",
     "lastMatchIdx": 0
   },
@@ -494,15 +622,19 @@
           {
             "type": "character",
             "codePoint": 128169,
-            "from": 1,
-            "to": 3,
+            "range": [
+              1,
+              3
+            ],
             "raw": "\uD83D\uDCA9"
           },
           {
             "type": "character",
             "codePoint": 128171,
-            "from": 3,
-            "to": 5,
+            "range": [
+              3,
+              5
+            ],
             "raw": "\uD83D\uDCAB"
           },
           {
@@ -510,30 +642,40 @@
             "min": {
               "type": "character",
               "codePoint": 97,
-              "from": 5,
-              "to": 6,
+              "range": [
+                5,
+                6
+              ],
               "raw": "a"
             },
             "max": {
               "type": "character",
               "codePoint": 98,
-              "from": 7,
-              "to": 8,
+              "range": [
+                7,
+                8
+              ],
               "raw": "b"
             },
-            "from": 5,
-            "to": 8,
+            "range": [
+              5,
+              8
+            ],
             "raw": "a-b"
           }
         ],
         "negative": false,
-        "from": 0,
-        "to": 9,
+        "range": [
+          0,
+          9
+        ],
         "raw": "[\uD83D\uDCA9\uD83D\uDCABa-b]"
       }
     ],
-    "from": 0,
-    "to": 9,
+    "range": [
+      0,
+      9
+    ],
     "raw": "[\uD83D\uDCA9\uD83D\uDCABa-b]",
     "lastMatchIdx": 0
   },
@@ -547,16 +689,20 @@
             "type": "escape",
             "codePoint": 128169,
             "name": "codePoint",
-            "from": 1,
-            "to": 13,
+            "range": [
+              1,
+              13
+            ],
             "raw": "\\uD83D\\uDCA9"
           },
           {
             "type": "escape",
             "codePoint": 128171,
             "name": "codePoint",
-            "from": 13,
-            "to": 25,
+            "range": [
+              13,
+              25
+            ],
             "raw": "\\uD83D\\uDCAB"
           },
           {
@@ -564,30 +710,40 @@
             "min": {
               "type": "character",
               "codePoint": 97,
-              "from": 25,
-              "to": 26,
+              "range": [
+                25,
+                26
+              ],
               "raw": "a"
             },
             "max": {
               "type": "character",
               "codePoint": 98,
-              "from": 27,
-              "to": 28,
+              "range": [
+                27,
+                28
+              ],
               "raw": "b"
             },
-            "from": 25,
-            "to": 28,
+            "range": [
+              25,
+              28
+            ],
             "raw": "a-b"
           }
         ],
         "negative": false,
-        "from": 0,
-        "to": 29,
+        "range": [
+          0,
+          29
+        ],
         "raw": "[\\uD83D\\uDCA9\\uD83D\\uDCABa-b]"
       }
     ],
-    "from": 0,
-    "to": 29,
+    "range": [
+      0,
+      29
+    ],
     "raw": "[\\uD83D\\uDCA9\\uD83D\\uDCABa-b]",
     "lastMatchIdx": 0
   },
@@ -597,13 +753,17 @@
       {
         "type": "character",
         "codePoint": 128169,
-        "from": 0,
-        "to": 2,
+        "range": [
+          0,
+          2
+        ],
         "raw": "\uD83D\uDCA9"
       }
     ],
-    "from": 0,
-    "to": 2,
+    "range": [
+      0,
+      2
+    ],
     "raw": "\uD83D\uDCA9",
     "lastMatchIdx": 0
   },
@@ -614,13 +774,17 @@
         "type": "escape",
         "codePoint": 128169,
         "name": "codePoint",
-        "from": 0,
-        "to": 12,
+        "range": [
+          0,
+          12
+        ],
         "raw": "\\uD83D\\uDCA9"
       }
     ],
-    "from": 0,
-    "to": 12,
+    "range": [
+      0,
+      12
+    ],
     "raw": "\\uD83D\\uDCA9",
     "lastMatchIdx": 0
   },
@@ -636,22 +800,30 @@
             {
               "type": "character",
               "codePoint": 128169,
-              "from": 3,
-              "to": 5,
+              "range": [
+                3,
+                5
+              ],
               "raw": "\uD83D\uDCA9"
             }
           ],
-          "from": 3,
-          "to": 5,
+          "range": [
+            3,
+            5
+          ],
           "raw": "\uD83D\uDCA9"
         },
-        "from": 0,
-        "to": 6,
+        "range": [
+          0,
+          6
+        ],
         "raw": "(?:\uD83D\uDCA9)"
       }
     ],
-    "from": 0,
-    "to": 6,
+    "range": [
+      0,
+      6
+    ],
     "raw": "(?:\uD83D\uDCA9)",
     "lastMatchIdx": 0
   },
@@ -668,22 +840,30 @@
               "type": "escape",
               "codePoint": 128169,
               "name": "codePoint",
-              "from": 3,
-              "to": 15,
+              "range": [
+                3,
+                15
+              ],
               "raw": "\\uD83D\\uDCA9"
             }
           ],
-          "from": 3,
-          "to": 15,
+          "range": [
+            3,
+            15
+          ],
           "raw": "\\uD83D\\uDCA9"
         },
-        "from": 0,
-        "to": 16,
+        "range": [
+          0,
+          16
+        ],
         "raw": "(?:\\uD83D\\uDCA9)"
       }
     ],
-    "from": 0,
-    "to": 16,
+    "range": [
+      0,
+      16
+    ],
     "raw": "(?:\\uD83D\\uDCA9)",
     "lastMatchIdx": 0
   }

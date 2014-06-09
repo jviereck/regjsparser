@@ -18,27 +18,33 @@ console.log(parseTree);
 /*
   Which prints:
   {
-    "type": "alternative",
-    "terms": [
+    'type': 'alternative',
+    'terms': [
       {
-        "type": "assertion",
-        "sub": "start",
-        "from": 0,
-        "to": 1,
-        "raw": "^"
+        'type': 'assertion',
+        'name': 'start',
+        'range': [
+          0,
+          1
+        ],
+        'raw': '^'
       },
       {
-        "type": "character",
-        "symbol": "a",
-        "from": 1,
-        "to": 2,
-        "raw": "a"
+        'type': 'character',
+        'codePoint': 97,
+        'range': [
+          1,
+          2
+        ],
+        'raw': 'a'
       }
     ],
-    "from": 0,
-    "to": 2,
-    "raw": "^a",
-    "lastMatchIdx": 0
+    'range': [
+      0,
+      2
+    ],
+    'raw': '^a',
+    'lastMatchIdx': 0
   }
 */
 ```
