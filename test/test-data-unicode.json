@@ -1,10 +1,10 @@
 {
   "[\uD83D\uDCA9-\uD83D\uDCAB]": {
     "type": "alternative",
-    "terms": [
+    "body": [
       {
         "type": "characterClass",
-        "classRanges": [
+        "body": [
           {
             "type": "characterClassRange",
             "min": {
@@ -51,10 +51,10 @@
   },
   "[\\uD83D\\uDCA9-\\uD83D\\uDCAB]": {
     "type": "alternative",
-    "terms": [
+    "body": [
       {
         "type": "characterClass",
-        "classRanges": [
+        "body": [
           {
             "type": "characterClassRange",
             "min": {
@@ -101,10 +101,10 @@
   },
   "[a-b\uD83D\uDCA9-\uD83D\uDCAB]": {
     "type": "alternative",
-    "terms": [
+    "body": [
       {
         "type": "characterClass",
-        "classRanges": [
+        "body": [
           {
             "type": "characterClassRange",
             "min": {
@@ -179,10 +179,10 @@
   },
   "[a-b\\uD83D\\uDCA9-\\uD83D\\uDCAB]": {
     "type": "alternative",
-    "terms": [
+    "body": [
       {
         "type": "characterClass",
-        "classRanges": [
+        "body": [
           {
             "type": "characterClassRange",
             "min": {
@@ -257,10 +257,10 @@
   },
   "[\uD83D\uDCA9-\uD83D\uDCABa-b]": {
     "type": "alternative",
-    "terms": [
+    "body": [
       {
         "type": "characterClass",
-        "classRanges": [
+        "body": [
           {
             "type": "characterClassRange",
             "min": {
@@ -335,10 +335,10 @@
   },
   "[\\uD83D\\uDCA9-\\uD83D\\uDCABa-b]": {
     "type": "alternative",
-    "terms": [
+    "body": [
       {
         "type": "characterClass",
-        "classRanges": [
+        "body": [
           {
             "type": "characterClassRange",
             "min": {
@@ -413,10 +413,10 @@
   },
   "[\uD83D\uDCA9\uD83D\uDCAB]": {
     "type": "alternative",
-    "terms": [
+    "body": [
       {
         "type": "characterClass",
-        "classRanges": [
+        "body": [
           {
             "type": "value",
             "kind": "character",
@@ -455,10 +455,10 @@
   },
   "[\\uD83D\\uDCA9\\uD83D\\uDCAB]": {
     "type": "alternative",
-    "terms": [
+    "body": [
       {
         "type": "characterClass",
-        "classRanges": [
+        "body": [
           {
             "type": "value",
             "kind": "unicode",
@@ -497,10 +497,10 @@
   },
   "[a-b\uD83D\uDCA9\uD83D\uDCAB]": {
     "type": "alternative",
-    "terms": [
+    "body": [
       {
         "type": "characterClass",
-        "classRanges": [
+        "body": [
           {
             "type": "characterClassRange",
             "min": {
@@ -567,10 +567,10 @@
   },
   "[a-b\\uD83D\\uDCA9\\uD83D\\uDCAB]": {
     "type": "alternative",
-    "terms": [
+    "body": [
       {
         "type": "characterClass",
-        "classRanges": [
+        "body": [
           {
             "type": "characterClassRange",
             "min": {
@@ -637,10 +637,10 @@
   },
   "[\uD83D\uDCA9\uD83D\uDCABa-b]": {
     "type": "alternative",
-    "terms": [
+    "body": [
       {
         "type": "characterClass",
-        "classRanges": [
+        "body": [
           {
             "type": "value",
             "kind": "character",
@@ -707,10 +707,10 @@
   },
   "[\\uD83D\\uDCA9\\uD83D\\uDCABa-b]": {
     "type": "alternative",
-    "terms": [
+    "body": [
       {
         "type": "characterClass",
-        "classRanges": [
+        "body": [
           {
             "type": "value",
             "kind": "unicode",
@@ -777,7 +777,7 @@
   },
   "\uD83D\uDCA9": {
     "type": "alternative",
-    "terms": [
+    "body": [
       {
         "type": "value",
         "kind": "character",
@@ -798,7 +798,7 @@
   },
   "\\uD83D\\uDCA9": {
     "type": "alternative",
-    "terms": [
+    "body": [
       {
         "type": "value",
         "kind": "unicode",
@@ -819,13 +819,13 @@
   },
   "(?:\uD83D\uDCA9)": {
     "type": "alternative",
-    "terms": [
+    "body": [
       {
         "type": "group",
         "behavior": "ignore",
         "disjunction": {
           "type": "alternative",
-          "terms": [
+          "body": [
             {
               "type": "value",
               "kind": "character",
@@ -859,13 +859,13 @@
   },
   "(?:\\uD83D\\uDCA9)": {
     "type": "alternative",
-    "terms": [
+    "body": [
       {
         "type": "group",
         "behavior": "ignore",
         "disjunction": {
           "type": "alternative",
-          "terms": [
+          "body": [
             {
               "type": "value",
               "kind": "unicode",

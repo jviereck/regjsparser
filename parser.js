@@ -174,7 +174,7 @@
     function createDisjunction(alternatives, from, to) {
       return addRaw({
         type: 'disjunction',
-        alternatives: alternatives,
+        body: alternatives,
         range: [
           from,
           to
@@ -237,7 +237,7 @@
         min: min,
         max: max,
         greedy: true,
-        child: null, // set later on,
+        body: null, // set later on,
         range: [
           from,
           to
@@ -248,7 +248,7 @@
     function createAlternative(terms, from, to) {
       return addRaw({
         type: 'alternative',
-        terms: terms,
+        body: terms,
         range: [
           from,
           to
@@ -259,7 +259,7 @@
     function createCharacterClass(classRanges, negative, from, to) {
       return addRaw({
         type: 'characterClass',
-        classRanges: classRanges,
+        body: classRanges,
         negative: negative,
         range: [
           from,
@@ -388,7 +388,7 @@
       }
       var quantifier = parseQuantifier() || false;
       if (quantifier) {
-        quantifier.child = atom;
+        quantifier.body = atom;
         if (matchIdx + 1 <= lastMatchIdx) {
           quantifier.firstMatchIdx = matchIdx + 1;
           quantifier.lastMatchIdx = lastMatchIdx;
