@@ -182,16 +182,6 @@
       });
     }
 
-    function createEmpty() {
-      return addRaw({
-        type: 'empty',
-        range: [
-          pos,
-          pos
-        ]
-      });
-    }
-
     function createDot() {
       return addRaw({
         type: 'dot',
@@ -368,15 +358,6 @@
       //      [empty]
       //      Alternative Term
       while (term = parseTerm()) {
-        if (isEmpty(term)) {
-          // Only add Empty if there is nothing else in the result array.
-          // Otherwise ignore it to save noice in the AST.
-          if (res.length === 0) {
-            res.push(term);
-          }
-          break;
-        }
-
         res.push(term);
       }
 
@@ -390,7 +371,7 @@
       //      Atom Quantifier
 
       if (pos >= str.length || current('|') || current(')')) {
-        return createEmpty();
+        return null; /* Means: The term is empty */
       }
 
       var assertion = parseAssertion();
@@ -404,7 +385,6 @@
       var atom = parseAtom();
       if (!atom) {
         throw SyntaxError('Expected atom')
-        // return createEmpty();
       }
       var quantifier = parseQuantifier() || false;
       if (quantifier) {
@@ -899,6 +879,12 @@
 
         return parseUnicodeSurrogatePairEscape(res);
       }
+    }
+
+    // Convert the input to a string and treat the empty string special.
+    str = String(str);
+    if (str === '') {
+      str = '(?:)';
     }
 
     var result = parseDisjunction();
