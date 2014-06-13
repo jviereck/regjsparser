@@ -174,20 +174,10 @@
     function createDisjunction(alternatives, from, to) {
       return addRaw({
         type: 'disjunction',
-        alternatives: alternatives,
+        body: alternatives,
         range: [
           from,
           to
-        ]
-      });
-    }
-
-    function createEmpty() {
-      return addRaw({
-        type: 'empty',
-        range: [
-          pos,
-          pos
         ]
       });
     }
@@ -247,7 +237,7 @@
         min: min,
         max: max,
         greedy: true,
-        child: null, // set later on,
+        body: null, // set later on,
         range: [
           from,
           to
@@ -258,7 +248,7 @@
     function createAlternative(terms, from, to) {
       return addRaw({
         type: 'alternative',
-        terms: terms,
+        body: terms,
         range: [
           from,
           to
@@ -269,7 +259,7 @@
     function createCharacterClass(classRanges, negative, from, to) {
       return addRaw({
         type: 'characterClass',
-        classRanges: classRanges,
+        body: classRanges,
         negative: negative,
         range: [
           from,
@@ -368,15 +358,6 @@
       //      [empty]
       //      Alternative Term
       while (term = parseTerm()) {
-        if (isEmpty(term)) {
-          // Only add Empty if there is nothing else in the result array.
-          // Otherwise ignore it to save noice in the AST.
-          if (res.length === 0) {
-            res.push(term);
-          }
-          break;
-        }
-
         res.push(term);
       }
 
@@ -390,7 +371,7 @@
       //      Atom Quantifier
 
       if (pos >= str.length || current('|') || current(')')) {
-        return createEmpty();
+        return null; /* Means: The term is empty */
       }
 
       var assertion = parseAssertion();
@@ -404,11 +385,10 @@
       var atom = parseAtom();
       if (!atom) {
         throw SyntaxError('Expected atom')
-        // return createEmpty();
       }
       var quantifier = parseQuantifier() || false;
       if (quantifier) {
-        quantifier.child = atom;
+        quantifier.body = atom;
         if (matchIdx + 1 <= lastMatchIdx) {
           quantifier.firstMatchIdx = matchIdx + 1;
           quantifier.lastMatchIdx = lastMatchIdx;
@@ -899,6 +879,12 @@
 
         return parseUnicodeSurrogatePairEscape(res);
       }
+    }
+
+    // Convert the input to a string and treat the empty string special.
+    str = String(str);
+    if (str === '') {
+      str = '(?:)';
     }
 
     var result = parseDisjunction();
