@@ -4,6 +4,9 @@
 //
 // See ECMA-262 Standard: 15.10.1
 //
+// NOTE: The ECMA-262 standard uses the term "Assertion" for /^/. Here the
+//   term "Anchor" is used.
+//
 // Pattern ::
 //      Disjunction
 //
@@ -452,7 +455,7 @@
     function parseAnchor() {
       // Anchor ::
       //      ^
-      //      $f
+      //      $
       //      \ b
       //      \ B
       //      ( ? = Disjunction )
