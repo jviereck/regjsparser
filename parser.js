@@ -218,7 +218,7 @@
       return addRaw({
         type: 'group',
         behavior: behavior,
-        disjunction: disjunction,
+        body: disjunction,
         range: [
           from,
           to
@@ -283,6 +283,14 @@
           to
         ]
       });
+    }
+
+    function flattenBody(body) {
+      if (body.type === 'alternative') {
+        return body.body;
+      } else {
+        return [body];
+      }
     }
 
     function isEmpty(obj) {
@@ -388,7 +396,7 @@
       }
       var quantifier = parseQuantifier() || false;
       if (quantifier) {
-        quantifier.body = atom;
+        quantifier.body = flattenBody(atom);
         if (matchIdx + 1 <= lastMatchIdx) {
           quantifier.firstMatchIdx = matchIdx + 1;
           quantifier.lastMatchIdx = lastMatchIdx;
@@ -417,12 +425,12 @@
         matchIdx = lastMatchIdx;
       }
 
-      var res = parseDisjunction();
-      if (!res) {
+      var body = parseDisjunction();
+      if (!body) {
         throw SyntaxError('Expected disjunction');
       }
       skip(')');
-      var group = createGroup(type, res, from, pos);
+      var group = createGroup(type, flattenBody(body), from, pos);
 
       if (type == 'normal') {
         group.matchIdx = matchIdx;
