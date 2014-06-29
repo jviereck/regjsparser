@@ -5357,7 +5357,7 @@
         "greedy": true,
         "body": [
           {
-            "type": "escapeChar",
+            "type": "characterClassEscape",
             "value": "d",
             "range": [
               9,
@@ -6157,8 +6157,9 @@
                         "raw": " "
                       },
                       {
-                        "type": "escapeChar",
-                        "value": "n",
+                        "type": "value",
+                        "kind": "singleEscape",
+                        "codePoint": 10,
                         "range": [
                           59,
                           61
@@ -6166,8 +6167,9 @@
                         "raw": "\\n"
                       },
                       {
-                        "type": "escapeChar",
-                        "value": "t",
+                        "type": "value",
+                        "kind": "singleEscape",
+                        "codePoint": 9,
                         "range": [
                           61,
                           63
@@ -6175,8 +6177,9 @@
                         "raw": "\\t"
                       },
                       {
-                        "type": "escapeChar",
-                        "value": "r",
+                        "type": "value",
+                        "kind": "singleEscape",
+                        "codePoint": 13,
                         "range": [
                           63,
                           65
@@ -6585,8 +6588,9 @@
                                 "raw": " "
                               },
                               {
-                                "type": "escapeChar",
-                                "value": "n",
+                                "type": "value",
+                                "kind": "singleEscape",
+                                "codePoint": 10,
                                 "range": [
                                   126,
                                   128
@@ -6594,8 +6598,9 @@
                                 "raw": "\\n"
                               },
                               {
-                                "type": "escapeChar",
-                                "value": "t",
+                                "type": "value",
+                                "kind": "singleEscape",
+                                "codePoint": 9,
                                 "range": [
                                   128,
                                   130
@@ -6603,8 +6608,9 @@
                                 "raw": "\\t"
                               },
                               {
-                                "type": "escapeChar",
-                                "value": "r",
+                                "type": "value",
+                                "kind": "singleEscape",
+                                "codePoint": 13,
                                 "range": [
                                   130,
                                   132
@@ -6681,8 +6687,9 @@
                                 "raw": " "
                               },
                               {
-                                "type": "escapeChar",
-                                "value": "n",
+                                "type": "value",
+                                "kind": "singleEscape",
+                                "codePoint": 10,
                                 "range": [
                                   140,
                                   142
@@ -6690,8 +6697,9 @@
                                 "raw": "\\n"
                               },
                               {
-                                "type": "escapeChar",
-                                "value": "t",
+                                "type": "value",
+                                "kind": "singleEscape",
+                                "codePoint": 9,
                                 "range": [
                                   142,
                                   144
@@ -6699,8 +6707,9 @@
                                 "raw": "\\t"
                               },
                               {
-                                "type": "escapeChar",
-                                "value": "r",
+                                "type": "value",
+                                "kind": "singleEscape",
+                                "codePoint": 13,
                                 "range": [
                                   144,
                                   146
@@ -6952,8 +6961,9 @@
                         "raw": " "
                       },
                       {
-                        "type": "escapeChar",
-                        "value": "n",
+                        "type": "value",
+                        "kind": "singleEscape",
+                        "codePoint": 10,
                         "range": [
                           174,
                           176
@@ -6961,8 +6971,9 @@
                         "raw": "\\n"
                       },
                       {
-                        "type": "escapeChar",
-                        "value": "t",
+                        "type": "value",
+                        "kind": "singleEscape",
+                        "codePoint": 9,
                         "range": [
                           176,
                           178
@@ -6970,8 +6981,9 @@
                         "raw": "\\t"
                       },
                       {
-                        "type": "escapeChar",
-                        "value": "r",
+                        "type": "value",
+                        "kind": "singleEscape",
+                        "codePoint": 13,
                         "range": [
                           178,
                           180
@@ -7451,8 +7463,9 @@
                         "raw": " "
                       },
                       {
-                        "type": "escapeChar",
-                        "value": "n",
+                        "type": "value",
+                        "kind": "singleEscape",
+                        "codePoint": 10,
                         "range": [
                           59,
                           61
@@ -7460,8 +7473,9 @@
                         "raw": "\\n"
                       },
                       {
-                        "type": "escapeChar",
-                        "value": "t",
+                        "type": "value",
+                        "kind": "singleEscape",
+                        "codePoint": 9,
                         "range": [
                           61,
                           63
@@ -7469,8 +7483,9 @@
                         "raw": "\\t"
                       },
                       {
-                        "type": "escapeChar",
-                        "value": "r",
+                        "type": "value",
+                        "kind": "singleEscape",
+                        "codePoint": 13,
                         "range": [
                           63,
                           65
@@ -7947,8 +7962,9 @@
                         "type": "characterClass",
                         "body": [
                           {
-                            "type": "escapeChar",
-                            "value": "n",
+                            "type": "value",
+                            "kind": "singleEscape",
+                            "codePoint": 10,
                             "range": [
                               62,
                               64
@@ -7956,8 +7972,9 @@
                             "raw": "\\n"
                           },
                           {
-                            "type": "escapeChar",
-                            "value": "r",
+                            "type": "value",
+                            "kind": "singleEscape",
+                            "codePoint": 13,
                             "range": [
                               64,
                               66
@@ -7965,8 +7982,9 @@
                             "raw": "\\r"
                           },
                           {
-                            "type": "escapeChar",
-                            "value": "t",
+                            "type": "value",
+                            "kind": "singleEscape",
+                            "codePoint": 9,
                             "range": [
                               66,
                               68
@@ -8413,7 +8431,7 @@
                     "greedy": true,
                     "body": [
                       {
-                        "type": "escapeChar",
+                        "type": "characterClassEscape",
                         "value": "s",
                         "range": [
                           22,
@@ -8797,7 +8815,7 @@
         "greedy": true,
         "body": [
           {
-            "type": "escapeChar",
+            "type": "characterClassEscape",
             "value": "d",
             "range": [
               1,
@@ -10033,8 +10051,9 @@
                             "raw": " "
                           },
                           {
-                            "type": "escapeChar",
-                            "value": "n",
+                            "type": "value",
+                            "kind": "singleEscape",
+                            "codePoint": 10,
                             "range": [
                               94,
                               96
@@ -10042,8 +10061,9 @@
                             "raw": "\\n"
                           },
                           {
-                            "type": "escapeChar",
-                            "value": "t",
+                            "type": "value",
+                            "kind": "singleEscape",
+                            "codePoint": 9,
                             "range": [
                               96,
                               98
@@ -10051,8 +10071,9 @@
                             "raw": "\\t"
                           },
                           {
-                            "type": "escapeChar",
-                            "value": "r",
+                            "type": "value",
+                            "kind": "singleEscape",
+                            "codePoint": 13,
                             "range": [
                               98,
                               100
@@ -10461,8 +10482,9 @@
                                     "raw": " "
                                   },
                                   {
-                                    "type": "escapeChar",
-                                    "value": "n",
+                                    "type": "value",
+                                    "kind": "singleEscape",
+                                    "codePoint": 10,
                                     "range": [
                                       161,
                                       163
@@ -10470,8 +10492,9 @@
                                     "raw": "\\n"
                                   },
                                   {
-                                    "type": "escapeChar",
-                                    "value": "t",
+                                    "type": "value",
+                                    "kind": "singleEscape",
+                                    "codePoint": 9,
                                     "range": [
                                       163,
                                       165
@@ -10479,8 +10502,9 @@
                                     "raw": "\\t"
                                   },
                                   {
-                                    "type": "escapeChar",
-                                    "value": "r",
+                                    "type": "value",
+                                    "kind": "singleEscape",
+                                    "codePoint": 13,
                                     "range": [
                                       165,
                                       167
@@ -11064,8 +11088,9 @@
                                     "raw": " "
                                   },
                                   {
-                                    "type": "escapeChar",
-                                    "value": "n",
+                                    "type": "value",
+                                    "kind": "singleEscape",
+                                    "codePoint": 10,
                                     "range": [
                                       248,
                                       250
@@ -11073,8 +11098,9 @@
                                     "raw": "\\n"
                                   },
                                   {
-                                    "type": "escapeChar",
-                                    "value": "t",
+                                    "type": "value",
+                                    "kind": "singleEscape",
+                                    "codePoint": 9,
                                     "range": [
                                       250,
                                       252
@@ -11082,8 +11108,9 @@
                                     "raw": "\\t"
                                   },
                                   {
-                                    "type": "escapeChar",
-                                    "value": "r",
+                                    "type": "value",
+                                    "kind": "singleEscape",
+                                    "codePoint": 13,
                                     "range": [
                                       252,
                                       254
@@ -12100,8 +12127,9 @@
                                                                     "type": "characterClass",
                                                                     "body": [
                                                                       {
-                                                                        "type": "escapeChar",
-                                                                        "value": "n",
+                                                                        "type": "value",
+                                                                        "kind": "singleEscape",
+                                                                        "codePoint": 10,
                                                                         "range": [
                                                                           389,
                                                                           391
@@ -12109,8 +12137,9 @@
                                                                         "raw": "\\n"
                                                                       },
                                                                       {
-                                                                        "type": "escapeChar",
-                                                                        "value": "r",
+                                                                        "type": "value",
+                                                                        "kind": "singleEscape",
+                                                                        "codePoint": 13,
                                                                         "range": [
                                                                           391,
                                                                           393
@@ -12118,8 +12147,9 @@
                                                                         "raw": "\\r"
                                                                       },
                                                                       {
-                                                                        "type": "escapeChar",
-                                                                        "value": "t",
+                                                                        "type": "value",
+                                                                        "kind": "singleEscape",
+                                                                        "codePoint": 9,
                                                                         "range": [
                                                                           393,
                                                                           395
@@ -12782,8 +12812,9 @@
                                                 "raw": " "
                                               },
                                               {
-                                                "type": "escapeChar",
-                                                "value": "n",
+                                                "type": "value",
+                                                "kind": "singleEscape",
+                                                "codePoint": 10,
                                                 "range": [
                                                   486,
                                                   488
@@ -12791,8 +12822,9 @@
                                                 "raw": "\\n"
                                               },
                                               {
-                                                "type": "escapeChar",
-                                                "value": "t",
+                                                "type": "value",
+                                                "kind": "singleEscape",
+                                                "codePoint": 9,
                                                 "range": [
                                                   488,
                                                   490
@@ -12800,8 +12832,9 @@
                                                 "raw": "\\t"
                                               },
                                               {
-                                                "type": "escapeChar",
-                                                "value": "r",
+                                                "type": "value",
+                                                "kind": "singleEscape",
+                                                "codePoint": 13,
                                                 "range": [
                                                   490,
                                                   492
@@ -12885,8 +12918,9 @@
                                             "raw": " "
                                           },
                                           {
-                                            "type": "escapeChar",
-                                            "value": "n",
+                                            "type": "value",
+                                            "kind": "singleEscape",
+                                            "codePoint": 10,
                                             "range": [
                                               500,
                                               502
@@ -12894,8 +12928,9 @@
                                             "raw": "\\n"
                                           },
                                           {
-                                            "type": "escapeChar",
-                                            "value": "t",
+                                            "type": "value",
+                                            "kind": "singleEscape",
+                                            "codePoint": 9,
                                             "range": [
                                               502,
                                               504
@@ -12903,8 +12938,9 @@
                                             "raw": "\\t"
                                           },
                                           {
-                                            "type": "escapeChar",
-                                            "value": "r",
+                                            "type": "value",
+                                            "kind": "singleEscape",
+                                            "codePoint": 13,
                                             "range": [
                                               504,
                                               506
@@ -13997,8 +14033,9 @@
                                                     "raw": " "
                                                   },
                                                   {
-                                                    "type": "escapeChar",
-                                                    "value": "n",
+                                                    "type": "value",
+                                                    "kind": "singleEscape",
+                                                    "codePoint": 10,
                                                     "range": [
                                                       98,
                                                       100
@@ -14006,8 +14043,9 @@
                                                     "raw": "\\n"
                                                   },
                                                   {
-                                                    "type": "escapeChar",
-                                                    "value": "t",
+                                                    "type": "value",
+                                                    "kind": "singleEscape",
+                                                    "codePoint": 9,
                                                     "range": [
                                                       100,
                                                       102
@@ -14015,8 +14053,9 @@
                                                     "raw": "\\t"
                                                   },
                                                   {
-                                                    "type": "escapeChar",
-                                                    "value": "r",
+                                                    "type": "value",
+                                                    "kind": "singleEscape",
+                                                    "codePoint": 13,
                                                     "range": [
                                                       102,
                                                       104
@@ -14425,8 +14464,9 @@
                                                             "raw": " "
                                                           },
                                                           {
-                                                            "type": "escapeChar",
-                                                            "value": "n",
+                                                            "type": "value",
+                                                            "kind": "singleEscape",
+                                                            "codePoint": 10,
                                                             "range": [
                                                               165,
                                                               167
@@ -14434,8 +14474,9 @@
                                                             "raw": "\\n"
                                                           },
                                                           {
-                                                            "type": "escapeChar",
-                                                            "value": "t",
+                                                            "type": "value",
+                                                            "kind": "singleEscape",
+                                                            "codePoint": 9,
                                                             "range": [
                                                               167,
                                                               169
@@ -14443,8 +14484,9 @@
                                                             "raw": "\\t"
                                                           },
                                                           {
-                                                            "type": "escapeChar",
-                                                            "value": "r",
+                                                            "type": "value",
+                                                            "kind": "singleEscape",
+                                                            "codePoint": 13,
                                                             "range": [
                                                               169,
                                                               171
@@ -15028,8 +15070,9 @@
                                                             "raw": " "
                                                           },
                                                           {
-                                                            "type": "escapeChar",
-                                                            "value": "n",
+                                                            "type": "value",
+                                                            "kind": "singleEscape",
+                                                            "codePoint": 10,
                                                             "range": [
                                                               252,
                                                               254
@@ -15037,8 +15080,9 @@
                                                             "raw": "\\n"
                                                           },
                                                           {
-                                                            "type": "escapeChar",
-                                                            "value": "t",
+                                                            "type": "value",
+                                                            "kind": "singleEscape",
+                                                            "codePoint": 9,
                                                             "range": [
                                                               254,
                                                               256
@@ -15046,8 +15090,9 @@
                                                             "raw": "\\t"
                                                           },
                                                           {
-                                                            "type": "escapeChar",
-                                                            "value": "r",
+                                                            "type": "value",
+                                                            "kind": "singleEscape",
+                                                            "codePoint": 13,
                                                             "range": [
                                                               256,
                                                               258
@@ -16064,8 +16109,9 @@
                                                                                             "type": "characterClass",
                                                                                             "body": [
                                                                                               {
-                                                                                                "type": "escapeChar",
-                                                                                                "value": "n",
+                                                                                                "type": "value",
+                                                                                                "kind": "singleEscape",
+                                                                                                "codePoint": 10,
                                                                                                 "range": [
                                                                                                   393,
                                                                                                   395
@@ -16073,8 +16119,9 @@
                                                                                                 "raw": "\\n"
                                                                                               },
                                                                                               {
-                                                                                                "type": "escapeChar",
-                                                                                                "value": "r",
+                                                                                                "type": "value",
+                                                                                                "kind": "singleEscape",
+                                                                                                "codePoint": 13,
                                                                                                 "range": [
                                                                                                   395,
                                                                                                   397
@@ -16082,8 +16129,9 @@
                                                                                                 "raw": "\\r"
                                                                                               },
                                                                                               {
-                                                                                                "type": "escapeChar",
-                                                                                                "value": "t",
+                                                                                                "type": "value",
+                                                                                                "kind": "singleEscape",
+                                                                                                "codePoint": 9,
                                                                                                 "range": [
                                                                                                   397,
                                                                                                   399
@@ -16746,8 +16794,9 @@
                                                                         "raw": " "
                                                                       },
                                                                       {
-                                                                        "type": "escapeChar",
-                                                                        "value": "n",
+                                                                        "type": "value",
+                                                                        "kind": "singleEscape",
+                                                                        "codePoint": 10,
                                                                         "range": [
                                                                           490,
                                                                           492
@@ -16755,8 +16804,9 @@
                                                                         "raw": "\\n"
                                                                       },
                                                                       {
-                                                                        "type": "escapeChar",
-                                                                        "value": "t",
+                                                                        "type": "value",
+                                                                        "kind": "singleEscape",
+                                                                        "codePoint": 9,
                                                                         "range": [
                                                                           492,
                                                                           494
@@ -16764,8 +16814,9 @@
                                                                         "raw": "\\t"
                                                                       },
                                                                       {
-                                                                        "type": "escapeChar",
-                                                                        "value": "r",
+                                                                        "type": "value",
+                                                                        "kind": "singleEscape",
+                                                                        "codePoint": 13,
                                                                         "range": [
                                                                           494,
                                                                           496
@@ -16849,8 +16900,9 @@
                                                                     "raw": " "
                                                                   },
                                                                   {
-                                                                    "type": "escapeChar",
-                                                                    "value": "n",
+                                                                    "type": "value",
+                                                                    "kind": "singleEscape",
+                                                                    "codePoint": 10,
                                                                     "range": [
                                                                       504,
                                                                       506
@@ -16858,8 +16910,9 @@
                                                                     "raw": "\\n"
                                                                   },
                                                                   {
-                                                                    "type": "escapeChar",
-                                                                    "value": "t",
+                                                                    "type": "value",
+                                                                    "kind": "singleEscape",
+                                                                    "codePoint": 9,
                                                                     "range": [
                                                                       506,
                                                                       508
@@ -16867,8 +16920,9 @@
                                                                     "raw": "\\t"
                                                                   },
                                                                   {
-                                                                    "type": "escapeChar",
-                                                                    "value": "r",
+                                                                    "type": "value",
+                                                                    "kind": "singleEscape",
+                                                                    "codePoint": 13,
                                                                     "range": [
                                                                       508,
                                                                       510
@@ -17424,8 +17478,9 @@
                                             "type": "characterClass",
                                             "body": [
                                               {
-                                                "type": "escapeChar",
-                                                "value": "n",
+                                                "type": "value",
+                                                "kind": "singleEscape",
+                                                "codePoint": 10,
                                                 "range": [
                                                   588,
                                                   590
@@ -17433,8 +17488,9 @@
                                                 "raw": "\\n"
                                               },
                                               {
-                                                "type": "escapeChar",
-                                                "value": "r",
+                                                "type": "value",
+                                                "kind": "singleEscape",
+                                                "codePoint": 13,
                                                 "range": [
                                                   590,
                                                   592
@@ -17442,8 +17498,9 @@
                                                 "raw": "\\r"
                                               },
                                               {
-                                                "type": "escapeChar",
-                                                "value": "t",
+                                                "type": "value",
+                                                "kind": "singleEscape",
+                                                "codePoint": 9,
                                                 "range": [
                                                   592,
                                                   594
@@ -18109,8 +18166,9 @@
                                             "raw": " "
                                           },
                                           {
-                                            "type": "escapeChar",
-                                            "value": "n",
+                                            "type": "value",
+                                            "kind": "singleEscape",
+                                            "codePoint": 10,
                                             "range": [
                                               687,
                                               689
@@ -18118,8 +18176,9 @@
                                             "raw": "\\n"
                                           },
                                           {
-                                            "type": "escapeChar",
-                                            "value": "t",
+                                            "type": "value",
+                                            "kind": "singleEscape",
+                                            "codePoint": 9,
                                             "range": [
                                               689,
                                               691
@@ -18127,8 +18186,9 @@
                                             "raw": "\\t"
                                           },
                                           {
-                                            "type": "escapeChar",
-                                            "value": "r",
+                                            "type": "value",
+                                            "kind": "singleEscape",
+                                            "codePoint": 13,
                                             "range": [
                                               691,
                                               693
@@ -18607,8 +18667,9 @@
                                         "raw": " "
                                       },
                                       {
-                                        "type": "escapeChar",
-                                        "value": "n",
+                                        "type": "value",
+                                        "kind": "singleEscape",
+                                        "codePoint": 10,
                                         "range": [
                                           762,
                                           764
@@ -18616,8 +18677,9 @@
                                         "raw": "\\n"
                                       },
                                       {
-                                        "type": "escapeChar",
-                                        "value": "t",
+                                        "type": "value",
+                                        "kind": "singleEscape",
+                                        "codePoint": 9,
                                         "range": [
                                           764,
                                           766
@@ -18625,8 +18687,9 @@
                                         "raw": "\\t"
                                       },
                                       {
-                                        "type": "escapeChar",
-                                        "value": "r",
+                                        "type": "value",
+                                        "kind": "singleEscape",
+                                        "codePoint": 13,
                                         "range": [
                                           766,
                                           768
@@ -19035,8 +19098,9 @@
                                                 "raw": " "
                                               },
                                               {
-                                                "type": "escapeChar",
-                                                "value": "n",
+                                                "type": "value",
+                                                "kind": "singleEscape",
+                                                "codePoint": 10,
                                                 "range": [
                                                   829,
                                                   831
@@ -19044,8 +19108,9 @@
                                                 "raw": "\\n"
                                               },
                                               {
-                                                "type": "escapeChar",
-                                                "value": "t",
+                                                "type": "value",
+                                                "kind": "singleEscape",
+                                                "codePoint": 9,
                                                 "range": [
                                                   831,
                                                   833
@@ -19053,8 +19118,9 @@
                                                 "raw": "\\t"
                                               },
                                               {
-                                                "type": "escapeChar",
-                                                "value": "r",
+                                                "type": "value",
+                                                "kind": "singleEscape",
+                                                "codePoint": 13,
                                                 "range": [
                                                   833,
                                                   835
@@ -19131,8 +19197,9 @@
                                                 "raw": " "
                                               },
                                               {
-                                                "type": "escapeChar",
-                                                "value": "n",
+                                                "type": "value",
+                                                "kind": "singleEscape",
+                                                "codePoint": 10,
                                                 "range": [
                                                   843,
                                                   845
@@ -19140,8 +19207,9 @@
                                                 "raw": "\\n"
                                               },
                                               {
-                                                "type": "escapeChar",
-                                                "value": "t",
+                                                "type": "value",
+                                                "kind": "singleEscape",
+                                                "codePoint": 9,
                                                 "range": [
                                                   845,
                                                   847
@@ -19149,8 +19217,9 @@
                                                 "raw": "\\t"
                                               },
                                               {
-                                                "type": "escapeChar",
-                                                "value": "r",
+                                                "type": "value",
+                                                "kind": "singleEscape",
+                                                "codePoint": 13,
                                                 "range": [
                                                   847,
                                                   849
@@ -19402,8 +19471,9 @@
                                         "raw": " "
                                       },
                                       {
-                                        "type": "escapeChar",
-                                        "value": "n",
+                                        "type": "value",
+                                        "kind": "singleEscape",
+                                        "codePoint": 10,
                                         "range": [
                                           877,
                                           879
@@ -19411,8 +19481,9 @@
                                         "raw": "\\n"
                                       },
                                       {
-                                        "type": "escapeChar",
-                                        "value": "t",
+                                        "type": "value",
+                                        "kind": "singleEscape",
+                                        "codePoint": 9,
                                         "range": [
                                           879,
                                           881
@@ -19420,8 +19491,9 @@
                                         "raw": "\\t"
                                       },
                                       {
-                                        "type": "escapeChar",
-                                        "value": "r",
+                                        "type": "value",
+                                        "kind": "singleEscape",
+                                        "codePoint": 13,
                                         "range": [
                                           881,
                                           883
@@ -20491,8 +20563,9 @@
                                     "type": "characterClass",
                                     "body": [
                                       {
-                                        "type": "escapeChar",
-                                        "value": "n",
+                                        "type": "value",
+                                        "kind": "singleEscape",
+                                        "codePoint": 10,
                                         "range": [
                                           127,
                                           129
@@ -20500,8 +20573,9 @@
                                         "raw": "\\n"
                                       },
                                       {
-                                        "type": "escapeChar",
-                                        "value": "r",
+                                        "type": "value",
+                                        "kind": "singleEscape",
+                                        "codePoint": 13,
                                         "range": [
                                           129,
                                           131
@@ -20509,8 +20583,9 @@
                                         "raw": "\\r"
                                       },
                                       {
-                                        "type": "escapeChar",
-                                        "value": "t",
+                                        "type": "value",
+                                        "kind": "singleEscape",
+                                        "codePoint": 9,
                                         "range": [
                                           131,
                                           133
@@ -21173,8 +21248,9 @@
                 "raw": " "
               },
               {
-                "type": "escapeChar",
-                "value": "n",
+                "type": "value",
+                "kind": "singleEscape",
+                "codePoint": 10,
                 "range": [
                   224,
                   226
@@ -21182,8 +21258,9 @@
                 "raw": "\\n"
               },
               {
-                "type": "escapeChar",
-                "value": "t",
+                "type": "value",
+                "kind": "singleEscape",
+                "codePoint": 9,
                 "range": [
                   226,
                   228
@@ -21191,8 +21268,9 @@
                 "raw": "\\t"
               },
               {
-                "type": "escapeChar",
-                "value": "r",
+                "type": "value",
+                "kind": "singleEscape",
+                "codePoint": 13,
                 "range": [
                   228,
                   230
@@ -21466,8 +21544,9 @@
         "raw": " "
       },
       {
-        "type": "escapeChar",
-        "value": "f",
+        "type": "value",
+        "kind": "singleEscape",
+        "codePoint": 12,
         "range": [
           2,
           4
@@ -21475,8 +21554,9 @@
         "raw": "\\f"
       },
       {
-        "type": "escapeChar",
-        "value": "n",
+        "type": "value",
+        "kind": "singleEscape",
+        "codePoint": 10,
         "range": [
           4,
           6
@@ -21511,8 +21591,9 @@
             "raw": " "
           },
           {
-            "type": "escapeChar",
-            "value": "n",
+            "type": "value",
+            "kind": "singleEscape",
+            "codePoint": 10,
             "range": [
               2,
               4
@@ -21520,8 +21601,9 @@
             "raw": "\\n"
           },
           {
-            "type": "escapeChar",
-            "value": "t",
+            "type": "value",
+            "kind": "singleEscape",
+            "codePoint": 9,
             "range": [
               4,
               6
@@ -21529,8 +21611,9 @@
             "raw": "\\t"
           },
           {
-            "type": "escapeChar",
-            "value": "r",
+            "type": "value",
+            "kind": "singleEscape",
+            "codePoint": 13,
             "range": [
               6,
               8
@@ -21575,8 +21658,9 @@
                 "raw": " "
               },
               {
-                "type": "escapeChar",
-                "value": "n",
+                "type": "value",
+                "kind": "singleEscape",
+                "codePoint": 10,
                 "range": [
                   2,
                   4
@@ -21584,8 +21668,9 @@
                 "raw": "\\n"
               },
               {
-                "type": "escapeChar",
-                "value": "t",
+                "type": "value",
+                "kind": "singleEscape",
+                "codePoint": 9,
                 "range": [
                   4,
                   6
@@ -21593,8 +21678,9 @@
                 "raw": "\\t"
               },
               {
-                "type": "escapeChar",
-                "value": "r",
+                "type": "value",
+                "kind": "singleEscape",
+                "codePoint": 13,
                 "range": [
                   6,
                   8
@@ -22003,8 +22089,9 @@
                         "raw": " "
                       },
                       {
-                        "type": "escapeChar",
-                        "value": "n",
+                        "type": "value",
+                        "kind": "singleEscape",
+                        "codePoint": 10,
                         "range": [
                           69,
                           71
@@ -22012,8 +22099,9 @@
                         "raw": "\\n"
                       },
                       {
-                        "type": "escapeChar",
-                        "value": "t",
+                        "type": "value",
+                        "kind": "singleEscape",
+                        "codePoint": 9,
                         "range": [
                           71,
                           73
@@ -22021,8 +22109,9 @@
                         "raw": "\\t"
                       },
                       {
-                        "type": "escapeChar",
-                        "value": "r",
+                        "type": "value",
+                        "kind": "singleEscape",
+                        "codePoint": 13,
                         "range": [
                           73,
                           75
@@ -22606,8 +22695,9 @@
                 "raw": " "
               },
               {
-                "type": "escapeChar",
-                "value": "n",
+                "type": "value",
+                "kind": "singleEscape",
+                "codePoint": 10,
                 "range": [
                   2,
                   4
@@ -22615,8 +22705,9 @@
                 "raw": "\\n"
               },
               {
-                "type": "escapeChar",
-                "value": "t",
+                "type": "value",
+                "kind": "singleEscape",
+                "codePoint": 9,
                 "range": [
                   4,
                   6
@@ -22624,8 +22715,9 @@
                 "raw": "\\t"
               },
               {
-                "type": "escapeChar",
-                "value": "r",
+                "type": "value",
+                "kind": "singleEscape",
+                "codePoint": 13,
                 "range": [
                   6,
                   8
@@ -23034,8 +23126,9 @@
                         "raw": " "
                       },
                       {
-                        "type": "escapeChar",
-                        "value": "n",
+                        "type": "value",
+                        "kind": "singleEscape",
+                        "codePoint": 10,
                         "range": [
                           69,
                           71
@@ -23043,8 +23136,9 @@
                         "raw": "\\n"
                       },
                       {
-                        "type": "escapeChar",
-                        "value": "t",
+                        "type": "value",
+                        "kind": "singleEscape",
+                        "codePoint": 9,
                         "range": [
                           71,
                           73
@@ -23052,8 +23146,9 @@
                         "raw": "\\t"
                       },
                       {
-                        "type": "escapeChar",
-                        "value": "r",
+                        "type": "value",
+                        "kind": "singleEscape",
+                        "codePoint": 13,
                         "range": [
                           73,
                           75
@@ -23637,8 +23732,9 @@
                         "raw": " "
                       },
                       {
-                        "type": "escapeChar",
-                        "value": "n",
+                        "type": "value",
+                        "kind": "singleEscape",
+                        "codePoint": 10,
                         "range": [
                           156,
                           158
@@ -23646,8 +23742,9 @@
                         "raw": "\\n"
                       },
                       {
-                        "type": "escapeChar",
-                        "value": "t",
+                        "type": "value",
+                        "kind": "singleEscape",
+                        "codePoint": 9,
                         "range": [
                           158,
                           160
@@ -23655,8 +23752,9 @@
                         "raw": "\\t"
                       },
                       {
-                        "type": "escapeChar",
-                        "value": "r",
+                        "type": "value",
+                        "kind": "singleEscape",
+                        "codePoint": 13,
                         "range": [
                           160,
                           162
@@ -24673,8 +24771,9 @@
                                                         "type": "characterClass",
                                                         "body": [
                                                           {
-                                                            "type": "escapeChar",
-                                                            "value": "n",
+                                                            "type": "value",
+                                                            "kind": "singleEscape",
+                                                            "codePoint": 10,
                                                             "range": [
                                                               297,
                                                               299
@@ -24682,8 +24781,9 @@
                                                             "raw": "\\n"
                                                           },
                                                           {
-                                                            "type": "escapeChar",
-                                                            "value": "r",
+                                                            "type": "value",
+                                                            "kind": "singleEscape",
+                                                            "codePoint": 13,
                                                             "range": [
                                                               299,
                                                               301
@@ -24691,8 +24791,9 @@
                                                             "raw": "\\r"
                                                           },
                                                           {
-                                                            "type": "escapeChar",
-                                                            "value": "t",
+                                                            "type": "value",
+                                                            "kind": "singleEscape",
+                                                            "codePoint": 9,
                                                             "range": [
                                                               301,
                                                               303
@@ -25355,8 +25456,9 @@
                                     "raw": " "
                                   },
                                   {
-                                    "type": "escapeChar",
-                                    "value": "n",
+                                    "type": "value",
+                                    "kind": "singleEscape",
+                                    "codePoint": 10,
                                     "range": [
                                       394,
                                       396
@@ -25364,8 +25466,9 @@
                                     "raw": "\\n"
                                   },
                                   {
-                                    "type": "escapeChar",
-                                    "value": "t",
+                                    "type": "value",
+                                    "kind": "singleEscape",
+                                    "codePoint": 9,
                                     "range": [
                                       396,
                                       398
@@ -25373,8 +25476,9 @@
                                     "raw": "\\t"
                                   },
                                   {
-                                    "type": "escapeChar",
-                                    "value": "r",
+                                    "type": "value",
+                                    "kind": "singleEscape",
+                                    "codePoint": 13,
                                     "range": [
                                       398,
                                       400
@@ -25458,8 +25562,9 @@
                                 "raw": " "
                               },
                               {
-                                "type": "escapeChar",
-                                "value": "n",
+                                "type": "value",
+                                "kind": "singleEscape",
+                                "codePoint": 10,
                                 "range": [
                                   408,
                                   410
@@ -25467,8 +25572,9 @@
                                 "raw": "\\n"
                               },
                               {
-                                "type": "escapeChar",
-                                "value": "t",
+                                "type": "value",
+                                "kind": "singleEscape",
+                                "codePoint": 9,
                                 "range": [
                                   410,
                                   412
@@ -25476,8 +25582,9 @@
                                 "raw": "\\t"
                               },
                               {
-                                "type": "escapeChar",
-                                "value": "r",
+                                "type": "value",
+                                "kind": "singleEscape",
+                                "codePoint": 13,
                                 "range": [
                                   412,
                                   414
@@ -26536,8 +26643,9 @@
     "type": "characterClass",
     "body": [
       {
-        "type": "escapeChar",
-        "value": "n",
+        "type": "value",
+        "kind": "singleEscape",
+        "codePoint": 10,
         "range": [
           1,
           3
@@ -26545,8 +26653,9 @@
         "raw": "\\n"
       },
       {
-        "type": "escapeChar",
-        "value": "r",
+        "type": "value",
+        "kind": "singleEscape",
+        "codePoint": 13,
         "range": [
           3,
           5
@@ -26554,8 +26663,9 @@
         "raw": "\\r"
       },
       {
-        "type": "escapeChar",
-        "value": "t",
+        "type": "value",
+        "kind": "singleEscape",
+        "codePoint": 9,
         "range": [
           5,
           7
@@ -27992,8 +28102,9 @@
                                                         "raw": " "
                                                       },
                                                       {
-                                                        "type": "escapeChar",
-                                                        "value": "n",
+                                                        "type": "value",
+                                                        "kind": "singleEscape",
+                                                        "codePoint": 10,
                                                         "range": [
                                                           104,
                                                           106
@@ -28001,8 +28112,9 @@
                                                         "raw": "\\n"
                                                       },
                                                       {
-                                                        "type": "escapeChar",
-                                                        "value": "t",
+                                                        "type": "value",
+                                                        "kind": "singleEscape",
+                                                        "codePoint": 9,
                                                         "range": [
                                                           106,
                                                           108
@@ -28010,8 +28122,9 @@
                                                         "raw": "\\t"
                                                       },
                                                       {
-                                                        "type": "escapeChar",
-                                                        "value": "r",
+                                                        "type": "value",
+                                                        "kind": "singleEscape",
+                                                        "codePoint": 13,
                                                         "range": [
                                                           108,
                                                           110
@@ -28420,8 +28533,9 @@
                                                                 "raw": " "
                                                               },
                                                               {
-                                                                "type": "escapeChar",
-                                                                "value": "n",
+                                                                "type": "value",
+                                                                "kind": "singleEscape",
+                                                                "codePoint": 10,
                                                                 "range": [
                                                                   171,
                                                                   173
@@ -28429,8 +28543,9 @@
                                                                 "raw": "\\n"
                                                               },
                                                               {
-                                                                "type": "escapeChar",
-                                                                "value": "t",
+                                                                "type": "value",
+                                                                "kind": "singleEscape",
+                                                                "codePoint": 9,
                                                                 "range": [
                                                                   173,
                                                                   175
@@ -28438,8 +28553,9 @@
                                                                 "raw": "\\t"
                                                               },
                                                               {
-                                                                "type": "escapeChar",
-                                                                "value": "r",
+                                                                "type": "value",
+                                                                "kind": "singleEscape",
+                                                                "codePoint": 13,
                                                                 "range": [
                                                                   175,
                                                                   177
@@ -29023,8 +29139,9 @@
                                                                 "raw": " "
                                                               },
                                                               {
-                                                                "type": "escapeChar",
-                                                                "value": "n",
+                                                                "type": "value",
+                                                                "kind": "singleEscape",
+                                                                "codePoint": 10,
                                                                 "range": [
                                                                   258,
                                                                   260
@@ -29032,8 +29149,9 @@
                                                                 "raw": "\\n"
                                                               },
                                                               {
-                                                                "type": "escapeChar",
-                                                                "value": "t",
+                                                                "type": "value",
+                                                                "kind": "singleEscape",
+                                                                "codePoint": 9,
                                                                 "range": [
                                                                   260,
                                                                   262
@@ -29041,8 +29159,9 @@
                                                                 "raw": "\\t"
                                                               },
                                                               {
-                                                                "type": "escapeChar",
-                                                                "value": "r",
+                                                                "type": "value",
+                                                                "kind": "singleEscape",
+                                                                "codePoint": 13,
                                                                 "range": [
                                                                   262,
                                                                   264
@@ -30059,8 +30178,9 @@
                                                                                                 "type": "characterClass",
                                                                                                 "body": [
                                                                                                   {
-                                                                                                    "type": "escapeChar",
-                                                                                                    "value": "n",
+                                                                                                    "type": "value",
+                                                                                                    "kind": "singleEscape",
+                                                                                                    "codePoint": 10,
                                                                                                     "range": [
                                                                                                       399,
                                                                                                       401
@@ -30068,8 +30188,9 @@
                                                                                                     "raw": "\\n"
                                                                                                   },
                                                                                                   {
-                                                                                                    "type": "escapeChar",
-                                                                                                    "value": "r",
+                                                                                                    "type": "value",
+                                                                                                    "kind": "singleEscape",
+                                                                                                    "codePoint": 13,
                                                                                                     "range": [
                                                                                                       401,
                                                                                                       403
@@ -30077,8 +30198,9 @@
                                                                                                     "raw": "\\r"
                                                                                                   },
                                                                                                   {
-                                                                                                    "type": "escapeChar",
-                                                                                                    "value": "t",
+                                                                                                    "type": "value",
+                                                                                                    "kind": "singleEscape",
+                                                                                                    "codePoint": 9,
                                                                                                     "range": [
                                                                                                       403,
                                                                                                       405
@@ -30741,8 +30863,9 @@
                                                                             "raw": " "
                                                                           },
                                                                           {
-                                                                            "type": "escapeChar",
-                                                                            "value": "n",
+                                                                            "type": "value",
+                                                                            "kind": "singleEscape",
+                                                                            "codePoint": 10,
                                                                             "range": [
                                                                               496,
                                                                               498
@@ -30750,8 +30873,9 @@
                                                                             "raw": "\\n"
                                                                           },
                                                                           {
-                                                                            "type": "escapeChar",
-                                                                            "value": "t",
+                                                                            "type": "value",
+                                                                            "kind": "singleEscape",
+                                                                            "codePoint": 9,
                                                                             "range": [
                                                                               498,
                                                                               500
@@ -30759,8 +30883,9 @@
                                                                             "raw": "\\t"
                                                                           },
                                                                           {
-                                                                            "type": "escapeChar",
-                                                                            "value": "r",
+                                                                            "type": "value",
+                                                                            "kind": "singleEscape",
+                                                                            "codePoint": 13,
                                                                             "range": [
                                                                               500,
                                                                               502
@@ -30844,8 +30969,9 @@
                                                                         "raw": " "
                                                                       },
                                                                       {
-                                                                        "type": "escapeChar",
-                                                                        "value": "n",
+                                                                        "type": "value",
+                                                                        "kind": "singleEscape",
+                                                                        "codePoint": 10,
                                                                         "range": [
                                                                           510,
                                                                           512
@@ -30853,8 +30979,9 @@
                                                                         "raw": "\\n"
                                                                       },
                                                                       {
-                                                                        "type": "escapeChar",
-                                                                        "value": "t",
+                                                                        "type": "value",
+                                                                        "kind": "singleEscape",
+                                                                        "codePoint": 9,
                                                                         "range": [
                                                                           512,
                                                                           514
@@ -30862,8 +30989,9 @@
                                                                         "raw": "\\t"
                                                                       },
                                                                       {
-                                                                        "type": "escapeChar",
-                                                                        "value": "r",
+                                                                        "type": "value",
+                                                                        "kind": "singleEscape",
+                                                                        "codePoint": 13,
                                                                         "range": [
                                                                           514,
                                                                           516
@@ -31419,8 +31547,9 @@
                                                 "type": "characterClass",
                                                 "body": [
                                                   {
-                                                    "type": "escapeChar",
-                                                    "value": "n",
+                                                    "type": "value",
+                                                    "kind": "singleEscape",
+                                                    "codePoint": 10,
                                                     "range": [
                                                       594,
                                                       596
@@ -31428,8 +31557,9 @@
                                                     "raw": "\\n"
                                                   },
                                                   {
-                                                    "type": "escapeChar",
-                                                    "value": "r",
+                                                    "type": "value",
+                                                    "kind": "singleEscape",
+                                                    "codePoint": 13,
                                                     "range": [
                                                       596,
                                                       598
@@ -31437,8 +31567,9 @@
                                                     "raw": "\\r"
                                                   },
                                                   {
-                                                    "type": "escapeChar",
-                                                    "value": "t",
+                                                    "type": "value",
+                                                    "kind": "singleEscape",
+                                                    "codePoint": 9,
                                                     "range": [
                                                       598,
                                                       600
@@ -32104,8 +32235,9 @@
                                                 "raw": " "
                                               },
                                               {
-                                                "type": "escapeChar",
-                                                "value": "n",
+                                                "type": "value",
+                                                "kind": "singleEscape",
+                                                "codePoint": 10,
                                                 "range": [
                                                   693,
                                                   695
@@ -32113,8 +32245,9 @@
                                                 "raw": "\\n"
                                               },
                                               {
-                                                "type": "escapeChar",
-                                                "value": "t",
+                                                "type": "value",
+                                                "kind": "singleEscape",
+                                                "codePoint": 9,
                                                 "range": [
                                                   695,
                                                   697
@@ -32122,8 +32255,9 @@
                                                 "raw": "\\t"
                                               },
                                               {
-                                                "type": "escapeChar",
-                                                "value": "r",
+                                                "type": "value",
+                                                "kind": "singleEscape",
+                                                "codePoint": 13,
                                                 "range": [
                                                   697,
                                                   699
@@ -32602,8 +32736,9 @@
                                             "raw": " "
                                           },
                                           {
-                                            "type": "escapeChar",
-                                            "value": "n",
+                                            "type": "value",
+                                            "kind": "singleEscape",
+                                            "codePoint": 10,
                                             "range": [
                                               768,
                                               770
@@ -32611,8 +32746,9 @@
                                             "raw": "\\n"
                                           },
                                           {
-                                            "type": "escapeChar",
-                                            "value": "t",
+                                            "type": "value",
+                                            "kind": "singleEscape",
+                                            "codePoint": 9,
                                             "range": [
                                               770,
                                               772
@@ -32620,8 +32756,9 @@
                                             "raw": "\\t"
                                           },
                                           {
-                                            "type": "escapeChar",
-                                            "value": "r",
+                                            "type": "value",
+                                            "kind": "singleEscape",
+                                            "codePoint": 13,
                                             "range": [
                                               772,
                                               774
@@ -33030,8 +33167,9 @@
                                                     "raw": " "
                                                   },
                                                   {
-                                                    "type": "escapeChar",
-                                                    "value": "n",
+                                                    "type": "value",
+                                                    "kind": "singleEscape",
+                                                    "codePoint": 10,
                                                     "range": [
                                                       835,
                                                       837
@@ -33039,8 +33177,9 @@
                                                     "raw": "\\n"
                                                   },
                                                   {
-                                                    "type": "escapeChar",
-                                                    "value": "t",
+                                                    "type": "value",
+                                                    "kind": "singleEscape",
+                                                    "codePoint": 9,
                                                     "range": [
                                                       837,
                                                       839
@@ -33048,8 +33187,9 @@
                                                     "raw": "\\t"
                                                   },
                                                   {
-                                                    "type": "escapeChar",
-                                                    "value": "r",
+                                                    "type": "value",
+                                                    "kind": "singleEscape",
+                                                    "codePoint": 13,
                                                     "range": [
                                                       839,
                                                       841
@@ -33126,8 +33266,9 @@
                                                     "raw": " "
                                                   },
                                                   {
-                                                    "type": "escapeChar",
-                                                    "value": "n",
+                                                    "type": "value",
+                                                    "kind": "singleEscape",
+                                                    "codePoint": 10,
                                                     "range": [
                                                       849,
                                                       851
@@ -33135,8 +33276,9 @@
                                                     "raw": "\\n"
                                                   },
                                                   {
-                                                    "type": "escapeChar",
-                                                    "value": "t",
+                                                    "type": "value",
+                                                    "kind": "singleEscape",
+                                                    "codePoint": 9,
                                                     "range": [
                                                       851,
                                                       853
@@ -33144,8 +33286,9 @@
                                                     "raw": "\\t"
                                                   },
                                                   {
-                                                    "type": "escapeChar",
-                                                    "value": "r",
+                                                    "type": "value",
+                                                    "kind": "singleEscape",
+                                                    "codePoint": 13,
                                                     "range": [
                                                       853,
                                                       855
@@ -33397,8 +33540,9 @@
                                             "raw": " "
                                           },
                                           {
-                                            "type": "escapeChar",
-                                            "value": "n",
+                                            "type": "value",
+                                            "kind": "singleEscape",
+                                            "codePoint": 10,
                                             "range": [
                                               883,
                                               885
@@ -33406,8 +33550,9 @@
                                             "raw": "\\n"
                                           },
                                           {
-                                            "type": "escapeChar",
-                                            "value": "t",
+                                            "type": "value",
+                                            "kind": "singleEscape",
+                                            "codePoint": 9,
                                             "range": [
                                               885,
                                               887
@@ -33415,8 +33560,9 @@
                                             "raw": "\\t"
                                           },
                                           {
-                                            "type": "escapeChar",
-                                            "value": "r",
+                                            "type": "value",
+                                            "kind": "singleEscape",
+                                            "codePoint": 13,
                                             "range": [
                                               887,
                                               889
@@ -35184,8 +35330,9 @@
             "type": "characterClass",
             "body": [
               {
-                "type": "escapeChar",
-                "value": "n",
+                "type": "value",
+                "kind": "singleEscape",
+                "codePoint": 10,
                 "range": [
                   5,
                   7
@@ -35193,8 +35340,9 @@
                 "raw": "\\n"
               },
               {
-                "type": "escapeChar",
-                "value": "r",
+                "type": "value",
+                "kind": "singleEscape",
+                "codePoint": 13,
                 "range": [
                   7,
                   9
@@ -35202,8 +35350,9 @@
                 "raw": "\\r"
               },
               {
-                "type": "escapeChar",
-                "value": "t",
+                "type": "value",
+                "kind": "singleEscape",
+                "codePoint": 9,
                 "range": [
                   9,
                   11
@@ -35433,7 +35582,7 @@
     "raw": "\\@"
   },
   "\\D": {
-    "type": "escapeChar",
+    "type": "characterClassEscape",
     "value": "D",
     "range": [
       0,
@@ -35442,7 +35591,7 @@
     "raw": "\\D"
   },
   "\\S": {
-    "type": "escapeChar",
+    "type": "characterClassEscape",
     "value": "S",
     "range": [
       0,
@@ -35451,7 +35600,7 @@
     "raw": "\\S"
   },
   "\\W": {
-    "type": "escapeChar",
+    "type": "characterClassEscape",
     "value": "W",
     "range": [
       0,
@@ -37968,7 +38117,7 @@
     "raw": "\\c\u044F"
   },
   "\\d": {
-    "type": "escapeChar",
+    "type": "characterClassEscape",
     "value": "d",
     "range": [
       0,
@@ -37983,7 +38132,7 @@
     "greedy": true,
     "body": [
       {
-        "type": "escapeChar",
+        "type": "characterClassEscape",
         "value": "d",
         "range": [
           0,
@@ -37999,8 +38148,9 @@
     "raw": "+"
   },
   "\\n": {
-    "type": "escapeChar",
-    "value": "n",
+    "type": "value",
+    "kind": "singleEscape",
+    "codePoint": 10,
     "range": [
       0,
       2
@@ -38008,7 +38158,7 @@
     "raw": "\\n"
   },
   "\\s": {
-    "type": "escapeChar",
+    "type": "characterClassEscape",
     "value": "s",
     "range": [
       0,
@@ -38017,8 +38167,9 @@
     "raw": "\\s"
   },
   "\\t": {
-    "type": "escapeChar",
-    "value": "t",
+    "type": "value",
+    "kind": "singleEscape",
+    "codePoint": 9,
     "range": [
       0,
       2
@@ -39416,7 +39567,7 @@
     "raw": "\\u{10FFFF}"
   },
   "\\w": {
-    "type": "escapeChar",
+    "type": "characterClassEscape",
     "value": "w",
     "range": [
       0,

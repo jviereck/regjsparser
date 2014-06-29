@@ -195,9 +195,9 @@
       });
     }
 
-    function createEscapedChar(value) {
+    function createCharacterClassEscape(value) {
       return addRaw({
-        type: 'escapeChar',
+        type: 'characterClassEscape',
         value: value,
         range: [
           pos - 2,
@@ -667,7 +667,7 @@
           return createEscaped('octal', parseInt(match, 8), match, 1);
         }
       } else if (res = matchReg(/^[dDsSwW]/)) {
-        return createEscapedChar(res[0], res);
+        return createCharacterClassEscape(res[0]);
       }
       return false;
     }
@@ -683,7 +683,15 @@
       var res;
       if (res = matchReg(/^[fnrtv]/)) {
         // ControlEscape
-        return createEscapedChar(res[0]);
+        var codePoint = 0;
+        switch (res[0]) {
+          case 't': codePoint = 0x009; break;
+          case 'n': codePoint = 0x00A; break;
+          case 'v': codePoint = 0x00B; break;
+          case 'f': codePoint = 0x00C; break;
+          case 'r': codePoint = 0x00D; break;
+        }
+        return createEscaped('singleEscape', codePoint, '\\' + res[0]);
       } else if (res = matchReg(/^c([a-zA-Z])/)) {
         // c ControlLetter
         return createEscaped('controlLetter', res[1].charCodeAt(0) % 32, res[1], 2);
