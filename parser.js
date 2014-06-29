@@ -4,6 +4,9 @@
 //
 // See ECMA-262 Standard: 15.10.1
 //
+// NOTE: The ECMA-262 standard uses the term "Assertion" for /^/. Here the
+//   term "Anchor" is used.
+//
 // Pattern ::
 //      Disjunction
 //
@@ -16,11 +19,11 @@
 //      Alternative Term
 //
 // Term ::
-//      Assertion
+//      Anchor
 //      Atom
 //      Atom Quantifier
 //
-// Assertion ::
+// Anchor ::
 //      ^
 //      $
 //      \ b
@@ -126,9 +129,9 @@
       return node;
     }
 
-    function createAssertion(kind, rawLength) {
+    function createAnchor(kind, rawLength) {
       return addRaw({
-        type: 'assertion',
+        type: 'anchor',
         kind: kind,
         range: [
           pos - rawLength,
@@ -369,12 +372,16 @@
         res.push(term);
       }
 
+      if (res.length === 1) {
+        return res[0];
+      }
+
       return createAlternative(res, from, pos);
     }
 
     function parseTerm() {
       // Term ::
-      //      Assertion
+      //      Anchor
       //      Atom
       //      Atom Quantifier
 
@@ -382,10 +389,10 @@
         return null; /* Means: The term is empty */
       }
 
-      var assertion = parseAssertion();
+      var anchor = parseAnchor();
 
-      if (assertion) {
-        return assertion;
+      if (anchor) {
+        return anchor;
       }
 
       var matchIdx = lastMatchIdx;
@@ -445,8 +452,8 @@
       return group;
     }
 
-    function parseAssertion() {
-      // Assertion ::
+    function parseAnchor() {
+      // Anchor ::
       //      ^
       //      $
       //      \ b
@@ -456,13 +463,13 @@
       var res, from = pos;
 
       if (match('^')) {
-        return createAssertion('start', 1 /* rawLength */);
+        return createAnchor('start', 1 /* rawLength */);
       } else if (match('$')) {
-        return createAssertion('end', 1 /* rawLength */);
+        return createAnchor('end', 1 /* rawLength */);
       } else if (match('\\b')) {
-        return createAssertion('boundary', 2 /* rawLength */);
+        return createAnchor('boundary', 2 /* rawLength */);
       } else if (match('\\B')) {
-        return createAssertion('not-boundary', 2 /* rawLength */);
+        return createAnchor('not-boundary', 2 /* rawLength */);
       } else {
         return parseGroup('(?=', 'lookahead', '(?!', 'negativeLookahead');
       }

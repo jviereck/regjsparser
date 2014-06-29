@@ -1,47 +1,37 @@
 {
   "[\uD83D\uDCA9-\uD83D\uDCAB]": {
-    "type": "alternative",
+    "type": "characterClass",
     "body": [
       {
-        "type": "characterClass",
-        "body": [
-          {
-            "type": "characterClassRange",
-            "min": {
-              "type": "value",
-              "kind": "symbol",
-              "codePoint": 128169,
-              "range": [
-                1,
-                3
-              ],
-              "raw": "\uD83D\uDCA9"
-            },
-            "max": {
-              "type": "value",
-              "kind": "symbol",
-              "codePoint": 128171,
-              "range": [
-                4,
-                6
-              ],
-              "raw": "\uD83D\uDCAB"
-            },
-            "range": [
-              1,
-              6
-            ],
-            "raw": "\uD83D\uDCA9-\uD83D\uDCAB"
-          }
-        ],
-        "negative": false,
+        "type": "characterClassRange",
+        "min": {
+          "type": "value",
+          "kind": "symbol",
+          "codePoint": 128169,
+          "range": [
+            1,
+            3
+          ],
+          "raw": "\uD83D\uDCA9"
+        },
+        "max": {
+          "type": "value",
+          "kind": "symbol",
+          "codePoint": 128171,
+          "range": [
+            4,
+            6
+          ],
+          "raw": "\uD83D\uDCAB"
+        },
         "range": [
-          0,
-          7
+          1,
+          6
         ],
-        "raw": "[\uD83D\uDCA9-\uD83D\uDCAB]"
+        "raw": "\uD83D\uDCA9-\uD83D\uDCAB"
       }
     ],
+    "negative": false,
     "range": [
       0,
       7
@@ -50,48 +40,38 @@
     "lastMatchIdx": 0
   },
   "[\\uD83D\\uDCA9-\\uD83D\\uDCAB]": {
-    "type": "alternative",
+    "type": "characterClass",
     "body": [
       {
-        "type": "characterClass",
-        "body": [
-          {
-            "type": "characterClassRange",
-            "min": {
-              "type": "value",
-              "kind": "unicodeCodePointEscape",
-              "codePoint": 128169,
-              "range": [
-                1,
-                13
-              ],
-              "raw": "\\uD83D\\uDCA9"
-            },
-            "max": {
-              "type": "value",
-              "kind": "unicodeCodePointEscape",
-              "codePoint": 128171,
-              "range": [
-                14,
-                26
-              ],
-              "raw": "\\uD83D\\uDCAB"
-            },
-            "range": [
-              1,
-              26
-            ],
-            "raw": "\\uD83D\\uDCA9-\\uD83D\\uDCAB"
-          }
-        ],
-        "negative": false,
+        "type": "characterClassRange",
+        "min": {
+          "type": "value",
+          "kind": "unicodeCodePointEscape",
+          "codePoint": 128169,
+          "range": [
+            1,
+            13
+          ],
+          "raw": "\\uD83D\\uDCA9"
+        },
+        "max": {
+          "type": "value",
+          "kind": "unicodeCodePointEscape",
+          "codePoint": 128171,
+          "range": [
+            14,
+            26
+          ],
+          "raw": "\\uD83D\\uDCAB"
+        },
         "range": [
-          0,
-          27
+          1,
+          26
         ],
-        "raw": "[\\uD83D\\uDCA9-\\uD83D\\uDCAB]"
+        "raw": "\\uD83D\\uDCA9-\\uD83D\\uDCAB"
       }
     ],
+    "negative": false,
     "range": [
       0,
       27
@@ -100,76 +80,66 @@
     "lastMatchIdx": 0
   },
   "[a-b\uD83D\uDCA9-\uD83D\uDCAB]": {
-    "type": "alternative",
+    "type": "characterClass",
     "body": [
       {
-        "type": "characterClass",
-        "body": [
-          {
-            "type": "characterClassRange",
-            "min": {
-              "type": "value",
-              "kind": "symbol",
-              "codePoint": 97,
-              "range": [
-                1,
-                2
-              ],
-              "raw": "a"
-            },
-            "max": {
-              "type": "value",
-              "kind": "symbol",
-              "codePoint": 98,
-              "range": [
-                3,
-                4
-              ],
-              "raw": "b"
-            },
-            "range": [
-              1,
-              4
-            ],
-            "raw": "a-b"
-          },
-          {
-            "type": "characterClassRange",
-            "min": {
-              "type": "value",
-              "kind": "symbol",
-              "codePoint": 128169,
-              "range": [
-                4,
-                6
-              ],
-              "raw": "\uD83D\uDCA9"
-            },
-            "max": {
-              "type": "value",
-              "kind": "symbol",
-              "codePoint": 128171,
-              "range": [
-                7,
-                9
-              ],
-              "raw": "\uD83D\uDCAB"
-            },
-            "range": [
-              4,
-              9
-            ],
-            "raw": "\uD83D\uDCA9-\uD83D\uDCAB"
-          }
-        ],
-        "negative": false,
+        "type": "characterClassRange",
+        "min": {
+          "type": "value",
+          "kind": "symbol",
+          "codePoint": 97,
+          "range": [
+            1,
+            2
+          ],
+          "raw": "a"
+        },
+        "max": {
+          "type": "value",
+          "kind": "symbol",
+          "codePoint": 98,
+          "range": [
+            3,
+            4
+          ],
+          "raw": "b"
+        },
         "range": [
-          0,
-          10
+          1,
+          4
         ],
-        "raw": "[a-b\uD83D\uDCA9-\uD83D\uDCAB]"
+        "raw": "a-b"
+      },
+      {
+        "type": "characterClassRange",
+        "min": {
+          "type": "value",
+          "kind": "symbol",
+          "codePoint": 128169,
+          "range": [
+            4,
+            6
+          ],
+          "raw": "\uD83D\uDCA9"
+        },
+        "max": {
+          "type": "value",
+          "kind": "symbol",
+          "codePoint": 128171,
+          "range": [
+            7,
+            9
+          ],
+          "raw": "\uD83D\uDCAB"
+        },
+        "range": [
+          4,
+          9
+        ],
+        "raw": "\uD83D\uDCA9-\uD83D\uDCAB"
       }
     ],
+    "negative": false,
     "range": [
       0,
       10
@@ -178,76 +148,66 @@
     "lastMatchIdx": 0
   },
   "[a-b\\uD83D\\uDCA9-\\uD83D\\uDCAB]": {
-    "type": "alternative",
+    "type": "characterClass",
     "body": [
       {
-        "type": "characterClass",
-        "body": [
-          {
-            "type": "characterClassRange",
-            "min": {
-              "type": "value",
-              "kind": "symbol",
-              "codePoint": 97,
-              "range": [
-                1,
-                2
-              ],
-              "raw": "a"
-            },
-            "max": {
-              "type": "value",
-              "kind": "symbol",
-              "codePoint": 98,
-              "range": [
-                3,
-                4
-              ],
-              "raw": "b"
-            },
-            "range": [
-              1,
-              4
-            ],
-            "raw": "a-b"
-          },
-          {
-            "type": "characterClassRange",
-            "min": {
-              "type": "value",
-              "kind": "unicodeCodePointEscape",
-              "codePoint": 128169,
-              "range": [
-                4,
-                16
-              ],
-              "raw": "\\uD83D\\uDCA9"
-            },
-            "max": {
-              "type": "value",
-              "kind": "unicodeCodePointEscape",
-              "codePoint": 128171,
-              "range": [
-                17,
-                29
-              ],
-              "raw": "\\uD83D\\uDCAB"
-            },
-            "range": [
-              4,
-              29
-            ],
-            "raw": "\\uD83D\\uDCA9-\\uD83D\\uDCAB"
-          }
-        ],
-        "negative": false,
+        "type": "characterClassRange",
+        "min": {
+          "type": "value",
+          "kind": "symbol",
+          "codePoint": 97,
+          "range": [
+            1,
+            2
+          ],
+          "raw": "a"
+        },
+        "max": {
+          "type": "value",
+          "kind": "symbol",
+          "codePoint": 98,
+          "range": [
+            3,
+            4
+          ],
+          "raw": "b"
+        },
         "range": [
-          0,
-          30
+          1,
+          4
         ],
-        "raw": "[a-b\\uD83D\\uDCA9-\\uD83D\\uDCAB]"
+        "raw": "a-b"
+      },
+      {
+        "type": "characterClassRange",
+        "min": {
+          "type": "value",
+          "kind": "unicodeCodePointEscape",
+          "codePoint": 128169,
+          "range": [
+            4,
+            16
+          ],
+          "raw": "\\uD83D\\uDCA9"
+        },
+        "max": {
+          "type": "value",
+          "kind": "unicodeCodePointEscape",
+          "codePoint": 128171,
+          "range": [
+            17,
+            29
+          ],
+          "raw": "\\uD83D\\uDCAB"
+        },
+        "range": [
+          4,
+          29
+        ],
+        "raw": "\\uD83D\\uDCA9-\\uD83D\\uDCAB"
       }
     ],
+    "negative": false,
     "range": [
       0,
       30
@@ -256,76 +216,66 @@
     "lastMatchIdx": 0
   },
   "[\uD83D\uDCA9-\uD83D\uDCABa-b]": {
-    "type": "alternative",
+    "type": "characterClass",
     "body": [
       {
-        "type": "characterClass",
-        "body": [
-          {
-            "type": "characterClassRange",
-            "min": {
-              "type": "value",
-              "kind": "symbol",
-              "codePoint": 128169,
-              "range": [
-                1,
-                3
-              ],
-              "raw": "\uD83D\uDCA9"
-            },
-            "max": {
-              "type": "value",
-              "kind": "symbol",
-              "codePoint": 128171,
-              "range": [
-                4,
-                6
-              ],
-              "raw": "\uD83D\uDCAB"
-            },
-            "range": [
-              1,
-              6
-            ],
-            "raw": "\uD83D\uDCA9-\uD83D\uDCAB"
-          },
-          {
-            "type": "characterClassRange",
-            "min": {
-              "type": "value",
-              "kind": "symbol",
-              "codePoint": 97,
-              "range": [
-                6,
-                7
-              ],
-              "raw": "a"
-            },
-            "max": {
-              "type": "value",
-              "kind": "symbol",
-              "codePoint": 98,
-              "range": [
-                8,
-                9
-              ],
-              "raw": "b"
-            },
-            "range": [
-              6,
-              9
-            ],
-            "raw": "a-b"
-          }
-        ],
-        "negative": false,
+        "type": "characterClassRange",
+        "min": {
+          "type": "value",
+          "kind": "symbol",
+          "codePoint": 128169,
+          "range": [
+            1,
+            3
+          ],
+          "raw": "\uD83D\uDCA9"
+        },
+        "max": {
+          "type": "value",
+          "kind": "symbol",
+          "codePoint": 128171,
+          "range": [
+            4,
+            6
+          ],
+          "raw": "\uD83D\uDCAB"
+        },
         "range": [
-          0,
-          10
+          1,
+          6
         ],
-        "raw": "[\uD83D\uDCA9-\uD83D\uDCABa-b]"
+        "raw": "\uD83D\uDCA9-\uD83D\uDCAB"
+      },
+      {
+        "type": "characterClassRange",
+        "min": {
+          "type": "value",
+          "kind": "symbol",
+          "codePoint": 97,
+          "range": [
+            6,
+            7
+          ],
+          "raw": "a"
+        },
+        "max": {
+          "type": "value",
+          "kind": "symbol",
+          "codePoint": 98,
+          "range": [
+            8,
+            9
+          ],
+          "raw": "b"
+        },
+        "range": [
+          6,
+          9
+        ],
+        "raw": "a-b"
       }
     ],
+    "negative": false,
     "range": [
       0,
       10
@@ -334,76 +284,66 @@
     "lastMatchIdx": 0
   },
   "[\\uD83D\\uDCA9-\\uD83D\\uDCABa-b]": {
-    "type": "alternative",
+    "type": "characterClass",
     "body": [
       {
-        "type": "characterClass",
-        "body": [
-          {
-            "type": "characterClassRange",
-            "min": {
-              "type": "value",
-              "kind": "unicodeCodePointEscape",
-              "codePoint": 128169,
-              "range": [
-                1,
-                13
-              ],
-              "raw": "\\uD83D\\uDCA9"
-            },
-            "max": {
-              "type": "value",
-              "kind": "unicodeCodePointEscape",
-              "codePoint": 128171,
-              "range": [
-                14,
-                26
-              ],
-              "raw": "\\uD83D\\uDCAB"
-            },
-            "range": [
-              1,
-              26
-            ],
-            "raw": "\\uD83D\\uDCA9-\\uD83D\\uDCAB"
-          },
-          {
-            "type": "characterClassRange",
-            "min": {
-              "type": "value",
-              "kind": "symbol",
-              "codePoint": 97,
-              "range": [
-                26,
-                27
-              ],
-              "raw": "a"
-            },
-            "max": {
-              "type": "value",
-              "kind": "symbol",
-              "codePoint": 98,
-              "range": [
-                28,
-                29
-              ],
-              "raw": "b"
-            },
-            "range": [
-              26,
-              29
-            ],
-            "raw": "a-b"
-          }
-        ],
-        "negative": false,
+        "type": "characterClassRange",
+        "min": {
+          "type": "value",
+          "kind": "unicodeCodePointEscape",
+          "codePoint": 128169,
+          "range": [
+            1,
+            13
+          ],
+          "raw": "\\uD83D\\uDCA9"
+        },
+        "max": {
+          "type": "value",
+          "kind": "unicodeCodePointEscape",
+          "codePoint": 128171,
+          "range": [
+            14,
+            26
+          ],
+          "raw": "\\uD83D\\uDCAB"
+        },
         "range": [
-          0,
-          30
+          1,
+          26
         ],
-        "raw": "[\\uD83D\\uDCA9-\\uD83D\\uDCABa-b]"
+        "raw": "\\uD83D\\uDCA9-\\uD83D\\uDCAB"
+      },
+      {
+        "type": "characterClassRange",
+        "min": {
+          "type": "value",
+          "kind": "symbol",
+          "codePoint": 97,
+          "range": [
+            26,
+            27
+          ],
+          "raw": "a"
+        },
+        "max": {
+          "type": "value",
+          "kind": "symbol",
+          "codePoint": 98,
+          "range": [
+            28,
+            29
+          ],
+          "raw": "b"
+        },
+        "range": [
+          26,
+          29
+        ],
+        "raw": "a-b"
       }
     ],
+    "negative": false,
     "range": [
       0,
       30
@@ -412,40 +352,30 @@
     "lastMatchIdx": 0
   },
   "[\uD83D\uDCA9\uD83D\uDCAB]": {
-    "type": "alternative",
+    "type": "characterClass",
     "body": [
       {
-        "type": "characterClass",
-        "body": [
-          {
-            "type": "value",
-            "kind": "symbol",
-            "codePoint": 128169,
-            "range": [
-              1,
-              3
-            ],
-            "raw": "\uD83D\uDCA9"
-          },
-          {
-            "type": "value",
-            "kind": "symbol",
-            "codePoint": 128171,
-            "range": [
-              3,
-              5
-            ],
-            "raw": "\uD83D\uDCAB"
-          }
-        ],
-        "negative": false,
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 128169,
         "range": [
-          0,
-          6
+          1,
+          3
         ],
-        "raw": "[\uD83D\uDCA9\uD83D\uDCAB]"
+        "raw": "\uD83D\uDCA9"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 128171,
+        "range": [
+          3,
+          5
+        ],
+        "raw": "\uD83D\uDCAB"
       }
     ],
+    "negative": false,
     "range": [
       0,
       6
@@ -454,40 +384,30 @@
     "lastMatchIdx": 0
   },
   "[\\uD83D\\uDCA9\\uD83D\\uDCAB]": {
-    "type": "alternative",
+    "type": "characterClass",
     "body": [
       {
-        "type": "characterClass",
-        "body": [
-          {
-            "type": "value",
-            "kind": "unicodeCodePointEscape",
-            "codePoint": 128169,
-            "range": [
-              1,
-              13
-            ],
-            "raw": "\\uD83D\\uDCA9"
-          },
-          {
-            "type": "value",
-            "kind": "unicodeCodePointEscape",
-            "codePoint": 128171,
-            "range": [
-              13,
-              25
-            ],
-            "raw": "\\uD83D\\uDCAB"
-          }
-        ],
-        "negative": false,
+        "type": "value",
+        "kind": "unicodeCodePointEscape",
+        "codePoint": 128169,
         "range": [
-          0,
-          26
+          1,
+          13
         ],
-        "raw": "[\\uD83D\\uDCA9\\uD83D\\uDCAB]"
+        "raw": "\\uD83D\\uDCA9"
+      },
+      {
+        "type": "value",
+        "kind": "unicodeCodePointEscape",
+        "codePoint": 128171,
+        "range": [
+          13,
+          25
+        ],
+        "raw": "\\uD83D\\uDCAB"
       }
     ],
+    "negative": false,
     "range": [
       0,
       26
@@ -496,68 +416,58 @@
     "lastMatchIdx": 0
   },
   "[a-b\uD83D\uDCA9\uD83D\uDCAB]": {
-    "type": "alternative",
+    "type": "characterClass",
     "body": [
       {
-        "type": "characterClass",
-        "body": [
-          {
-            "type": "characterClassRange",
-            "min": {
-              "type": "value",
-              "kind": "symbol",
-              "codePoint": 97,
-              "range": [
-                1,
-                2
-              ],
-              "raw": "a"
-            },
-            "max": {
-              "type": "value",
-              "kind": "symbol",
-              "codePoint": 98,
-              "range": [
-                3,
-                4
-              ],
-              "raw": "b"
-            },
-            "range": [
-              1,
-              4
-            ],
-            "raw": "a-b"
-          },
-          {
-            "type": "value",
-            "kind": "symbol",
-            "codePoint": 128169,
-            "range": [
-              4,
-              6
-            ],
-            "raw": "\uD83D\uDCA9"
-          },
-          {
-            "type": "value",
-            "kind": "symbol",
-            "codePoint": 128171,
-            "range": [
-              6,
-              8
-            ],
-            "raw": "\uD83D\uDCAB"
-          }
-        ],
-        "negative": false,
+        "type": "characterClassRange",
+        "min": {
+          "type": "value",
+          "kind": "symbol",
+          "codePoint": 97,
+          "range": [
+            1,
+            2
+          ],
+          "raw": "a"
+        },
+        "max": {
+          "type": "value",
+          "kind": "symbol",
+          "codePoint": 98,
+          "range": [
+            3,
+            4
+          ],
+          "raw": "b"
+        },
         "range": [
-          0,
-          9
+          1,
+          4
         ],
-        "raw": "[a-b\uD83D\uDCA9\uD83D\uDCAB]"
+        "raw": "a-b"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 128169,
+        "range": [
+          4,
+          6
+        ],
+        "raw": "\uD83D\uDCA9"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 128171,
+        "range": [
+          6,
+          8
+        ],
+        "raw": "\uD83D\uDCAB"
       }
     ],
+    "negative": false,
     "range": [
       0,
       9
@@ -566,68 +476,58 @@
     "lastMatchIdx": 0
   },
   "[a-b\\uD83D\\uDCA9\\uD83D\\uDCAB]": {
-    "type": "alternative",
+    "type": "characterClass",
     "body": [
       {
-        "type": "characterClass",
-        "body": [
-          {
-            "type": "characterClassRange",
-            "min": {
-              "type": "value",
-              "kind": "symbol",
-              "codePoint": 97,
-              "range": [
-                1,
-                2
-              ],
-              "raw": "a"
-            },
-            "max": {
-              "type": "value",
-              "kind": "symbol",
-              "codePoint": 98,
-              "range": [
-                3,
-                4
-              ],
-              "raw": "b"
-            },
-            "range": [
-              1,
-              4
-            ],
-            "raw": "a-b"
-          },
-          {
-            "type": "value",
-            "kind": "unicodeCodePointEscape",
-            "codePoint": 128169,
-            "range": [
-              4,
-              16
-            ],
-            "raw": "\\uD83D\\uDCA9"
-          },
-          {
-            "type": "value",
-            "kind": "unicodeCodePointEscape",
-            "codePoint": 128171,
-            "range": [
-              16,
-              28
-            ],
-            "raw": "\\uD83D\\uDCAB"
-          }
-        ],
-        "negative": false,
+        "type": "characterClassRange",
+        "min": {
+          "type": "value",
+          "kind": "symbol",
+          "codePoint": 97,
+          "range": [
+            1,
+            2
+          ],
+          "raw": "a"
+        },
+        "max": {
+          "type": "value",
+          "kind": "symbol",
+          "codePoint": 98,
+          "range": [
+            3,
+            4
+          ],
+          "raw": "b"
+        },
         "range": [
-          0,
-          29
+          1,
+          4
         ],
-        "raw": "[a-b\\uD83D\\uDCA9\\uD83D\\uDCAB]"
+        "raw": "a-b"
+      },
+      {
+        "type": "value",
+        "kind": "unicodeCodePointEscape",
+        "codePoint": 128169,
+        "range": [
+          4,
+          16
+        ],
+        "raw": "\\uD83D\\uDCA9"
+      },
+      {
+        "type": "value",
+        "kind": "unicodeCodePointEscape",
+        "codePoint": 128171,
+        "range": [
+          16,
+          28
+        ],
+        "raw": "\\uD83D\\uDCAB"
       }
     ],
+    "negative": false,
     "range": [
       0,
       29
@@ -636,68 +536,58 @@
     "lastMatchIdx": 0
   },
   "[\uD83D\uDCA9\uD83D\uDCABa-b]": {
-    "type": "alternative",
+    "type": "characterClass",
     "body": [
       {
-        "type": "characterClass",
-        "body": [
-          {
-            "type": "value",
-            "kind": "symbol",
-            "codePoint": 128169,
-            "range": [
-              1,
-              3
-            ],
-            "raw": "\uD83D\uDCA9"
-          },
-          {
-            "type": "value",
-            "kind": "symbol",
-            "codePoint": 128171,
-            "range": [
-              3,
-              5
-            ],
-            "raw": "\uD83D\uDCAB"
-          },
-          {
-            "type": "characterClassRange",
-            "min": {
-              "type": "value",
-              "kind": "symbol",
-              "codePoint": 97,
-              "range": [
-                5,
-                6
-              ],
-              "raw": "a"
-            },
-            "max": {
-              "type": "value",
-              "kind": "symbol",
-              "codePoint": 98,
-              "range": [
-                7,
-                8
-              ],
-              "raw": "b"
-            },
-            "range": [
-              5,
-              8
-            ],
-            "raw": "a-b"
-          }
-        ],
-        "negative": false,
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 128169,
         "range": [
-          0,
-          9
+          1,
+          3
         ],
-        "raw": "[\uD83D\uDCA9\uD83D\uDCABa-b]"
+        "raw": "\uD83D\uDCA9"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 128171,
+        "range": [
+          3,
+          5
+        ],
+        "raw": "\uD83D\uDCAB"
+      },
+      {
+        "type": "characterClassRange",
+        "min": {
+          "type": "value",
+          "kind": "symbol",
+          "codePoint": 97,
+          "range": [
+            5,
+            6
+          ],
+          "raw": "a"
+        },
+        "max": {
+          "type": "value",
+          "kind": "symbol",
+          "codePoint": 98,
+          "range": [
+            7,
+            8
+          ],
+          "raw": "b"
+        },
+        "range": [
+          5,
+          8
+        ],
+        "raw": "a-b"
       }
     ],
+    "negative": false,
     "range": [
       0,
       9
@@ -706,68 +596,58 @@
     "lastMatchIdx": 0
   },
   "[\\uD83D\\uDCA9\\uD83D\\uDCABa-b]": {
-    "type": "alternative",
+    "type": "characterClass",
     "body": [
       {
-        "type": "characterClass",
-        "body": [
-          {
-            "type": "value",
-            "kind": "unicodeCodePointEscape",
-            "codePoint": 128169,
-            "range": [
-              1,
-              13
-            ],
-            "raw": "\\uD83D\\uDCA9"
-          },
-          {
-            "type": "value",
-            "kind": "unicodeCodePointEscape",
-            "codePoint": 128171,
-            "range": [
-              13,
-              25
-            ],
-            "raw": "\\uD83D\\uDCAB"
-          },
-          {
-            "type": "characterClassRange",
-            "min": {
-              "type": "value",
-              "kind": "symbol",
-              "codePoint": 97,
-              "range": [
-                25,
-                26
-              ],
-              "raw": "a"
-            },
-            "max": {
-              "type": "value",
-              "kind": "symbol",
-              "codePoint": 98,
-              "range": [
-                27,
-                28
-              ],
-              "raw": "b"
-            },
-            "range": [
-              25,
-              28
-            ],
-            "raw": "a-b"
-          }
-        ],
-        "negative": false,
+        "type": "value",
+        "kind": "unicodeCodePointEscape",
+        "codePoint": 128169,
         "range": [
-          0,
-          29
+          1,
+          13
         ],
-        "raw": "[\\uD83D\\uDCA9\\uD83D\\uDCABa-b]"
+        "raw": "\\uD83D\\uDCA9"
+      },
+      {
+        "type": "value",
+        "kind": "unicodeCodePointEscape",
+        "codePoint": 128171,
+        "range": [
+          13,
+          25
+        ],
+        "raw": "\\uD83D\\uDCAB"
+      },
+      {
+        "type": "characterClassRange",
+        "min": {
+          "type": "value",
+          "kind": "symbol",
+          "codePoint": 97,
+          "range": [
+            25,
+            26
+          ],
+          "raw": "a"
+        },
+        "max": {
+          "type": "value",
+          "kind": "symbol",
+          "codePoint": 98,
+          "range": [
+            27,
+            28
+          ],
+          "raw": "b"
+        },
+        "range": [
+          25,
+          28
+        ],
+        "raw": "a-b"
       }
     ],
+    "negative": false,
     "range": [
       0,
       29
@@ -776,19 +656,9 @@
     "lastMatchIdx": 0
   },
   "\uD83D\uDCA9": {
-    "type": "alternative",
-    "body": [
-      {
-        "type": "value",
-        "kind": "symbol",
-        "codePoint": 128169,
-        "range": [
-          0,
-          2
-        ],
-        "raw": "\uD83D\uDCA9"
-      }
-    ],
+    "type": "value",
+    "kind": "symbol",
+    "codePoint": 128169,
     "range": [
       0,
       2
@@ -797,19 +667,9 @@
     "lastMatchIdx": 0
   },
   "\\uD83D\\uDCA9": {
-    "type": "alternative",
-    "body": [
-      {
-        "type": "value",
-        "kind": "unicodeCodePointEscape",
-        "codePoint": 128169,
-        "range": [
-          0,
-          12
-        ],
-        "raw": "\\uD83D\\uDCA9"
-      }
-    ],
+    "type": "value",
+    "kind": "unicodeCodePointEscape",
+    "codePoint": 128169,
     "range": [
       0,
       12
@@ -818,28 +678,18 @@
     "lastMatchIdx": 0
   },
   "(?:\uD83D\uDCA9)": {
-    "type": "alternative",
+    "type": "group",
+    "behavior": "ignore",
     "body": [
       {
-        "type": "group",
-        "behavior": "ignore",
-        "body": [
-          {
-            "type": "value",
-            "kind": "symbol",
-            "codePoint": 128169,
-            "range": [
-              3,
-              5
-            ],
-            "raw": "\uD83D\uDCA9"
-          }
-        ],
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 128169,
         "range": [
-          0,
-          6
+          3,
+          5
         ],
-        "raw": "(?:\uD83D\uDCA9)"
+        "raw": "\uD83D\uDCA9"
       }
     ],
     "range": [
@@ -850,28 +700,18 @@
     "lastMatchIdx": 0
   },
   "(?:\\uD83D\\uDCA9)": {
-    "type": "alternative",
+    "type": "group",
+    "behavior": "ignore",
     "body": [
       {
-        "type": "group",
-        "behavior": "ignore",
-        "body": [
-          {
-            "type": "value",
-            "kind": "unicodeCodePointEscape",
-            "codePoint": 128169,
-            "range": [
-              3,
-              15
-            ],
-            "raw": "\\uD83D\\uDCA9"
-          }
-        ],
+        "type": "value",
+        "kind": "unicodeCodePointEscape",
+        "codePoint": 128169,
         "range": [
-          0,
-          16
+          3,
+          15
         ],
-        "raw": "(?:\\uD83D\\uDCA9)"
+        "raw": "\\uD83D\\uDCA9"
       }
     ],
     "range": [
