@@ -395,8 +395,6 @@
         return anchor;
       }
 
-      var matchIdx = lastMatchIdx;
-
       var atom = parseAtom();
       if (!atom) {
         throw SyntaxError('Expected atom')
@@ -404,11 +402,6 @@
       var quantifier = parseQuantifier() || false;
       if (quantifier) {
         quantifier.body = flattenBody(atom);
-        if (matchIdx + 1 <= lastMatchIdx) {
-          quantifier.firstMatchIdx = matchIdx + 1;
-          quantifier.lastMatchIdx = lastMatchIdx;
-        }
-
         return quantifier;
       }
       return atom;
@@ -425,11 +418,10 @@
         return false;
       }
 
+      // Need to set the `matchIdx` here before calling `parseDisjunction()`.
       var matchIdx;
       if (type === 'normal') {
         matchIdx = ++lastMatchIdx;
-      } else {
-        matchIdx = lastMatchIdx;
       }
 
       var body = parseDisjunction();
@@ -441,13 +433,6 @@
 
       if (type == 'normal') {
         group.matchIdx = matchIdx;
-        group.lastMatchIdx = lastMatchIdx;
-        lastMatchClosed++;
-      } else if (type == 'lookahead' || type == 'negativeLookahead') {
-        if (matchIdx !== lastMatchIdx) {
-          group.firstMatchIdx = matchIdx + 1;
-          group.lastMatchIdx = lastMatchIdx;
-        }
       }
       return group;
     }
@@ -903,7 +888,6 @@
     }
 
     var result = parseDisjunction();
-    result.lastMatchIdx = lastMatchIdx;
 
     if (result.range[1] !== str.length) {
       throw SyntaxError('Could not parse entire input - got stuck: ' + str);

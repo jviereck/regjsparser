@@ -36,8 +36,7 @@
       0,
       7
     ],
-    "raw": "[\uD83D\uDCA9-\uD83D\uDCAB]",
-    "lastMatchIdx": 0
+    "raw": "[\uD83D\uDCA9-\uD83D\uDCAB]"
   },
   "[\\uD83D\\uDCA9-\\uD83D\\uDCAB]": {
     "type": "characterClass",
@@ -76,8 +75,7 @@
       0,
       27
     ],
-    "raw": "[\\uD83D\\uDCA9-\\uD83D\\uDCAB]",
-    "lastMatchIdx": 0
+    "raw": "[\\uD83D\\uDCA9-\\uD83D\\uDCAB]"
   },
   "[a-b\uD83D\uDCA9-\uD83D\uDCAB]": {
     "type": "characterClass",
@@ -144,8 +142,7 @@
       0,
       10
     ],
-    "raw": "[a-b\uD83D\uDCA9-\uD83D\uDCAB]",
-    "lastMatchIdx": 0
+    "raw": "[a-b\uD83D\uDCA9-\uD83D\uDCAB]"
   },
   "[a-b\\uD83D\\uDCA9-\\uD83D\\uDCAB]": {
     "type": "characterClass",
@@ -212,8 +209,7 @@
       0,
       30
     ],
-    "raw": "[a-b\\uD83D\\uDCA9-\\uD83D\\uDCAB]",
-    "lastMatchIdx": 0
+    "raw": "[a-b\\uD83D\\uDCA9-\\uD83D\\uDCAB]"
   },
   "[\uD83D\uDCA9-\uD83D\uDCABa-b]": {
     "type": "characterClass",
@@ -280,8 +276,7 @@
       0,
       10
     ],
-    "raw": "[\uD83D\uDCA9-\uD83D\uDCABa-b]",
-    "lastMatchIdx": 0
+    "raw": "[\uD83D\uDCA9-\uD83D\uDCABa-b]"
   },
   "[\\uD83D\\uDCA9-\\uD83D\\uDCABa-b]": {
     "type": "characterClass",
@@ -348,8 +343,7 @@
       0,
       30
     ],
-    "raw": "[\\uD83D\\uDCA9-\\uD83D\\uDCABa-b]",
-    "lastMatchIdx": 0
+    "raw": "[\\uD83D\\uDCA9-\\uD83D\\uDCABa-b]"
   },
   "[\uD83D\uDCA9\uD83D\uDCAB]": {
     "type": "characterClass",
@@ -380,8 +374,7 @@
       0,
       6
     ],
-    "raw": "[\uD83D\uDCA9\uD83D\uDCAB]",
-    "lastMatchIdx": 0
+    "raw": "[\uD83D\uDCA9\uD83D\uDCAB]"
   },
   "[\\uD83D\\uDCA9\\uD83D\\uDCAB]": {
     "type": "characterClass",
@@ -412,8 +405,7 @@
       0,
       26
     ],
-    "raw": "[\\uD83D\\uDCA9\\uD83D\\uDCAB]",
-    "lastMatchIdx": 0
+    "raw": "[\\uD83D\\uDCA9\\uD83D\\uDCAB]"
   },
   "[a-b\uD83D\uDCA9\uD83D\uDCAB]": {
     "type": "characterClass",
@@ -472,8 +464,7 @@
       0,
       9
     ],
-    "raw": "[a-b\uD83D\uDCA9\uD83D\uDCAB]",
-    "lastMatchIdx": 0
+    "raw": "[a-b\uD83D\uDCA9\uD83D\uDCAB]"
   },
   "[a-b\\uD83D\\uDCA9\\uD83D\\uDCAB]": {
     "type": "characterClass",
@@ -532,8 +523,7 @@
       0,
       29
     ],
-    "raw": "[a-b\\uD83D\\uDCA9\\uD83D\\uDCAB]",
-    "lastMatchIdx": 0
+    "raw": "[a-b\\uD83D\\uDCA9\\uD83D\\uDCAB]"
   },
   "[\uD83D\uDCA9\uD83D\uDCABa-b]": {
     "type": "characterClass",
@@ -592,8 +582,7 @@
       0,
       9
     ],
-    "raw": "[\uD83D\uDCA9\uD83D\uDCABa-b]",
-    "lastMatchIdx": 0
+    "raw": "[\uD83D\uDCA9\uD83D\uDCABa-b]"
   },
   "[\\uD83D\\uDCA9\\uD83D\\uDCABa-b]": {
     "type": "characterClass",
@@ -652,8 +641,7 @@
       0,
       29
     ],
-    "raw": "[\\uD83D\\uDCA9\\uD83D\\uDCABa-b]",
-    "lastMatchIdx": 0
+    "raw": "[\\uD83D\\uDCA9\\uD83D\\uDCABa-b]"
   },
   "\uD83D\uDCA9": {
     "type": "value",
@@ -663,8 +651,7 @@
       0,
       2
     ],
-    "raw": "\uD83D\uDCA9",
-    "lastMatchIdx": 0
+    "raw": "\uD83D\uDCA9"
   },
   "\\uD83D\\uDCA9": {
     "type": "value",
@@ -674,8 +661,7 @@
       0,
       12
     ],
-    "raw": "\\uD83D\\uDCA9",
-    "lastMatchIdx": 0
+    "raw": "\\uD83D\\uDCA9"
   },
   "(?:\uD83D\uDCA9)": {
     "type": "group",
@@ -696,8 +682,7 @@
       0,
       6
     ],
-    "raw": "(?:\uD83D\uDCA9)",
-    "lastMatchIdx": 0
+    "raw": "(?:\uD83D\uDCA9)"
   },
   "(?:\\uD83D\\uDCA9)": {
     "type": "group",
@@ -718,7 +703,6 @@
       0,
       16
     ],
-    "raw": "(?:\\uD83D\\uDCA9)",
-    "lastMatchIdx": 0
+    "raw": "(?:\\uD83D\\uDCA9)"
   }
 }
