@@ -823,26 +823,18 @@
       {
         "type": "group",
         "behavior": "ignore",
-        "disjunction": {
-          "type": "alternative",
-          "body": [
-            {
-              "type": "value",
-              "kind": "symbol",
-              "codePoint": 128169,
-              "range": [
-                3,
-                5
-              ],
-              "raw": "\uD83D\uDCA9"
-            }
-          ],
-          "range": [
-            3,
-            5
-          ],
-          "raw": "\uD83D\uDCA9"
-        },
+        "body": [
+          {
+            "type": "value",
+            "kind": "symbol",
+            "codePoint": 128169,
+            "range": [
+              3,
+              5
+            ],
+            "raw": "\uD83D\uDCA9"
+          }
+        ],
         "range": [
           0,
           6
@@ -863,26 +855,18 @@
       {
         "type": "group",
         "behavior": "ignore",
-        "disjunction": {
-          "type": "alternative",
-          "body": [
-            {
-              "type": "value",
-              "kind": "unicodeCodePointEscape",
-              "codePoint": 128169,
-              "range": [
-                3,
-                15
-              ],
-              "raw": "\\uD83D\\uDCA9"
-            }
-          ],
-          "range": [
-            3,
-            15
-          ],
-          "raw": "\\uD83D\\uDCA9"
-        },
+        "body": [
+          {
+            "type": "value",
+            "kind": "unicodeCodePointEscape",
+            "codePoint": 128169,
+            "range": [
+              3,
+              15
+            ],
+            "raw": "\\uD83D\\uDCA9"
+          }
+        ],
         "range": [
           0,
           16
