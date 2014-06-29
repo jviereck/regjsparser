@@ -16,11 +16,11 @@
 //      Alternative Term
 //
 // Term ::
-//      Assertion
+//      Anchor
 //      Atom
 //      Atom Quantifier
 //
-// Assertion ::
+// Anchor ::
 //      ^
 //      $
 //      \ b
@@ -126,9 +126,9 @@
       return node;
     }
 
-    function createAssertion(kind, rawLength) {
+    function createAnchor(kind, rawLength) {
       return addRaw({
-        type: 'assertion',
+        type: 'anchor',
         kind: kind,
         range: [
           pos - rawLength,
@@ -374,7 +374,7 @@
 
     function parseTerm() {
       // Term ::
-      //      Assertion
+      //      Anchor
       //      Atom
       //      Atom Quantifier
 
@@ -382,10 +382,10 @@
         return null; /* Means: The term is empty */
       }
 
-      var assertion = parseAssertion();
+      var anchor = parseAnchor();
 
-      if (assertion) {
-        return assertion;
+      if (anchor) {
+        return anchor;
       }
 
       var matchIdx = lastMatchIdx;
@@ -445,10 +445,10 @@
       return group;
     }
 
-    function parseAssertion() {
-      // Assertion ::
+    function parseAnchor() {
+      // Anchor ::
       //      ^
-      //      $
+      //      $f
       //      \ b
       //      \ B
       //      ( ? = Disjunction )
@@ -456,13 +456,13 @@
       var res, from = pos;
 
       if (match('^')) {
-        return createAssertion('start', 1 /* rawLength */);
+        return createAnchor('start', 1 /* rawLength */);
       } else if (match('$')) {
-        return createAssertion('end', 1 /* rawLength */);
+        return createAnchor('end', 1 /* rawLength */);
       } else if (match('\\b')) {
-        return createAssertion('boundary', 2 /* rawLength */);
+        return createAnchor('boundary', 2 /* rawLength */);
       } else if (match('\\B')) {
-        return createAssertion('not-boundary', 2 /* rawLength */);
+        return createAnchor('not-boundary', 2 /* rawLength */);
       } else {
         return parseGroup('(?=', 'lookahead', '(?!', 'negativeLookahead');
       }

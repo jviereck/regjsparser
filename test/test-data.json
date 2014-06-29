@@ -322,7 +322,7 @@
     "type": "alternative",
     "body": [
       {
-        "type": "assertion",
+        "type": "anchor",
         "kind": "end",
         "range": [
           0,
@@ -38520,7 +38520,7 @@
     "type": "alternative",
     "body": [
       {
-        "type": "assertion",
+        "type": "anchor",
         "kind": "boundary",
         "range": [
           0,
@@ -38540,7 +38540,7 @@
     "type": "alternative",
     "body": [
       {
-        "type": "assertion",
+        "type": "anchor",
         "kind": "not-boundary",
         "range": [
           0,
@@ -45755,7 +45755,7 @@
     "type": "alternative",
     "body": [
       {
-        "type": "assertion",
+        "type": "anchor",
         "kind": "start",
         "range": [
           0,
@@ -45793,7 +45793,7 @@
     "type": "alternative",
     "body": [
       {
-        "type": "assertion",
+        "type": "anchor",
         "kind": "start",
         "range": [
           0,
@@ -45826,7 +45826,7 @@
         "type": "alternative",
         "body": [
           {
-            "type": "assertion",
+            "type": "anchor",
             "kind": "start",
             "range": [
               0,
@@ -45845,7 +45845,7 @@
         "type": "alternative",
         "body": [
           {
-            "type": "assertion",
+            "type": "anchor",
             "kind": "start",
             "range": [
               2,
