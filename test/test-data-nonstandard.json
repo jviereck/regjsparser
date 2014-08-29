@@ -1,0 +1,52 @@
+{
+  "\\1": {
+    "type": "value",
+    "kind": "octal",
+    "codePoint": 1,
+    "range": [
+      0,
+      2
+    ],
+    "raw": "\\1"
+  },
+  "a\\91": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 97,
+        "range": [
+          0,
+          1
+        ],
+        "raw": "a"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 57,
+        "range": [
+          2,
+          3
+        ],
+        "raw": "9"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 49,
+        "range": [
+          3,
+          4
+        ],
+        "raw": "1"
+      }
+    ],
+    "range": [
+      0,
+      4
+    ],
+    "raw": "a\\91"
+  }
+}
