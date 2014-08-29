@@ -1,4 +1,182 @@
 {
+  "\\u{000000}": {
+    "type": "value",
+    "kind": "unicodeCodePointEscape",
+    "codePoint": 0,
+    "range": [
+      0,
+      10
+    ],
+    "raw": "\\u{000000}"
+  },
+  "\\u{0}": {
+    "type": "value",
+    "kind": "unicodeCodePointEscape",
+    "codePoint": 0,
+    "range": [
+      0,
+      5
+    ],
+    "raw": "\\u{0}"
+  },
+  "\\u{1}": {
+    "type": "value",
+    "kind": "unicodeCodePointEscape",
+    "codePoint": 1,
+    "range": [
+      0,
+      5
+    ],
+    "raw": "\\u{1}"
+  },
+  "\\u{02}": {
+    "type": "value",
+    "kind": "unicodeCodePointEscape",
+    "codePoint": 2,
+    "range": [
+      0,
+      6
+    ],
+    "raw": "\\u{02}"
+  },
+  "\\u{003}": {
+    "type": "value",
+    "kind": "unicodeCodePointEscape",
+    "codePoint": 3,
+    "range": [
+      0,
+      7
+    ],
+    "raw": "\\u{003}"
+  },
+  "\\u{0004}": {
+    "type": "value",
+    "kind": "unicodeCodePointEscape",
+    "codePoint": 4,
+    "range": [
+      0,
+      8
+    ],
+    "raw": "\\u{0004}"
+  },
+  "\\u{00005}": {
+    "type": "value",
+    "kind": "unicodeCodePointEscape",
+    "codePoint": 5,
+    "range": [
+      0,
+      9
+    ],
+    "raw": "\\u{00005}"
+  },
+  "\\u{1D306}": {
+    "type": "value",
+    "kind": "unicodeCodePointEscape",
+    "codePoint": 119558,
+    "range": [
+      0,
+      9
+    ],
+    "raw": "\\u{1D306}"
+  },
+  "\\u{01D306}": {
+    "type": "value",
+    "kind": "unicodeCodePointEscape",
+    "codePoint": 119558,
+    "range": [
+      0,
+      10
+    ],
+    "raw": "\\u{01D306}"
+  },
+  "\\u{10FFFF}": {
+    "type": "value",
+    "kind": "unicodeCodePointEscape",
+    "codePoint": 1114111,
+    "range": [
+      0,
+      10
+    ],
+    "raw": "\\u{10FFFF}"
+  },
+  "[\\u{0}-\\u{A}]": {
+    "type": "characterClass",
+    "body": [
+      {
+        "type": "characterClassRange",
+        "min": {
+          "type": "value",
+          "kind": "unicodeCodePointEscape",
+          "codePoint": 0,
+          "range": [
+            1,
+            6
+          ],
+          "raw": "\\u{0}"
+        },
+        "max": {
+          "type": "value",
+          "kind": "unicodeCodePointEscape",
+          "codePoint": 10,
+          "range": [
+            7,
+            12
+          ],
+          "raw": "\\u{A}"
+        },
+        "range": [
+          1,
+          12
+        ],
+        "raw": "\\u{0}-\\u{A}"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      13
+    ],
+    "raw": "[\\u{0}-\\u{A}]"
+  },
+  "[\\u{02}-\\u{003}]": {
+    "type": "characterClass",
+    "body": [
+      {
+        "type": "characterClassRange",
+        "min": {
+          "type": "value",
+          "kind": "unicodeCodePointEscape",
+          "codePoint": 2,
+          "range": [
+            1,
+            7
+          ],
+          "raw": "\\u{02}"
+        },
+        "max": {
+          "type": "value",
+          "kind": "unicodeCodePointEscape",
+          "codePoint": 3,
+          "range": [
+            8,
+            15
+          ],
+          "raw": "\\u{003}"
+        },
+        "range": [
+          1,
+          15
+        ],
+        "raw": "\\u{02}-\\u{003}"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      16
+    ],
+    "raw": "[\\u{02}-\\u{003}]"
+  },
   "[\uD83D\uDCA9-\uD83D\uDCAB]": {
     "type": "characterClass",
     "body": [
