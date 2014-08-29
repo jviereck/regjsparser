@@ -128,6 +128,11 @@
       return node;
     }
 
+    function updateRawStart(node, start) {
+      node.range[0] = start;
+      return addRaw(node);
+    }
+
     function createAnchor(kind, rawLength) {
       return addRaw({
         type: 'anchor',
@@ -401,6 +406,9 @@
       var quantifier = parseQuantifier() || false;
       if (quantifier) {
         quantifier.body = flattenBody(atom);
+        // The quantifier contains the atom. Therefore, the beginning of the
+        // quantifier range is given by the beginning of the atom.
+        updateRawStart(quantifier, atom.range[0]);
         return quantifier;
       }
       return atom;
@@ -641,8 +649,8 @@
             // like ordinary characters. Create a character for the
             // first number only here - other number-characters
             // (if available) will be matched later.
-            res = matchReg(/^[89]/);
-            return createCharacter(res);
+            res = createCharacter(matchReg(/^[89]/));
+            return updateRawStart(res, res.range[0] - 1);
           }
         }
       }
