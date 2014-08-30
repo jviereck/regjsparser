@@ -40,3 +40,4 @@ var runTests = function(data, flags) {
 
 runTests(require('./test-data.json'), '');
 runTests(require('./test-data-unicode.json'), 'u');
+runTests(require('./test-data-nonstandard.json'), '');

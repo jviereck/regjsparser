@@ -121,8 +121,7 @@
   function parse(str, flags) {
     var hasUnicodeFlag = (flags || "").indexOf("u") !== -1;
     var pos = 0;
-    var lastMatchIdx = 0;
-    var lastMatchClosed = 0;
+    var closedCaptureCounter = 0;
 
     function addRaw(node) {
       node.raw = str.substring(node.range[0], node.range[1]);
@@ -206,9 +205,9 @@
       });
     }
 
-    function createRef(ref) {
+    function createReference(ref) {
       return addRaw({
-        type: 'ref',
+        type: 'reference',
         ref: parseInt(ref, 10),
         range: [
           pos - 1 - ref.length,
@@ -418,12 +417,6 @@
         return false;
       }
 
-      // Need to set the `matchIdx` here before calling `parseDisjunction()`.
-      var matchIdx;
-      if (type === 'normal') {
-        matchIdx = ++lastMatchIdx;
-      }
-
       var body = parseDisjunction();
       if (!body) {
         throw SyntaxError('Expected disjunction');
@@ -432,7 +425,9 @@
       var group = createGroup(type, flattenBody(body), from, pos);
 
       if (type == 'normal') {
-        group.matchIdx = matchIdx;
+        // Keep track of the number of closed groups. This is required for
+        // parseDecimalEscape().
+        closedCaptureCounter++;
       }
       return group;
     }
@@ -624,10 +619,10 @@
       if (res = matchReg(/^(?!0)\d+/)) {
         match = res[0];
         var refIdx = parseInt(res[0], 10);
-        if (refIdx <= lastMatchClosed) {
-          // If the number is smaller than the matching-groups found so
+        if (refIdx <= closedCaptureCounter) {
+          // If the number is smaller than the normal-groups found so
           // far, then it is a reference...
-          return createRef(res[0]);
+          return createReference(res[0]);
         } else {
           // ... otherwise it needs to be interpreted as a octal (if the
           // number is in an octal format). If it is NOT octal format,
