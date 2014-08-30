@@ -10,9 +10,6 @@
     "type": "git",
     "url": "git@github.com:jviereck/regjsparser.git"
   },
-  "dependencies": {
-    "jsesc": "~0.4.3"
-  },
   "scripts": {
     "test": "node test/index.js"
   },
@@ -21,5 +18,12 @@
     "LICENSE.BSD",
     "parser.js",
     "README.md"
-  ]
+  ],
+  "dependencies": {
+    "jsesc": "~0.5.0"
+  },
+  "devDependencies": {
+    "regenerate": "~0.6.4",
+    "unicode-7.0.0": "~0.1.5"
+  }
 }
