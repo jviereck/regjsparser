@@ -210,12 +210,12 @@
       });
     }
 
-    function createReference(ref) {
+    function createReference(matchIndex) {
       return addRaw({
         type: 'reference',
-        ref: parseInt(ref, 10),
+        matchIndex: parseInt(matchIndex, 10),
         range: [
-          pos - 1 - ref.length,
+          pos - 1 - matchIndex.length,
           pos
         ]
       });
