@@ -9,6 +9,16 @@
     ],
     "raw": "\\u{000000}"
   },
+  "\\u{0000000000000000000}": {
+    "type": "value",
+    "kind": "unicodeCodePointEscape",
+    "codePoint": 0,
+    "range": [
+      0,
+      23
+    ],
+    "raw": "\\u{0000000000000000000}"
+  },
   "\\u{0}": {
     "type": "value",
     "kind": "unicodeCodePointEscape",
