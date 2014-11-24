@@ -706,7 +706,7 @@
         return parseUnicodeSurrogatePairEscape(
           createEscaped('unicodeEscape', parseInt(res[1], 16), res[1], 2)
         );
-      } else if (hasUnicodeFlag && (res = matchReg(/^u\{([0-9a-fA-F]{1,6})\}/))) {
+      } else if (hasUnicodeFlag && (res = matchReg(/^u\{([0-9a-fA-F]{1,})\}/))) {
         // RegExpUnicodeEscapeSequence (ES6 Unicode code point escape)
         return createEscaped('unicodeCodePointEscape', parseInt(res[1], 16), res[1], 4);
       } else {
