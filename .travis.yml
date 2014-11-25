@@ -9,5 +9,4 @@ deploy:
     secure: QieqFrJl/NTuVbyt+dBz3GLaH1czdlPKLtgOGwU3S/WF5RxFyGMix8SOA0avw4UbZErzAg9Io59c75lZ6aUOzTDXBzhZ/zbUPznAuFtNIVo0B2gjoUjiNuhLG0ciYnIpM8A8KWf8O3XnPeM/gQVMMaXiO84pGn4bctusOzoVNJE=
   on:
     tags: true
-    branch: master
-    
+    all_branches: true
