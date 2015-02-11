@@ -119,10 +119,6 @@
 (function() {
 
   function parse(str, flags) {
-    var hasUnicodeFlag = (flags || "").indexOf("u") !== -1;
-    var pos = 0;
-    var closedCaptureCounter = 0;
-
     function addRaw(node) {
       node.raw = str.substring(node.range[0], node.range[1]);
       return node;
@@ -434,8 +430,11 @@
 
       if (type == 'normal') {
         // Keep track of the number of closed groups. This is required for
-        // parseDecimalEscape().
-        closedCaptureCounter++;
+        // parseDecimalEscape(). In case the string is parsed a second time the
+        // value already holds the total count and no incrementation is required.
+        if (firstIteration) {
+          closedCaptureCounter++;
+        }
       }
       return group;
     }
@@ -636,6 +635,10 @@
           // number is in an octal format). If it is NOT octal format,
           // then the slash is ignored and the number is matched later
           // as normal characters.
+
+          // Recall the negative decision to decide if the input must be parsed
+          // a second time with the total normal-groups.
+          backrefDenied.push(refIdx);
 
           // Reset the position again, as maybe only parts of the previous
           // matched numbers are actual octal numbers. E.g. in '019' only
@@ -893,6 +896,12 @@
       }
     }
 
+    var backrefDenied = [];
+    var closedCaptureCounter = 0;
+    var firstIteration = true;
+    var hasUnicodeFlag = (flags || "").indexOf("u") !== -1;
+    var pos = 0;
+
     // Convert the input to a string and treat the empty string special.
     str = String(str);
     if (str === '') {
@@ -903,6 +912,23 @@
 
     if (result.range[1] !== str.length) {
       throw SyntaxError('Could not parse entire input - got stuck: ' + str);
+    }
+
+    // The spec requires to interpret the `\2` in `/\2()()/` as backreference.
+    // As the parser collects the number of capture groups as the string is
+    // parsed it is impossible to making these decisions at the point the `\2`
+    // handled. In case the local decision turns out to be wrong later after the
+    // parsing has finished, the input string is parsed a second time with the
+    // total count of capture groups set.
+    //
+    // SEE: https://github.com/jviereck/regjsparser/issues/70
+    for (var i = 0; i < backrefDenied.length; i++) {
+      if (backrefDenied[i] <= closedCaptureCounter) {
+        // Parse the input a second time.
+        pos = 0;
+        firstIteration = false;
+        return parseDisjunction();
+      }
     }
 
     return result;
