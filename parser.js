@@ -916,8 +916,8 @@
 
     // The spec requires to interpret the `\2` in `/\2()()/` as backreference.
     // As the parser collects the number of capture groups as the string is
-    // parsed it is impossible to making these decisions at the point the `\2`
-    // handled. In case the local decision turns out to be wrong later after the
+    // parsed it is impossible to make these decisions at the point the `\2` is
+    // handled. In case the local decision turns out to be wrongq after the
     // parsing has finished, the input string is parsed a second time with the
     // total count of capture groups set.
     //
