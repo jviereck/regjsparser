@@ -240,7 +240,7 @@
         min: min,
         max: max,
         greedy: true,
-        body: null, // set later on,
+        body: null, // set later on
         range: [
           from,
           to
@@ -916,10 +916,10 @@
 
     // The spec requires to interpret the `\2` in `/\2()()/` as backreference.
     // As the parser collects the number of capture groups as the string is
-    // parsed it is impossible to make these decisions at the point the `\2` is
-    // handled. In case the local decision turns out to be wrongq after the
-    // parsing has finished, the input string is parsed a second time with the
-    // total count of capture groups set.
+    // parsed it is impossible to make these decisions at the point when the
+    // `\2` is handled. In case the local decision turns out to be wrong after
+    // the parsing has finished, the input string is parsed a second time with
+    // the total number of capture groups set.
     //
     // SEE: https://github.com/jviereck/regjsparser/issues/70
     for (var i = 0; i < backrefDenied.length; i++) {
