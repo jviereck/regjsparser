@@ -274,7 +274,7 @@
     function createClassRange(min, max, from, to) {
       // See 15.10.2.15:
       if (min.codePoint > max.codePoint) {
-        throw SyntaxError('invalid range in character class');
+        bail('invalid range in character class: ' + min.raw + '-' + max.raw, from, to);
       }
 
       return addRaw({
@@ -309,7 +309,7 @@
 
     function skip(value) {
       if (!match(value)) {
-        throw SyntaxError('character: ' + value);
+        bail('character: ' + value);
       }
     }
 
@@ -397,7 +397,7 @@
 
       var atom = parseAtom();
       if (!atom) {
-        throw SyntaxError('Expected atom')
+        bail('Expected atom');
       }
       var quantifier = parseQuantifier() || false;
       if (quantifier) {
@@ -423,7 +423,7 @@
 
       var body = parseDisjunction();
       if (!body) {
-        throw SyntaxError('Expected disjunction');
+        bail('Expected disjunction');
       }
       skip(')');
       var group = createGroup(type, flattenBody(body), from, pos);
@@ -475,7 +475,7 @@
       //      { DecimalDigits , }
       //      { DecimalDigits , DecimalDigits }
 
-      var res;
+      var res, from = pos;
       var quantifier;
       var min, max;
 
@@ -500,7 +500,7 @@
         min = parseInt(res[1], 10);
         max = parseInt(res[2], 10);
         if (min > max) {
-          throw SyntaxError('numbers out of order in {} quantifier');
+          bail('numbers out of order in {} quantifier', from, pos);
         }
         quantifier = createQuantifier(min, max, res.range[0], res.range[1]);
       }
@@ -541,7 +541,7 @@
         //      \ AtomEscape
         res = parseAtomEscape();
         if (!res) {
-          throw SyntaxError('atomEscape');
+          bail('atomEscape');
         }
         return res;
       }
@@ -591,7 +591,7 @@
       //      CharacterEscape
       //      CharacterClassEscape
 
-      var res;
+      var res, from = pos;
 
       res = parseDecimalEscape();
       if (res) {
@@ -606,7 +606,7 @@
           // CharSet containing the one character <BS> (Unicode value 0008).
           return createEscaped('singleEscape', 0x0008, '\\b');
         } else if (match('B')) {
-          throw SyntaxError('\\B not possible inside of CharacterClass');
+          bail('\\B not possible inside of CharacterClass', from);
         }
       }
 
@@ -740,7 +740,6 @@
       var ZWJ = '\u200C';
       var ZWNJ = '\u200D';
 
-      var res;
       var tmp;
 
       if (!isIdentifierPart(lookahead())) {
@@ -790,7 +789,7 @@
       } else {
         res = parseNonemptyClassRanges();
         if (!res) {
-          throw SyntaxError('nonEmptyClassRanges');
+          bail('nonEmptyClassRanges');
         }
         return res;
       }
@@ -804,12 +803,12 @@
 
         res = parseClassAtom();
         if (!res) {
-          throw SyntaxError('classAtom');
+          bail('classAtom');
         }
         to = pos;
         var classRanges = parseClassRanges();
         if (!classRanges) {
-          throw SyntaxError('classRanges');
+          bail('classRanges');
         }
         from = atom.range[0];
         if (classRanges.type === 'empty') {
@@ -820,7 +819,7 @@
 
       res = parseNonemptyClassRangesNoDash();
       if (!res) {
-        throw SyntaxError('nonEmptyClassRangesNoDash');
+        bail('nonEmptyClassRangesNoDash');
       }
 
       return [atom].concat(res);
@@ -834,7 +833,7 @@
 
       var atom = parseClassAtom();
       if (!atom) {
-        throw SyntaxError('classAtom');
+        bail('classAtom');
       }
 
       if (current(']')) {
@@ -855,7 +854,7 @@
 
       var res = parseClassAtom();
       if (!res) {
-        throw SyntaxError('classAtom');
+        bail('classAtom');
       }
       if (current(']')) {
         //      ClassAtom
@@ -889,11 +888,27 @@
       } else if (match('\\')) {
         res = parseClassEscape();
         if (!res) {
-          throw SyntaxError('classEscape');
+          bail('classEscape');
         }
 
         return parseUnicodeSurrogatePairEscape(res);
       }
+    }
+
+    function bail(message, from, to) {
+      from = from == null ? pos : from;
+      to = to == null ? from : to;
+
+      var contextStart = Math.max(0, from - 10),
+          contextEnd = Math.min(to + 10, str.length);
+
+      // Output a bit of context and a line pointing to where our error is.
+      //
+      // We are assuming that there are no actual newlines in the content as this is a regular expression.
+      var context = '    ' + str.substring(contextStart, contextEnd),
+          pointer = '    ' + new Array(from - contextStart + 1).join(' ') + '^';
+
+      throw SyntaxError(message + ' at position ' + from + '\n' + context + '\n' + pointer);
     }
 
     var backrefDenied = [];
@@ -932,7 +947,7 @@
     }
 
     return result;
-  };
+  }
 
   var regjsparser = {
     parse: parse
