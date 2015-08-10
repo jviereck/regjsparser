@@ -5,6 +5,8 @@ node_js:
 - "0.10"
 - "0.12"
 - "iojs"
+script:
+- "npm test"
 deploy:
   provider: npm
   email: "julian.viereck@gmail.com"
