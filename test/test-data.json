@@ -21871,13 +21871,13 @@
   "[\\0b-G]": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "invalid range in character class: b-G at position 3\n    [\\0b-G]\n       ^",
+    "message": "invalid range in character class at position 3: b-G\n    [\\0b-G]\n       ^",
     "input": "[\\0b-G]"
   },
   "[\\10b-G]": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "invalid range in character class: b-G at position 4\n    [\\10b-G]\n        ^",
+    "message": "invalid range in character class at position 4: b-G\n    [\\10b-G]\n        ^",
     "input": "[\\10b-G]"
   },
   "[\\B]": {
@@ -21895,19 +21895,19 @@
   "[\\Db-G]": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "invalid range in character class: b-G at position 3\n    [\\Db-G]\n       ^",
+    "message": "invalid range in character class at position 3: b-G\n    [\\Db-G]\n       ^",
     "input": "[\\Db-G]"
   },
   "[\\Sb-G]": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "invalid range in character class: b-G at position 3\n    [\\Sb-G]\n       ^",
+    "message": "invalid range in character class at position 3: b-G\n    [\\Sb-G]\n       ^",
     "input": "[\\Sb-G]"
   },
   "[\\Wb-G]": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "invalid range in character class: b-G at position 3\n    [\\Wb-G]\n       ^",
+    "message": "invalid range in character class at position 3: b-G\n    [\\Wb-G]\n       ^",
     "input": "[\\Wb-G]"
   },
   "[\\\\]": {
@@ -21934,7 +21934,7 @@
   "[\\ad-G]": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "invalid range in character class: d-G at position 3\n    [\\ad-G]\n       ^",
+    "message": "invalid range in character class at position 3: d-G\n    [\\ad-G]\n       ^",
     "input": "[\\ad-G]"
   },
   "[\\b]": {
@@ -21961,25 +21961,25 @@
   "[\\bd-G]": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "invalid range in character class: d-G at position 3\n    [\\bd-G]\n       ^",
+    "message": "invalid range in character class at position 3: d-G\n    [\\bd-G]\n       ^",
     "input": "[\\bd-G]"
   },
   "[\\c0001d-G]": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "invalid range in character class: d-G at position 7\n    [\\c0001d-G]\n           ^",
+    "message": "invalid range in character class at position 7: d-G\n    [\\c0001d-G]\n           ^",
     "input": "[\\c0001d-G]"
   },
   "[\\db-G]": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "invalid range in character class: b-G at position 3\n    [\\db-G]\n       ^",
+    "message": "invalid range in character class at position 3: b-G\n    [\\db-G]\n       ^",
     "input": "[\\db-G]"
   },
   "[\\fd-G]": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "invalid range in character class: d-G at position 3\n    [\\fd-G]\n       ^",
+    "message": "invalid range in character class at position 3: d-G\n    [\\fd-G]\n       ^",
     "input": "[\\fd-G]"
   },
   "[\\n\\r\\t ]": {
@@ -22036,25 +22036,25 @@
   "[\\nd-G]": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "invalid range in character class: d-G at position 3\n    [\\nd-G]\n       ^",
+    "message": "invalid range in character class at position 3: d-G\n    [\\nd-G]\n       ^",
     "input": "[\\nd-G]"
   },
   "[\\rd-G]": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "invalid range in character class: d-G at position 3\n    [\\rd-G]\n       ^",
+    "message": "invalid range in character class at position 3: d-G\n    [\\rd-G]\n       ^",
     "input": "[\\rd-G]"
   },
   "[\\sb-G]": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "invalid range in character class: b-G at position 3\n    [\\sb-G]\n       ^",
+    "message": "invalid range in character class at position 3: b-G\n    [\\sb-G]\n       ^",
     "input": "[\\sb-G]"
   },
   "[\\td-G]": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "invalid range in character class: d-G at position 3\n    [\\td-G]\n       ^",
+    "message": "invalid range in character class at position 3: d-G\n    [\\td-G]\n       ^",
     "input": "[\\td-G]"
   },
   "[\\u0020]": {
@@ -22081,25 +22081,25 @@
   "[\\u0061d-G]": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "invalid range in character class: d-G at position 7\n    [\\u0061d-G]\n           ^",
+    "message": "invalid range in character class at position 7: d-G\n    [\\u0061d-G]\n           ^",
     "input": "[\\u0061d-G]"
   },
   "[\\vd-G]": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "invalid range in character class: d-G at position 3\n    [\\vd-G]\n       ^",
+    "message": "invalid range in character class at position 3: d-G\n    [\\vd-G]\n       ^",
     "input": "[\\vd-G]"
   },
   "[\\wb-G]": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "invalid range in character class: b-G at position 3\n    [\\wb-G]\n       ^",
+    "message": "invalid range in character class at position 3: b-G\n    [\\wb-G]\n       ^",
     "input": "[\\wb-G]"
   },
   "[\\x0061d-G]": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "invalid range in character class: d-G at position 7\n    [\\x0061d-G]\n           ^",
+    "message": "invalid range in character class at position 7: d-G\n    [\\x0061d-G]\n           ^",
     "input": "[\\x0061d-G]"
   },
   "[^-]*-": {
@@ -29491,7 +29491,7 @@
   "[a--z]": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "invalid range in character class: a-- at position 1\n    [a--z]\n     ^",
+    "message": "invalid range in character class at position 1: a--\n    [a--z]\n     ^",
     "input": "[a--z]"
   },
   "[a-]": {
@@ -29671,7 +29671,7 @@
   "[a-dc-b]": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "invalid range in character class: c-b at position 4\n    [a-dc-b]\n        ^",
+    "message": "invalid range in character class at position 4: c-b\n    [a-dc-b]\n        ^",
     "input": "[a-dc-b]"
   },
   "[a-f]d": {
@@ -29816,61 +29816,61 @@
   "[b-G\\0]": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "invalid range in character class: b-G at position 1\n    [b-G\\0]\n     ^",
+    "message": "invalid range in character class at position 1: b-G\n    [b-G\\0]\n     ^",
     "input": "[b-G\\0]"
   },
   "[b-G\\10]": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "invalid range in character class: b-G at position 1\n    [b-G\\10]\n     ^",
+    "message": "invalid range in character class at position 1: b-G\n    [b-G\\10]\n     ^",
     "input": "[b-G\\10]"
   },
   "[b-G\\D]": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "invalid range in character class: b-G at position 1\n    [b-G\\D]\n     ^",
+    "message": "invalid range in character class at position 1: b-G\n    [b-G\\D]\n     ^",
     "input": "[b-G\\D]"
   },
   "[b-G\\S]": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "invalid range in character class: b-G at position 1\n    [b-G\\S]\n     ^",
+    "message": "invalid range in character class at position 1: b-G\n    [b-G\\S]\n     ^",
     "input": "[b-G\\S]"
   },
   "[b-G\\W]": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "invalid range in character class: b-G at position 1\n    [b-G\\W]\n     ^",
+    "message": "invalid range in character class at position 1: b-G\n    [b-G\\W]\n     ^",
     "input": "[b-G\\W]"
   },
   "[b-G\\d]": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "invalid range in character class: b-G at position 1\n    [b-G\\d]\n     ^",
+    "message": "invalid range in character class at position 1: b-G\n    [b-G\\d]\n     ^",
     "input": "[b-G\\d]"
   },
   "[b-G\\s]": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "invalid range in character class: b-G at position 1\n    [b-G\\s]\n     ^",
+    "message": "invalid range in character class at position 1: b-G\n    [b-G\\s]\n     ^",
     "input": "[b-G\\s]"
   },
   "[b-G\\w]": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "invalid range in character class: b-G at position 1\n    [b-G\\w]\n     ^",
+    "message": "invalid range in character class at position 1: b-G\n    [b-G\\w]\n     ^",
     "input": "[b-G\\w]"
   },
   "[b-ac-e]": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "invalid range in character class: b-a at position 1\n    [b-ac-e]\n     ^",
+    "message": "invalid range in character class at position 1: b-a\n    [b-ac-e]\n     ^",
     "input": "[b-ac-e]"
   },
   "[c-eb-a]": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "invalid range in character class: b-a at position 4\n    [c-eb-a]\n        ^",
+    "message": "invalid range in character class at position 4: b-a\n    [c-eb-a]\n        ^",
     "input": "[c-eb-a]"
   },
   "[d-G\\B]": {
@@ -29882,61 +29882,61 @@
   "[d-G\\a]": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "invalid range in character class: d-G at position 1\n    [d-G\\a]\n     ^",
+    "message": "invalid range in character class at position 1: d-G\n    [d-G\\a]\n     ^",
     "input": "[d-G\\a]"
   },
   "[d-G\\b]": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "invalid range in character class: d-G at position 1\n    [d-G\\b]\n     ^",
+    "message": "invalid range in character class at position 1: d-G\n    [d-G\\b]\n     ^",
     "input": "[d-G\\b]"
   },
   "[d-G\\c0001]": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "invalid range in character class: d-G at position 1\n    [d-G\\c0001]\n     ^",
+    "message": "invalid range in character class at position 1: d-G\n    [d-G\\c0001]\n     ^",
     "input": "[d-G\\c0001]"
   },
   "[d-G\\f]": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "invalid range in character class: d-G at position 1\n    [d-G\\f]\n     ^",
+    "message": "invalid range in character class at position 1: d-G\n    [d-G\\f]\n     ^",
     "input": "[d-G\\f]"
   },
   "[d-G\\n]": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "invalid range in character class: d-G at position 1\n    [d-G\\n]\n     ^",
+    "message": "invalid range in character class at position 1: d-G\n    [d-G\\n]\n     ^",
     "input": "[d-G\\n]"
   },
   "[d-G\\r]": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "invalid range in character class: d-G at position 1\n    [d-G\\r]\n     ^",
+    "message": "invalid range in character class at position 1: d-G\n    [d-G\\r]\n     ^",
     "input": "[d-G\\r]"
   },
   "[d-G\\t]": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "invalid range in character class: d-G at position 1\n    [d-G\\t]\n     ^",
+    "message": "invalid range in character class at position 1: d-G\n    [d-G\\t]\n     ^",
     "input": "[d-G\\t]"
   },
   "[d-G\\u0061]": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "invalid range in character class: d-G at position 1\n    [d-G\\u0061]\n     ^",
+    "message": "invalid range in character class at position 1: d-G\n    [d-G\\u0061]\n     ^",
     "input": "[d-G\\u0061]"
   },
   "[d-G\\v]": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "invalid range in character class: d-G at position 1\n    [d-G\\v]\n     ^",
+    "message": "invalid range in character class at position 1: d-G\n    [d-G\\v]\n     ^",
     "input": "[d-G\\v]"
   },
   "[d-G\\x0061]": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "invalid range in character class: d-G at position 1\n    [d-G\\x0061]\n     ^",
+    "message": "invalid range in character class at position 1: d-G\n    [d-G\\x0061]\n     ^",
     "input": "[d-G\\x0061]"
   },
   "[o-o]": {
@@ -30141,7 +30141,7 @@
   "[{-z]": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "invalid range in character class: {-z at position 1\n    [{-z]\n     ^",
+    "message": "invalid range in character class at position 1: {-z\n    [{-z]\n     ^",
     "input": "[{-z]"
   },
   "[|||||||]": {
@@ -35280,19 +35280,19 @@
   "^[/w-c]$": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "invalid range in character class: w-c at position 3\n    ^[/w-c]$\n       ^",
+    "message": "invalid range in character class at position 3: w-c\n    ^[/w-c]$\n       ^",
     "input": "^[/w-c]$"
   },
   "^[a-/w]$": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "invalid range in character class: a-/ at position 2\n    ^[a-/w]$\n      ^",
+    "message": "invalid range in character class at position 2: a-/\n    ^[a-/w]$\n      ^",
     "input": "^[a-/w]$"
   },
   "^[z-a]$": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "invalid range in character class: z-a at position 2\n    ^[z-a]$\n      ^",
+    "message": "invalid range in character class at position 2: z-a\n    ^[z-a]$\n      ^",
     "input": "^[z-a]$"
   },
   "^a": {

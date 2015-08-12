@@ -274,7 +274,7 @@
     function createClassRange(min, max, from, to) {
       // See 15.10.2.15:
       if (min.codePoint > max.codePoint) {
-        bail('invalid range in character class: ' + min.raw + '-' + max.raw, from, to);
+        bail('invalid range in character class', min.raw + '-' + max.raw, from, to);
       }
 
       return addRaw({
@@ -309,7 +309,7 @@
 
     function skip(value) {
       if (!match(value)) {
-        bail('character: ' + value);
+        bail('character', value);
       }
     }
 
@@ -500,7 +500,7 @@
         min = parseInt(res[1], 10);
         max = parseInt(res[2], 10);
         if (min > max) {
-          bail('numbers out of order in {} quantifier', from, pos);
+          bail('numbers out of order in {} quantifier', '', from, pos);
         }
         quantifier = createQuantifier(min, max, res.range[0], res.range[1]);
       }
@@ -606,7 +606,7 @@
           // CharSet containing the one character <BS> (Unicode value 0008).
           return createEscaped('singleEscape', 0x0008, '\\b');
         } else if (match('B')) {
-          bail('\\B not possible inside of CharacterClass', from);
+          bail('\\B not possible inside of CharacterClass', '', from);
         }
       }
 
@@ -895,7 +895,7 @@
       }
     }
 
-    function bail(message, from, to) {
+    function bail(message, details, from, to) {
       from = from == null ? pos : from;
       to = to == null ? from : to;
 
@@ -908,7 +908,7 @@
       var context = '    ' + str.substring(contextStart, contextEnd);
       var pointer = '    ' + new Array(from - contextStart + 1).join(' ') + '^';
 
-      throw SyntaxError(message + ' at position ' + from + '\n' + context + '\n' + pointer);
+      throw SyntaxError(message + ' at position ' + from + (details ? ': ' + details : '') + '\n' + context + '\n' + pointer);
     }
 
     var backrefDenied = [];
