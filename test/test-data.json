@@ -4712,7 +4712,7 @@
   ")*": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "Could not parse entire input - got stuck: )*",
+    "message": "Could not parse entire input - got stuck at position 0\n    )*\n    ^",
     "input": ")*"
   },
   "**a": {
@@ -30228,7 +30228,7 @@
   "\\": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "Could not parse entire input - got stuck: \\",
+    "message": "Could not parse entire input - got stuck at position 2\n    \\\n      ^",
     "input": "\\"
   },
   "\\!": {
