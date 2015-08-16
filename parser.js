@@ -926,7 +926,7 @@
     var result = parseDisjunction();
 
     if (result.range[1] !== str.length) {
-      throw SyntaxError('Could not parse entire input - got stuck: ' + str);
+      bail('Could not parse entire input - got stuck', '', result.range[1]);
     }
 
     // The spec requires to interpret the `\2` in `/\2()()/` as backreference.
