@@ -118,7 +118,10 @@
 
 (function() {
 
-  function parse(str, flags) {
+  function parse(str, flags, features) {
+    if (!features) {
+      features = {};
+    }
     function addRaw(node) {
       node.raw = str.substring(node.range[0], node.range[1]);
       return node;
@@ -712,7 +715,7 @@
       } else if (hasUnicodeFlag && (res = matchReg(/^u\{([0-9a-fA-F]+)\}/))) {
         // RegExpUnicodeEscapeSequence (ES6 Unicode code point escape)
         return createEscaped('unicodeCodePointEscape', parseInt(res[1], 16), res[1], 4);
-      } else if (hasUnicodeFlag && (res = matchReg(/^([pP])\{([^\}]+)\}/))) {
+      } else if (features.unicodePropertyEscape && hasUnicodeFlag && (res = matchReg(/^([pP])\{([^\}]+)\}/))) {
         // https://github.com/jviereck/regjsparser/issues/77
         return addRaw({
           type: 'unicodePropertyEscape',

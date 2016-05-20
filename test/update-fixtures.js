@@ -11,13 +11,13 @@ var stringify = function(obj) {
   });
 };
 
-var updateFixtures = function(fileName, flags) {
+var updateFixtures = function(fileName, flags, options) {
   var data = {};
   Object.keys(require(fileName)).forEach(function(regex) {
     flags || (flags = '');
     var par;
     try {
-      par = parse(regex, flags);
+      par = parse(regex, flags, options);
     } catch (exception) {
       par = {
         type: 'error',
@@ -36,5 +36,7 @@ var updateFixtures = function(fileName, flags) {
 
 updateFixtures('./test-data.json', '');
 updateFixtures('./test-data-unicode.json', 'u');
-updateFixtures('./test-data-unicode-properties.json', 'u');
+updateFixtures('./test-data-unicode-properties.json', 'u', {
+  unicodePropertyEscape: true
+});
 updateFixtures('./test-data-nonstandard.json', '');
