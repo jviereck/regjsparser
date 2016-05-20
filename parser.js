@@ -712,6 +712,15 @@
       } else if (hasUnicodeFlag && (res = matchReg(/^u\{([0-9a-fA-F]+)\}/))) {
         // RegExpUnicodeEscapeSequence (ES6 Unicode code point escape)
         return createEscaped('unicodeCodePointEscape', parseInt(res[1], 16), res[1], 4);
+      } else if (hasUnicodeFlag && (res = matchReg(/^([pP])\{([^\}]+)\}/))) {
+        // https://github.com/jviereck/regjsparser/issues/77
+        return addRaw({
+          type: 'unicodePropertyEscape',
+          negative: res[1] === 'P',
+          value: res[2],
+          range: [res.range[0] - 1, res.range[1]],
+          raw: res[0]
+        });
       } else {
         // IdentityEscape
         return parseIdentityEscape();

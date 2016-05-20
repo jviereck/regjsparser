@@ -36,4 +36,5 @@ var updateFixtures = function(fileName, flags) {
 
 updateFixtures('./test-data.json', '');
 updateFixtures('./test-data-unicode.json', 'u');
+updateFixtures('./test-data-unicode-properties.json', 'u');
 updateFixtures('./test-data-nonstandard.json', '');
