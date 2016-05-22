@@ -24,7 +24,7 @@
     regexes.forEach(function(snippet) {
       var result;
       try {
-        result = parse(snippet);
+        result = parse(snippet, 'u');
         log(jsesc(result, {
           'json': true,
           'compact': false,
