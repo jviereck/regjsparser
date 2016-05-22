@@ -1,0 +1,194 @@
+{
+  "\\p{ASCII_Hex_Digit}": {
+    "type": "unicodePropertyEscape",
+    "negative": false,
+    "value": "ASCII_Hex_Digit",
+    "range": [
+      0,
+      19
+    ],
+    "raw": "\\p{ASCII_Hex_Digit}"
+  },
+  "foo\\p{ASCII_Hex_Digit}bar": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 102,
+        "range": [
+          0,
+          1
+        ],
+        "raw": "f"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 111,
+        "range": [
+          1,
+          2
+        ],
+        "raw": "o"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 111,
+        "range": [
+          2,
+          3
+        ],
+        "raw": "o"
+      },
+      {
+        "type": "unicodePropertyEscape",
+        "negative": false,
+        "value": "ASCII_Hex_Digit",
+        "range": [
+          3,
+          22
+        ],
+        "raw": "\\p{ASCII_Hex_Digit}"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 98,
+        "range": [
+          22,
+          23
+        ],
+        "raw": "b"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 97,
+        "range": [
+          23,
+          24
+        ],
+        "raw": "a"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 114,
+        "range": [
+          24,
+          25
+        ],
+        "raw": "r"
+      }
+    ],
+    "range": [
+      0,
+      25
+    ],
+    "raw": "foo\\p{ASCII_Hex_Digit}bar"
+  },
+  "\\P{ASCII_Hex_Digit}": {
+    "type": "unicodePropertyEscape",
+    "negative": true,
+    "value": "ASCII_Hex_Digit",
+    "range": [
+      0,
+      19
+    ],
+    "raw": "\\P{ASCII_Hex_Digit}"
+  },
+  "foo\\P{ASCII_Hex_Digit}bar": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 102,
+        "range": [
+          0,
+          1
+        ],
+        "raw": "f"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 111,
+        "range": [
+          1,
+          2
+        ],
+        "raw": "o"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 111,
+        "range": [
+          2,
+          3
+        ],
+        "raw": "o"
+      },
+      {
+        "type": "unicodePropertyEscape",
+        "negative": true,
+        "value": "ASCII_Hex_Digit",
+        "range": [
+          3,
+          22
+        ],
+        "raw": "\\P{ASCII_Hex_Digit}"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 98,
+        "range": [
+          22,
+          23
+        ],
+        "raw": "b"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 97,
+        "range": [
+          23,
+          24
+        ],
+        "raw": "a"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 114,
+        "range": [
+          24,
+          25
+        ],
+        "raw": "r"
+      }
+    ],
+    "range": [
+      0,
+      25
+    ],
+    "raw": "foo\\P{ASCII_Hex_Digit}bar"
+  },
+  "\\p{}": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Expected atom at position 2\n    \\p{}\n      ^",
+    "input": "\\p{}"
+  },
+  "\\P{}": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Expected atom at position 2\n    \\P{}\n      ^",
+    "input": "\\P{}"
+  }
+}

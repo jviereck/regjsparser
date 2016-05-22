@@ -11,13 +11,13 @@ var stringify = function(obj) {
   });
 };
 
-var runTests = function(data, flags) {
+var runTests = function(data, flags, features) {
   Object.keys(data).forEach(function(regex) {
     var results = data[regex];
     flags || (flags = '');
     var par;
     try {
-      par = parse(regex, flags);
+      par = parse(regex, flags, features);
     } catch (exception) {
       par = {
         type: 'error',
@@ -40,4 +40,7 @@ var runTests = function(data, flags) {
 
 runTests(require('./test-data.json'), '');
 runTests(require('./test-data-unicode.json'), 'u');
+runTests(require('./test-data-unicode-properties.json'), 'u', {
+  unicodePropertyEscape: true
+});
 runTests(require('./test-data-nonstandard.json'), '');
