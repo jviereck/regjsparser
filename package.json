@@ -2,7 +2,7 @@
   "name": "regjsparser",
   "version": "0.2.0",
   "author": "'Julian Viereck' <julian.viereck@gmail.com>",
-  "license": "BSD",
+  "license": "BSD-2-Clause",
   "main": "./parser",
   "bin": "bin/parser",
   "homepage": "https://github.com/jviereck/regjsparser",
