@@ -971,4 +971,5 @@
     window.regjsparser = regjsparser;
   }
 
+  // Small test!
 }());
