@@ -28,24 +28,24 @@ var generateES5Regex = function() { // ES 5.1
     .add(Lu, Ll, Lt, Lm, Lo, Nl)
     .removeRange(0x010000, 0x10FFFF) // remove astral symbols
     .removeRange(0x0, 0x7F); // remove ASCII symbols (regjsparser-specific)
-  var identifierPart = identifierStart.clone()
-    .add('\u200C', '\u200D', Mn, Mc, Nd, Pc)
+  var identifierPartOnly = regenerate('\u200C', '\u200D')
+    .add(Mn, Mc, Nd, Pc)
     .removeRange(0x010000, 0x10FFFF) // remove astral symbols
     .removeRange(0x0, 0x7F); // remove ASCII symbols (regjsparser-specific)
   return {
     'NonAsciiIdentifierStart': identifierStart.toString(),
-    'NonAsciiIdentifierPart': identifierPart.toString()
+    'NonAsciiIdentifierPartOnly': identifierPartOnly.toString()
   };
 };
 
 var result = generateES5Regex();
-// console.log(
-//   '// ECMAScript 5.1/Unicode v%s NonAsciiIdentifierStart:\n\n%s\n',
-//   version,
-//   result.NonAsciiIdentifierStart
-// );
 console.log(
-  '// ECMAScript 5.1/Unicode v%s NonAsciiIdentifierPart:\n\n%s',
+  '// ECMAScript 5.1/Unicode v%s NonAsciiIdentifierStart:\n\n%s\n',
   version,
-  result.NonAsciiIdentifierPart
+  result.NonAsciiIdentifierStart
+);
+console.log(
+  '// ECMAScript 5.1/Unicode v%s NonAsciiIdentifierPartOnly:\n\n%s',
+  version,
+  result.NonAsciiIdentifierPartOnly
 );

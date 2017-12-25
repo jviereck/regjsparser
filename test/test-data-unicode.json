@@ -892,5 +892,63 @@
       16
     ],
     "raw": "(?:\\uD83D\\uDCA9)"
+  },
+  "(?<\\u{41}bc\\u{41}>)\\k<\\u{41}bc\\u{41}>": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          0,
+          19
+        ],
+        "raw": "(?<\\u{41}bc\\u{41}>)",
+        "name": {
+          "type": "identifier",
+          "value": "AbcA",
+          "range": [
+            3,
+            17
+          ],
+          "raw": "\\u{41}bc\\u{41}"
+        }
+      },
+      {
+        "type": "reference",
+        "name": {
+          "type": "identifier",
+          "value": "AbcA",
+          "range": [
+            22,
+            36
+          ],
+          "raw": "\\u{41}bc\\u{41}"
+        },
+        "range": [
+          19,
+          37
+        ],
+        "raw": "\\k<\\u{41}bc\\u{41}>"
+      }
+    ],
+    "range": [
+      0,
+      37
+    ],
+    "raw": "(?<\\u{41}bc\\u{41}>)\\k<\\u{41}bc\\u{41}>"
+  },
+  "(?<\\u{0}>)": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid escape sequence at position 3\n    (?<\\u{0}>)\n       ^",
+    "input": "(?<\\u{0}>)"
+  },
+  "(?<\\u{x}>)": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid escape sequence at position 3\n    (?<\\u{x}>)\n       ^",
+    "input": "(?<\\u{x}>)"
   }
 }
