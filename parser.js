@@ -592,7 +592,7 @@
       else if (res = parseCharacterClass()) {
         return res;
       }
-      else if (match("(?<")) {
+      else if (features.namedGroups && match("(?<")) {
         var name = parseIdentifier();
         skip(">");
         var group = finishGroup("normal", name.range[0] - 3);
@@ -731,7 +731,7 @@
     }
 
     function parseNamedReference() {
-      if (matchReg(/^k<(?=.*?>)/)) {
+      if (features.namedGroups && matchReg(/^k<(?=.*?>)/)) {
         var name = parseIdentifier();
         skip('>');
         return createNamedReference(name);

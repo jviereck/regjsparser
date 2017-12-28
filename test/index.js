@@ -44,3 +44,9 @@ runTests(require('./test-data-unicode-properties.json'), 'u', {
   unicodePropertyEscape: true
 });
 runTests(require('./test-data-nonstandard.json'), '');
+runTests(require('./test-data-named-groups.json'), '', {
+  namedGroups: true
+});
+runTests(require('./test-data-named-groups-unicode.json'), 'u', {
+  namedGroups: true
+});

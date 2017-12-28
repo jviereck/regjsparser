@@ -40,3 +40,9 @@ updateFixtures('./test-data-unicode-properties.json', 'u', {
   unicodePropertyEscape: true
 });
 updateFixtures('./test-data-nonstandard.json', '');
+updateFixtures('./test-data-named-groups.json', '', {
+  namedGroups: true
+});
+updateFixtures('./test-data-named-groups-unicode.json', 'u', {
+  namedGroups: true
+});

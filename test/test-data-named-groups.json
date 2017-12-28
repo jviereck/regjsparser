@@ -1,0 +1,222 @@
+{
+  "(?<name>a)": {
+    "type": "group",
+    "behavior": "normal",
+    "body": [
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 97,
+        "range": [
+          8,
+          9
+        ],
+        "raw": "a"
+      }
+    ],
+    "range": [
+      0,
+      10
+    ],
+    "raw": "(?<name>a)",
+    "name": {
+      "type": "identifier",
+      "value": "name",
+      "range": [
+        3,
+        7
+      ],
+      "raw": "name"
+    }
+  },
+  "(?<$>)(?<_>)": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          0,
+          6
+        ],
+        "raw": "(?<$>)",
+        "name": {
+          "type": "identifier",
+          "value": "$",
+          "range": [
+            3,
+            4
+          ],
+          "raw": "$"
+        }
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          6,
+          12
+        ],
+        "raw": "(?<_>)",
+        "name": {
+          "type": "identifier",
+          "value": "_",
+          "range": [
+            9,
+            10
+          ],
+          "raw": "_"
+        }
+      }
+    ],
+    "range": [
+      0,
+      12
+    ],
+    "raw": "(?<$>)(?<_>)"
+  },
+  "(?<a>)\\1": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          0,
+          6
+        ],
+        "raw": "(?<a>)",
+        "name": {
+          "type": "identifier",
+          "value": "a",
+          "range": [
+            3,
+            4
+          ],
+          "raw": "a"
+        }
+      },
+      {
+        "type": "reference",
+        "matchIndex": 1,
+        "range": [
+          6,
+          8
+        ],
+        "raw": "\\1"
+      }
+    ],
+    "range": [
+      0,
+      8
+    ],
+    "raw": "(?<a>)\\1"
+  },
+  "(?<name>)\\k<name>": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          0,
+          9
+        ],
+        "raw": "(?<name>)",
+        "name": {
+          "type": "identifier",
+          "value": "name",
+          "range": [
+            3,
+            7
+          ],
+          "raw": "name"
+        }
+      },
+      {
+        "type": "reference",
+        "name": {
+          "type": "identifier",
+          "value": "name",
+          "range": [
+            12,
+            16
+          ],
+          "raw": "name"
+        },
+        "range": [
+          9,
+          17
+        ],
+        "raw": "\\k<name>"
+      }
+    ],
+    "range": [
+      0,
+      17
+    ],
+    "raw": "(?<name>)\\k<name>"
+  },
+  "(?<\\u{41})": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid escape sequence at position 3\n    (?<\\u{41})\n       ^",
+    "input": "(?<\\u{41})"
+  },
+  "(?<\\u0041bc\\u0041>)\\k<\\u0041bc\\u0041>": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          0,
+          19
+        ],
+        "raw": "(?<\\u0041bc\\u0041>)",
+        "name": {
+          "type": "identifier",
+          "value": "AbcA",
+          "range": [
+            3,
+            17
+          ],
+          "raw": "\\u0041bc\\u0041"
+        }
+      },
+      {
+        "type": "reference",
+        "name": {
+          "type": "identifier",
+          "value": "AbcA",
+          "range": [
+            22,
+            36
+          ],
+          "raw": "\\u0041bc\\u0041"
+        },
+        "range": [
+          19,
+          37
+        ],
+        "raw": "\\k<\\u0041bc\\u0041>"
+      }
+    ],
+    "range": [
+      0,
+      37
+    ],
+    "raw": "(?<\\u0041bc\\u0041>)\\k<\\u0041bc\\u0041>"
+  },
+  "(?<\\u0000>)": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid escape sequence at position 3\n    (?<\\u0000>)\n       ^",
+    "input": "(?<\\u0000>)"
+  }
+}
