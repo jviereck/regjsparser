@@ -1,0 +1,89 @@
+{
+  "(?<name>\\p{ASCII_Hex_Digit}.)\\k<name>\\p{ASCII_Hex_Digit}": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [
+          {
+            "type": "unicodePropertyEscape",
+            "negative": false,
+            "value": "ASCII_Hex_Digit",
+            "range": [
+              8,
+              27
+            ],
+            "raw": "\\p{ASCII_Hex_Digit}"
+          },
+          {
+            "type": "dot",
+            "range": [
+              27,
+              28
+            ],
+            "raw": "."
+          }
+        ],
+        "range": [
+          0,
+          29
+        ],
+        "raw": "(?<name>\\p{ASCII_Hex_Digit}.)",
+        "name": {
+          "type": "identifier",
+          "value": "name",
+          "range": [
+            3,
+            7
+          ],
+          "raw": "name"
+        }
+      },
+      {
+        "type": "reference",
+        "name": {
+          "type": "identifier",
+          "value": "name",
+          "range": [
+            32,
+            36
+          ],
+          "raw": "name"
+        },
+        "range": [
+          29,
+          37
+        ],
+        "raw": "\\k<name>"
+      },
+      {
+        "type": "unicodePropertyEscape",
+        "negative": false,
+        "value": "ASCII_Hex_Digit",
+        "range": [
+          37,
+          56
+        ],
+        "raw": "\\p{ASCII_Hex_Digit}"
+      }
+    ],
+    "range": [
+      0,
+      56
+    ],
+    "raw": "(?<name>\\p{ASCII_Hex_Digit}.)\\k<name>\\p{ASCII_Hex_Digit}"
+  },
+  "(?<name\\p{ASCII_Hex_Digit}>.)": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid escape sequence at position 7\n    (?<name\\p{ASCII_He\n           ^",
+    "input": "(?<name\\p{ASCII_Hex_Digit}>.)"
+  },
+  "(?<name>)\\k<name\\p{ASCII_Hex_Digit}>": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid escape sequence at position 16\n    e>)\\k<name\\p{ASCII_He\n              ^",
+    "input": "(?<name>)\\k<name\\p{ASCII_Hex_Digit}>"
+  }
+}

@@ -50,3 +50,7 @@ runTests(require('./test-data-named-groups.json'), '', {
 runTests(require('./test-data-named-groups-unicode.json'), 'u', {
   namedGroups: true
 });
+runTests(require('./test-data-named-groups-unicode-properties.json'), 'u', {
+  namedGroups: true,
+  unicodePropertyEscape: true
+});
