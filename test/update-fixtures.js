@@ -46,3 +46,7 @@ updateFixtures('./test-data-named-groups.json', '', {
 updateFixtures('./test-data-named-groups-unicode.json', 'u', {
   namedGroups: true
 });
+updateFixtures('./test-data-named-groups-unicode-properties.json', 'u', {
+  namedGroups: true,
+  unicodePropertyEscape: true
+});
