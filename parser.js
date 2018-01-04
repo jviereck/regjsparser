@@ -144,6 +144,20 @@
 
 (function() {
 
+  // Simplified implementation of String.fromCodePoint for legacy environments.
+  // This function doesn't check that the parameter is a positive integer
+  // and <= 0x10ffff, since it will only be called with valid codepoints.
+  var fromCodePoint = String.fromCodePoint || function(codepoint) {
+    if (codepoint <= 0xffff) { // BMP
+      return String.fromCharCode(codepoint);
+    } else { // astral
+      var cp = codepoint - 0x10000;
+      var highSurrogate = (cp >> 10) + 0xd800;
+      var lowSurrogate = (cp % 1024) + 0xdc00;
+      return String.fromCharCode(highSurrogate, lowSurrogate);
+    }
+  };
+
   function parse(str, flags, features) {
     if (!features) {
       features = {};
@@ -804,7 +818,7 @@
         if (!esc || !check(esc.codePoint)) {
           bail('Invalid escape sequence', null, from, pos);
         }
-        return String.fromCodePoint(esc.codePoint);
+        return fromCodePoint(esc.codePoint);
       }
       return ch;
     }
