@@ -56,5 +56,11 @@
     "name": "SyntaxError",
     "message": "Invalid escape sequence at position 3\n    (?<\\u{x}>)\n       ^",
     "input": "(?<\\u{x}>)"
+  },
+  "(?<\\u{ffffff})": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid escape sequence at position 3\n    (?<\\u{ffffff})\n       ^",
+    "input": "(?<\\u{ffffff})"
   }
 }
