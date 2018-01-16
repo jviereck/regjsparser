@@ -806,6 +806,7 @@
       //      IdentityEscape
 
       var res;
+      var from = pos;
       if (res = matchReg(/^[fnrtv]/)) {
         // ControlEscape
         var codePoint = 0;
@@ -824,6 +825,9 @@
         // HexEscapeSequence
         return createEscaped('hexadecimalEscape', parseInt(res[1], 16), res[1], 2);
       } else if (res = parseRegExpUnicodeEscapeSequence()) {
+        if (!res || res.codePoint > 0x10FFFF) {
+          bail('Invalid escape sequence', null, from, pos);
+        }
         return res;
       } else if (features.unicodePropertyEscape && hasUnicodeFlag && (res = matchReg(/^([pP])\{([^\}]+)\}/))) {
         // https://github.com/jviereck/regjsparser/issues/77
