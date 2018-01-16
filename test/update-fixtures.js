@@ -35,6 +35,9 @@ var updateFixtures = function(fileName, flags, options) {
 };
 
 updateFixtures('./test-data.json', '');
+updateFixtures('./test-data-lookbehind.json', '', {
+  lookbehind: true
+});
 updateFixtures('./test-data-unicode.json', 'u');
 updateFixtures('./test-data-unicode-properties.json', 'u', {
   unicodePropertyEscape: true
