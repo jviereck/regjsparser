@@ -17,7 +17,7 @@ var parseTree = parse('^a'); // /^a/
 console.log(parseTree);
 
 // Toggle on/off additional features:
-var parseTree = parse('^a', {
+var parseTree = parse('^a', '', {
   // SEE: https://github.com/jviereck/regjsparser/pull/78
   unicodePropertyEscape: true,
 
