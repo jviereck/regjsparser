@@ -892,5 +892,11 @@
       16
     ],
     "raw": "(?:\\uD83D\\uDCA9)"
+  },
+  "\\u{110000}": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message":"Invalid escape sequence at position 1\n    \\u{110000}\n     ^",
+    "input":"\\u{110000}"
   }
 }
