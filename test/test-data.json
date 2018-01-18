@@ -35932,6 +35932,29 @@
     ],
     "raw": "e{1}"
   },
+  "e{2,}": {
+    "type": "quantifier",
+    "min": 2,
+    "max": null,
+    "greedy": true,
+    "body": [
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 101,
+        "range": [
+          0,
+          1
+        ],
+        "raw": "e"
+      }
+    ],
+    "range": [
+      0,
+      5
+    ],
+    "raw": "e{2,}"
+  },
   "foo": {
     "type": "alternative",
     "body": [
