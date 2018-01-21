@@ -39,6 +39,9 @@ var runTests = function(data, flags, features) {
 };
 
 runTests(require('./test-data.json'), '');
+runTests(require('./test-data-lookbehind.json'), '', {
+  lookbehind: true
+});
 runTests(require('./test-data-unicode.json'), 'u');
 runTests(require('./test-data-unicode-properties.json'), 'u', {
   unicodePropertyEscape: true

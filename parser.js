@@ -30,6 +30,8 @@
 //      \ B
 //      ( ? = Disjunction )
 //      ( ? ! Disjunction )
+//      ( ? < = Disjunction )
+//      ( ? < ! Disjunction )
 //
 // Quantifier ::
 //      QuantifierPrefix
@@ -636,6 +638,9 @@
         return res;
       }
       else if (res = parseCharacterClass()) {
+        return res;
+      }
+      else if (features.lookbehind && (res = parseGroup('(?<=', 'lookbehind', '(?<!', 'negativeLookbehind'))) {
         return res;
       }
       else if (features.namedGroups && match("(?<")) {

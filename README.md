@@ -22,7 +22,10 @@ var parseTree = parse('^a', '', {
   unicodePropertyEscape: true,
 
   // SEE: https://github.com/jviereck/regjsparser/pull/83
-  namedGroups: true
+  namedGroups: true,
+
+  // SEE: https://github.com/jviereck/regjsparser/pull/89
+  lookbehind: true
 });
 console.log(parseTree);
 ```
