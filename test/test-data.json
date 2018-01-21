@@ -33357,6 +33357,16 @@
     ],
     "raw": "\\d+"
   },
+  "\\t": {
+    "type": "value",
+    "kind": "singleEscape",
+    "codePoint": 9,
+    "range": [
+      0,
+      2
+    ],
+    "raw": "\\t"
+  },
   "\\n": {
     "type": "value",
     "kind": "singleEscape",
@@ -33367,24 +33377,35 @@
     ],
     "raw": "\\n"
   },
-  "\\s": {
-    "type": "characterClassEscape",
-    "value": "s",
-    "range": [
-      0,
-      2
-    ],
-    "raw": "\\s"
-  },
-  "\\t": {
+  "\\v": {
     "type": "value",
     "kind": "singleEscape",
-    "codePoint": 9,
+    "codePoint": 11,
     "range": [
       0,
       2
     ],
-    "raw": "\\t"
+    "raw": "\\v"
+  },
+  "\\f": {
+    "type": "value",
+    "kind": "singleEscape",
+    "codePoint": 12,
+    "range": [
+      0,
+      2
+    ],
+    "raw": "\\f"
+  },
+  "\\r": {
+    "type": "value",
+    "kind": "singleEscape",
+    "codePoint": 13,
+    "range": [
+      0,
+      2
+    ],
+    "raw": "\\r"
   },
   "\\u0020": {
     "type": "value",
@@ -35931,6 +35952,29 @@
       4
     ],
     "raw": "e{1}"
+  },
+  "e{2,}": {
+    "type": "quantifier",
+    "min": 2,
+    "max": null,
+    "greedy": true,
+    "body": [
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 101,
+        "range": [
+          0,
+          1
+        ],
+        "raw": "e"
+      }
+    ],
+    "range": [
+      0,
+      5
+    ],
+    "raw": "e{2,}"
   },
   "foo": {
     "type": "alternative",
