@@ -77,9 +77,7 @@
 //          A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
 //
 // IdentityEscape ::
-//      SourceCharacter but not IdentifierPart
-//      <ZWJ>
-//      <ZWNJ>
+//      SourceCharacter but not c
 //
 // DecimalEscape ::
 //      DecimalIntegerLiteral [lookahead ∉ DecimalDigit]
@@ -633,6 +631,11 @@
         //      \ AtomEscape
         res = parseAtomEscape();
         if (!res) {
+          if (!hasUnicodeFlag && lookahead() == 'c') {
+            // B.1.4 ExtendedAtom
+            // \[lookahead = c]
+            return createValue('symbol', 92, pos - 1, pos);
+          }
           bail('atomEscape');
         }
         return res;
@@ -710,6 +713,10 @@
           return createEscaped('singleEscape', 0x0008, '\\b');
         } else if (match('B')) {
           bail('\\B not possible inside of CharacterClass', '', from);
+        } else if (!hasUnicodeFlag && (res = matchReg(/^c([0-9])/))) {
+          // B.1.4
+          // c ClassControlLetter
+          return createEscaped('controlLetter', res[1] + 16, res[1], 2);
         }
       }
 
@@ -852,15 +859,16 @@
     function parseIdentifierAtom(check) {
       var ch = lookahead();
       var from = pos;
-      if (!check(ch.charCodeAt(0))) return;
-      incr();
       if (ch === '\\') {
+        incr();
         var esc = parseRegExpUnicodeEscapeSequence();
         if (!esc || !check(esc.codePoint)) {
           bail('Invalid escape sequence', null, from, pos);
         }
         return fromCodePoint(esc.codePoint);
       }
+      if (!check(ch.charCodeAt(0))) return;
+      incr();
       return ch;
     }
 
@@ -893,7 +901,7 @@
       while (ch = parseIdentifierAtom(isIdentifierPart)) {
         res += ch;
       }
-      
+
       return addRaw({
         type: 'identifier',
         value: res,
@@ -908,8 +916,6 @@
       return (ch === 36) || (ch === 95) ||  // $ (dollar) and _ (underscore)
         (ch >= 65 && ch <= 90) ||         // A..Z
         (ch >= 97 && ch <= 122) ||        // a..z
-        (ch >= 48 && ch <= 57) ||         // 0..9
-        (ch === 92) ||                    // \ (backslash)
         ((ch >= 0x80) && NonAsciiIdentifierStart.test(String.fromCharCode(ch)));
     }
 
@@ -919,31 +925,19 @@
       var NonAsciiIdentifierPartOnly = /[\u0300-\u036F\u0483-\u0487\u0591-\u05BD\u05BF\u05C1\u05C2\u05C4\u05C5\u05C7\u0610-\u061A\u064B-\u0669\u0670\u06D6-\u06DC\u06DF-\u06E4\u06E7\u06E8\u06EA-\u06ED\u06F0-\u06F9\u0711\u0730-\u074A\u07A6-\u07B0\u07C0-\u07C9\u07EB-\u07F3\u0816-\u0819\u081B-\u0823\u0825-\u0827\u0829-\u082D\u0859-\u085B\u08E4-\u0903\u093A-\u093C\u093E-\u094F\u0951-\u0957\u0962\u0963\u0966-\u096F\u0981-\u0983\u09BC\u09BE-\u09C4\u09C7\u09C8\u09CB-\u09CD\u09D7\u09E2\u09E3\u09E6-\u09EF\u0A01-\u0A03\u0A3C\u0A3E-\u0A42\u0A47\u0A48\u0A4B-\u0A4D\u0A51\u0A66-\u0A71\u0A75\u0A81-\u0A83\u0ABC\u0ABE-\u0AC5\u0AC7-\u0AC9\u0ACB-\u0ACD\u0AE2\u0AE3\u0AE6-\u0AEF\u0B01-\u0B03\u0B3C\u0B3E-\u0B44\u0B47\u0B48\u0B4B-\u0B4D\u0B56\u0B57\u0B62\u0B63\u0B66-\u0B6F\u0B82\u0BBE-\u0BC2\u0BC6-\u0BC8\u0BCA-\u0BCD\u0BD7\u0BE6-\u0BEF\u0C00-\u0C03\u0C3E-\u0C44\u0C46-\u0C48\u0C4A-\u0C4D\u0C55\u0C56\u0C62\u0C63\u0C66-\u0C6F\u0C81-\u0C83\u0CBC\u0CBE-\u0CC4\u0CC6-\u0CC8\u0CCA-\u0CCD\u0CD5\u0CD6\u0CE2\u0CE3\u0CE6-\u0CEF\u0D01-\u0D03\u0D3E-\u0D44\u0D46-\u0D48\u0D4A-\u0D4D\u0D57\u0D62\u0D63\u0D66-\u0D6F\u0D82\u0D83\u0DCA\u0DCF-\u0DD4\u0DD6\u0DD8-\u0DDF\u0DE6-\u0DEF\u0DF2\u0DF3\u0E31\u0E34-\u0E3A\u0E47-\u0E4E\u0E50-\u0E59\u0EB1\u0EB4-\u0EB9\u0EBB\u0EBC\u0EC8-\u0ECD\u0ED0-\u0ED9\u0F18\u0F19\u0F20-\u0F29\u0F35\u0F37\u0F39\u0F3E\u0F3F\u0F71-\u0F84\u0F86\u0F87\u0F8D-\u0F97\u0F99-\u0FBC\u0FC6\u102B-\u103E\u1040-\u1049\u1056-\u1059\u105E-\u1060\u1062-\u1064\u1067-\u106D\u1071-\u1074\u1082-\u108D\u108F-\u109D\u135D-\u135F\u1712-\u1714\u1732-\u1734\u1752\u1753\u1772\u1773\u17B4-\u17D3\u17DD\u17E0-\u17E9\u180B-\u180D\u1810-\u1819\u18A9\u1920-\u192B\u1930-\u193B\u1946-\u194F\u19B0-\u19C0\u19C8\u19C9\u19D0-\u19D9\u1A17-\u1A1B\u1A55-\u1A5E\u1A60-\u1A7C\u1A7F-\u1A89\u1A90-\u1A99\u1AB0-\u1ABD\u1B00-\u1B04\u1B34-\u1B44\u1B50-\u1B59\u1B6B-\u1B73\u1B80-\u1B82\u1BA1-\u1BAD\u1BB0-\u1BB9\u1BE6-\u1BF3\u1C24-\u1C37\u1C40-\u1C49\u1C50-\u1C59\u1CD0-\u1CD2\u1CD4-\u1CE8\u1CED\u1CF2-\u1CF4\u1CF8\u1CF9\u1DC0-\u1DF5\u1DFC-\u1DFF\u200C\u200D\u203F\u2040\u2054\u20D0-\u20DC\u20E1\u20E5-\u20F0\u2CEF-\u2CF1\u2D7F\u2DE0-\u2DFF\u302A-\u302F\u3099\u309A\uA620-\uA629\uA66F\uA674-\uA67D\uA69F\uA6F0\uA6F1\uA802\uA806\uA80B\uA823-\uA827\uA880\uA881\uA8B4-\uA8C4\uA8D0-\uA8D9\uA8E0-\uA8F1\uA900-\uA909\uA926-\uA92D\uA947-\uA953\uA980-\uA983\uA9B3-\uA9C0\uA9D0-\uA9D9\uA9E5\uA9F0-\uA9F9\uAA29-\uAA36\uAA43\uAA4C\uAA4D\uAA50-\uAA59\uAA7B-\uAA7D\uAAB0\uAAB2-\uAAB4\uAAB7\uAAB8\uAABE\uAABF\uAAC1\uAAEB-\uAAEF\uAAF5\uAAF6\uABE3-\uABEA\uABEC\uABED\uABF0-\uABF9\uFB1E\uFE00-\uFE0F\uFE20-\uFE2D\uFE33\uFE34\uFE4D-\uFE4F\uFF10-\uFF19\uFF3F]/;
 
       return isIdentifierStart(ch) ||
+        (ch >= 48 && ch <= 57) ||         // 0..9
         ((ch >= 0x80) && NonAsciiIdentifierPartOnly.test(String.fromCharCode(ch)));
     }
 
     function parseIdentityEscape() {
       // IdentityEscape ::
-      //      SourceCharacter but not IdentifierPart
-      //      <ZWJ>
-      //      <ZWNJ>
-
-      var ZWJ = '\u200C';
-      var ZWNJ = '\u200D';
+      //      SourceCharacter but not c
 
       var tmp;
 
-      if (!isIdentifierPart(lookahead())) {
+      if (lookahead() !== 'c') {
         tmp = incr();
         return createEscaped('identifier', tmp.charCodeAt(0), tmp, 1);
-      }
-
-      if (match(ZWJ)) {
-        // <ZWJ>
-        return createEscaped('identifier', 0x200C, ZWJ);
-      } else if (match(ZWNJ)) {
-        // <ZWNJ>
-        return createEscaped('identifier', 0x200D, ZWNJ);
       }
 
       return null;
