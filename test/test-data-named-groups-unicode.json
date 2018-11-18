@@ -59,8 +59,43 @@
   },
   "(?<\\u{ffffff})": {
     "type": "error",
-    "name": "SyntaxError",
-    "message": "Invalid escape sequence at position 3\n    (?<\\u{ffffff})\n       ^",
+    "name": "RangeError",
+    "message": "Invalid code point 16777215",
     "input": "(?<\\u{ffffff})"
+  },
+  "(?<$𐒤>a)": {
+    "type": "group",
+    "behavior": "normal",
+    "body": [{
+      "type": "value",
+      "kind": "symbol",
+      "codePoint": 97,
+      "range": [7, 8],
+      "raw": "a"
+    }],
+    "range": [0, 9],
+    "raw": "(?<$𐒤>a)",
+    "name": {
+      "type": "identifier",
+      "value": "$𐒤",
+      "range": [
+        3,
+        6
+      ],
+      "raw": "$𐒤"
+    }
+  },
+  "(?<\\u{102A7}Ƞ>)": {
+    "type": "group",
+    "behavior": "normal",
+    "body": [],
+    "range": [0, 15],
+    "raw": "(?<\\u{102A7}Ƞ>)",
+    "name": {
+      "type": "identifier",
+      "value": "𐊧Ƞ",
+      "range": [3, 13],
+      "raw": "\\u{102A7}Ƞ"
+    }
   }
 }
