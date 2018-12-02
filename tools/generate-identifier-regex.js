@@ -3,34 +3,30 @@
 var regenerate = require('regenerate');
 
 // Which Unicode version should be used?
-var version = '7.0.0'; // note: also update `package.json` when this changes
+var version = '11.0.0'; // note: also update `package.json` when this changes
 
 // Shorthand function
 var get = function(what) {
     return require('unicode-' + version + '/' + what + '/code-points');
 };
 
-// Unicode categories needed to construct the ES5 regex
-var Lu = get('categories/Lu');
-var Ll = get('categories/Ll');
-var Lt = get('categories/Lt');
-var Lm = get('categories/Lm');
-var Lo = get('categories/Lo');
-var Nl = get('categories/Nl');
-var Mn = get('categories/Mn');
-var Mc = get('categories/Mc');
-var Nd = get('categories/Nd');
-var Pc = get('categories/Pc');
+// Get the Unicode properties needed to construct the regex.
+var ID_Start = get('Binary_Property/ID_Start');
+var ID_Continue = get('Binary_Property/ID_Continue');
+var Other_ID_Start = get('Binary_Property/Other_ID_Start');
 
-var generateES5Regex = function() { // ES 5.1
-  // http://mathiasbynens.be/notes/javascript-identifiers#valid-identifier-names
+var generateRegex = function() {
+  // https://tc39.github.io/ecma262/#sec-identifier-names-static-semantics-early-errors
+  // http://unicode.org/reports/tr31/#Default_Identifier_Syntax
+  // https://bugs.ecmascript.org/show_bug.cgi?id=2717#c0
   var identifierStart = regenerate('$', '_')
-    .add(Lu, Ll, Lt, Lm, Lo, Nl)
-    .removeRange(0x010000, 0x10FFFF) // remove astral symbols
+    // Note: this already includes `Other_ID_Start`. http://git.io/wRCAfQ
+    .add(ID_Start)
     .removeRange(0x0, 0x7F); // remove ASCII symbols (regjsparser-specific)
   var identifierPartOnly = regenerate('\u200C', '\u200D')
-    .add(Mn, Mc, Nd, Pc)
-    .removeRange(0x010000, 0x10FFFF) // remove astral symbols
+    // Note: `ID_Continue` already includes `Other_ID_Continue`. http://git.io/wRCAfQ
+    .add(ID_Continue)
+    .remove(ID_Start)
     .removeRange(0x0, 0x7F); // remove ASCII symbols (regjsparser-specific)
   return {
     'NonAsciiIdentifierStart': identifierStart.toString(),
@@ -38,14 +34,14 @@ var generateES5Regex = function() { // ES 5.1
   };
 };
 
-var result = generateES5Regex();
+var result = generateRegex();
 console.log(
-  '// ECMAScript 5.1/Unicode v%s NonAsciiIdentifierStart:\n\n%s\n',
+  '// ECMAScript (Unicode v%s) NonAsciiIdentifierStart:\n\n%s\n',
   version,
   result.NonAsciiIdentifierStart
 );
 console.log(
-  '// ECMAScript 5.1/Unicode v%s NonAsciiIdentifierPartOnly:\n\n%s',
+  '// ECMAScript (Unicode v%s) NonAsciiIdentifierPartOnly:\n\n%s',
   version,
   result.NonAsciiIdentifierPartOnly
 );
