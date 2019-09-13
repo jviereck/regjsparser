@@ -941,11 +941,20 @@
 
     function parseIdentityEscape() {
       // IdentityEscape ::
-      //      SourceCharacter but not c
+      //      [+U] SyntaxCharacter
+      //      [+U] /
+      //      [~U] SourceCharacterIdentityEscape[?N]
+      // SourceCharacterIdentityEscape[?N] ::
+      //      [~N] SourceCharacter but not c
+      //      [+N] SourceCharacter but not one of c or k
+
 
       var tmp;
-
-      if (lookahead() !== 'c') {
+      var l = lookahead();
+      if (
+        (hasUnicodeFlag && /[\^\$\.\*\+\?\(\)\\\[\]\{\}\|\/]/.test(l)) ||
+        (!hasUnicodeFlag && l !== "c")
+      ) {
         tmp = incr();
         return createEscaped('identifier', tmp.charCodeAt(0), tmp, 1);
       }

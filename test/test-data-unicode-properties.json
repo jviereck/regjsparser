@@ -182,13 +182,13 @@
   "\\p{}": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "Expected atom at position 2\n    \\p{}\n      ^",
+    "message": "atomEscape at position 1\n    \\p{}\n     ^",
     "input": "\\p{}"
   },
   "\\P{}": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "Expected atom at position 2\n    \\P{}\n      ^",
+    "message": "atomEscape at position 1\n    \\P{}\n     ^",
     "input": "\\P{}"
   }
 }
