@@ -955,6 +955,9 @@
         (hasUnicodeFlag && /[\^\$\.\*\+\?\(\)\\\[\]\{\}\|\/]/.test(l)) ||
         (!hasUnicodeFlag && l !== "c")
       ) {
+        if (l === "k" && features.lookbehind) {
+          return null;
+        }
         tmp = incr();
         return createEscaped('identifier', tmp.charCodeAt(0), tmp, 1);
       }
