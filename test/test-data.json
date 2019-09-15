@@ -37424,5 +37424,25 @@
       8
     ],
     "raw": "(\\2)(b)a"
+  },
+  "\\a": {
+    "type": "value",
+    "kind": "identifier",
+    "codePoint": 97,
+    "range": [
+      0,
+      2
+    ],
+    "raw": "\\a"
+  },
+  "\\k": {
+    "type": "value",
+    "kind": "identifier",
+    "codePoint": 107,
+    "range": [
+      0,
+      2
+    ],
+    "raw": "\\k"
   }
 }
