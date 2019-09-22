@@ -37444,5 +37444,33 @@
       2
     ],
     "raw": "\\k"
+  },
+  "a.": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 97,
+        "range": [
+          0,
+          1
+        ],
+        "raw": "a"
+      },
+      {
+        "type": "dot",
+        "range": [
+          1,
+          2
+        ],
+        "raw": "."
+      }
+    ],
+    "range": [
+      0,
+      2
+    ],
+    "raw": "a."
   }
 }
