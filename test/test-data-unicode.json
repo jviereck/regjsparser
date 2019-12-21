@@ -904,5 +904,20 @@
     "name": "SyntaxError",
     "message": "atomEscape at position 1\n    \\a\n     ^",
     "input": "\\a"
+  },
+  "[\\-]": {
+    "type": "characterClass",
+    "body": [
+      {
+        "type": "value",
+        "kind": "singleEscape",
+        "codePoint": 45,
+        "range": [1, 3],
+        "raw": "\\-"
+      }
+    ],
+    "negative": false,
+    "range": [0, 4],
+    "raw": "[\\-]"
   }
 }

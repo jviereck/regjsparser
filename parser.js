@@ -706,6 +706,7 @@
 
       // For ClassEscape
       if (insideCharacterClass) {
+        //     b
         if (match('b')) {
           // 15.10.2.19
           // The production ClassEscape :: b evaluates by returning the
@@ -717,6 +718,10 @@
           // B.1.4
           // c ClassControlLetter
           return createEscaped('controlLetter', res[1] + 16, res[1], 2);
+        }
+        //     [+U] -
+        if (match('-') && hasUnicodeFlag) {
+          return createEscaped('singleEscape', 0x002d, '\\-');
         }
       }
 
