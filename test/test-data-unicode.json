@@ -899,6 +899,12 @@
     "message": "Invalid escape sequence at position 1\n    \\u{110000}\n     ^",
     "input": "\\u{110000}"
   },
+  "\\a": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "atomEscape at position 1\n    \\a\n     ^",
+    "input": "\\a"
+  },
   "[\\-]": {
     "type": "characterClass",
     "body": [

@@ -346,5 +346,11 @@
       6
     ],
     "raw": "(?<!.)"
+  },
+  "\\k": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "atomEscape at position 1\n    \\k\n     ^",
+    "input": "\\k"
   }
 }
