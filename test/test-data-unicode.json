@@ -898,5 +898,20 @@
     "name": "SyntaxError",
     "message": "Invalid escape sequence at position 1\n    \\u{110000}\n     ^",
     "input": "\\u{110000}"
+  },
+  "[\\-]": {
+    "type": "characterClass",
+    "body": [
+      {
+        "type": "value",
+        "kind": "singleEscape",
+        "codePoint": 45,
+        "range": [1, 3],
+        "raw": "\\-"
+      }
+    ],
+    "negative": false,
+    "range": [0, 4],
+    "raw": "[\\-]"
   }
 }
