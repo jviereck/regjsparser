@@ -905,6 +905,24 @@
     "message": "atomEscape at position 1\n    \\a\n     ^",
     "input": "\\a"
   },
+  "\\-": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "atomEscape at position 1\n    \\-\n     ^",
+    "input": "\\-"
+  },
+  "}": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "unescaped or unmatched closing brace at position 1\n    }\n     ^",
+    "input": "}"
+  },
+  "]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "unescaped or unmatched closing bracket at position 1\n    ]\n     ^",
+    "input": "]"
+  },
   "[\\-]": {
     "type": "characterClass",
     "body": [
