@@ -229,14 +229,14 @@
       return createValue(kind, codePoint, pos - (value.length + fromOffset), pos);
     }
 
-    function createCharacter(matches) {
+    function createCharacter(matches, insideClass) {
       var _char = matches[0];
       var first = _char.charCodeAt(0);
       if (hasUnicodeFlag) {
-        if (_char === '}') {
+        if (!insideClass && _char === '}') {
           bail("unescaped or unmatched closing brace");
         }
-        if (_char === ']') {
+        if (!insideClass && _char === ']') {
           bail("unescaped or unmatched closing bracket");
         }
         var second;
@@ -1102,7 +1102,7 @@
 
       var res;
       if (res = matchReg(/^[^\\\]-]/)) {
-        return createCharacter(res[0]);
+        return createCharacter(res[0], true);
       } else if (match('\\')) {
         res = parseClassEscape();
         if (!res) {
