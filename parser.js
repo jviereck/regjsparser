@@ -229,16 +229,10 @@
       return createValue(kind, codePoint, pos - (value.length + fromOffset), pos);
     }
 
-    function createCharacter(matches, insideClass) {
+    function createCharacter(matches) {
       var _char = matches[0];
       var first = _char.charCodeAt(0);
       if (hasUnicodeFlag) {
-        if (!insideClass && _char === '}') {
-          bail("unescaped or unmatched closing brace");
-        }
-        if (!insideClass && _char === ']') {
-          bail("unescaped or unmatched closing bracket");
-        }
         var second;
         if (_char.length === 1 && first >= 0xD800 && first <= 0xDBFF) {
           second = lookahead().charCodeAt(0);
@@ -487,7 +481,7 @@
         return anchor;
       }
 
-      var atom = parseAtom();
+      var atom = parseAtomAndExtendedAtom();
       if (!atom) {
         bail('Expected atom');
       }
@@ -611,7 +605,12 @@
       return quantifier;
     }
 
-    function parseAtom() {
+    function parseAtomAndExtendedAtom() {
+      // Parsing Atom and ExtendedAtom together due to redundancy.
+      // ExtendedAtom is defined in Apendix B of the ECMA-262 standard.
+      //
+      // SEE: https://www.ecma-international.org/ecma-262/10.0/index.html#prod-annexB-ExtendedPatternCharacter
+      //
       // Atom ::
       //      PatternCharacter
       //      .
@@ -619,14 +618,21 @@
       //      CharacterClass
       //      ( GroupSpecifier Disjunction )
       //      ( ? : Disjunction )
+      // ExtendedAtom ::
+      //      ExtendedPatternCharacter
+      // ExtendedPatternCharacter ::
+      //      SourceCharacter but not one of ^$\.*+?()[|
 
       var res;
 
       // jviereck: allow ']', '}' here as well to be compatible with browser's
       //   implementations: ']'.match(/]/);
-      // if (res = matchReg(/^[^^$\\.*+?()[\]{}|]/)) {
-      if (res = matchReg(/^[^^$\\.*+?(){[|]/)) {
+      if (res = matchReg(/^[^^$\\.*+?()[\]{}|]/)) {
         //      PatternCharacter
+        return createCharacter(res);
+      }
+      else if (!hasUnicodeFlag && (res = matchReg(/^[^^$\\.*+?(){[|]/))) {
+        //      ExtendedPatternCharacter
         return createCharacter(res);
       }
       else if (match('.')) {
@@ -1102,7 +1108,7 @@
 
       var res;
       if (res = matchReg(/^[^\\\]-]/)) {
-        return createCharacter(res[0], true);
+        return createCharacter(res[0]);
       } else if (match('\\')) {
         res = parseClassEscape();
         if (!res) {

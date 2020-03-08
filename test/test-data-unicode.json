@@ -914,13 +914,13 @@
   "}": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "unescaped or unmatched closing brace at position 1\n    }\n     ^",
+    "message": "Expected atom at position 0\n    }\n    ^",
     "input": "}"
   },
   "]": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "unescaped or unmatched closing bracket at position 1\n    ]\n     ^",
+    "message": "Expected atom at position 0\n    ]\n    ^",
     "input": "]"
   },
   "[\\-]": {
