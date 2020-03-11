@@ -37472,5 +37472,46 @@
       2
     ],
     "raw": "a."
+  },
+  "}": {
+    "type": "value",
+    "kind": "symbol",
+    "codePoint": 125,
+    "range": [
+      0,
+      1
+    ],
+    "raw": "}"
+  },
+  "]": {
+    "type": "value",
+    "kind": "symbol",
+    "codePoint": 93,
+    "range": [
+      0,
+      1
+    ],
+    "raw": "]"
+  },
+  "[}]": {
+    "type": "characterClass",
+    "body": [
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 125,
+        "range": [
+          1,
+          2
+        ],
+        "raw": "}"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      3
+    ],
+    "raw": "[}]"
   }
 }
