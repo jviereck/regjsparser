@@ -631,7 +631,7 @@
         //      PatternCharacter
         return createCharacter(res);
       }
-      else if (!hasUnicodeFlag && (res = matchReg(/^[^^$\\.*+?(){[|]/))) {
+      else if (!hasUnicodeFlag && (res = matchReg(/^(?:]|})/))) {
         //      ExtendedPatternCharacter
         return createCharacter(res);
       }
