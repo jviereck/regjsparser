@@ -1020,25 +1020,36 @@
     }
 
     function parseHelperClassRanges(atom) {
-      var from, to, res;
+      var from, to, res, atomTo, dash;
       if (current('-') && !next(']')) {
         // ClassAtom - ClassAtom ClassRanges
-        skip('-');
+        dash = createCharacter(match('-'));
 
-        res = parseClassAtom();
-        if (!res) {
+        atomTo = parseClassAtom();
+        if (!atomTo) {
           bail('classAtom');
         }
         to = pos;
+
+        // Parse the next class range if exists.
         var classRanges = parseClassRanges();
         if (!classRanges) {
           bail('classRanges');
         }
+
         from = atom.range[0];
-        if (classRanges.type === 'empty') {
-          return [createClassRange(atom, res, from, to)];
+        // Check if both the from and atomTo have codePoints. If not, don't
+        // create a range but treat them as `atom` `-` `atom` instead.
+        if (!('codePoint' in atom) || !('codePoint' in atomTo)) {
+            res = [atom, dash, atomTo];
+        } else {
+            res = [createClassRange(atom, atomTo, from, to)];
         }
-        return [createClassRange(atom, res, from, to)].concat(classRanges);
+
+        if (classRanges.type === 'empty') {
+          return res;
+        }
+        return res.concat(classRanges);
       }
 
       res = parseNonemptyClassRangesNoDash();

@@ -37513,5 +37513,85 @@
       3
     ],
     "raw": "[}]"
+  },
+  "[\\w-e]": {
+    "type": "characterClass",
+    "body": [
+      {
+        "type": "characterClassEscape",
+        "value": "w",
+        "range": [
+          1,
+          3
+        ],
+        "raw": "\\w"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 45,
+        "range": [
+          3,
+          4
+        ],
+        "raw": "-"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 101,
+        "range": [
+          4,
+          5
+        ],
+        "raw": "e"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      6
+    ],
+    "raw": "[\\w-e]"
+  },
+  "[e-\\w]": {
+    "type": "characterClass",
+    "body": [
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 101,
+        "range": [
+          1,
+          2
+        ],
+        "raw": "e"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 45,
+        "range": [
+          2,
+          3
+        ],
+        "raw": "-"
+      },
+      {
+        "type": "characterClassEscape",
+        "value": "w",
+        "range": [
+          3,
+          5
+        ],
+        "raw": "\\w"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      6
+    ],
+    "raw": "[e-\\w]"
   }
 }
