@@ -37514,37 +37514,36 @@
     ],
     "raw": "[}]"
   },
-  "[\\w-e]": {
+  "[\\b-e]": {
     "type": "characterClass",
     "body": [
       {
-        "type": "characterClassEscape",
-        "value": "w",
+        "type": "characterClassRange",
+        "min": {
+          "type": "value",
+          "kind": "singleEscape",
+          "codePoint": 8,
+          "range": [
+            1,
+            3
+          ],
+          "raw": "\\b"
+        },
+        "max": {
+          "type": "value",
+          "kind": "symbol",
+          "codePoint": 101,
+          "range": [
+            4,
+            5
+          ],
+          "raw": "e"
+        },
         "range": [
           1,
-          3
-        ],
-        "raw": "\\w"
-      },
-      {
-        "type": "value",
-        "kind": "symbol",
-        "codePoint": 45,
-        "range": [
-          3,
-          4
-        ],
-        "raw": "-"
-      },
-      {
-        "type": "value",
-        "kind": "symbol",
-        "codePoint": 101,
-        "range": [
-          4,
           5
         ],
-        "raw": "e"
+        "raw": "\\b-e"
       }
     ],
     "negative": false,
@@ -37552,46 +37551,12 @@
       0,
       6
     ],
-    "raw": "[\\w-e]"
+    "raw": "[\\b-e]"
   },
-  "[e-\\w]": {
-    "type": "characterClass",
-    "body": [
-      {
-        "type": "value",
-        "kind": "symbol",
-        "codePoint": 101,
-        "range": [
-          1,
-          2
-        ],
-        "raw": "e"
-      },
-      {
-        "type": "value",
-        "kind": "symbol",
-        "codePoint": 45,
-        "range": [
-          2,
-          3
-        ],
-        "raw": "-"
-      },
-      {
-        "type": "characterClassEscape",
-        "value": "w",
-        "range": [
-          3,
-          5
-        ],
-        "raw": "\\w"
-      }
-    ],
-    "negative": false,
-    "range": [
-      0,
-      6
-    ],
-    "raw": "[e-\\w]"
+  "[e-\\b]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "invalid range in character class at position 1: e-\\b\n    [e-\\b]\n     ^",
+    "input": "[e-\\b]"
   }
 }

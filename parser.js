@@ -1023,6 +1023,7 @@
       var from, to, res, atomTo, dash;
       if (current('-') && !next(']')) {
         // ClassAtom - ClassAtom ClassRanges
+        from = atom.range[0];
         dash = createCharacter(match('-'));
 
         atomTo = parseClassAtom();
@@ -1037,11 +1038,24 @@
           bail('classRanges');
         }
 
-        from = atom.range[0];
-        // Check if both the from and atomTo have codePoints. If not, don't
-        // create a range but treat them as `atom` `-` `atom` instead.
+        // Check if both the from and atomTo have codePoints.
         if (!('codePoint' in atom) || !('codePoint' in atomTo)) {
-            res = [atom, dash, atomTo];
+            if (!hasUnicodeFlag) {
+                // If not, don't create a range but treat them as
+                // `atom` `-` `atom` instead.
+                //
+                // SEE: https://tc39.es/ecma262/#sec-regular-expression-patterns-semantics
+                //   NonemptyClassRanges::ClassAtom-ClassAtomClassRanges
+                //   CharacterRangeOrUnion
+                res = [atom, dash, atomTo];
+            } else {
+                // With unicode flag, both sides must have codePoints if
+                // one side has a codePoint.
+                //
+                // SEE: https://tc39.es/ecma262/#sec-patterns-static-semantics-early-errors
+                //   NonemptyClassRanges :: ClassAtom - ClassAtom ClassRanges
+                bail('invalid character class');
+            }
         } else {
             res = [createClassRange(atom, atomTo, from, to)];
         }
