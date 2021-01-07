@@ -1036,5 +1036,44 @@
     "name": "SyntaxError",
     "message": "invalid character class at position 5\n    [\\w-e]\n         ^",
     "input": "[\\w-e]"
+  },
+  "[\\0-\\b]": {
+    "type": "characterClass",
+    "body": [
+      {
+        "type": "characterClassRange",
+        "min": {
+          "type": "value",
+          "kind": "null",
+          "codePoint": 0,
+          "range": [
+            0,
+            3
+          ],
+          "raw": "[\\0"
+        },
+        "max": {
+          "type": "value",
+          "kind": "singleEscape",
+          "codePoint": 8,
+          "range": [
+            4,
+            6
+          ],
+          "raw": "\\b"
+        },
+        "range": [
+          0,
+          6
+        ],
+        "raw": "[\\0-\\b"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      7
+    ],
+    "raw": "[\\0-\\b]"
   }
 }
