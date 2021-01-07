@@ -11,7 +11,9 @@ var stringify = function(obj) {
   });
 };
 
-var runTests = function(data, flags, features) {
+var runTests = function(data_path, flags, features) {
+  console.log('Testing:', data_path);
+  data = require(data_path)
   Object.keys(data).forEach(function(regex) {
     var results = data[regex];
     flags || (flags = '');
@@ -33,27 +35,27 @@ var runTests = function(data, flags, features) {
         ':' + JSON.stringify(par) + '\n' + JSON.stringify(results)
       );
     } else {
-      console.log('PASSED TEST: ' + regex);
+      console.log('  PASSED TEST: ' + regex);
     }
   });
 };
 
-runTests(require('./test-data.json'), '');
-runTests(require('./test-data-lookbehind.json'), '', {
+runTests('./test-data.json', '');
+runTests('./test-data-lookbehind.json', '', {
   lookbehind: true
 });
-runTests(require('./test-data-unicode.json'), 'u');
-runTests(require('./test-data-unicode-properties.json'), 'u', {
+runTests('./test-data-unicode.json', 'u');
+runTests('./test-data-unicode-properties.json', 'u', {
   unicodePropertyEscape: true
 });
-runTests(require('./test-data-nonstandard.json'), '');
-runTests(require('./test-data-named-groups.json'), '', {
+runTests('./test-data-nonstandard.json', '');
+runTests('./test-data-named-groups.json', '', {
   namedGroups: true
 });
-runTests(require('./test-data-named-groups-unicode.json'), 'u', {
+runTests('./test-data-named-groups-unicode.json', 'u', {
   namedGroups: true
 });
-runTests(require('./test-data-named-groups-unicode-properties.json'), 'u', {
+runTests('./test-data-named-groups-unicode-properties.json', 'u', {
   namedGroups: true,
   unicodePropertyEscape: true
 });
