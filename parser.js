@@ -494,7 +494,7 @@
 
         // If no unicode flag, then try to parse ExtendedAtom -> ExtendedPatternCharacter.
         //      ExtendedPatternCharacter
-        if (!hasUnicodeFlag && (res = matchReg(/^[^^$\\.*+?()[|]/))) {
+        if (!hasUnicodeFlag && (res = matchReg(/^{/))) {
           atom = createCharacter(res);
         } else {
           bail('Expected atom');
