@@ -483,7 +483,22 @@
 
       var atom = parseAtomAndExtendedAtom();
       if (!atom) {
-        bail('Expected atom');
+        // Check if a quantifier is following. A quantifier without an atom
+        // is an error.
+        pos_backup = pos
+        var quantifier = parseQuantifier() || false;
+        if (quantifier) {
+          pos = pos_backup
+          bail('Expected atom');
+        }
+
+        // If no unicode flag, then try to parse ExtendedAtom -> ExtendedPatternCharacter.
+        //      ExtendedPatternCharacter
+        if (!hasUnicodeFlag && (res = matchReg(/^[^^$\\.*+?()[|]/))) {
+          atom = createCharacter(res);
+        } else {
+          bail('Expected atom');
+        }
       }
       var quantifier = parseQuantifier() || false;
       if (quantifier) {
@@ -632,7 +647,7 @@
         return createCharacter(res);
       }
       else if (!hasUnicodeFlag && (res = matchReg(/^(?:]|})/))) {
-        //      ExtendedPatternCharacter
+        //      ExtendedPatternCharacter, first part. See parseTerm.
         return createCharacter(res);
       }
       else if (match('.')) {

@@ -1075,5 +1075,11 @@
       7
     ],
     "raw": "[\\0-\\b]"
+  },
+  "{}": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Expected atom at position 0\n    {}\n    ^",
+    "input": "{}"
   }
 }

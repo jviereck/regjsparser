@@ -37597,5 +37597,41 @@
       7
     ],
     "raw": "[\\0-\\b]"
+  },
+  "{1}": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Expected atom at position 0\n    {1}\n    ^",
+    "input": "{1}"
+  },
+  "{}": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 123,
+        "range": [
+          0,
+          1
+        ],
+        "raw": "{"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 125,
+        "range": [
+          1,
+          2
+        ],
+        "raw": "}"
+      }
+    ],
+    "range": [
+      0,
+      2
+    ],
+    "raw": "{}"
   }
 }
