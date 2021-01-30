@@ -743,8 +743,12 @@
           bail('\\B not possible inside of CharacterClass', '', from);
         } else if (!hasUnicodeFlag && (res = matchReg(/^c([0-9])/))) {
           // B.1.4
-          // c ClassControlLetter
+          // c ClassControlLetter, ClassControlLetter = DecimalDigit
           return createEscaped('controlLetter', res[1] + 16, res[1], 2);
+        } else if (!hasUnicodeFlag && (res = matchReg(/^c_/))) {
+          // B.1.4
+          // c ClassControlLetter, ClassControlLetter = _
+          return createEscaped('controlLetter', 31, '_', 2);
         }
         //     [+U] -
         if (match('-') && hasUnicodeFlag) {
