@@ -37633,5 +37633,26 @@
       2
     ],
     "raw": "{}"
+  },
+  "[\\c_]": {
+    "type": "characterClass",
+    "body": [
+      {
+        "type": "value",
+        "kind": "controlLetter",
+        "codePoint": 31,
+        "range": [
+          1,
+          4
+        ],
+        "raw": "\\c_"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      5
+    ],
+    "raw": "[\\c_]"
   }
 }
