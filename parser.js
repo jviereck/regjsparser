@@ -751,7 +751,7 @@
           return createEscaped('controlLetter', 31, '_', 2);
         }
         //     [+U] -
-        if (match('-') && hasUnicodeFlag) {
+        if (hasUnicodeFlag && match('-')) {
           return createEscaped('singleEscape', 0x002d, '\\-');
         }
       }

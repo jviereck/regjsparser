@@ -37654,5 +37654,26 @@
       5
     ],
     "raw": "[\\c_]"
+  },
+  "[\\-]": {
+    "type": "characterClass",
+    "body": [
+      {
+        "type": "value",
+        "kind": "identifier",
+        "codePoint": 45,
+        "range": [
+          1,
+          3
+        ],
+        "raw": "\\-"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      4
+    ],
+    "raw": "[\\-]"
   }
 }
