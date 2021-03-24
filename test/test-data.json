@@ -21845,10 +21845,10 @@
         "kind": "null",
         "codePoint": 0,
         "range": [
-          0,
+          1,
           5
         ],
-        "raw": "[\\000"
+        "raw": "\\000"
       },
       {
         "type": "value",
@@ -30426,7 +30426,7 @@
     "kind": "null",
     "codePoint": 0,
     "range": [
-      -1,
+      0,
       2
     ],
     "raw": "\\0"
@@ -37569,10 +37569,10 @@
           "kind": "null",
           "codePoint": 0,
           "range": [
-            0,
+            1,
             3
           ],
-          "raw": "[\\0"
+          "raw": "\\0"
         },
         "max": {
           "type": "value",
@@ -37585,10 +37585,10 @@
           "raw": "\\b"
         },
         "range": [
-          0,
+          1,
           6
         ],
-        "raw": "[\\0-\\b"
+        "raw": "\\0-\\b"
       }
     ],
     "negative": false,

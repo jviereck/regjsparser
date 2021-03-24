@@ -814,7 +814,7 @@
         match = res[0];
         if (/^0{1,3}$/.test(match)) {
           // If they are all zeros, then only take the first one.
-          return createEscaped('null', 0x0000, '0', match.length + 1);
+          return createEscaped('null', 0x0000, '0', match.length);
         } else {
           return createEscaped('octal', parseInt(match, 8), match, 1);
         }
