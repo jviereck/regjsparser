@@ -59,3 +59,7 @@ runTests('./test-data-named-groups-unicode-properties.json', 'u', {
   namedGroups: true,
   unicodePropertyEscape: true
 });
+runTests('./test-data-unicode-set.json', 'uv', {
+  unicodeSet: true,
+  unicodePropertyEscape: true
+});

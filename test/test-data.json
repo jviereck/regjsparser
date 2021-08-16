@@ -72,6 +72,7 @@
             "body": [
               {
                 "type": "characterClass",
+                "kind": "union",
                 "body": [
                   {
                     "type": "value",
@@ -136,6 +137,7 @@
             "body": [
               {
                 "type": "characterClass",
+                "kind": "union",
                 "body": [
                   {
                     "type": "value",
@@ -210,6 +212,7 @@
             "body": [
               {
                 "type": "characterClass",
+                "kind": "union",
                 "body": [
                   {
                     "type": "value",
@@ -284,6 +287,7 @@
             "body": [
               {
                 "type": "characterClass",
+                "kind": "union",
                 "body": [
                   {
                     "type": "value",
@@ -898,6 +902,7 @@
             "body": [
               {
                 "type": "characterClass",
+                "kind": "union",
                 "body": [
                   {
                     "type": "characterClassRange",
@@ -985,6 +990,7 @@
               },
               {
                 "type": "characterClass",
+                "kind": "union",
                 "body": [
                   {
                     "type": "characterClassRange",
@@ -1051,6 +1057,7 @@
                 "body": [
                   {
                     "type": "characterClass",
+                    "kind": "union",
                     "body": [
                       {
                         "type": "characterClassRange",
@@ -1186,6 +1193,7 @@
                   },
                   {
                     "type": "characterClass",
+                    "kind": "union",
                     "body": [
                       {
                         "type": "characterClassRange",
@@ -1263,6 +1271,7 @@
             "body": [
               {
                 "type": "characterClass",
+                "kind": "union",
                 "body": [
                   {
                     "type": "characterClassRange",
@@ -1350,6 +1359,7 @@
               },
               {
                 "type": "characterClass",
+                "kind": "union",
                 "body": [
                   {
                     "type": "characterClassRange",
@@ -1416,6 +1426,7 @@
                 "body": [
                   {
                     "type": "characterClass",
+                    "kind": "union",
                     "body": [
                       {
                         "type": "characterClassRange",
@@ -1551,6 +1562,7 @@
                   },
                   {
                     "type": "characterClass",
+                    "kind": "union",
                     "body": [
                       {
                         "type": "characterClassRange",
@@ -1627,6 +1639,7 @@
                 "body": [
                   {
                     "type": "characterClass",
+                    "kind": "union",
                     "body": [
                       {
                         "type": "value",
@@ -1692,6 +1705,7 @@
                     "body": [
                       {
                         "type": "characterClass",
+                        "kind": "union",
                         "body": [
                           {
                             "type": "characterClassRange",
@@ -1779,6 +1793,7 @@
                       },
                       {
                         "type": "characterClass",
+                        "kind": "union",
                         "body": [
                           {
                             "type": "characterClassRange",
@@ -1845,6 +1860,7 @@
                         "body": [
                           {
                             "type": "characterClass",
+                            "kind": "union",
                             "body": [
                               {
                                 "type": "characterClassRange",
@@ -1980,6 +1996,7 @@
                           },
                           {
                             "type": "characterClass",
+                            "kind": "union",
                             "body": [
                               {
                                 "type": "characterClassRange",
@@ -2056,6 +2073,7 @@
                         "body": [
                           {
                             "type": "characterClass",
+                            "kind": "union",
                             "body": [
                               {
                                 "type": "value",
@@ -2154,6 +2172,7 @@
                         "body": [
                           {
                             "type": "characterClass",
+                            "kind": "union",
                             "body": [
                               {
                                 "type": "value",
@@ -2252,6 +2271,7 @@
                             "body": [
                               {
                                 "type": "characterClass",
+                                "kind": "union",
                                 "body": [
                                   {
                                     "type": "value",
@@ -2326,6 +2346,7 @@
                             "body": [
                               {
                                 "type": "characterClass",
+                                "kind": "union",
                                 "body": [
                                   {
                                     "type": "value",
@@ -2425,6 +2446,7 @@
                 "body": [
                   {
                     "type": "characterClass",
+                    "kind": "union",
                     "body": [
                       {
                         "type": "value",
@@ -2560,6 +2582,7 @@
             "body": [
               {
                 "type": "characterClass",
+                "kind": "union",
                 "body": [
                   {
                     "type": "characterClassRange",
@@ -2647,6 +2670,7 @@
               },
               {
                 "type": "characterClass",
+                "kind": "union",
                 "body": [
                   {
                     "type": "characterClassRange",
@@ -2713,6 +2737,7 @@
                 "body": [
                   {
                     "type": "characterClass",
+                    "kind": "union",
                     "body": [
                       {
                         "type": "characterClassRange",
@@ -2848,6 +2873,7 @@
                   },
                   {
                     "type": "characterClass",
+                    "kind": "union",
                     "body": [
                       {
                         "type": "characterClassRange",
@@ -2924,6 +2950,7 @@
                 "body": [
                   {
                     "type": "characterClass",
+                    "kind": "union",
                     "body": [
                       {
                         "type": "value",
@@ -3036,6 +3063,7 @@
             "body": [
               {
                 "type": "characterClass",
+                "kind": "union",
                 "body": [
                   {
                     "type": "characterClassRange",
@@ -3123,6 +3151,7 @@
               },
               {
                 "type": "characterClass",
+                "kind": "union",
                 "body": [
                   {
                     "type": "characterClassRange",
@@ -3189,6 +3218,7 @@
                 "body": [
                   {
                     "type": "characterClass",
+                    "kind": "union",
                     "body": [
                       {
                         "type": "characterClassRange",
@@ -3324,6 +3354,7 @@
                   },
                   {
                     "type": "characterClass",
+                    "kind": "union",
                     "body": [
                       {
                         "type": "characterClassRange",
@@ -3430,6 +3461,7 @@
                     "body": [
                       {
                         "type": "characterClass",
+                        "kind": "union",
                         "body": [
                           {
                             "type": "value",
@@ -3487,6 +3519,7 @@
                         "body": [
                           {
                             "type": "characterClass",
+                            "kind": "union",
                             "body": [
                               {
                                 "type": "value",
@@ -3548,6 +3581,7 @@
                             "body": [
                               {
                                 "type": "characterClass",
+                                "kind": "union",
                                 "body": [
                                   {
                                     "type": "value",
@@ -3585,6 +3619,7 @@
                                 "body": [
                                   {
                                     "type": "characterClass",
+                                    "kind": "union",
                                     "body": [
                                       {
                                         "type": "value",
@@ -3714,6 +3749,7 @@
                     "body": [
                       {
                         "type": "characterClass",
+                        "kind": "union",
                         "body": [
                           {
                             "type": "value",
@@ -3803,6 +3839,7 @@
                 "body": [
                   {
                     "type": "characterClass",
+                    "kind": "union",
                     "body": [
                       {
                         "type": "value",
@@ -4003,6 +4040,7 @@
                     "body": [
                       {
                         "type": "characterClass",
+                        "kind": "union",
                         "body": [],
                         "negative": true,
                         "range": [
@@ -4102,6 +4140,7 @@
                         "body": [
                           {
                             "type": "characterClass",
+                            "kind": "union",
                             "body": [
                               {
                                 "type": "value",
@@ -4166,6 +4205,7 @@
                         "body": [
                           {
                             "type": "characterClass",
+                            "kind": "union",
                             "body": [
                               {
                                 "type": "value",
@@ -4783,6 +4823,7 @@
                     "body": [
                       {
                         "type": "characterClass",
+                        "kind": "union",
                         "body": [
                           {
                             "type": "value",
@@ -4831,6 +4872,7 @@
                         "body": [
                           {
                             "type": "characterClass",
+                            "kind": "union",
                             "body": [
                               {
                                 "type": "value",
@@ -4858,6 +4900,7 @@
                             "body": [
                               {
                                 "type": "characterClass",
+                                "kind": "union",
                                 "body": [
                                   {
                                     "type": "value",
@@ -5047,6 +5090,7 @@
                 "body": [
                   {
                     "type": "characterClass",
+                    "kind": "union",
                     "body": [],
                     "negative": true,
                     "range": [
@@ -5100,6 +5144,7 @@
                         "body": [
                           {
                             "type": "characterClass",
+                            "kind": "union",
                             "body": [],
                             "negative": true,
                             "range": [
@@ -5190,6 +5235,7 @@
                         "body": [
                           {
                             "type": "characterClass",
+                            "kind": "union",
                             "body": [],
                             "negative": true,
                             "range": [
@@ -5220,6 +5266,7 @@
                           },
                           {
                             "type": "characterClass",
+                            "kind": "union",
                             "body": [],
                             "negative": true,
                             "range": [
@@ -5273,6 +5320,7 @@
                                 "body": [
                                   {
                                     "type": "characterClass",
+                                    "kind": "union",
                                     "body": [],
                                     "negative": true,
                                     "range": [
@@ -5487,6 +5535,7 @@
                     "body": [
                       {
                         "type": "characterClass",
+                        "kind": "union",
                         "body": [
                           {
                             "type": "value",
@@ -5552,6 +5601,7 @@
                         "body": [
                           {
                             "type": "characterClass",
+                            "kind": "union",
                             "body": [
                               {
                                 "type": "characterClassRange",
@@ -5639,6 +5689,7 @@
                           },
                           {
                             "type": "characterClass",
+                            "kind": "union",
                             "body": [
                               {
                                 "type": "characterClassRange",
@@ -5705,6 +5756,7 @@
                             "body": [
                               {
                                 "type": "characterClass",
+                                "kind": "union",
                                 "body": [
                                   {
                                     "type": "characterClassRange",
@@ -5840,6 +5892,7 @@
                               },
                               {
                                 "type": "characterClass",
+                                "kind": "union",
                                 "body": [
                                   {
                                     "type": "characterClassRange",
@@ -5916,6 +5969,7 @@
                             "body": [
                               {
                                 "type": "characterClass",
+                                "kind": "union",
                                 "body": [
                                   {
                                     "type": "value",
@@ -5991,6 +6045,7 @@
                                             "body": [
                                               {
                                                 "type": "characterClass",
+                                                "kind": "union",
                                                 "body": [
                                                   {
                                                     "type": "characterClassRange",
@@ -6078,6 +6133,7 @@
                                               },
                                               {
                                                 "type": "characterClass",
+                                                "kind": "union",
                                                 "body": [
                                                   {
                                                     "type": "characterClassRange",
@@ -6144,6 +6200,7 @@
                                                 "body": [
                                                   {
                                                     "type": "characterClass",
+                                                    "kind": "union",
                                                     "body": [
                                                       {
                                                         "type": "characterClassRange",
@@ -6279,6 +6336,7 @@
                                                   },
                                                   {
                                                     "type": "characterClass",
+                                                    "kind": "union",
                                                     "body": [
                                                       {
                                                         "type": "characterClassRange",
@@ -6365,6 +6423,7 @@
                                         "body": [
                                           {
                                             "type": "characterClass",
+                                            "kind": "union",
                                             "body": [
                                               {
                                                 "type": "value",
@@ -6429,6 +6488,7 @@
                                         "body": [
                                           {
                                             "type": "characterClass",
+                                            "kind": "union",
                                             "body": [
                                               {
                                                 "type": "value",
@@ -6518,6 +6578,7 @@
                             "body": [
                               {
                                 "type": "characterClass",
+                                "kind": "union",
                                 "body": [
                                   {
                                     "type": "value",
@@ -6692,6 +6753,7 @@
                                                                     "body": [
                                                                       {
                                                                         "type": "characterClass",
+                                                                        "kind": "union",
                                                                         "body": [
                                                                           {
                                                                             "type": "value",
@@ -6740,6 +6802,7 @@
                                                                         "body": [
                                                                           {
                                                                             "type": "characterClass",
+                                                                            "kind": "union",
                                                                             "body": [
                                                                               {
                                                                                 "type": "value",
@@ -6767,6 +6830,7 @@
                                                                             "body": [
                                                                               {
                                                                                 "type": "characterClass",
+                                                                                "kind": "union",
                                                                                 "body": [
                                                                                   {
                                                                                     "type": "value",
@@ -6849,6 +6913,7 @@
                                                                 "body": [
                                                                   {
                                                                     "type": "characterClass",
+                                                                    "kind": "union",
                                                                     "body": [
                                                                       {
                                                                         "type": "value",
@@ -6886,6 +6951,7 @@
                                                                                 "body": [
                                                                                   {
                                                                                     "type": "characterClass",
+                                                                                    "kind": "union",
                                                                                     "body": [],
                                                                                     "negative": true,
                                                                                     "range": [
@@ -6985,6 +7051,7 @@
                                                                                     "body": [
                                                                                       {
                                                                                         "type": "characterClass",
+                                                                                        "kind": "union",
                                                                                         "body": [
                                                                                           {
                                                                                             "type": "value",
@@ -7049,6 +7116,7 @@
                                                                                     "body": [
                                                                                       {
                                                                                         "type": "characterClass",
+                                                                                        "kind": "union",
                                                                                         "body": [
                                                                                           {
                                                                                             "type": "value",
@@ -7173,6 +7241,7 @@
                                                             "body": [
                                                               {
                                                                 "type": "characterClass",
+                                                                "kind": "union",
                                                                 "body": [
                                                                   {
                                                                     "type": "characterClassRange",
@@ -7260,6 +7329,7 @@
                                                               },
                                                               {
                                                                 "type": "characterClass",
+                                                                "kind": "union",
                                                                 "body": [
                                                                   {
                                                                     "type": "characterClassRange",
@@ -7326,6 +7396,7 @@
                                                                 "body": [
                                                                   {
                                                                     "type": "characterClass",
+                                                                    "kind": "union",
                                                                     "body": [
                                                                       {
                                                                         "type": "characterClassRange",
@@ -7461,6 +7532,7 @@
                                                                   },
                                                                   {
                                                                     "type": "characterClass",
+                                                                    "kind": "union",
                                                                     "body": [
                                                                       {
                                                                         "type": "characterClassRange",
@@ -7561,6 +7633,7 @@
                                                                 "body": [
                                                                   {
                                                                     "type": "characterClass",
+                                                                    "kind": "union",
                                                                     "body": [
                                                                       {
                                                                         "type": "value",
@@ -7618,6 +7691,7 @@
                                                                     "body": [
                                                                       {
                                                                         "type": "characterClass",
+                                                                        "kind": "union",
                                                                         "body": [
                                                                           {
                                                                             "type": "value",
@@ -7679,6 +7753,7 @@
                                                                         "body": [
                                                                           {
                                                                             "type": "characterClass",
+                                                                            "kind": "union",
                                                                             "body": [
                                                                               {
                                                                                 "type": "value",
@@ -7716,6 +7791,7 @@
                                                                             "body": [
                                                                               {
                                                                                 "type": "characterClass",
+                                                                                "kind": "union",
                                                                                 "body": [
                                                                                   {
                                                                                     "type": "value",
@@ -7860,6 +7936,7 @@
                                                 "body": [
                                                   {
                                                     "type": "characterClass",
+                                                    "kind": "union",
                                                     "body": [
                                                       {
                                                         "type": "characterClassRange",
@@ -7947,6 +8024,7 @@
                                                   },
                                                   {
                                                     "type": "characterClass",
+                                                    "kind": "union",
                                                     "body": [
                                                       {
                                                         "type": "characterClassRange",
@@ -8013,6 +8091,7 @@
                                                     "body": [
                                                       {
                                                         "type": "characterClass",
+                                                        "kind": "union",
                                                         "body": [
                                                           {
                                                             "type": "characterClassRange",
@@ -8148,6 +8227,7 @@
                                                       },
                                                       {
                                                         "type": "characterClass",
+                                                        "kind": "union",
                                                         "body": [
                                                           {
                                                             "type": "characterClassRange",
@@ -8231,6 +8311,7 @@
                                         "body": [
                                           {
                                             "type": "characterClass",
+                                            "kind": "union",
                                             "body": [
                                               {
                                                 "type": "value",
@@ -8336,6 +8417,7 @@
                                     "body": [
                                       {
                                         "type": "characterClass",
+                                        "kind": "union",
                                         "body": [
                                           {
                                             "type": "value",
@@ -8738,6 +8820,7 @@
                                             "body": [
                                               {
                                                 "type": "characterClass",
+                                                "kind": "union",
                                                 "body": [
                                                   {
                                                     "type": "value",
@@ -8786,6 +8869,7 @@
                                                 "body": [
                                                   {
                                                     "type": "characterClass",
+                                                    "kind": "union",
                                                     "body": [
                                                       {
                                                         "type": "value",
@@ -8813,6 +8897,7 @@
                                                     "body": [
                                                       {
                                                         "type": "characterClass",
+                                                        "kind": "union",
                                                         "body": [
                                                           {
                                                             "type": "value",
@@ -9002,6 +9087,7 @@
                                         "body": [
                                           {
                                             "type": "characterClass",
+                                            "kind": "union",
                                             "body": [],
                                             "negative": true,
                                             "range": [
@@ -9055,6 +9141,7 @@
                                                 "body": [
                                                   {
                                                     "type": "characterClass",
+                                                    "kind": "union",
                                                     "body": [],
                                                     "negative": true,
                                                     "range": [
@@ -9145,6 +9232,7 @@
                                                 "body": [
                                                   {
                                                     "type": "characterClass",
+                                                    "kind": "union",
                                                     "body": [],
                                                     "negative": true,
                                                     "range": [
@@ -9175,6 +9263,7 @@
                                                   },
                                                   {
                                                     "type": "characterClass",
+                                                    "kind": "union",
                                                     "body": [],
                                                     "negative": true,
                                                     "range": [
@@ -9228,6 +9317,7 @@
                                                         "body": [
                                                           {
                                                             "type": "characterClass",
+                                                            "kind": "union",
                                                             "body": [],
                                                             "negative": true,
                                                             "range": [
@@ -9442,6 +9532,7 @@
                                             "body": [
                                               {
                                                 "type": "characterClass",
+                                                "kind": "union",
                                                 "body": [
                                                   {
                                                     "type": "value",
@@ -9507,6 +9598,7 @@
                                                 "body": [
                                                   {
                                                     "type": "characterClass",
+                                                    "kind": "union",
                                                     "body": [
                                                       {
                                                         "type": "characterClassRange",
@@ -9594,6 +9686,7 @@
                                                   },
                                                   {
                                                     "type": "characterClass",
+                                                    "kind": "union",
                                                     "body": [
                                                       {
                                                         "type": "characterClassRange",
@@ -9660,6 +9753,7 @@
                                                     "body": [
                                                       {
                                                         "type": "characterClass",
+                                                        "kind": "union",
                                                         "body": [
                                                           {
                                                             "type": "characterClassRange",
@@ -9795,6 +9889,7 @@
                                                       },
                                                       {
                                                         "type": "characterClass",
+                                                        "kind": "union",
                                                         "body": [
                                                           {
                                                             "type": "characterClassRange",
@@ -9871,6 +9966,7 @@
                                                     "body": [
                                                       {
                                                         "type": "characterClass",
+                                                        "kind": "union",
                                                         "body": [
                                                           {
                                                             "type": "value",
@@ -9946,6 +10042,7 @@
                                                                     "body": [
                                                                       {
                                                                         "type": "characterClass",
+                                                                        "kind": "union",
                                                                         "body": [
                                                                           {
                                                                             "type": "characterClassRange",
@@ -10033,6 +10130,7 @@
                                                                       },
                                                                       {
                                                                         "type": "characterClass",
+                                                                        "kind": "union",
                                                                         "body": [
                                                                           {
                                                                             "type": "characterClassRange",
@@ -10099,6 +10197,7 @@
                                                                         "body": [
                                                                           {
                                                                             "type": "characterClass",
+                                                                            "kind": "union",
                                                                             "body": [
                                                                               {
                                                                                 "type": "characterClassRange",
@@ -10234,6 +10333,7 @@
                                                                           },
                                                                           {
                                                                             "type": "characterClass",
+                                                                            "kind": "union",
                                                                             "body": [
                                                                               {
                                                                                 "type": "characterClassRange",
@@ -10320,6 +10420,7 @@
                                                                 "body": [
                                                                   {
                                                                     "type": "characterClass",
+                                                                    "kind": "union",
                                                                     "body": [
                                                                       {
                                                                         "type": "value",
@@ -10384,6 +10485,7 @@
                                                                 "body": [
                                                                   {
                                                                     "type": "characterClass",
+                                                                    "kind": "union",
                                                                     "body": [
                                                                       {
                                                                         "type": "value",
@@ -10473,6 +10575,7 @@
                                                     "body": [
                                                       {
                                                         "type": "characterClass",
+                                                        "kind": "union",
                                                         "body": [
                                                           {
                                                             "type": "value",
@@ -10647,6 +10750,7 @@
                                                                                             "body": [
                                                                                               {
                                                                                                 "type": "characterClass",
+                                                                                                "kind": "union",
                                                                                                 "body": [
                                                                                                   {
                                                                                                     "type": "value",
@@ -10695,6 +10799,7 @@
                                                                                                 "body": [
                                                                                                   {
                                                                                                     "type": "characterClass",
+                                                                                                    "kind": "union",
                                                                                                     "body": [
                                                                                                       {
                                                                                                         "type": "value",
@@ -10722,6 +10827,7 @@
                                                                                                     "body": [
                                                                                                       {
                                                                                                         "type": "characterClass",
+                                                                                                        "kind": "union",
                                                                                                         "body": [
                                                                                                           {
                                                                                                             "type": "value",
@@ -10804,6 +10910,7 @@
                                                                                         "body": [
                                                                                           {
                                                                                             "type": "characterClass",
+                                                                                            "kind": "union",
                                                                                             "body": [
                                                                                               {
                                                                                                 "type": "value",
@@ -10841,6 +10948,7 @@
                                                                                                         "body": [
                                                                                                           {
                                                                                                             "type": "characterClass",
+                                                                                                            "kind": "union",
                                                                                                             "body": [],
                                                                                                             "negative": true,
                                                                                                             "range": [
@@ -10940,6 +11048,7 @@
                                                                                                             "body": [
                                                                                                               {
                                                                                                                 "type": "characterClass",
+                                                                                                                "kind": "union",
                                                                                                                 "body": [
                                                                                                                   {
                                                                                                                     "type": "value",
@@ -11004,6 +11113,7 @@
                                                                                                             "body": [
                                                                                                               {
                                                                                                                 "type": "characterClass",
+                                                                                                                "kind": "union",
                                                                                                                 "body": [
                                                                                                                   {
                                                                                                                     "type": "value",
@@ -11128,6 +11238,7 @@
                                                                                     "body": [
                                                                                       {
                                                                                         "type": "characterClass",
+                                                                                        "kind": "union",
                                                                                         "body": [
                                                                                           {
                                                                                             "type": "characterClassRange",
@@ -11215,6 +11326,7 @@
                                                                                       },
                                                                                       {
                                                                                         "type": "characterClass",
+                                                                                        "kind": "union",
                                                                                         "body": [
                                                                                           {
                                                                                             "type": "characterClassRange",
@@ -11281,6 +11393,7 @@
                                                                                         "body": [
                                                                                           {
                                                                                             "type": "characterClass",
+                                                                                            "kind": "union",
                                                                                             "body": [
                                                                                               {
                                                                                                 "type": "characterClassRange",
@@ -11416,6 +11529,7 @@
                                                                                           },
                                                                                           {
                                                                                             "type": "characterClass",
+                                                                                            "kind": "union",
                                                                                             "body": [
                                                                                               {
                                                                                                 "type": "characterClassRange",
@@ -11516,6 +11630,7 @@
                                                                                         "body": [
                                                                                           {
                                                                                             "type": "characterClass",
+                                                                                            "kind": "union",
                                                                                             "body": [
                                                                                               {
                                                                                                 "type": "value",
@@ -11573,6 +11688,7 @@
                                                                                             "body": [
                                                                                               {
                                                                                                 "type": "characterClass",
+                                                                                                "kind": "union",
                                                                                                 "body": [
                                                                                                   {
                                                                                                     "type": "value",
@@ -11634,6 +11750,7 @@
                                                                                                 "body": [
                                                                                                   {
                                                                                                     "type": "characterClass",
+                                                                                                    "kind": "union",
                                                                                                     "body": [
                                                                                                       {
                                                                                                         "type": "value",
@@ -11671,6 +11788,7 @@
                                                                                                     "body": [
                                                                                                       {
                                                                                                         "type": "characterClass",
+                                                                                                        "kind": "union",
                                                                                                         "body": [
                                                                                                           {
                                                                                                             "type": "value",
@@ -11815,6 +11933,7 @@
                                                                         "body": [
                                                                           {
                                                                             "type": "characterClass",
+                                                                            "kind": "union",
                                                                             "body": [
                                                                               {
                                                                                 "type": "characterClassRange",
@@ -11902,6 +12021,7 @@
                                                                           },
                                                                           {
                                                                             "type": "characterClass",
+                                                                            "kind": "union",
                                                                             "body": [
                                                                               {
                                                                                 "type": "characterClassRange",
@@ -11968,6 +12088,7 @@
                                                                             "body": [
                                                                               {
                                                                                 "type": "characterClass",
+                                                                                "kind": "union",
                                                                                 "body": [
                                                                                   {
                                                                                     "type": "characterClassRange",
@@ -12103,6 +12224,7 @@
                                                                               },
                                                                               {
                                                                                 "type": "characterClass",
+                                                                                "kind": "union",
                                                                                 "body": [
                                                                                   {
                                                                                     "type": "characterClassRange",
@@ -12186,6 +12308,7 @@
                                                                 "body": [
                                                                   {
                                                                     "type": "characterClass",
+                                                                    "kind": "union",
                                                                     "body": [
                                                                       {
                                                                         "type": "value",
@@ -12291,6 +12414,7 @@
                                                             "body": [
                                                               {
                                                                 "type": "characterClass",
+                                                                "kind": "union",
                                                                 "body": [
                                                                   {
                                                                     "type": "value",
@@ -12479,6 +12603,7 @@
                                 "body": [
                                   {
                                     "type": "characterClass",
+                                    "kind": "union",
                                     "body": [
                                       {
                                         "type": "characterClassRange",
@@ -12566,6 +12691,7 @@
                                   },
                                   {
                                     "type": "characterClass",
+                                    "kind": "union",
                                     "body": [
                                       {
                                         "type": "characterClassRange",
@@ -12632,6 +12758,7 @@
                                     "body": [
                                       {
                                         "type": "characterClass",
+                                        "kind": "union",
                                         "body": [
                                           {
                                             "type": "characterClassRange",
@@ -12767,6 +12894,7 @@
                                       },
                                       {
                                         "type": "characterClass",
+                                        "kind": "union",
                                         "body": [
                                           {
                                             "type": "characterClassRange",
@@ -12873,6 +13001,7 @@
                                         "body": [
                                           {
                                             "type": "characterClass",
+                                            "kind": "union",
                                             "body": [
                                               {
                                                 "type": "value",
@@ -12930,6 +13059,7 @@
                                             "body": [
                                               {
                                                 "type": "characterClass",
+                                                "kind": "union",
                                                 "body": [
                                                   {
                                                     "type": "value",
@@ -12991,6 +13121,7 @@
                                                 "body": [
                                                   {
                                                     "type": "characterClass",
+                                                    "kind": "union",
                                                     "body": [
                                                       {
                                                         "type": "value",
@@ -13028,6 +13159,7 @@
                                                     "body": [
                                                       {
                                                         "type": "characterClass",
+                                                        "kind": "union",
                                                         "body": [
                                                           {
                                                             "type": "value",
@@ -13182,6 +13314,7 @@
                                 "body": [
                                   {
                                     "type": "characterClass",
+                                    "kind": "union",
                                     "body": [
                                       {
                                         "type": "characterClassRange",
@@ -13269,6 +13402,7 @@
                                   },
                                   {
                                     "type": "characterClass",
+                                    "kind": "union",
                                     "body": [
                                       {
                                         "type": "characterClassRange",
@@ -13335,6 +13469,7 @@
                                     "body": [
                                       {
                                         "type": "characterClass",
+                                        "kind": "union",
                                         "body": [
                                           {
                                             "type": "characterClassRange",
@@ -13470,6 +13605,7 @@
                                       },
                                       {
                                         "type": "characterClass",
+                                        "kind": "union",
                                         "body": [
                                           {
                                             "type": "characterClassRange",
@@ -13546,6 +13682,7 @@
                                     "body": [
                                       {
                                         "type": "characterClass",
+                                        "kind": "union",
                                         "body": [
                                           {
                                             "type": "value",
@@ -13679,6 +13816,7 @@
                             "body": [
                               {
                                 "type": "characterClass",
+                                "kind": "union",
                                 "body": [
                                   {
                                     "type": "characterClassRange",
@@ -13766,6 +13904,7 @@
                               },
                               {
                                 "type": "characterClass",
+                                "kind": "union",
                                 "body": [
                                   {
                                     "type": "characterClassRange",
@@ -13832,6 +13971,7 @@
                                 "body": [
                                   {
                                     "type": "characterClass",
+                                    "kind": "union",
                                     "body": [
                                       {
                                         "type": "characterClassRange",
@@ -13967,6 +14107,7 @@
                                   },
                                   {
                                     "type": "characterClass",
+                                    "kind": "union",
                                     "body": [
                                       {
                                         "type": "characterClassRange",
@@ -14043,6 +14184,7 @@
                                 "body": [
                                   {
                                     "type": "characterClass",
+                                    "kind": "union",
                                     "body": [
                                       {
                                         "type": "value",
@@ -14108,6 +14250,7 @@
                                     "body": [
                                       {
                                         "type": "characterClass",
+                                        "kind": "union",
                                         "body": [
                                           {
                                             "type": "characterClassRange",
@@ -14195,6 +14338,7 @@
                                       },
                                       {
                                         "type": "characterClass",
+                                        "kind": "union",
                                         "body": [
                                           {
                                             "type": "characterClassRange",
@@ -14261,6 +14405,7 @@
                                         "body": [
                                           {
                                             "type": "characterClass",
+                                            "kind": "union",
                                             "body": [
                                               {
                                                 "type": "characterClassRange",
@@ -14396,6 +14541,7 @@
                                           },
                                           {
                                             "type": "characterClass",
+                                            "kind": "union",
                                             "body": [
                                               {
                                                 "type": "characterClassRange",
@@ -14472,6 +14618,7 @@
                                         "body": [
                                           {
                                             "type": "characterClass",
+                                            "kind": "union",
                                             "body": [
                                               {
                                                 "type": "value",
@@ -14570,6 +14717,7 @@
                                         "body": [
                                           {
                                             "type": "characterClass",
+                                            "kind": "union",
                                             "body": [
                                               {
                                                 "type": "value",
@@ -14668,6 +14816,7 @@
                                             "body": [
                                               {
                                                 "type": "characterClass",
+                                                "kind": "union",
                                                 "body": [
                                                   {
                                                     "type": "value",
@@ -14742,6 +14891,7 @@
                                             "body": [
                                               {
                                                 "type": "characterClass",
+                                                "kind": "union",
                                                 "body": [
                                                   {
                                                     "type": "value",
@@ -14841,6 +14991,7 @@
                                 "body": [
                                   {
                                     "type": "characterClass",
+                                    "kind": "union",
                                     "body": [
                                       {
                                         "type": "value",
@@ -15066,6 +15217,7 @@
                                     "body": [
                                       {
                                         "type": "characterClass",
+                                        "kind": "union",
                                         "body": [
                                           {
                                             "type": "value",
@@ -15114,6 +15266,7 @@
                                         "body": [
                                           {
                                             "type": "characterClass",
+                                            "kind": "union",
                                             "body": [
                                               {
                                                 "type": "value",
@@ -15141,6 +15294,7 @@
                                             "body": [
                                               {
                                                 "type": "characterClass",
+                                                "kind": "union",
                                                 "body": [
                                                   {
                                                     "type": "value",
@@ -15223,6 +15377,7 @@
                                 "body": [
                                   {
                                     "type": "characterClass",
+                                    "kind": "union",
                                     "body": [
                                       {
                                         "type": "value",
@@ -15260,6 +15415,7 @@
                                                 "body": [
                                                   {
                                                     "type": "characterClass",
+                                                    "kind": "union",
                                                     "body": [],
                                                     "negative": true,
                                                     "range": [
@@ -15359,6 +15515,7 @@
                                                     "body": [
                                                       {
                                                         "type": "characterClass",
+                                                        "kind": "union",
                                                         "body": [
                                                           {
                                                             "type": "value",
@@ -15423,6 +15580,7 @@
                                                     "body": [
                                                       {
                                                         "type": "characterClass",
+                                                        "kind": "union",
                                                         "body": [
                                                           {
                                                             "type": "value",
@@ -15547,6 +15705,7 @@
                             "body": [
                               {
                                 "type": "characterClass",
+                                "kind": "union",
                                 "body": [
                                   {
                                     "type": "characterClassRange",
@@ -15634,6 +15793,7 @@
                               },
                               {
                                 "type": "characterClass",
+                                "kind": "union",
                                 "body": [
                                   {
                                     "type": "characterClassRange",
@@ -15700,6 +15860,7 @@
                                 "body": [
                                   {
                                     "type": "characterClass",
+                                    "kind": "union",
                                     "body": [
                                       {
                                         "type": "characterClassRange",
@@ -15835,6 +15996,7 @@
                                   },
                                   {
                                     "type": "characterClass",
+                                    "kind": "union",
                                     "body": [
                                       {
                                         "type": "characterClassRange",
@@ -15935,6 +16097,7 @@
                                 "body": [
                                   {
                                     "type": "characterClass",
+                                    "kind": "union",
                                     "body": [
                                       {
                                         "type": "value",
@@ -15992,6 +16155,7 @@
                                     "body": [
                                       {
                                         "type": "characterClass",
+                                        "kind": "union",
                                         "body": [
                                           {
                                             "type": "value",
@@ -16053,6 +16217,7 @@
                                         "body": [
                                           {
                                             "type": "characterClass",
+                                            "kind": "union",
                                             "body": [
                                               {
                                                 "type": "value",
@@ -16090,6 +16255,7 @@
                                             "body": [
                                               {
                                                 "type": "characterClass",
+                                                "kind": "union",
                                                 "body": [
                                                   {
                                                     "type": "value",
@@ -16234,6 +16400,7 @@
                 "body": [
                   {
                     "type": "characterClass",
+                    "kind": "union",
                     "body": [
                       {
                         "type": "characterClassRange",
@@ -16321,6 +16488,7 @@
                   },
                   {
                     "type": "characterClass",
+                    "kind": "union",
                     "body": [
                       {
                         "type": "characterClassRange",
@@ -16387,6 +16555,7 @@
                     "body": [
                       {
                         "type": "characterClass",
+                        "kind": "union",
                         "body": [
                           {
                             "type": "characterClassRange",
@@ -16522,6 +16691,7 @@
                       },
                       {
                         "type": "characterClass",
+                        "kind": "union",
                         "body": [
                           {
                             "type": "characterClassRange",
@@ -16605,6 +16775,7 @@
         "body": [
           {
             "type": "characterClass",
+            "kind": "union",
             "body": [
               {
                 "type": "value",
@@ -16901,6 +17072,7 @@
   },
   "[ \\f\\n]": {
     "type": "characterClass",
+    "kind": "union",
     "body": [
       {
         "type": "value",
@@ -16948,6 +17120,7 @@
     "body": [
       {
         "type": "characterClass",
+        "kind": "union",
         "body": [
           {
             "type": "value",
@@ -17015,6 +17188,7 @@
         "body": [
           {
             "type": "characterClass",
+            "kind": "union",
             "body": [
               {
                 "type": "value",
@@ -17080,6 +17254,7 @@
             "body": [
               {
                 "type": "characterClass",
+                "kind": "union",
                 "body": [
                   {
                     "type": "characterClassRange",
@@ -17167,6 +17342,7 @@
               },
               {
                 "type": "characterClass",
+                "kind": "union",
                 "body": [
                   {
                     "type": "characterClassRange",
@@ -17233,6 +17409,7 @@
                 "body": [
                   {
                     "type": "characterClass",
+                    "kind": "union",
                     "body": [
                       {
                         "type": "characterClassRange",
@@ -17368,6 +17545,7 @@
                   },
                   {
                     "type": "characterClass",
+                    "kind": "union",
                     "body": [
                       {
                         "type": "characterClassRange",
@@ -17444,6 +17622,7 @@
                 "body": [
                   {
                     "type": "characterClass",
+                    "kind": "union",
                     "body": [
                       {
                         "type": "value",
@@ -17519,6 +17698,7 @@
                                 "body": [
                                   {
                                     "type": "characterClass",
+                                    "kind": "union",
                                     "body": [
                                       {
                                         "type": "characterClassRange",
@@ -17606,6 +17786,7 @@
                                   },
                                   {
                                     "type": "characterClass",
+                                    "kind": "union",
                                     "body": [
                                       {
                                         "type": "characterClassRange",
@@ -17672,6 +17853,7 @@
                                     "body": [
                                       {
                                         "type": "characterClass",
+                                        "kind": "union",
                                         "body": [
                                           {
                                             "type": "characterClassRange",
@@ -17807,6 +17989,7 @@
                                       },
                                       {
                                         "type": "characterClass",
+                                        "kind": "union",
                                         "body": [
                                           {
                                             "type": "characterClassRange",
@@ -17893,6 +18076,7 @@
                             "body": [
                               {
                                 "type": "characterClass",
+                                "kind": "union",
                                 "body": [
                                   {
                                     "type": "value",
@@ -17957,6 +18141,7 @@
                             "body": [
                               {
                                 "type": "characterClass",
+                                "kind": "union",
                                 "body": [
                                   {
                                     "type": "value",
@@ -18046,6 +18231,7 @@
         "body": [
           {
             "type": "characterClass",
+            "kind": "union",
             "body": [
               {
                 "type": "value",
@@ -18111,6 +18297,7 @@
             "body": [
               {
                 "type": "characterClass",
+                "kind": "union",
                 "body": [
                   {
                     "type": "characterClassRange",
@@ -18198,6 +18385,7 @@
               },
               {
                 "type": "characterClass",
+                "kind": "union",
                 "body": [
                   {
                     "type": "characterClassRange",
@@ -18264,6 +18452,7 @@
                 "body": [
                   {
                     "type": "characterClass",
+                    "kind": "union",
                     "body": [
                       {
                         "type": "characterClassRange",
@@ -18399,6 +18588,7 @@
                   },
                   {
                     "type": "characterClass",
+                    "kind": "union",
                     "body": [
                       {
                         "type": "characterClassRange",
@@ -18475,6 +18665,7 @@
                 "body": [
                   {
                     "type": "characterClass",
+                    "kind": "union",
                     "body": [
                       {
                         "type": "value",
@@ -18550,6 +18741,7 @@
                                 "body": [
                                   {
                                     "type": "characterClass",
+                                    "kind": "union",
                                     "body": [
                                       {
                                         "type": "characterClassRange",
@@ -18637,6 +18829,7 @@
                                   },
                                   {
                                     "type": "characterClass",
+                                    "kind": "union",
                                     "body": [
                                       {
                                         "type": "characterClassRange",
@@ -18703,6 +18896,7 @@
                                     "body": [
                                       {
                                         "type": "characterClass",
+                                        "kind": "union",
                                         "body": [
                                           {
                                             "type": "characterClassRange",
@@ -18838,6 +19032,7 @@
                                       },
                                       {
                                         "type": "characterClass",
+                                        "kind": "union",
                                         "body": [
                                           {
                                             "type": "characterClassRange",
@@ -18924,6 +19119,7 @@
                             "body": [
                               {
                                 "type": "characterClass",
+                                "kind": "union",
                                 "body": [
                                   {
                                     "type": "value",
@@ -18988,6 +19184,7 @@
                             "body": [
                               {
                                 "type": "characterClass",
+                                "kind": "union",
                                 "body": [
                                   {
                                     "type": "value",
@@ -19077,6 +19274,7 @@
                 "body": [
                   {
                     "type": "characterClass",
+                    "kind": "union",
                     "body": [
                       {
                         "type": "value",
@@ -19251,6 +19449,7 @@
                                                         "body": [
                                                           {
                                                             "type": "characterClass",
+                                                            "kind": "union",
                                                             "body": [
                                                               {
                                                                 "type": "value",
@@ -19299,6 +19498,7 @@
                                                             "body": [
                                                               {
                                                                 "type": "characterClass",
+                                                                "kind": "union",
                                                                 "body": [
                                                                   {
                                                                     "type": "value",
@@ -19326,6 +19526,7 @@
                                                                 "body": [
                                                                   {
                                                                     "type": "characterClass",
+                                                                    "kind": "union",
                                                                     "body": [
                                                                       {
                                                                         "type": "value",
@@ -19408,6 +19609,7 @@
                                                     "body": [
                                                       {
                                                         "type": "characterClass",
+                                                        "kind": "union",
                                                         "body": [
                                                           {
                                                             "type": "value",
@@ -19445,6 +19647,7 @@
                                                                     "body": [
                                                                       {
                                                                         "type": "characterClass",
+                                                                        "kind": "union",
                                                                         "body": [],
                                                                         "negative": true,
                                                                         "range": [
@@ -19544,6 +19747,7 @@
                                                                         "body": [
                                                                           {
                                                                             "type": "characterClass",
+                                                                            "kind": "union",
                                                                             "body": [
                                                                               {
                                                                                 "type": "value",
@@ -19608,6 +19812,7 @@
                                                                         "body": [
                                                                           {
                                                                             "type": "characterClass",
+                                                                            "kind": "union",
                                                                             "body": [
                                                                               {
                                                                                 "type": "value",
@@ -19732,6 +19937,7 @@
                                                 "body": [
                                                   {
                                                     "type": "characterClass",
+                                                    "kind": "union",
                                                     "body": [
                                                       {
                                                         "type": "characterClassRange",
@@ -19819,6 +20025,7 @@
                                                   },
                                                   {
                                                     "type": "characterClass",
+                                                    "kind": "union",
                                                     "body": [
                                                       {
                                                         "type": "characterClassRange",
@@ -19885,6 +20092,7 @@
                                                     "body": [
                                                       {
                                                         "type": "characterClass",
+                                                        "kind": "union",
                                                         "body": [
                                                           {
                                                             "type": "characterClassRange",
@@ -20020,6 +20228,7 @@
                                                       },
                                                       {
                                                         "type": "characterClass",
+                                                        "kind": "union",
                                                         "body": [
                                                           {
                                                             "type": "characterClassRange",
@@ -20120,6 +20329,7 @@
                                                     "body": [
                                                       {
                                                         "type": "characterClass",
+                                                        "kind": "union",
                                                         "body": [
                                                           {
                                                             "type": "value",
@@ -20177,6 +20387,7 @@
                                                         "body": [
                                                           {
                                                             "type": "characterClass",
+                                                            "kind": "union",
                                                             "body": [
                                                               {
                                                                 "type": "value",
@@ -20238,6 +20449,7 @@
                                                             "body": [
                                                               {
                                                                 "type": "characterClass",
+                                                                "kind": "union",
                                                                 "body": [
                                                                   {
                                                                     "type": "value",
@@ -20275,6 +20487,7 @@
                                                                 "body": [
                                                                   {
                                                                     "type": "characterClass",
+                                                                    "kind": "union",
                                                                     "body": [
                                                                       {
                                                                         "type": "value",
@@ -20419,6 +20632,7 @@
                                     "body": [
                                       {
                                         "type": "characterClass",
+                                        "kind": "union",
                                         "body": [
                                           {
                                             "type": "characterClassRange",
@@ -20506,6 +20720,7 @@
                                       },
                                       {
                                         "type": "characterClass",
+                                        "kind": "union",
                                         "body": [
                                           {
                                             "type": "characterClassRange",
@@ -20572,6 +20787,7 @@
                                         "body": [
                                           {
                                             "type": "characterClass",
+                                            "kind": "union",
                                             "body": [
                                               {
                                                 "type": "characterClassRange",
@@ -20707,6 +20923,7 @@
                                           },
                                           {
                                             "type": "characterClass",
+                                            "kind": "union",
                                             "body": [
                                               {
                                                 "type": "characterClassRange",
@@ -20790,6 +21007,7 @@
                             "body": [
                               {
                                 "type": "characterClass",
+                                "kind": "union",
                                 "body": [
                                   {
                                     "type": "value",
@@ -20895,6 +21113,7 @@
                         "body": [
                           {
                             "type": "characterClass",
+                            "kind": "union",
                             "body": [
                               {
                                 "type": "value",
@@ -21011,6 +21230,7 @@
   },
   "[ \\u0020]": {
     "type": "characterClass",
+    "kind": "union",
     "body": [
       {
         "type": "value",
@@ -21042,6 +21262,7 @@
   },
   "[0-9]": {
     "type": "characterClass",
+    "kind": "union",
     "body": [
       {
         "type": "characterClassRange",
@@ -21081,6 +21302,7 @@
   },
   "[1-2]": {
     "type": "characterClass",
+    "kind": "union",
     "body": [
       {
         "type": "characterClassRange",
@@ -21120,6 +21342,7 @@
   },
   "[A-I]": {
     "type": "characterClass",
+    "kind": "union",
     "body": [
       {
         "type": "characterClassRange",
@@ -21162,6 +21385,7 @@
     "body": [
       {
         "type": "characterClass",
+        "kind": "union",
         "body": [
           {
             "type": "characterClassRange",
@@ -21297,6 +21521,7 @@
       },
       {
         "type": "characterClass",
+        "kind": "union",
         "body": [
           {
             "type": "characterClassRange",
@@ -21343,6 +21568,7 @@
   },
   "[A-Za-z0-9_]": {
     "type": "characterClass",
+    "kind": "union",
     "body": [
       {
         "type": "characterClassRange",
@@ -21451,6 +21677,7 @@
     "body": [
       {
         "type": "characterClass",
+        "kind": "union",
         "body": [
           {
             "type": "characterClassRange",
@@ -21538,6 +21765,7 @@
       },
       {
         "type": "characterClass",
+        "kind": "union",
         "body": [
           {
             "type": "characterClassRange",
@@ -21593,6 +21821,7 @@
         "body": [
           {
             "type": "characterClass",
+            "kind": "union",
             "body": [
               {
                 "type": "value",
@@ -21721,6 +21950,7 @@
     "body": [
       {
         "type": "characterClass",
+        "kind": "union",
         "body": [
           {
             "type": "value",
@@ -21839,6 +22069,7 @@
   },
   "[\\0001]": {
     "type": "characterClass",
+    "kind": "union",
     "body": [
       {
         "type": "value",
@@ -21912,6 +22143,7 @@
   },
   "[\\\\]": {
     "type": "characterClass",
+    "kind": "union",
     "body": [
       {
         "type": "value",
@@ -21939,6 +22171,7 @@
   },
   "[\\b]": {
     "type": "characterClass",
+    "kind": "union",
     "body": [
       {
         "type": "value",
@@ -21984,6 +22217,7 @@
   },
   "[\\n\\r\\t ]": {
     "type": "characterClass",
+    "kind": "union",
     "body": [
       {
         "type": "value",
@@ -22059,6 +22293,7 @@
   },
   "[\\u0020]": {
     "type": "characterClass",
+    "kind": "union",
     "body": [
       {
         "type": "value",
@@ -22113,6 +22348,7 @@
         "body": [
           {
             "type": "characterClass",
+            "kind": "union",
             "body": [
               {
                 "type": "value",
@@ -22167,6 +22403,7 @@
         "body": [
           {
             "type": "characterClass",
+            "kind": "union",
             "body": [
               {
                 "type": "value",
@@ -22215,6 +22452,7 @@
             "body": [
               {
                 "type": "characterClass",
+                "kind": "union",
                 "body": [
                   {
                     "type": "value",
@@ -22242,6 +22480,7 @@
                 "body": [
                   {
                     "type": "characterClass",
+                    "kind": "union",
                     "body": [
                       {
                         "type": "value",
@@ -22320,6 +22559,7 @@
         "body": [
           {
             "type": "characterClass",
+            "kind": "union",
             "body": [
               {
                 "type": "value",
@@ -22368,6 +22608,7 @@
             "body": [
               {
                 "type": "characterClass",
+                "kind": "union",
                 "body": [
                   {
                     "type": "value",
@@ -22395,6 +22636,7 @@
                 "body": [
                   {
                     "type": "characterClass",
+                    "kind": "union",
                     "body": [
                       {
                         "type": "value",
@@ -22493,6 +22735,7 @@
     "body": [
       {
         "type": "characterClass",
+        "kind": "union",
         "body": [
           {
             "type": "value",
@@ -22530,6 +22773,7 @@
         "body": [
           {
             "type": "characterClass",
+            "kind": "union",
             "body": [
               {
                 "type": "value",
@@ -22643,6 +22887,7 @@
                                                 "body": [
                                                   {
                                                     "type": "characterClass",
+                                                    "kind": "union",
                                                     "body": [
                                                       {
                                                         "type": "value",
@@ -22691,6 +22936,7 @@
                                                     "body": [
                                                       {
                                                         "type": "characterClass",
+                                                        "kind": "union",
                                                         "body": [
                                                           {
                                                             "type": "value",
@@ -22718,6 +22964,7 @@
                                                         "body": [
                                                           {
                                                             "type": "characterClass",
+                                                            "kind": "union",
                                                             "body": [
                                                               {
                                                                 "type": "value",
@@ -22907,6 +23154,7 @@
                                             "body": [
                                               {
                                                 "type": "characterClass",
+                                                "kind": "union",
                                                 "body": [],
                                                 "negative": true,
                                                 "range": [
@@ -22960,6 +23208,7 @@
                                                     "body": [
                                                       {
                                                         "type": "characterClass",
+                                                        "kind": "union",
                                                         "body": [],
                                                         "negative": true,
                                                         "range": [
@@ -23050,6 +23299,7 @@
                                                     "body": [
                                                       {
                                                         "type": "characterClass",
+                                                        "kind": "union",
                                                         "body": [],
                                                         "negative": true,
                                                         "range": [
@@ -23080,6 +23330,7 @@
                                                       },
                                                       {
                                                         "type": "characterClass",
+                                                        "kind": "union",
                                                         "body": [],
                                                         "negative": true,
                                                         "range": [
@@ -23133,6 +23384,7 @@
                                                             "body": [
                                                               {
                                                                 "type": "characterClass",
+                                                                "kind": "union",
                                                                 "body": [],
                                                                 "negative": true,
                                                                 "range": [
@@ -23347,6 +23599,7 @@
                                                 "body": [
                                                   {
                                                     "type": "characterClass",
+                                                    "kind": "union",
                                                     "body": [
                                                       {
                                                         "type": "value",
@@ -23412,6 +23665,7 @@
                                                     "body": [
                                                       {
                                                         "type": "characterClass",
+                                                        "kind": "union",
                                                         "body": [
                                                           {
                                                             "type": "characterClassRange",
@@ -23499,6 +23753,7 @@
                                                       },
                                                       {
                                                         "type": "characterClass",
+                                                        "kind": "union",
                                                         "body": [
                                                           {
                                                             "type": "characterClassRange",
@@ -23565,6 +23820,7 @@
                                                         "body": [
                                                           {
                                                             "type": "characterClass",
+                                                            "kind": "union",
                                                             "body": [
                                                               {
                                                                 "type": "characterClassRange",
@@ -23700,6 +23956,7 @@
                                                           },
                                                           {
                                                             "type": "characterClass",
+                                                            "kind": "union",
                                                             "body": [
                                                               {
                                                                 "type": "characterClassRange",
@@ -23776,6 +24033,7 @@
                                                         "body": [
                                                           {
                                                             "type": "characterClass",
+                                                            "kind": "union",
                                                             "body": [
                                                               {
                                                                 "type": "value",
@@ -23851,6 +24109,7 @@
                                                                         "body": [
                                                                           {
                                                                             "type": "characterClass",
+                                                                            "kind": "union",
                                                                             "body": [
                                                                               {
                                                                                 "type": "characterClassRange",
@@ -23938,6 +24197,7 @@
                                                                           },
                                                                           {
                                                                             "type": "characterClass",
+                                                                            "kind": "union",
                                                                             "body": [
                                                                               {
                                                                                 "type": "characterClassRange",
@@ -24004,6 +24264,7 @@
                                                                             "body": [
                                                                               {
                                                                                 "type": "characterClass",
+                                                                                "kind": "union",
                                                                                 "body": [
                                                                                   {
                                                                                     "type": "characterClassRange",
@@ -24139,6 +24400,7 @@
                                                                               },
                                                                               {
                                                                                 "type": "characterClass",
+                                                                                "kind": "union",
                                                                                 "body": [
                                                                                   {
                                                                                     "type": "characterClassRange",
@@ -24225,6 +24487,7 @@
                                                                     "body": [
                                                                       {
                                                                         "type": "characterClass",
+                                                                        "kind": "union",
                                                                         "body": [
                                                                           {
                                                                             "type": "value",
@@ -24289,6 +24552,7 @@
                                                                     "body": [
                                                                       {
                                                                         "type": "characterClass",
+                                                                        "kind": "union",
                                                                         "body": [
                                                                           {
                                                                             "type": "value",
@@ -24378,6 +24642,7 @@
                                                         "body": [
                                                           {
                                                             "type": "characterClass",
+                                                            "kind": "union",
                                                             "body": [
                                                               {
                                                                 "type": "value",
@@ -24552,6 +24817,7 @@
                                                                                                 "body": [
                                                                                                   {
                                                                                                     "type": "characterClass",
+                                                                                                    "kind": "union",
                                                                                                     "body": [
                                                                                                       {
                                                                                                         "type": "value",
@@ -24600,6 +24866,7 @@
                                                                                                     "body": [
                                                                                                       {
                                                                                                         "type": "characterClass",
+                                                                                                        "kind": "union",
                                                                                                         "body": [
                                                                                                           {
                                                                                                             "type": "value",
@@ -24627,6 +24894,7 @@
                                                                                                         "body": [
                                                                                                           {
                                                                                                             "type": "characterClass",
+                                                                                                            "kind": "union",
                                                                                                             "body": [
                                                                                                               {
                                                                                                                 "type": "value",
@@ -24709,6 +24977,7 @@
                                                                                             "body": [
                                                                                               {
                                                                                                 "type": "characterClass",
+                                                                                                "kind": "union",
                                                                                                 "body": [
                                                                                                   {
                                                                                                     "type": "value",
@@ -24746,6 +25015,7 @@
                                                                                                             "body": [
                                                                                                               {
                                                                                                                 "type": "characterClass",
+                                                                                                                "kind": "union",
                                                                                                                 "body": [],
                                                                                                                 "negative": true,
                                                                                                                 "range": [
@@ -24845,6 +25115,7 @@
                                                                                                                 "body": [
                                                                                                                   {
                                                                                                                     "type": "characterClass",
+                                                                                                                    "kind": "union",
                                                                                                                     "body": [
                                                                                                                       {
                                                                                                                         "type": "value",
@@ -24909,6 +25180,7 @@
                                                                                                                 "body": [
                                                                                                                   {
                                                                                                                     "type": "characterClass",
+                                                                                                                    "kind": "union",
                                                                                                                     "body": [
                                                                                                                       {
                                                                                                                         "type": "value",
@@ -25033,6 +25305,7 @@
                                                                                         "body": [
                                                                                           {
                                                                                             "type": "characterClass",
+                                                                                            "kind": "union",
                                                                                             "body": [
                                                                                               {
                                                                                                 "type": "characterClassRange",
@@ -25120,6 +25393,7 @@
                                                                                           },
                                                                                           {
                                                                                             "type": "characterClass",
+                                                                                            "kind": "union",
                                                                                             "body": [
                                                                                               {
                                                                                                 "type": "characterClassRange",
@@ -25186,6 +25460,7 @@
                                                                                             "body": [
                                                                                               {
                                                                                                 "type": "characterClass",
+                                                                                                "kind": "union",
                                                                                                 "body": [
                                                                                                   {
                                                                                                     "type": "characterClassRange",
@@ -25321,6 +25596,7 @@
                                                                                               },
                                                                                               {
                                                                                                 "type": "characterClass",
+                                                                                                "kind": "union",
                                                                                                 "body": [
                                                                                                   {
                                                                                                     "type": "characterClassRange",
@@ -25421,6 +25697,7 @@
                                                                                             "body": [
                                                                                               {
                                                                                                 "type": "characterClass",
+                                                                                                "kind": "union",
                                                                                                 "body": [
                                                                                                   {
                                                                                                     "type": "value",
@@ -25478,6 +25755,7 @@
                                                                                                 "body": [
                                                                                                   {
                                                                                                     "type": "characterClass",
+                                                                                                    "kind": "union",
                                                                                                     "body": [
                                                                                                       {
                                                                                                         "type": "value",
@@ -25539,6 +25817,7 @@
                                                                                                     "body": [
                                                                                                       {
                                                                                                         "type": "characterClass",
+                                                                                                        "kind": "union",
                                                                                                         "body": [
                                                                                                           {
                                                                                                             "type": "value",
@@ -25576,6 +25855,7 @@
                                                                                                         "body": [
                                                                                                           {
                                                                                                             "type": "characterClass",
+                                                                                                            "kind": "union",
                                                                                                             "body": [
                                                                                                               {
                                                                                                                 "type": "value",
@@ -25720,6 +26000,7 @@
                                                                             "body": [
                                                                               {
                                                                                 "type": "characterClass",
+                                                                                "kind": "union",
                                                                                 "body": [
                                                                                   {
                                                                                     "type": "characterClassRange",
@@ -25807,6 +26088,7 @@
                                                                               },
                                                                               {
                                                                                 "type": "characterClass",
+                                                                                "kind": "union",
                                                                                 "body": [
                                                                                   {
                                                                                     "type": "characterClassRange",
@@ -25873,6 +26155,7 @@
                                                                                 "body": [
                                                                                   {
                                                                                     "type": "characterClass",
+                                                                                    "kind": "union",
                                                                                     "body": [
                                                                                       {
                                                                                         "type": "characterClassRange",
@@ -26008,6 +26291,7 @@
                                                                                   },
                                                                                   {
                                                                                     "type": "characterClass",
+                                                                                    "kind": "union",
                                                                                     "body": [
                                                                                       {
                                                                                         "type": "characterClassRange",
@@ -26091,6 +26375,7 @@
                                                                     "body": [
                                                                       {
                                                                         "type": "characterClass",
+                                                                        "kind": "union",
                                                                         "body": [
                                                                           {
                                                                             "type": "value",
@@ -26196,6 +26481,7 @@
                                                                 "body": [
                                                                   {
                                                                     "type": "characterClass",
+                                                                    "kind": "union",
                                                                     "body": [
                                                                       {
                                                                         "type": "value",
@@ -26384,6 +26670,7 @@
                                     "body": [
                                       {
                                         "type": "characterClass",
+                                        "kind": "union",
                                         "body": [
                                           {
                                             "type": "characterClassRange",
@@ -26471,6 +26758,7 @@
                                       },
                                       {
                                         "type": "characterClass",
+                                        "kind": "union",
                                         "body": [
                                           {
                                             "type": "characterClassRange",
@@ -26537,6 +26825,7 @@
                                         "body": [
                                           {
                                             "type": "characterClass",
+                                            "kind": "union",
                                             "body": [
                                               {
                                                 "type": "characterClassRange",
@@ -26672,6 +26961,7 @@
                                           },
                                           {
                                             "type": "characterClass",
+                                            "kind": "union",
                                             "body": [
                                               {
                                                 "type": "characterClassRange",
@@ -26778,6 +27068,7 @@
                                             "body": [
                                               {
                                                 "type": "characterClass",
+                                                "kind": "union",
                                                 "body": [
                                                   {
                                                     "type": "value",
@@ -26835,6 +27126,7 @@
                                                 "body": [
                                                   {
                                                     "type": "characterClass",
+                                                    "kind": "union",
                                                     "body": [
                                                       {
                                                         "type": "value",
@@ -26896,6 +27188,7 @@
                                                     "body": [
                                                       {
                                                         "type": "characterClass",
+                                                        "kind": "union",
                                                         "body": [
                                                           {
                                                             "type": "value",
@@ -26933,6 +27226,7 @@
                                                         "body": [
                                                           {
                                                             "type": "characterClass",
+                                                            "kind": "union",
                                                             "body": [
                                                               {
                                                                 "type": "value",
@@ -27087,6 +27381,7 @@
                                     "body": [
                                       {
                                         "type": "characterClass",
+                                        "kind": "union",
                                         "body": [
                                           {
                                             "type": "characterClassRange",
@@ -27174,6 +27469,7 @@
                                       },
                                       {
                                         "type": "characterClass",
+                                        "kind": "union",
                                         "body": [
                                           {
                                             "type": "characterClassRange",
@@ -27240,6 +27536,7 @@
                                         "body": [
                                           {
                                             "type": "characterClass",
+                                            "kind": "union",
                                             "body": [
                                               {
                                                 "type": "characterClassRange",
@@ -27375,6 +27672,7 @@
                                           },
                                           {
                                             "type": "characterClass",
+                                            "kind": "union",
                                             "body": [
                                               {
                                                 "type": "characterClassRange",
@@ -27451,6 +27749,7 @@
                                         "body": [
                                           {
                                             "type": "characterClass",
+                                            "kind": "union",
                                             "body": [
                                               {
                                                 "type": "value",
@@ -27584,6 +27883,7 @@
                                 "body": [
                                   {
                                     "type": "characterClass",
+                                    "kind": "union",
                                     "body": [
                                       {
                                         "type": "characterClassRange",
@@ -27671,6 +27971,7 @@
                                   },
                                   {
                                     "type": "characterClass",
+                                    "kind": "union",
                                     "body": [
                                       {
                                         "type": "characterClassRange",
@@ -27737,6 +28038,7 @@
                                     "body": [
                                       {
                                         "type": "characterClass",
+                                        "kind": "union",
                                         "body": [
                                           {
                                             "type": "characterClassRange",
@@ -27872,6 +28174,7 @@
                                       },
                                       {
                                         "type": "characterClass",
+                                        "kind": "union",
                                         "body": [
                                           {
                                             "type": "characterClassRange",
@@ -27948,6 +28251,7 @@
                                     "body": [
                                       {
                                         "type": "characterClass",
+                                        "kind": "union",
                                         "body": [
                                           {
                                             "type": "value",
@@ -28013,6 +28317,7 @@
                                         "body": [
                                           {
                                             "type": "characterClass",
+                                            "kind": "union",
                                             "body": [
                                               {
                                                 "type": "characterClassRange",
@@ -28100,6 +28405,7 @@
                                           },
                                           {
                                             "type": "characterClass",
+                                            "kind": "union",
                                             "body": [
                                               {
                                                 "type": "characterClassRange",
@@ -28166,6 +28472,7 @@
                                             "body": [
                                               {
                                                 "type": "characterClass",
+                                                "kind": "union",
                                                 "body": [
                                                   {
                                                     "type": "characterClassRange",
@@ -28301,6 +28608,7 @@
                                               },
                                               {
                                                 "type": "characterClass",
+                                                "kind": "union",
                                                 "body": [
                                                   {
                                                     "type": "characterClassRange",
@@ -28377,6 +28685,7 @@
                                             "body": [
                                               {
                                                 "type": "characterClass",
+                                                "kind": "union",
                                                 "body": [
                                                   {
                                                     "type": "value",
@@ -28475,6 +28784,7 @@
                                             "body": [
                                               {
                                                 "type": "characterClass",
+                                                "kind": "union",
                                                 "body": [
                                                   {
                                                     "type": "value",
@@ -28573,6 +28883,7 @@
                                                 "body": [
                                                   {
                                                     "type": "characterClass",
+                                                    "kind": "union",
                                                     "body": [
                                                       {
                                                         "type": "value",
@@ -28647,6 +28958,7 @@
                                                 "body": [
                                                   {
                                                     "type": "characterClass",
+                                                    "kind": "union",
                                                     "body": [
                                                       {
                                                         "type": "value",
@@ -28746,6 +29058,7 @@
                                     "body": [
                                       {
                                         "type": "characterClass",
+                                        "kind": "union",
                                         "body": [
                                           {
                                             "type": "value",
@@ -28915,6 +29228,7 @@
         "body": [
           {
             "type": "characterClass",
+            "kind": "union",
             "body": [
               {
                 "type": "value",
@@ -28976,6 +29290,7 @@
     "body": [
       {
         "type": "characterClass",
+        "kind": "union",
         "body": [],
         "negative": true,
         "range": [
@@ -29029,6 +29344,7 @@
             "body": [
               {
                 "type": "characterClass",
+                "kind": "union",
                 "body": [],
                 "negative": true,
                 "range": [
@@ -29119,6 +29435,7 @@
     "body": [
       {
         "type": "characterClass",
+        "kind": "union",
         "body": [],
         "negative": true,
         "range": [
@@ -29172,6 +29489,7 @@
             "body": [
               {
                 "type": "characterClass",
+                "kind": "union",
                 "body": [],
                 "negative": true,
                 "range": [
@@ -29262,6 +29580,7 @@
             "body": [
               {
                 "type": "characterClass",
+                "kind": "union",
                 "body": [],
                 "negative": true,
                 "range": [
@@ -29292,6 +29611,7 @@
               },
               {
                 "type": "characterClass",
+                "kind": "union",
                 "body": [],
                 "negative": true,
                 "range": [
@@ -29345,6 +29665,7 @@
                     "body": [
                       {
                         "type": "characterClass",
+                        "kind": "union",
                         "body": [],
                         "negative": true,
                         "range": [
@@ -29462,6 +29783,7 @@
     "body": [
       {
         "type": "characterClass",
+        "kind": "union",
         "body": [
           {
             "type": "value",
@@ -29496,6 +29818,7 @@
   },
   "[a-]": {
     "type": "characterClass",
+    "kind": "union",
     "body": [
       {
         "type": "value",
@@ -29527,6 +29850,7 @@
   },
   "[a-b]": {
     "type": "characterClass",
+    "kind": "union",
     "body": [
       {
         "type": "characterClassRange",
@@ -29572,6 +29896,7 @@
     "body": [
       {
         "type": "characterClass",
+        "kind": "union",
         "body": [
           {
             "type": "characterClassRange",
@@ -29624,6 +29949,7 @@
     "body": [
       {
         "type": "characterClass",
+        "kind": "union",
         "body": [
           {
             "type": "characterClassRange",
@@ -29679,6 +30005,7 @@
     "body": [
       {
         "type": "characterClass",
+        "kind": "union",
         "body": [
           {
             "type": "characterClassRange",
@@ -29738,6 +30065,7 @@
     "body": [
       {
         "type": "characterClass",
+        "kind": "union",
         "body": [
           {
             "type": "characterClassRange",
@@ -29794,6 +30122,7 @@
   },
   "[a]": {
     "type": "characterClass",
+    "kind": "union",
     "body": [
       {
         "type": "value",
@@ -29941,6 +30270,7 @@
   },
   "[o-o]": {
     "type": "characterClass",
+    "kind": "union",
     "body": [
       {
         "type": "characterClassRange",
@@ -29980,6 +30310,7 @@
   },
   "[object Math]": {
     "type": "characterClass",
+    "kind": "union",
     "body": [
       {
         "type": "value",
@@ -30101,6 +30432,7 @@
   },
   "[z-z]": {
     "type": "characterClass",
+    "kind": "union",
     "body": [
       {
         "type": "characterClassRange",
@@ -30146,6 +30478,7 @@
   },
   "[|||||||]": {
     "type": "characterClass",
+    "kind": "union",
     "body": [
       {
         "type": "value",
@@ -30539,6 +30872,7 @@
         "body": [
           {
             "type": "characterClass",
+            "kind": "union",
             "body": [
               {
                 "type": "value",
@@ -30596,6 +30930,7 @@
             "body": [
               {
                 "type": "characterClass",
+                "kind": "union",
                 "body": [
                   {
                     "type": "value",
@@ -30657,6 +30992,7 @@
                 "body": [
                   {
                     "type": "characterClass",
+                    "kind": "union",
                     "body": [
                       {
                         "type": "value",
@@ -30694,6 +31030,7 @@
                     "body": [
                       {
                         "type": "characterClass",
+                        "kind": "union",
                         "body": [
                           {
                             "type": "value",
@@ -36161,6 +36498,7 @@
         "body": [
           {
             "type": "characterClass",
+            "kind": "union",
             "body": [
               {
                 "type": "characterClassRange",
@@ -36233,6 +36571,7 @@
         "body": [
           {
             "type": "characterClass",
+            "kind": "union",
             "body": [
               {
                 "type": "characterClassRange",
@@ -36482,6 +36821,7 @@
       },
       {
         "type": "characterClass",
+        "kind": "union",
         "body": [],
         "negative": false,
         "range": [
@@ -36841,6 +37181,7 @@
       },
       {
         "type": "characterClass",
+        "kind": "union",
         "body": [
           {
             "type": "characterClassRange",
@@ -37495,6 +37836,7 @@
   },
   "[}]": {
     "type": "characterClass",
+    "kind": "union",
     "body": [
       {
         "type": "value",
@@ -37516,6 +37858,7 @@
   },
   "[\\b-e]": {
     "type": "characterClass",
+    "kind": "union",
     "body": [
       {
         "type": "characterClassRange",
@@ -37561,6 +37904,7 @@
   },
   "[\\0-\\b]": {
     "type": "characterClass",
+    "kind": "union",
     "body": [
       {
         "type": "characterClassRange",
@@ -37636,6 +37980,7 @@
   },
   "[\\c_]": {
     "type": "characterClass",
+    "kind": "union",
     "body": [
       {
         "type": "value",
@@ -37657,6 +38002,7 @@
   },
   "[\\-]": {
     "type": "characterClass",
+    "kind": "union",
     "body": [
       {
         "type": "value",
