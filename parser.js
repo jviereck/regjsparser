@@ -1495,6 +1495,10 @@
       throw new Error('The "v" flag is only supported when the .unicodeSet option is enabled.');
     }
 
+    if (hasUnicodeFlag && hasUnicodeSetFlag) {
+      throw new Error('The "u" and "v" flags are mutually exclusive.');
+    }
+
     // Convert the input to a string and treat the empty string special.
     str = String(str);
     if (str === '') {

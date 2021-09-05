@@ -59,7 +59,20 @@ runTests('./test-data-named-groups-unicode-properties.json', 'u', {
   namedGroups: true,
   unicodePropertyEscape: true
 });
-runTests('./test-data-unicode-set.json', 'uv', {
+runTests('./test-data-unicode-set.json', 'v', {
   unicodeSet: true,
   unicodePropertyEscape: true
 });
+
+(function testUVError() {
+  var message = 'It should throw an error when using both the "u" and "v" flags.';
+
+  try {
+    parse('(?:)', 'uv', { unicodeSet: true });
+  } catch (e) {
+    console.log('  PASSED TEST: ' + message);
+    return;
+  }
+
+  throw new Error(message);
+})();
