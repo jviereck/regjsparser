@@ -111,6 +111,7 @@
   },
   "[\\u{0}-\\u{A}]": {
     "type": "characterClass",
+    "kind": "union",
     "body": [
       {
         "type": "characterClassRange",
@@ -150,6 +151,7 @@
   },
   "[\\u{02}-\\u{003}]": {
     "type": "characterClass",
+    "kind": "union",
     "body": [
       {
         "type": "characterClassRange",
@@ -189,6 +191,7 @@
   },
   "[\uD83D\uDCA9-\uD83D\uDCAB]": {
     "type": "characterClass",
+    "kind": "union",
     "body": [
       {
         "type": "characterClassRange",
@@ -228,6 +231,7 @@
   },
   "[\\uD83D\\uDCA9-\\uD83D\\uDCAB]": {
     "type": "characterClass",
+    "kind": "union",
     "body": [
       {
         "type": "characterClassRange",
@@ -267,6 +271,7 @@
   },
   "[a-b\uD83D\uDCA9-\uD83D\uDCAB]": {
     "type": "characterClass",
+    "kind": "union",
     "body": [
       {
         "type": "characterClassRange",
@@ -334,6 +339,7 @@
   },
   "[a-b\\uD83D\\uDCA9-\\uD83D\\uDCAB]": {
     "type": "characterClass",
+    "kind": "union",
     "body": [
       {
         "type": "characterClassRange",
@@ -401,6 +407,7 @@
   },
   "[\uD83D\uDCA9-\uD83D\uDCABa-b]": {
     "type": "characterClass",
+    "kind": "union",
     "body": [
       {
         "type": "characterClassRange",
@@ -468,6 +475,7 @@
   },
   "[\\uD83D\\uDCA9-\\uD83D\\uDCABa-b]": {
     "type": "characterClass",
+    "kind": "union",
     "body": [
       {
         "type": "characterClassRange",
@@ -535,6 +543,7 @@
   },
   "[\uD83D\uDCA9\uD83D\uDCAB]": {
     "type": "characterClass",
+    "kind": "union",
     "body": [
       {
         "type": "value",
@@ -566,6 +575,7 @@
   },
   "[\\uD83D\\uDCA9\\uD83D\\uDCAB]": {
     "type": "characterClass",
+    "kind": "union",
     "body": [
       {
         "type": "value",
@@ -597,6 +607,7 @@
   },
   "[a-b\uD83D\uDCA9\uD83D\uDCAB]": {
     "type": "characterClass",
+    "kind": "union",
     "body": [
       {
         "type": "characterClassRange",
@@ -656,6 +667,7 @@
   },
   "[a-b\\uD83D\\uDCA9\\uD83D\\uDCAB]": {
     "type": "characterClass",
+    "kind": "union",
     "body": [
       {
         "type": "characterClassRange",
@@ -715,6 +727,7 @@
   },
   "[\uD83D\uDCA9\uD83D\uDCABa-b]": {
     "type": "characterClass",
+    "kind": "union",
     "body": [
       {
         "type": "value",
@@ -774,6 +787,7 @@
   },
   "[\\uD83D\\uDCA9\\uD83D\\uDCABa-b]": {
     "type": "characterClass",
+    "kind": "union",
     "body": [
       {
         "type": "value",
@@ -925,6 +939,7 @@
   },
   "[\\-]": {
     "type": "characterClass",
+    "kind": "union",
     "body": [
       {
         "type": "value",
@@ -946,6 +961,7 @@
   },
   "[}]": {
     "type": "characterClass",
+    "kind": "union",
     "body": [
       {
         "type": "value",
@@ -967,6 +983,7 @@
   },
   "[^}]": {
     "type": "characterClass",
+    "kind": "union",
     "body": [
       {
         "type": "value",
@@ -988,6 +1005,7 @@
   },
   "[\\b-e]": {
     "type": "characterClass",
+    "kind": "union",
     "body": [
       {
         "type": "characterClassRange",
@@ -1039,6 +1057,7 @@
   },
   "[\\0-\\b]": {
     "type": "characterClass",
+    "kind": "union",
     "body": [
       {
         "type": "characterClassRange",
