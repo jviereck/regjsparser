@@ -38021,5 +38021,38 @@
       4
     ],
     "raw": "[\\-]"
+  },
+  "([\\1])": {
+    "type": "group",
+    "behavior": "normal",
+    "body": [
+      {
+        "type": "characterClass",
+        "kind": "union",
+        "body": [
+          {
+            "type": "value",
+            "kind": "octal",
+            "codePoint": 1,
+            "range": [
+              2,
+              4
+            ],
+            "raw": "\\1"
+          }
+        ],
+        "negative": false,
+        "range": [
+          1,
+          5
+        ],
+        "raw": "[\\1]"
+      }
+    ],
+    "range": [
+      0,
+      6
+    ],
+    "raw": "([\\1])"
   }
 }

@@ -1100,5 +1100,11 @@
     "name": "SyntaxError",
     "message": "Expected atom at position 0\n    {}\n    ^",
     "input": "{}"
+  },
+  "([\\1])": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid decimal escape in unicode mode at position 3\n    ([\\1])\n       ^",
+    "input": "([\\1])"
   }
 }
