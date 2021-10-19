@@ -893,9 +893,15 @@
       else if (res = matchReg(/^[0-7]{1,3}/)) {
         match = res[0];
         if (/^0{1,3}$/.test(match)) {
+          if (hasUnicodeFlag && match.length > 1) {
+            bail("Invalid decimal escape in unicode mode", null, from, pos);
+          }
           // If they are all zeros, then only take the first one.
           return createEscaped('null', 0x0000, '0', match.length);
         } else {
+          if (hasUnicodeFlag) {
+            bail("Invalid decimal escape in unicode mode", null, from, pos);
+          }
           return createEscaped('octal', parseInt(match, 8), match, 1);
         }
       }
