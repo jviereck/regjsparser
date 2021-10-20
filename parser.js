@@ -847,12 +847,20 @@
 
       var res, match, from = pos;
 
+      if (hasUnicodeFlag) {
+        if (res = matchReg(/^\d/)) {
+          if (res[0] !== "0" || (res = matchReg(/^\d/)) ) {
+            bail("Invalid decimal escape in unicode mode", null, from, pos);
+          }
+          return createEscaped('null', 0x0000, '0', 1);
+        }
+        return false;
+      }
+
       if (res = matchReg(/^(?!0)\d+/)) {
         match = res[0];
         var refIdx = parseInt(res[0], 10);
-        if (hasUnicodeFlag) {
-          bail("Invalid decimal escape in unicode mode", null, from, pos);
-        } else if (refIdx <= closedCaptureCounter && !insideCharacterClass) {
+        if (refIdx <= closedCaptureCounter && !insideCharacterClass) {
           // If the number is smaller than the normal-groups found so
           // far, then it is a reference...
           return createReference(res[0]);
@@ -893,15 +901,9 @@
       else if (res = matchReg(/^[0-7]{1,3}/)) {
         match = res[0];
         if (/^0{1,3}$/.test(match)) {
-          if (hasUnicodeFlag && match.length > 1) {
-            bail("Invalid decimal escape in unicode mode", null, from, pos);
-          }
           // If they are all zeros, then only take the first one.
           return createEscaped('null', 0x0000, '0', match.length);
         } else {
-          if (hasUnicodeFlag) {
-            bail("Invalid decimal escape in unicode mode", null, from, pos);
-          }
           return createEscaped('octal', parseInt(match, 8), match, 1);
         }
       }
