@@ -1100,5 +1100,45 @@
     "name": "SyntaxError",
     "message": "Expected atom at position 0\n    {}\n    ^",
     "input": "{}"
+  },
+  "([\\1])": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid decimal escape in unicode mode at position 3\n    ([\\1])\n       ^",
+    "input": "([\\1])"
+  },
+  "\\10": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid decimal escape in unicode mode at position 1\n    \\10\n     ^",
+    "input": "\\10"
+  },
+  "\\01": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid decimal escape in unicode mode at position 1\n    \\01\n     ^",
+    "input": "\\01"
+  },
+  "\\00": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid decimal escape in unicode mode at position 1\n    \\00\n     ^",
+    "input": "\\00"
+  },
+  "\\8": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid decimal escape in unicode mode at position 1\n    \\8\n     ^",
+    "input": "\\8"
+  },
+  "\\0": {
+    "type": "value",
+    "kind": "null",
+    "codePoint": 0,
+    "range": [
+      0,
+      2
+    ],
+    "raw": "\\0"
   }
 }

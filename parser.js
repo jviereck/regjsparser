@@ -805,7 +805,7 @@
 
       var res, from = pos;
 
-      res = parseDecimalEscape() || parseNamedReference();
+      res = parseDecimalEscape(insideCharacterClass) || parseNamedReference();
       if (res) {
         return res;
       }
@@ -841,16 +841,26 @@
     }
 
 
-    function parseDecimalEscape() {
+    function parseDecimalEscape(insideCharacterClass) {
       // DecimalEscape ::
       //      DecimalIntegerLiteral [lookahead ∉ DecimalDigit]
 
-      var res, match;
+      var res, match, from = pos;
+
+      if (hasUnicodeFlag) {
+        if (res = matchReg(/^\d/)) {
+          if (res[0] !== "0" || (res = matchReg(/^\d/)) ) {
+            bail("Invalid decimal escape in unicode mode", null, from, pos);
+          }
+          return createEscaped('null', 0x0000, '0', 1);
+        }
+        return false;
+      }
 
       if (res = matchReg(/^(?!0)\d+/)) {
         match = res[0];
         var refIdx = parseInt(res[0], 10);
-        if (refIdx <= closedCaptureCounter) {
+        if (refIdx <= closedCaptureCounter && !insideCharacterClass) {
           // If the number is smaller than the normal-groups found so
           // far, then it is a reference...
           return createReference(res[0]);
