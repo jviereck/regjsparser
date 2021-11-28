@@ -564,7 +564,7 @@
       if (!atom) {
         // Check if a quantifier is following. A quantifier without an atom
         // is an error.
-        pos_backup = pos
+        var pos_backup = pos
         var quantifier = parseQuantifier() || false;
         if (quantifier) {
           pos = pos_backup
