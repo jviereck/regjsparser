@@ -3,6 +3,7 @@ import { AstNodeType, parse, RootNode } from "../parser";
 let defaultNode: RootNode;
 let number: number;
 let string: string;
+let boolean: boolean = false as boolean;
 let type: AstNodeType;
 
 defaultNode = parse("", "");
@@ -19,6 +20,9 @@ defaultNode.type === "unicodePropertyEscape";
 if (defaultNode.type === "reference") {
   // namedGroups = false
   defaultNode.matchIndex;
+
+  // @ts-expect-error
+  nodeWithMaybeNamedGroups.referenceType === "named";
 }
 
 number = defaultNode.range[0];
@@ -42,4 +46,18 @@ nodeWithNamedGroups = parse("", "", {
 if (nodeWithNamedGroups.type === "reference") {
   // namedGroups = true
   nodeWithNamedGroups.name;
+  // @ts-expect-error
+  nodeWithMaybeNamedGroups.referenceType === "index";
+}
+
+let nodeWithMaybeNamedGroups = parse("", "", {
+  namedGroups: boolean,
+});
+
+if (nodeWithMaybeNamedGroups.type === "reference") {
+  if (nodeWithMaybeNamedGroups.referenceType === "index") {
+    nodeWithMaybeNamedGroups.matchIndex;
+  } else if (nodeWithMaybeNamedGroups.referenceType === "named") {
+    nodeWithMaybeNamedGroups.name;
+  }
 }

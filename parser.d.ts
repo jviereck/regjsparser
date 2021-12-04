@@ -124,8 +124,20 @@ export type Disjunction<F extends Features = {}> = Base<"disjunction"> & {
 
 export type Dot = Base<"dot">;
 
-export type Reference<F extends Features = {}> = Base<"reference"> &
-  _If<F["namedGroups"], { name: string }, { matchIndex: number }>;
+export type NamedReference = Base<"reference"> & {
+  name: Value; // TODO better type?
+  referenceType: "named";
+};
+export type IndexReference = Base<"reference"> & {
+  matchIndex: number;
+  referenceType: "index";
+};
+
+export type Reference<F extends Features = {}> = _If<
+  F["namedGroups"],
+  NamedReference,
+  IndexReference
+>;
 
 export function parse<F extends Features = {}>(
   str: string,
