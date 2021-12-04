@@ -43,7 +43,7 @@ export type AstNode<F extends Features = {}> =
 
 export type RootNode<F extends Features = {}> =
   | Exclude<AstNode<F>, CharacterClassRange | UnicodePropertyEscape>
-  | _If<F["unicodePropertyEscape"], UnicodePropertyEscape, never>;
+  | _If<F["unicodePropertyEscape"], UnicodePropertyEscape>;
 
 export type Anchor = Base<"anchor"> & {
   kind: "boundary" | "end" | "not-boundary" | "start";
