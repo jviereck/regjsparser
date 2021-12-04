@@ -1,4 +1,4 @@
-type _If<Test, Then, Else = {}> = Test extends true ? Then : Else;
+type _If<Test, Then, Else = never> = Test extends true ? Then : Else;
 
 export type Features = {
   lookbehind?: boolean;
