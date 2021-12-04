@@ -46,10 +46,16 @@
         "name": {
           "type": "identifier",
           "value": "name",
-          "range": [32, 36],
+          "range": [
+            32,
+            36
+          ],
           "raw": "name"
         },
-        "range": [29, 37],
+        "range": [
+          29,
+          37
+        ],
         "raw": "\\k<name>"
       },
       {

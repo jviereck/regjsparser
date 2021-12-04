@@ -361,10 +361,13 @@
 
     function createNamedReference(name) {
       return addRaw({
-        type: "reference",
-        referenceType: "named",
+        type: 'reference',
+        referenceType: 'named',
         name: name,
-        range: [name.range[0] - 3, pos],
+        range: [
+          name.range[0] - 3,
+          pos
+        ]
       });
     }
 
