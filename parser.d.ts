@@ -67,6 +67,10 @@ export type Value = Base<"value"> & {
     | "unicodeEscape";
 };
 
+export type Identifier = Base<"value"> & {
+  value: string;
+};
+
 export type Alternative<F extends Features = {}> = Base<"alternative"> & {
   body: RootNode<F>[];
 };
@@ -125,7 +129,7 @@ export type Disjunction<F extends Features = {}> = Base<"disjunction"> & {
 export type Dot = Base<"dot">;
 
 export type NamedReference = Base<"reference"> & {
-  name: Value; // TODO better type?
+  name: Identifier;
   referenceType: "named";
 };
 export type IndexReference = Base<"reference"> & {
