@@ -11,6 +11,7 @@ node = parse("", "", {
   lookbehind: true,
   namedGroups: true,
   unicodePropertyEscape: true,
+  unicodeSet: true,
 });
 
 number = node.range[0];

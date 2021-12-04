@@ -127,6 +127,7 @@ export type Features = {
   lookbehind?: boolean;
   namedGroups?: boolean;
   unicodePropertyEscape?: boolean;
+  unicodeSet?: boolean;
 };
 
 export function parse(
