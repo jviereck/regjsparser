@@ -18,7 +18,6 @@ export type Base<T extends AstNodeType> = {
   type: T;
 };
 
-/* eslint-disable no-use-before-define */
 export type AstNode =
   | Alternative
   | Anchor
@@ -34,7 +33,6 @@ export type AstNode =
   | Value;
 
 export type RootNode = Exclude<AstNode, CharacterClassRange>;
-/* eslint-enable no-use-before-define */
 
 export type Anchor = Base<"anchor"> & {
   kind: "boundary" | "end" | "not-boundary" | "start";
