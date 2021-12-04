@@ -27,22 +27,22 @@ export type Base<T extends AstNodeType> = {
   type: T;
 };
 
-export type AstNode =
-  | Alternative
+export type AstNode<F extends Features = {}> =
+  | Alternative<F>
   | Anchor
   | CharacterClass
   | CharacterClassEscape
   | CharacterClassRange
-  | Disjunction
+  | Disjunction<F>
   | Dot
-  | Group
-  | Quantifier
-  | Reference
+  | Group<F>
+  | Quantifier<F>
+  | Reference<F>
   | UnicodePropertyEscape
   | Value;
 
 export type RootNode<F extends Features = {}> =
-  | Exclude<AstNode, CharacterClassRange | UnicodePropertyEscape>
+  | Exclude<AstNode<F>, CharacterClassRange | UnicodePropertyEscape>
   | _If<F["unicodePropertyEscape"], UnicodePropertyEscape, never>;
 
 export type Anchor = Base<"anchor"> & {
@@ -107,7 +107,9 @@ export type CapturingGroup<F extends Features = {}> = Base<"group"> & {
   name?: string;
 };
 
-export type Group = CapturingGroup | NonCapturingGroup;
+export type Group<F extends Features = {}> =
+  | CapturingGroup<F>
+  | NonCapturingGroup<F>;
 
 export type Quantifier<F extends Features = {}> = Base<"quantifier"> & {
   body: [RootNode<F>];
@@ -122,19 +124,10 @@ export type Disjunction<F extends Features = {}> = Base<"disjunction"> & {
 
 export type Dot = Base<"dot">;
 
-export type Reference = Base<"reference"> &
-  (
-    | {
-        matchIndex: number;
-        name?: undefined;
-      }
-    | {
-        matchIndex?: undefined;
-        name: string;
-      }
-  );
+export type Reference<F extends Features = {}> = Base<"reference"> &
+  _If<F["namedGroups"], { name: string }, { matchIndex: number }>;
 
-export function parse<F extends Features>(
+export function parse<F extends Features = {}>(
   str: string,
   flags: string,
   features?: F
