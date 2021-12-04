@@ -1,3 +1,12 @@
+type _If<Test, Then, Else = {}> = Test extends true ? Then : Else;
+
+export type Features = {
+  lookbehind?: boolean;
+  namedGroups?: boolean;
+  unicodePropertyEscape?: boolean;
+  unicodeSet?: boolean;
+};
+
 export type AstNodeType =
   | "alternative"
   | "anchor"
@@ -32,7 +41,9 @@ export type AstNode =
   | UnicodePropertyEscape
   | Value;
 
-export type RootNode = Exclude<AstNode, CharacterClassRange>;
+export type RootNode<F extends Features = {}> =
+  | Exclude<AstNode, CharacterClassRange | UnicodePropertyEscape>
+  | _If<F["unicodePropertyEscape"], UnicodePropertyEscape, never>;
 
 export type Anchor = Base<"anchor"> & {
   kind: "boundary" | "end" | "not-boundary" | "start";
@@ -56,8 +67,8 @@ export type Value = Base<"value"> & {
     | "unicodeEscape";
 };
 
-export type Alternative = Base<"alternative"> & {
-  body: RootNode[];
+export type Alternative<F extends Features = {}> = Base<"alternative"> & {
+  body: RootNode<F>[];
 };
 
 export type CharacterClassRange = Base<"characterClassRange"> & {
@@ -80,33 +91,33 @@ export type CharacterClass = Base<"characterClass"> & {
   negative: boolean;
 };
 
-export type NonCapturingGroup = Base<"group"> & {
+export type NonCapturingGroup<F extends Features = {}> = Base<"group"> & {
   behavior:
     | "ignore"
     | "lookahead"
     | "lookbehind"
     | "negativeLookahead"
     | "negativeLookbehind";
-  body: RootNode[];
+  body: RootNode<F>[];
 };
 
-export type CapturingGroup = Base<"group"> & {
+export type CapturingGroup<F extends Features = {}> = Base<"group"> & {
   behavior: "normal";
-  body: RootNode[];
+  body: RootNode<F>[];
   name?: string;
 };
 
 export type Group = CapturingGroup | NonCapturingGroup;
 
-export type Quantifier = Base<"quantifier"> & {
-  body: [RootNode];
+export type Quantifier<F extends Features = {}> = Base<"quantifier"> & {
+  body: [RootNode<F>];
   greedy: boolean;
   max?: number;
   min: number;
 };
 
-export type Disjunction = Base<"disjunction"> & {
-  body: [RootNode, RootNode, ...RootNode[]];
+export type Disjunction<F extends Features = {}> = Base<"disjunction"> & {
+  body: [RootNode<F>, RootNode<F>, ...RootNode<F>[]];
 };
 
 export type Dot = Base<"dot">;
@@ -123,15 +134,8 @@ export type Reference = Base<"reference"> &
       }
   );
 
-export type Features = {
-  lookbehind?: boolean;
-  namedGroups?: boolean;
-  unicodePropertyEscape?: boolean;
-  unicodeSet?: boolean;
-};
-
-export function parse(
+export function parse<F extends Features>(
   str: string,
   flags: string,
-  features?: Features
-): RootNode;
+  features?: F
+): RootNode<F>;
