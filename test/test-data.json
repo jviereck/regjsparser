@@ -34,6 +34,7 @@
       },
       {
         "type": "reference",
+        "referenceType": "index",
         "matchIndex": 1,
         "range": [
           3,
@@ -660,6 +661,7 @@
       },
       {
         "type": "reference",
+        "referenceType": "index",
         "matchIndex": 1,
         "range": [
           3,
@@ -4293,6 +4295,7 @@
     "body": [
       {
         "type": "reference",
+        "referenceType": "index",
         "matchIndex": 1,
         "range": [
           1,
@@ -36404,6 +36407,7 @@
       },
       {
         "type": "reference",
+        "referenceType": "index",
         "matchIndex": 1,
         "range": [
           5,
@@ -37619,6 +37623,7 @@
             "body": [
               {
                 "type": "reference",
+                "referenceType": "index",
                 "matchIndex": 1,
                 "range": [
                   1,
@@ -37642,6 +37647,7 @@
       },
       {
         "type": "reference",
+        "referenceType": "index",
         "matchIndex": 1,
         "range": [
           5,
@@ -37651,6 +37657,7 @@
       },
       {
         "type": "reference",
+        "referenceType": "index",
         "matchIndex": 1,
         "range": [
           7,
@@ -37674,6 +37681,7 @@
         "body": [
           {
             "type": "reference",
+            "referenceType": "index",
             "matchIndex": 1,
             "range": [
               1,
@@ -37714,6 +37722,7 @@
         "body": [
           {
             "type": "reference",
+            "referenceType": "index",
             "matchIndex": 2,
             "range": [
               1,

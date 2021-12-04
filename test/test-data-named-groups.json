@@ -101,11 +101,9 @@
       },
       {
         "type": "reference",
+        "referenceType": "index",
         "matchIndex": 1,
-        "range": [
-          6,
-          8
-        ],
+        "range": [6, 8],
         "raw": "\\1"
       }
     ],
@@ -139,19 +137,14 @@
       },
       {
         "type": "reference",
+        "referenceType": "named",
         "name": {
           "type": "identifier",
           "value": "name",
-          "range": [
-            12,
-            16
-          ],
+          "range": [12, 16],
           "raw": "name"
         },
-        "range": [
-          9,
-          17
-        ],
+        "range": [9, 17],
         "raw": "\\k<name>"
       }
     ],
@@ -191,19 +184,14 @@
       },
       {
         "type": "reference",
+        "referenceType": "named",
         "name": {
           "type": "identifier",
           "value": "AbcA",
-          "range": [
-            22,
-            36
-          ],
+          "range": [22, 36],
           "raw": "\\u0041bc\\u0041"
         },
-        "range": [
-          19,
-          37
-        ],
+        "range": [19, 37],
         "raw": "\\k<\\u0041bc\\u0041>"
       }
     ],

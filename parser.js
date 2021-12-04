@@ -350,6 +350,7 @@
     function createReference(matchIndex) {
       return addRaw({
         type: 'reference',
+        referenceType: 'index',
         matchIndex: parseInt(matchIndex, 10),
         range: [
           pos - 1 - matchIndex.length,
@@ -360,12 +361,10 @@
 
     function createNamedReference(name) {
       return addRaw({
-        type: 'reference',
+        type: "reference",
+        referenceType: "named",
         name: name,
-        range: [
-          name.range[0] - 3,
-          pos
-        ]
+        range: [name.range[0] - 3, pos],
       });
     }
 
