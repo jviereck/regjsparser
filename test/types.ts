@@ -1,16 +1,13 @@
-import { AstNodeType, parse, RootNode } from "../parser";
+import { AstNodeType, Identifier, parse, RootNode } from "../parser";
+
+function assert<T>(input: T): void {}
 
 let defaultNode: RootNode;
-let number: number;
-let string: string;
-let boolean: boolean = false as boolean;
-let type: AstNodeType;
 
 defaultNode = parse("", "");
 defaultNode = parse("", "", {});
 defaultNode = parse("", "", {
   lookbehind: true,
-  unicodeSet: true,
 });
 
 // unicodePropertyEscape = false
@@ -25,16 +22,18 @@ if (defaultNode.type === "group" && defaultNode.behavior === "normal") {
 
 if (defaultNode.type === "reference") {
   // namedGroups = false
-  defaultNode.matchIndex;
-
-  // @ts-expect-error
-  nodeWithMaybeNamedGroups.referenceType === "named";
+  assert<number>(defaultNode.matchIndex);
 }
 
-number = defaultNode.range[0];
-number = defaultNode.range[1];
-string = defaultNode.raw;
-type = defaultNode.type;
+if (defaultNode.type === "characterClass") {
+  defaultNode.kind === "union";
+  assert<"union">(defaultNode.kind);
+}
+
+assert<number>(defaultNode.range[0]);
+assert<number>(defaultNode.range[1]);
+assert<string>(defaultNode.raw);
+assert<AstNodeType>(defaultNode.type);
 
 let nodeWithUnicodePropertyEscape: RootNode<{ unicodePropertyEscape: true }>;
 nodeWithUnicodePropertyEscape = parse("", "", {
@@ -59,19 +58,26 @@ if (
 
 if (nodeWithNamedGroups.type === "reference") {
   // namedGroups = true
-  nodeWithNamedGroups.name;
-  // @ts-expect-error
-  nodeWithMaybeNamedGroups.referenceType === "index";
+  assert<Identifier>(nodeWithNamedGroups.name);
 }
 
 let nodeWithMaybeNamedGroups = parse("", "", {
-  namedGroups: boolean,
+  namedGroups: false as boolean,
 });
 
 if (nodeWithMaybeNamedGroups.type === "reference") {
-  if (nodeWithMaybeNamedGroups.referenceType === "index") {
-    nodeWithMaybeNamedGroups.matchIndex;
-  } else if (nodeWithMaybeNamedGroups.referenceType === "named") {
-    nodeWithMaybeNamedGroups.name;
-  }
+  assert<number | undefined>(nodeWithMaybeNamedGroups.matchIndex);
+  assert<Identifier | undefined>(nodeWithMaybeNamedGroups.name);
+}
+
+let nodeWithUnicodeSet: RootNode<{ unicodeSet: true }>;
+nodeWithUnicodeSet = parse("", "", {
+  unicodeSet: true,
+});
+
+if (nodeWithUnicodeSet.type === "characterClass") {
+  nodeWithUnicodeSet.kind === "union";
+  nodeWithUnicodeSet.kind === "intersection";
+  nodeWithUnicodeSet.kind === "subtraction";
+  assert<"union" | "intersection" | "subtraction">(nodeWithUnicodeSet.kind);
 }
