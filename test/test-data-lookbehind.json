@@ -295,7 +295,6 @@
     "body": [
       {
         "type": "reference",
-        "referenceType": "index",
         "matchIndex": 1,
         "range": [
           4,

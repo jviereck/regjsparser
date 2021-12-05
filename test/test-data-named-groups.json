@@ -101,7 +101,6 @@
       },
       {
         "type": "reference",
-        "referenceType": "index",
         "matchIndex": 1,
         "range": [
           6,
@@ -140,7 +139,6 @@
       },
       {
         "type": "reference",
-        "referenceType": "named",
         "name": {
           "type": "identifier",
           "value": "name",
@@ -193,7 +191,6 @@
       },
       {
         "type": "reference",
-        "referenceType": "named",
         "name": {
           "type": "identifier",
           "value": "AbcA",

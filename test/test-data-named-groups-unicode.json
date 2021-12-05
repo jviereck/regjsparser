@@ -23,7 +23,6 @@
       },
       {
         "type": "reference",
-        "referenceType": "named",
         "name": {
           "type": "identifier",
           "value": "AbcA",

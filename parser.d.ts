@@ -133,12 +133,12 @@ export type Disjunction<F extends Features = {}> = Base<"disjunction"> & {
 export type Dot = Base<"dot">;
 
 export type NamedReference = Base<"reference"> & {
+  matchIndex: undefined;
   name: Identifier;
-  referenceType: "named";
 };
 export type IndexReference = Base<"reference"> & {
   matchIndex: number;
-  referenceType: "index";
+  name: undefined;
 };
 
 export type Reference<F extends Features = {}> = _If<
