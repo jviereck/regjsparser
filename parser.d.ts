@@ -1,4 +1,4 @@
-type _If<Test, Then, Else = never> = Test extends true ? Then : Else;
+type _If<Test, Then, Else> = Test extends true ? Then : Else;
 
 export type Features = {
   lookbehind?: boolean;
@@ -30,7 +30,7 @@ export type Base<T extends AstNodeType> = {
 export type AstNode<F extends Features = {}> =
   | Alternative<F>
   | Anchor
-  | CharacterClass
+  | CharacterClass<F>
   | CharacterClassEscape
   | CharacterClassRange
   | Disjunction<F>
@@ -43,7 +43,7 @@ export type AstNode<F extends Features = {}> =
 
 export type RootNode<F extends Features = {}> =
   | Exclude<AstNode<F>, CharacterClassRange | UnicodePropertyEscape>
-  | _If<F["unicodePropertyEscape"], UnicodePropertyEscape>;
+  | _If<F["unicodePropertyEscape"], UnicodePropertyEscape, never>;
 
 export type Anchor = Base<"anchor"> & {
   kind: "boundary" | "end" | "not-boundary" | "start";
@@ -90,9 +90,11 @@ export type CharacterClassBody =
   | CharacterClassRange
   | UnicodePropertyEscape
   | Value;
-export type CharacterClass = Base<"characterClass"> & {
+
+export type CharacterClass<F extends Features = {}> = Base<"characterClass"> & {
   body: CharacterClassBody[];
   negative: boolean;
+  kind: "union" | _If<F["unicodeSet"], "intersection" | "subtraction", never>;
 };
 
 export type NonCapturingGroup<F extends Features = {}> = Base<"group"> & {
@@ -112,7 +114,8 @@ export type CapturingGroup<F extends Features = {}> = Base<"group"> & {
     F["namedGroups"],
     {
       name?: Identifier;
-    }
+    },
+    {}
   >;
 
 export type Group<F extends Features = {}> =

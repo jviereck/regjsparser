@@ -14,7 +14,7 @@
   "scripts": {
     "test": "run-p test:*",
     "test:src": "node test/index.js",
-    "test:types": "tsc test/types.ts --noEmit --target esnext --strict"
+    "test:types": "tsc test/types.ts --noEmit"
   },
   "files": [
     "bin/",
