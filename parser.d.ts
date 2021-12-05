@@ -109,7 +109,7 @@ export type CapturingGroup<F extends Features = {}> = Base<"group"> & {
   behavior: "normal";
   body: RootNode<F>[];
 } & _If<
-    Features["namedGroups"],
+    F["namedGroups"],
     {
       name?: Identifier;
     }
