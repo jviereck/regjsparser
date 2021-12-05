@@ -108,8 +108,12 @@ export type NonCapturingGroup<F extends Features = {}> = Base<"group"> & {
 export type CapturingGroup<F extends Features = {}> = Base<"group"> & {
   behavior: "normal";
   body: RootNode<F>[];
-  name?: string;
-};
+} & _If<
+    Features["namedGroups"],
+    {
+      name?: Identifier;
+    }
+  >;
 
 export type Group<F extends Features = {}> =
   | CapturingGroup<F>

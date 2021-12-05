@@ -17,6 +17,12 @@ defaultNode = parse("", "", {
 // @ts-expect-error
 defaultNode.type === "unicodePropertyEscape";
 
+if (defaultNode.type === "group" && defaultNode.behavior === "normal") {
+  // namedGroups = false
+  // @ts-expect-error
+  nodeWithNamedGroups.name;
+}
+
 if (defaultNode.type === "reference") {
   // namedGroups = false
   defaultNode.matchIndex;
@@ -42,6 +48,14 @@ let nodeWithNamedGroups: RootNode<{ namedGroups: true }>;
 nodeWithNamedGroups = parse("", "", {
   namedGroups: true,
 });
+
+if (
+  nodeWithNamedGroups.type === "group" &&
+  nodeWithNamedGroups.behavior === "normal"
+) {
+  // namedGroups = true
+  nodeWithNamedGroups.name;
+}
 
 if (nodeWithNamedGroups.type === "reference") {
   // namedGroups = true
