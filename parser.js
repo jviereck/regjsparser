@@ -689,7 +689,7 @@
         quantifier = createQuantifier(min, max, res.range[0], res.range[1]);
       }
 
-      if ((min && !Number.isSafeInteger(min)) || max && !Number.isSafeInteger(max)) {
+      if ((min && !Number.isSafeInteger(min)) || (max && !Number.isSafeInteger(max))) {
         bail("iterations out of safe range in quantifier", "", from, pos);
       }
 
