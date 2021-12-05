@@ -690,7 +690,7 @@
       }
 
       if ((min && !Number.isSafeInteger(min)) || (max && !Number.isSafeInteger(max))) {
-        bail("iterations out of safe range in quantifier", "", from, pos);
+        bail("iterations outside JS safe integer range in quantifier", "", from, pos);
       }
 
       if (quantifier) {

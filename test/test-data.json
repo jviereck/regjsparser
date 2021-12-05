@@ -37533,19 +37533,19 @@
   "x{9999999999999999999}": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "iterations out of safe range in quantifier at position 1\n    x{9999999999999999999}\n     ^",
+    "message": "iterations outside JS safe integer range in quantifier at position 1\n    x{9999999999999999999}\n     ^",
     "input": "x{9999999999999999999}"
   },
   "x{0,9999999999999999999}": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "iterations out of safe range in quantifier at position 1\n    x{0,9999999999999999999}\n     ^",
+    "message": "iterations outside JS safe integer range in quantifier at position 1\n    x{0,9999999999999999999}\n     ^",
     "input": "x{0,9999999999999999999}"
   },
   "x{9999999999999999999,9999999999999999999}": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "iterations out of safe range in quantifier at position 1\n    x{9999999999999999999,9999999999999999999}\n     ^",
+    "message": "iterations outside JS safe integer range in quantifier at position 1\n    x{9999999999999999999,9999999999999999999}\n     ^",
     "input": "x{9999999999999999999,9999999999999999999}"
   },
   "z": {
