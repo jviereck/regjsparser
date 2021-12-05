@@ -689,6 +689,10 @@
         quantifier = createQuantifier(min, max, res.range[0], res.range[1]);
       }
 
+      if ((min && !Number.isSafeInteger(min)) || (max && !Number.isSafeInteger(max))) {
+        bail("iterations outside JS safe integer range in quantifier", "", from, pos);
+      }
+
       if (quantifier) {
         if (match('?')) {
           quantifier.greedy = false;

@@ -37530,6 +37530,24 @@
     "message": "Expected atom at position 4\n    x{1}{1,}\n        ^",
     "input": "x{1}{1,}"
   },
+  "x{9999999999999999999}": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "iterations outside JS safe integer range in quantifier at position 1\n    x{9999999999999999999}\n     ^",
+    "input": "x{9999999999999999999}"
+  },
+  "x{0,9999999999999999999}": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "iterations outside JS safe integer range in quantifier at position 1\n    x{0,9999999999999999999}\n     ^",
+    "input": "x{0,9999999999999999999}"
+  },
+  "x{9999999999999999999,9999999999999999999}": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "iterations outside JS safe integer range in quantifier at position 1\n    x{9999999999999999999,9999999999999999999}\n     ^",
+    "input": "x{9999999999999999999,9999999999999999999}"
+  },
   "z": {
     "type": "value",
     "kind": "symbol",
