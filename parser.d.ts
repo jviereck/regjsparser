@@ -115,7 +115,9 @@ export type CapturingGroup<F extends Features = {}> = Base<"group"> & {
     {
       name?: Identifier;
     },
-    {}
+    {
+      name: undefined;
+    }
   >;
 
 export type Group<F extends Features = {}> =

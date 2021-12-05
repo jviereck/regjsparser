@@ -70,6 +70,13 @@ if (nodeWithMaybeNamedGroups.type === "reference") {
   assert<Identifier | undefined>(nodeWithMaybeNamedGroups.name);
 }
 
+if (
+  nodeWithMaybeNamedGroups.type === "group" &&
+  nodeWithMaybeNamedGroups.behavior === "normal"
+) {
+  assert<Identifier | undefined>(nodeWithMaybeNamedGroups.name);
+}
+
 let nodeWithUnicodeSet: RootNode<{ unicodeSet: true }>;
 nodeWithUnicodeSet = parse("", "", {
   unicodeSet: true,
