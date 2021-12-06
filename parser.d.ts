@@ -38,12 +38,13 @@ export type AstNode<F extends Features = {}> =
   | Group<F>
   | Quantifier<F>
   | Reference<F>
-  | UnicodePropertyEscape
+  | _If<F["unicodePropertyEscape"], UnicodePropertyEscape, never>
   | Value;
 
-export type RootNode<F extends Features = {}> =
-  | Exclude<AstNode<F>, CharacterClassRange | UnicodePropertyEscape>
-  | _If<F["unicodePropertyEscape"], UnicodePropertyEscape, never>;
+export type RootNode<F extends Features = {}> = Exclude<
+  AstNode<F>,
+  CharacterClassRange
+>;
 
 export type Anchor = Base<"anchor"> & {
   kind: "boundary" | "end" | "not-boundary" | "start";
