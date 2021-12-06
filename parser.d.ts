@@ -142,6 +142,7 @@ export type NamedReference = Base<"reference"> & {
   matchIndex: undefined;
   name: Identifier;
 };
+
 export type IndexReference = Base<"reference"> & {
   matchIndex: number;
   name: undefined;
