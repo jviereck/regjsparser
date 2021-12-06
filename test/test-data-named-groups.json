@@ -267,5 +267,26 @@
       8
     ],
     "raw": "{(?<x>)}"
+  },
+  "(a)": {
+    "type": "group",
+    "behavior": "normal",
+    "body": [
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 97,
+        "range": [
+          1,
+          2
+        ],
+        "raw": "a"
+      }
+    ],
+    "range": [
+      0,
+      3
+    ],
+    "raw": "(a)"
   }
 }
