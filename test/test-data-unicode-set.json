@@ -710,10 +710,54 @@
   "[A&&&]": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "&& cannot be followed by &. Wrap it in parentheses: &&(&). at position 4\n    [A&&&]\n        ^",
+    "message": "&& cannot be followed by &. Wrap it in brackets: &&[&]. at position 4\n    [A&&&]\n        ^",
     "input": "[A&&&]"
   },
-  "[A&&(&)]": {
+  "[A&&[&]]": {
+    "type": "characterClass",
+    "kind": "intersection",
+    "body": [
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 65,
+        "range": [
+          1,
+          2
+        ],
+        "raw": "A"
+      },
+      {
+        "type": "characterClass",
+        "kind": "union",
+        "body": [
+          {
+            "type": "value",
+            "kind": "symbol",
+            "codePoint": 38,
+            "range": [
+              5,
+              6
+            ],
+            "raw": "&"
+          }
+        ],
+        "negative": false,
+        "range": [
+          4,
+          7
+        ],
+        "raw": "[&]"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      8
+    ],
+    "raw": "[A&&[&]]"
+  },
+  "[A&&\\q{&}]": {
     "type": "characterClass",
     "kind": "intersection",
     "body": [
@@ -738,32 +782,32 @@
                 "kind": "symbol",
                 "codePoint": 38,
                 "range": [
-                  5,
-                  6
+                  7,
+                  8
                 ],
                 "raw": "&"
               }
             ],
             "range": [
-              5,
-              6
+              7,
+              8
             ],
             "raw": "&"
           }
         ],
         "range": [
           4,
-          7
+          9
         ],
-        "raw": "(&)"
+        "raw": "\\q{&}"
       }
     ],
     "negative": false,
     "range": [
       0,
-      8
+      10
     ],
-    "raw": "[A&&(&)]"
+    "raw": "[A&&\\q{&}]"
   },
   "[A---B]": {
     "type": "error",
@@ -953,7 +997,7 @@
     "message": "character at position 5: -\n    [A--B&&C]\n         ^",
     "input": "[A--B&&C]"
   },
-  "[(AB|CD|DE)]": {
+  "[\\q{AB|CD|DE}]": {
     "type": "characterClass",
     "kind": "union",
     "body": [
@@ -968,8 +1012,8 @@
                 "kind": "symbol",
                 "codePoint": 65,
                 "range": [
-                  2,
-                  3
+                  4,
+                  5
                 ],
                 "raw": "A"
               },
@@ -978,15 +1022,15 @@
                 "kind": "symbol",
                 "codePoint": 66,
                 "range": [
-                  3,
-                  4
+                  5,
+                  6
                 ],
                 "raw": "B"
               }
             ],
             "range": [
-              2,
-              4
+              4,
+              6
             ],
             "raw": "AB"
           },
@@ -998,8 +1042,8 @@
                 "kind": "symbol",
                 "codePoint": 67,
                 "range": [
-                  5,
-                  6
+                  7,
+                  8
                 ],
                 "raw": "C"
               },
@@ -1008,15 +1052,15 @@
                 "kind": "symbol",
                 "codePoint": 68,
                 "range": [
-                  6,
-                  7
+                  8,
+                  9
                 ],
                 "raw": "D"
               }
             ],
             "range": [
-              5,
-              7
+              7,
+              9
             ],
             "raw": "CD"
           },
@@ -1028,8 +1072,8 @@
                 "kind": "symbol",
                 "codePoint": 68,
                 "range": [
-                  8,
-                  9
+                  10,
+                  11
                 ],
                 "raw": "D"
               },
@@ -1038,34 +1082,34 @@
                 "kind": "symbol",
                 "codePoint": 69,
                 "range": [
-                  9,
-                  10
+                  11,
+                  12
                 ],
                 "raw": "E"
               }
             ],
             "range": [
-              8,
-              10
+              10,
+              12
             ],
             "raw": "DE"
           }
         ],
         "range": [
           1,
-          11
+          13
         ],
-        "raw": "(AB|CD|DE)"
+        "raw": "\\q{AB|CD|DE}"
       }
     ],
     "negative": false,
     "range": [
       0,
-      12
+      14
     ],
-    "raw": "[(AB|CD|DE)]"
+    "raw": "[\\q{AB|CD|DE}]"
   },
-  "[()]": {
+  "[\\q{}]": {
     "type": "characterClass",
     "kind": "union",
     "body": [
@@ -1076,51 +1120,33 @@
             "type": "classString",
             "characters": [],
             "range": [
-              2,
-              2
+              4,
+              4
             ],
             "raw": ""
           }
         ],
         "range": [
           1,
-          3
+          5
         ],
-        "raw": "()"
+        "raw": "\\q{}"
       }
     ],
     "negative": false,
     "range": [
       0,
-      4
+      6
     ],
-    "raw": "[()]"
+    "raw": "[\\q{}]"
   },
-  "[(|||)]": {
+  "[\\q{|||}]": {
     "type": "characterClass",
     "kind": "union",
     "body": [
       {
         "type": "classStrings",
         "strings": [
-          {
-            "type": "classString",
-            "characters": [],
-            "range": [
-              2,
-              2
-            ],
-            "raw": ""
-          },
-          {
-            "type": "classString",
-            "characters": [],
-            "range": [
-              3,
-              3
-            ],
-            "raw": ""
-          },
           {
             "type": "classString",
             "characters": [],
@@ -1138,23 +1164,41 @@
               5
             ],
             "raw": ""
+          },
+          {
+            "type": "classString",
+            "characters": [],
+            "range": [
+              6,
+              6
+            ],
+            "raw": ""
+          },
+          {
+            "type": "classString",
+            "characters": [],
+            "range": [
+              7,
+              7
+            ],
+            "raw": ""
           }
         ],
         "range": [
           1,
-          6
+          8
         ],
-        "raw": "(|||)"
+        "raw": "\\q{|||}"
       }
     ],
     "negative": false,
     "range": [
       0,
-      7
+      9
     ],
-    "raw": "[(|||)]"
+    "raw": "[\\q{|||}]"
   },
-  "[(a|b|c)--[b-d]]": {
+  "[\\q{a|b|c}--[b-d]]": {
     "type": "characterClass",
     "kind": "subtraction",
     "body": [
@@ -1169,15 +1213,15 @@
                 "kind": "symbol",
                 "codePoint": 97,
                 "range": [
-                  2,
-                  3
+                  4,
+                  5
                 ],
                 "raw": "a"
               }
             ],
             "range": [
-              2,
-              3
+              4,
+              5
             ],
             "raw": "a"
           },
@@ -1189,15 +1233,15 @@
                 "kind": "symbol",
                 "codePoint": 98,
                 "range": [
-                  4,
-                  5
+                  6,
+                  7
                 ],
                 "raw": "b"
               }
             ],
             "range": [
-              4,
-              5
+              6,
+              7
             ],
             "raw": "b"
           },
@@ -1209,24 +1253,24 @@
                 "kind": "symbol",
                 "codePoint": 99,
                 "range": [
-                  6,
-                  7
+                  8,
+                  9
                 ],
                 "raw": "c"
               }
             ],
             "range": [
-              6,
-              7
+              8,
+              9
             ],
             "raw": "c"
           }
         ],
         "range": [
           1,
-          8
+          10
         ],
-        "raw": "(a|b|c)"
+        "raw": "\\q{a|b|c}"
       },
       {
         "type": "characterClass",
@@ -1239,8 +1283,8 @@
               "kind": "symbol",
               "codePoint": 98,
               "range": [
-                11,
-                12
+                13,
+                14
               ],
               "raw": "b"
             },
@@ -1249,22 +1293,22 @@
               "kind": "symbol",
               "codePoint": 100,
               "range": [
-                13,
-                14
+                15,
+                16
               ],
               "raw": "d"
             },
             "range": [
-              11,
-              14
+              13,
+              16
             ],
             "raw": "b-d"
           }
         ],
         "negative": false,
         "range": [
-          10,
-          15
+          12,
+          17
         ],
         "raw": "[b-d]"
       }
@@ -1272,11 +1316,11 @@
     "negative": false,
     "range": [
       0,
-      16
+      18
     ],
-    "raw": "[(a|b|c)--[b-d]]"
+    "raw": "[\\q{a|b|c}--[b-d]]"
   },
-  "[[b-d]--(a|b|c)]": {
+  "[[b-d]--\\q{a|b|c}]": {
     "type": "characterClass",
     "kind": "subtraction",
     "body": [
@@ -1331,15 +1375,15 @@
                 "kind": "symbol",
                 "codePoint": 97,
                 "range": [
-                  9,
-                  10
+                  11,
+                  12
                 ],
                 "raw": "a"
               }
             ],
             "range": [
-              9,
-              10
+              11,
+              12
             ],
             "raw": "a"
           },
@@ -1351,15 +1395,15 @@
                 "kind": "symbol",
                 "codePoint": 98,
                 "range": [
-                  11,
-                  12
+                  13,
+                  14
                 ],
                 "raw": "b"
               }
             ],
             "range": [
-              11,
-              12
+              13,
+              14
             ],
             "raw": "b"
           },
@@ -1371,34 +1415,34 @@
                 "kind": "symbol",
                 "codePoint": 99,
                 "range": [
-                  13,
-                  14
+                  15,
+                  16
                 ],
                 "raw": "c"
               }
             ],
             "range": [
-              13,
-              14
+              15,
+              16
             ],
             "raw": "c"
           }
         ],
         "range": [
           8,
-          15
+          17
         ],
-        "raw": "(a|b|c)"
+        "raw": "\\q{a|b|c}"
       }
     ],
     "negative": false,
     "range": [
       0,
-      16
+      18
     ],
-    "raw": "[[b-d]--(a|b|c)]"
+    "raw": "[[b-d]--\\q{a|b|c}]"
   },
-  "[^(AB)]": {
+  "[^\\q{AB}]": {
     "type": "characterClass",
     "kind": "union",
     "body": [
@@ -1413,8 +1457,8 @@
                 "kind": "symbol",
                 "codePoint": 65,
                 "range": [
-                  3,
-                  4
+                  5,
+                  6
                 ],
                 "raw": "A"
               },
@@ -1423,31 +1467,31 @@
                 "kind": "symbol",
                 "codePoint": 66,
                 "range": [
-                  4,
-                  5
+                  6,
+                  7
                 ],
                 "raw": "B"
               }
             ],
             "range": [
-              3,
-              5
+              5,
+              7
             ],
             "raw": "AB"
           }
         ],
         "range": [
           2,
-          6
+          8
         ],
-        "raw": "(AB)"
+        "raw": "\\q{AB}"
       }
     ],
     "negative": true,
     "range": [
       0,
-      7
+      9
     ],
-    "raw": "[^(AB)]"
+    "raw": "[^\\q{AB}]"
   }
 }

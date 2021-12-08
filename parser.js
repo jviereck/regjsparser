@@ -928,6 +928,8 @@
           range: [res.range[0] - 1, res.range[1]],
           raw: res[0]
         });
+      } else if (features.unicodeSet && hasUnicodeSetFlag && match('q{')) {
+        return parseClassStrings();
       }
       return false;
     }
@@ -1305,7 +1307,7 @@
           skip('&');
           skip('&');
           if (current('&')) {
-            bail('&& cannot be followed by &. Wrap it in parentheses: &&(&).');
+            bail('&& cannot be followed by &. Wrap it in brackets: &&[&].');
           }
         } else if (kind === 'subtraction') {
           skip('-');
@@ -1346,26 +1348,26 @@
       var start, res;
 
       if (match('\\')) {
+        // ClassOperand ::
+        //      ...
+        //      ClassStrings
+        //      NestedClass
+        //
+        // NestedClass ::
+        //      ...
+        //      \ CharacterClassEscape[+U, +V]
         if (res = parseCharacterClassEscape()) {
           start = res;
         } else if (res = parseClassCharacterEscapedHelper()) {
-          // ClassOperand ::
-          //      ...
-          //      NestedClass
-          //
-          // NestedClass ::
-          //      ...
-          //      \ CharacterClassEscape[+U, +V]
           return res;
         } else {
           bail('Invalid escape', '\\' + lookahead(), from);
         }
       } else if (res = parseClassCharacterUnescapedHelper()) {
         start = res;
-      } else if (res = parseClassStrings() || parseCharacterClass()) {
+      } else if (res = parseCharacterClass()) {
         // ClassOperand ::
         //      ...
-        //      ClassStrings
         //      NestedClass
         //
         // NestedClass ::
@@ -1446,20 +1448,17 @@
 
     function parseClassStrings() {
       // ClassStrings ::
-      //      ( ClassString MoreClassStrings? )
+      //      \q{ ClassString MoreClassStrings? }
+
+      // When calling this function, \q{ has already been consumed.
+      var from = pos - 3;
 
       var res = [];
-      var from = pos;
-
-      if (!match('(')) {
-        return null;
-      }
-
       do {
         res.push(parseClassString());
       } while (match('|'));
 
-      skip(')');
+      skip('}');
 
       return createClassStrings(res, from, pos);
     }
