@@ -851,16 +851,6 @@
 
       var res, match, from = pos;
 
-      if (hasUnicodeFlag) {
-        if (res = matchReg(/^\d/)) {
-          if (res[0] !== "0" || (res = matchReg(/^\d/)) ) {
-            bail("Invalid decimal escape in unicode mode", null, from, pos);
-          }
-          return createEscaped('null', 0x0000, '0', 1);
-        }
-        return false;
-      }
-
       if (res = matchReg(/^(?!0)\d+/)) {
         match = res[0];
         var refIdx = parseInt(res[0], 10);
@@ -877,6 +867,16 @@
           // Recall the negative decision to decide if the input must be parsed
           // a second time with the total normal-groups.
           backrefDenied.push(refIdx);
+
+          // \1 octal escapes are disallowed in unicode mode, but they might
+          // be references to groups which haven't been parsed yet.
+          // We must parse a second time to determine if \1 is a reference
+          // or an octal scape, and then we can report the error.
+          if (firstIteration) {
+            shouldReparse = true;
+          } else {
+            bailOctalEscapeIfUnicode(from, pos);
+          }
 
           // Reset the position again, as maybe only parts of the previous
           // matched numbers are actual octal numbers. E.g. in '019' only
@@ -904,6 +904,9 @@
       //   /\091/.exec('\091')[0].length === 3
       else if (res = matchReg(/^[0-7]{1,3}/)) {
         match = res[0];
+        if (match !== '0') {
+          bailOctalEscapeIfUnicode(from, pos);
+        }
         if (/^0{1,3}$/.test(match)) {
           // If they are all zeros, then only take the first one.
           return createEscaped('null', 0x0000, '0', match.length);
@@ -912,6 +915,12 @@
         }
       }
       return false;
+    }
+
+    function bailOctalEscapeIfUnicode(from, pos) {
+      if (hasUnicodeFlag) {
+        bail("Invalid decimal escape in unicode mode", null, from, pos);
+      }
     }
 
     function parseCharacterClassEscape() {
@@ -1500,6 +1509,7 @@
     var backrefDenied = [];
     var closedCaptureCounter = 0;
     var firstIteration = true;
+    var shouldReparse = false;
     var hasUnicodeFlag = (flags || "").indexOf("u") !== -1;
     var hasUnicodeSetFlag = (flags || "").indexOf("v") !== -1;
     var pos = 0;
@@ -1532,13 +1542,14 @@
     // the total number of capture groups set.
     //
     // SEE: https://github.com/jviereck/regjsparser/issues/70
-    for (var i = 0; i < backrefDenied.length; i++) {
-      if (backrefDenied[i] <= closedCaptureCounter) {
-        // Parse the input a second time.
-        pos = 0;
-        firstIteration = false;
-        return parseDisjunction();
-      }
+    shouldReparse = shouldReparse || backrefDenied.some(function (ref) {
+      return ref <= closedCaptureCounter;
+    });
+    if (shouldReparse) {
+      // Parse the input a second time.
+      pos = 0;
+      firstIteration = false;
+      return parseDisjunction();
     }
 
     return result;
