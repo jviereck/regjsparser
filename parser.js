@@ -918,7 +918,7 @@
     }
 
     function bailOctalEscapeIfUnicode(from, pos) {
-      if (hasUnicodeFlag) {
+      if (hasUnicodeFlag || hasUnicodeSetFlag) {
         bail("Invalid decimal escape in unicode mode", null, from, pos);
       }
     }

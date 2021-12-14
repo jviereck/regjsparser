@@ -1493,5 +1493,11 @@
       9
     ],
     "raw": "[^\\q{AB}]"
+  },
+  "\\1": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid decimal escape in unicode mode at position 1\n    \\1\n     ^",
+    "input": "\\1"
   }
 }
