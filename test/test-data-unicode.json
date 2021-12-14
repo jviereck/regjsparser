@@ -1140,5 +1140,93 @@
       2
     ],
     "raw": "\\0"
+  },
+  "(.)\\1": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [
+          {
+            "type": "dot",
+            "range": [
+              1,
+              2
+            ],
+            "raw": "."
+          }
+        ],
+        "range": [
+          0,
+          3
+        ],
+        "raw": "(.)"
+      },
+      {
+        "type": "reference",
+        "matchIndex": 1,
+        "range": [
+          3,
+          5
+        ],
+        "raw": "\\1"
+      }
+    ],
+    "range": [
+      0,
+      5
+    ],
+    "raw": "(.)\\1"
+  },
+  "\\1(.)": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "reference",
+        "matchIndex": 1,
+        "range": [
+          0,
+          2
+        ],
+        "raw": "\\1"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [
+          {
+            "type": "dot",
+            "range": [
+              3,
+              4
+            ],
+            "raw": "."
+          }
+        ],
+        "range": [
+          2,
+          5
+        ],
+        "raw": "(.)"
+      }
+    ],
+    "range": [
+      0,
+      5
+    ],
+    "raw": "\\1(.)"
+  },
+  "(.)\\2": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid decimal escape in unicode mode at position 4\n    (.)\\2\n        ^",
+    "input": "(.)\\2"
+  },
+  "\\2(.)": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid decimal escape in unicode mode at position 1\n    \\2(.)\n     ^",
+    "input": "\\2(.)"
   }
 }
