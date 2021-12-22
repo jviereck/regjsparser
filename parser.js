@@ -1365,7 +1365,7 @@
         // NestedClass ::
         //      ...
         //      \ CharacterClassEscape[+U, +V]
-        if (res = parseCharacterClassEscape()) {
+        if (res = parseClassEscape()) {
           start = res;
         } else if (res = parseClassCharacterEscapedHelper()) {
           return res;
