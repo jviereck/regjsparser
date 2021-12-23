@@ -1499,5 +1499,67 @@
     "name": "SyntaxError",
     "message": "Invalid decimal escape in unicode mode at position 1\n    \\1\n     ^",
     "input": "\\1"
+  },
+  "[\\u{14630}]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "value",
+        "kind": "unicodeCodePointEscape",
+        "codePoint": 83504,
+        "range": [
+          1,
+          10
+        ],
+        "raw": "\\u{14630}"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      11
+    ],
+    "raw": "[\\u{14630}]"
+  },
+  "[\\u{14630}-\\u{14633}]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "characterClassRange",
+        "min": {
+          "type": "value",
+          "kind": "unicodeCodePointEscape",
+          "codePoint": 83504,
+          "range": [
+            1,
+            10
+          ],
+          "raw": "\\u{14630}"
+        },
+        "max": {
+          "type": "value",
+          "kind": "unicodeCodePointEscape",
+          "codePoint": 83507,
+          "range": [
+            11,
+            20
+          ],
+          "raw": "\\u{14633}"
+        },
+        "range": [
+          1,
+          20
+        ],
+        "raw": "\\u{14630}-\\u{14633}"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      21
+    ],
+    "raw": "[\\u{14630}-\\u{14633}]"
   }
 }

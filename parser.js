@@ -298,7 +298,7 @@
     function createCharacter(matches) {
       var _char = matches[0];
       var first = _char.charCodeAt(0);
-      if (hasUnicodeFlag) {
+      if (isUnicodeMode) {
         var second;
         if (_char.length === 1 && first >= 0xD800 && first <= 0xDBFF) {
           second = lookahead().charCodeAt(0);
@@ -573,7 +573,7 @@
 
         // If no unicode flag, then try to parse ExtendedAtom -> ExtendedPatternCharacter.
         //      ExtendedPatternCharacter
-        if (!hasUnicodeFlag && (res = matchReg(/^{/))) {
+        if (!isUnicodeMode && (res = matchReg(/^{/))) {
           atom = createCharacter(res);
         } else {
           bail('Expected atom');
@@ -729,7 +729,7 @@
         //      PatternCharacter
         return createCharacter(res);
       }
-      else if (!hasUnicodeFlag && (res = matchReg(/^(?:]|})/))) {
+      else if (!isUnicodeMode && (res = matchReg(/^(?:]|})/))) {
         //      ExtendedPatternCharacter, first part. See parseTerm.
         return createCharacter(res);
       }
@@ -741,7 +741,7 @@
         //      \ AtomEscape
         res = parseAtomEscape();
         if (!res) {
-          if (!hasUnicodeFlag && lookahead() == 'c') {
+          if (!isUnicodeMode && lookahead() == 'c') {
             // B.1.4 ExtendedAtom
             // \[lookahead = c]
             return createValue('symbol', 92, pos - 1, pos);
@@ -771,7 +771,7 @@
     }
 
     function parseUnicodeSurrogatePairEscape(firstEscape) {
-      if (hasUnicodeFlag) {
+      if (isUnicodeMode) {
         var first, second;
         if (firstEscape.kind == 'unicodeEscape' &&
           (first = firstEscape.codePoint) >= 0xD800 && first <= 0xDBFF &&
@@ -824,17 +824,17 @@
           return createEscaped('singleEscape', 0x0008, '\\b');
         } else if (match('B')) {
           bail('\\B not possible inside of CharacterClass', '', from);
-        } else if (!hasUnicodeFlag && (res = matchReg(/^c([0-9])/))) {
+        } else if (!isUnicodeMode && (res = matchReg(/^c([0-9])/))) {
           // B.1.4
           // c ClassControlLetter, ClassControlLetter = DecimalDigit
           return createEscaped('controlLetter', res[1] + 16, res[1], 2);
-        } else if (!hasUnicodeFlag && (res = matchReg(/^c_/))) {
+        } else if (!isUnicodeMode && (res = matchReg(/^c_/))) {
           // B.1.4
           // c ClassControlLetter, ClassControlLetter = _
           return createEscaped('controlLetter', 31, '_', 2);
         }
         //     [+U] -
-        if (hasUnicodeFlag && match('-')) {
+        if (isUnicodeMode && match('-')) {
           return createEscaped('singleEscape', 0x002d, '\\-');
         }
       }
@@ -918,7 +918,7 @@
     }
 
     function bailOctalEscapeIfUnicode(from, pos) {
-      if (hasUnicodeFlag || hasUnicodeSetFlag) {
+      if (isUnicodeMode) {
         bail("Invalid decimal escape in unicode mode", null, from, pos);
       }
     }
@@ -928,7 +928,7 @@
       var res;
       if (res = matchReg(/^[dDsSwW]/)) {
         return createCharacterClassEscape(res[0]);
-      } else if (features.unicodePropertyEscape && (hasUnicodeFlag || hasUnicodeSetFlag) && (res = matchReg(/^([pP])\{([^\}]+)\}/))) {
+      } else if (features.unicodePropertyEscape && isUnicodeMode && (res = matchReg(/^([pP])\{([^\}]+)\}/))) {
         // https://github.com/jviereck/regjsparser/issues/77
         return addRaw({
           type: 'unicodePropertyEscape',
@@ -958,7 +958,7 @@
         return parseUnicodeSurrogatePairEscape(
           createEscaped('unicodeEscape', parseInt(res[1], 16), res[1], 2)
         );
-      } else if (hasUnicodeFlag && (res = matchReg(/^u\{([0-9a-fA-F]+)\}/))) {
+      } else if (isUnicodeMode && (res = matchReg(/^u\{([0-9a-fA-F]+)\}/))) {
         // RegExpUnicodeEscapeSequence (ES6 Unicode code point escape)
         return createEscaped('unicodeCodePointEscape', parseInt(res[1], 16), res[1], 4);
       }
@@ -1098,8 +1098,8 @@
       var tmp;
       var l = lookahead();
       if (
-        (hasUnicodeFlag && /[\^\$\.\*\+\?\(\)\\\[\]\{\}\|\/]/.test(l)) ||
-        (!hasUnicodeFlag && l !== "c")
+        (isUnicodeMode && /[\^\$\.\*\+\?\(\)\\\[\]\{\}\|\/]/.test(l)) ||
+        (!isUnicodeMode && l !== "c")
       ) {
         if (l === "k" && features.lookbehind) {
           return null;
@@ -1172,7 +1172,7 @@
 
         // Check if both the from and atomTo have codePoints.
         if (!('codePoint' in atom) || !('codePoint' in atomTo)) {
-            if (!hasUnicodeFlag) {
+            if (!isUnicodeMode) {
                 // If not, don't create a range but treat them as
                 // `atom` `-` `atom` instead.
                 //
@@ -1365,7 +1365,7 @@
         // NestedClass ::
         //      ...
         //      \ CharacterClassEscape[+U, +V]
-        if (res = parseCharacterClassEscape()) {
+        if (res = parseClassEscape()) {
           start = res;
         } else if (res = parseClassCharacterEscapedHelper()) {
           return res;
@@ -1512,6 +1512,7 @@
     var shouldReparse = false;
     var hasUnicodeFlag = (flags || "").indexOf("u") !== -1;
     var hasUnicodeSetFlag = (flags || "").indexOf("v") !== -1;
+    var isUnicodeMode = hasUnicodeFlag || hasUnicodeSetFlag;
     var pos = 0;
 
     if (hasUnicodeSetFlag && !features.unicodeSet) {
