@@ -130,7 +130,7 @@ export type Quantifier<F extends Features = {}> = Base<"quantifier"> & {
   greedy: boolean;
   max?: number;
   min: number;
-  symbol?: string;
+  symbol?: '?' | '*' | '+';
 };
 
 export type Disjunction<F extends Features = {}> = Base<"disjunction"> & {
