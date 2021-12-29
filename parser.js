@@ -381,7 +381,7 @@
       });
     }
 
-    function createQuantifier(min, max, from, to) {
+    function createQuantifier(min, max, from, to, symbol) {
       if (to == null) {
         from = pos - 1;
         to = pos;
@@ -393,6 +393,7 @@
         max: max,
         greedy: true,
         body: null, // set later on
+        symbol: symbol,
         range: [
           from,
           to
@@ -664,13 +665,13 @@
       var min, max;
 
       if (match('*')) {
-        quantifier = createQuantifier(0);
+        quantifier = createQuantifier(0, undefined, undefined, undefined, '*');
       }
       else if (match('+')) {
-        quantifier = createQuantifier(1);
+        quantifier = createQuantifier(1, undefined, undefined, undefined, "+");
       }
       else if (match('?')) {
-        quantifier = createQuantifier(0, 1);
+        quantifier = createQuantifier(0, 1, undefined, undefined, "?");
       }
       else if (res = matchReg(/^\{([0-9]+)\}/)) {
         min = parseInt(res[1], 10);

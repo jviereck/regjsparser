@@ -63,39 +63,53 @@
     "message": "Invalid code point 16777215",
     "input": "(?<\\u{ffffff})"
   },
-  "(?<$𐒤>a)": {
+  "(?<$\uD801\uDCA4>a)": {
     "type": "group",
     "behavior": "normal",
-    "body": [{
-      "type": "value",
-      "kind": "symbol",
-      "codePoint": 97,
-      "range": [7, 8],
-      "raw": "a"
-    }],
-    "range": [0, 9],
-    "raw": "(?<$𐒤>a)",
+    "body": [
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 97,
+        "range": [
+          7,
+          8
+        ],
+        "raw": "a"
+      }
+    ],
+    "range": [
+      0,
+      9
+    ],
+    "raw": "(?<$\uD801\uDCA4>a)",
     "name": {
       "type": "identifier",
-      "value": "$𐒤",
+      "value": "$\uD801\uDCA4",
       "range": [
         3,
         6
       ],
-      "raw": "$𐒤"
+      "raw": "$\uD801\uDCA4"
     }
   },
-  "(?<\\u{102A7}Ƞ>)": {
+  "(?<\\u{102A7}\u0220>)": {
     "type": "group",
     "behavior": "normal",
     "body": [],
-    "range": [0, 15],
-    "raw": "(?<\\u{102A7}Ƞ>)",
+    "range": [
+      0,
+      15
+    ],
+    "raw": "(?<\\u{102A7}\u0220>)",
     "name": {
       "type": "identifier",
-      "value": "𐊧Ƞ",
-      "range": [3, 13],
-      "raw": "\\u{102A7}Ƞ"
+      "value": "\uD800\uDEA7\u0220",
+      "range": [
+        3,
+        13
+      ],
+      "raw": "\\u{102A7}\u0220"
     }
   }
 }
