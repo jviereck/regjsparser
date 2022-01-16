@@ -179,6 +179,54 @@
     ],
     "raw": "foo\\P{ASCII_Hex_Digit}bar"
   },
+  "\\p{ASCII_Hex_Digit}{4}": {
+    "type": "quantifier",
+    "min": 4,
+    "max": 4,
+    "greedy": true,
+    "body": [
+      {
+        "type": "unicodePropertyEscape",
+        "negative": false,
+        "value": "ASCII_Hex_Digit",
+        "range": [
+          0,
+          19
+        ],
+        "raw": "\\p{ASCII_Hex_Digit}"
+      }
+    ],
+    "symbol": null,
+    "range": [
+      0,
+      22
+    ],
+    "raw": "\\p{ASCII_Hex_Digit}{4}"
+  },
+  "\\p{ASCII_Hex_Digit}+": {
+    "type": "quantifier",
+    "min": 1,
+    "max": null,
+    "greedy": true,
+    "body": [
+      {
+        "type": "unicodePropertyEscape",
+        "negative": false,
+        "value": "ASCII_Hex_Digit",
+        "range": [
+          0,
+          19
+        ],
+        "raw": "\\p{ASCII_Hex_Digit}"
+      }
+    ],
+    "symbol": "+",
+    "range": [
+      0,
+      20
+    ],
+    "raw": "\\p{ASCII_Hex_Digit}+"
+  },
   "\\p{}": {
     "type": "error",
     "name": "SyntaxError",
