@@ -46,7 +46,7 @@
     }
     permalink.hash = encode('/' + regexSource + '/' + regexFlags);
     storage && (storage.regexSource = regexSource) && (storage.regexFlags = regexFlags);
-  };
+  }
 
   regex.oninput = flags.oninput = update;
 
