@@ -1417,7 +1417,7 @@
       //      \ b
 
       if (match('\\')) {
-        var res;
+        var res, from = pos;
         if (res = parseClassCharacterEscapedHelper()) {
           return res;
         } else {
