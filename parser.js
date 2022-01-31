@@ -208,6 +208,7 @@
 //      one of & - ! # % , : ; < = > @ _ ` ~
 //
 
+"use strict";
 (function() {
 
   var fromCodePoint = String.fromCodePoint || (function() {
