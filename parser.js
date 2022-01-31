@@ -1417,6 +1417,7 @@
       //      \ b
 
       if (match('\\')) {
+        var res;
         if (res = parseClassCharacterEscapedHelper()) {
           return res;
         } else {
@@ -1445,6 +1446,7 @@
       //      \ ClassHalfOfDouble
       //      \ b
 
+      var res;
       if (match('b')) {
         return createEscaped('singleEscape', 0x0008, '\\b');
       } else if (match('B')) {
