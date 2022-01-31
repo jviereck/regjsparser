@@ -575,6 +575,7 @@
 
         // If no unicode flag, then try to parse ExtendedAtom -> ExtendedPatternCharacter.
         //      ExtendedPatternCharacter
+        var res;
         if (!isUnicodeMode && (res = matchReg(/^{/))) {
           atom = createCharacter(res);
         } else {
