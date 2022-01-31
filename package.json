@@ -13,7 +13,7 @@
   },
   "scripts": {
     "lint": "eslint --ext .js --max-warnings 0 .",
-    "test": "run-p test:*",
+    "test": "run-p test:* && npm run lint",
     "test:src": "node test/index.js",
     "test:types": "tsc test/types.ts --noEmit"
   },
