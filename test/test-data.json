@@ -38409,5 +38409,85 @@
       6
     ],
     "raw": "([\\1])"
+  },
+  "a{1,,2}": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 97,
+        "range": [
+          0,
+          1
+        ],
+        "raw": "a"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 123,
+        "range": [
+          1,
+          2
+        ],
+        "raw": "{"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 49,
+        "range": [
+          2,
+          3
+        ],
+        "raw": "1"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 44,
+        "range": [
+          3,
+          4
+        ],
+        "raw": ","
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 44,
+        "range": [
+          4,
+          5
+        ],
+        "raw": ","
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 50,
+        "range": [
+          5,
+          6
+        ],
+        "raw": "2"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 125,
+        "range": [
+          6,
+          7
+        ],
+        "raw": "}"
+      }
+    ],
+    "range": [
+      0,
+      7
+    ],
+    "raw": "a{1,,2}"
   }
 }

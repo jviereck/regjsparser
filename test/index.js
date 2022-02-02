@@ -1,4 +1,3 @@
-var fs = require('fs');
 var jsesc = require('jsesc');
 
 var parse = require('../parser').parse;
@@ -13,7 +12,7 @@ var stringify = function(obj) {
 
 var runTests = function(data_path, flags, features) {
   console.log('Testing:', data_path);
-  data = require(data_path)
+  var data = require(data_path)
   Object.keys(data).forEach(function(regex) {
     var results = data[regex];
     flags || (flags = '');

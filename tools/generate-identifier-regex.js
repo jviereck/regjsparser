@@ -13,7 +13,6 @@ var get = function(what) {
 // Get the Unicode properties needed to construct the regex.
 var ID_Start = get('Binary_Property/ID_Start');
 var ID_Continue = get('Binary_Property/ID_Continue');
-var Other_ID_Start = get('Binary_Property/Other_ID_Start');
 
 var generateRegex = function() {
   // https://tc39.github.io/ecma262/#sec-identifier-names-static-semantics-early-errors
