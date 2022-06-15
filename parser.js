@@ -207,6 +207,16 @@
 // ClassHalfOfDouble ::
 //      one of & - ! # % , : ; < = > @ _ ` ~
 //
+// --------------------------------------------------------------
+// NOTE: The following productions refer to the
+//       "Regular Expression Pattern Modifiers for ECMAScript" proposal.
+//       https://github.com/tc39/proposal-regexp-modifiers
+// --------------------------------------------------------------
+//
+// Atom ::
+//      ( ? RegularExpressionFlags : Disjunction )
+//      ( ? RegularExpressionFlags - RegularExpressionFlags : Disjunction )
+//
 
 "use strict";
 (function() {
@@ -719,6 +729,8 @@
       //      CharacterClass
       //      ( GroupSpecifier Disjunction )
       //      ( ? : Disjunction )
+      //      ( ? RegularExpressionFlags : Disjunction )
+      //      ( ? RegularExpressionFlags - RegularExpressionFlags : Disjunction )
       // ExtendedAtom ::
       //      ExtendedPatternCharacter
       // ExtendedPatternCharacter ::
@@ -766,11 +778,64 @@
         group.name = name;
         return group;
       }
+      else if (features.modifiersGroup && str.indexOf("(?") == pos && str[pos+2] != ":") {
+        return parseModifiersGroup();
+      }
       else {
         //      ( Disjunction )
         //      ( ? : Disjunction )
         return parseGroup('(?:', 'ignore', '(', 'normal');
       }
+    }
+
+    function parseModifiersGroup() {
+      function hasDupChar(str) {
+        var i = 0;
+        while (i < str.length) {
+          if (str.indexOf(str[i], i + 1) != -1) {
+            return true;
+          }
+          i++;
+        }
+        return false;
+      }
+
+      var from = pos;
+      incr(2);
+
+      var enablingFlags = matchReg(/^[sim]+/);
+      var disablingFlags;
+      if(match("-")){
+        disablingFlags = matchReg(/^[sim]+/);
+        if (!disablingFlags) {
+          bail('Invalid flags for modifiers group');
+        }
+      } else if(!enablingFlags){
+        bail('Invalid flags for modifiers group');
+      }
+
+      enablingFlags = enablingFlags ? enablingFlags[0] : "";
+      disablingFlags = disablingFlags ? disablingFlags[0] : "";
+
+      var flags = enablingFlags + disablingFlags;
+      if(flags.length > 3 || hasDupChar(flags)){
+        bail('flags cannot be duplicated for modifiers group');
+      }
+
+      var modifiersGroup = {
+        type: 'modifiersGroup',
+        enablingFlags: enablingFlags,
+        disablingFlags: disablingFlags,
+      };
+
+      skip(":");
+      modifiersGroup.body = parseDisjunction();
+      if (!modifiersGroup.body) {
+        bail('Expected disjunction');
+      }
+      skip(")");
+      modifiersGroup.range = [from, pos];
+      return modifiersGroup;
     }
 
     function parseUnicodeSurrogatePairEscape(firstEscape) {
