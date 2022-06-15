@@ -307,9 +307,9 @@
             // Unicode surrogate pair
             pos++;
             return createValue(
-                'symbol',
-                (first - 0xD800) * 0x400 + second - 0xDC00 + 0x10000,
-                pos - 2, pos);
+              'symbol',
+              (first - 0xD800) * 0x400 + second - 0xDC00 + 0x10000,
+              pos - 2, pos);
           }
         }
       }
@@ -981,11 +981,11 @@
         // ControlEscape
         var codePoint = 0;
         switch (res[0]) {
-          case 't': codePoint = 0x009; break;
-          case 'n': codePoint = 0x00A; break;
-          case 'v': codePoint = 0x00B; break;
-          case 'f': codePoint = 0x00C; break;
-          case 'r': codePoint = 0x00D; break;
+        case 't': codePoint = 0x009; break;
+        case 'n': codePoint = 0x00A; break;
+        case 'v': codePoint = 0x00B; break;
+        case 'f': codePoint = 0x00C; break;
+        case 'r': codePoint = 0x00D; break;
         }
         return createEscaped('singleEscape', codePoint, '\\' + res[0]);
       } else if (res = matchReg(/^c([a-zA-Z])/)) {
@@ -1176,24 +1176,24 @@
 
         // Check if both the from and atomTo have codePoints.
         if (!('codePoint' in atom) || !('codePoint' in atomTo)) {
-            if (!isUnicodeMode) {
-                // If not, don't create a range but treat them as
-                // `atom` `-` `atom` instead.
-                //
-                // SEE: https://tc39.es/ecma262/#sec-regular-expression-patterns-semantics
-                //   NonemptyClassRanges::ClassAtom-ClassAtomClassRanges
-                //   CharacterRangeOrUnion
-                res = [atom, dash, atomTo];
-            } else {
-                // With unicode flag, both sides must have codePoints if
-                // one side has a codePoint.
-                //
-                // SEE: https://tc39.es/ecma262/#sec-patterns-static-semantics-early-errors
-                //   NonemptyClassRanges :: ClassAtom - ClassAtom ClassRanges
-                bail('invalid character class');
-            }
+          if (!isUnicodeMode) {
+            // If not, don't create a range but treat them as
+            // `atom` `-` `atom` instead.
+            //
+            // SEE: https://tc39.es/ecma262/#sec-regular-expression-patterns-semantics
+            //   NonemptyClassRanges::ClassAtom-ClassAtomClassRanges
+            //   CharacterRangeOrUnion
+            res = [atom, dash, atomTo];
+          } else {
+            // With unicode flag, both sides must have codePoints if
+            // one side has a codePoint.
+            //
+            // SEE: https://tc39.es/ecma262/#sec-patterns-static-semantics-early-errors
+            //   NonemptyClassRanges :: ClassAtom - ClassAtom ClassRanges
+            bail('invalid character class');
+          }
         } else {
-            res = [createClassRange(atom, atomTo, from, to)];
+          res = [createClassRange(atom, atomTo, from, to)];
         }
 
         if (classRanges.type === 'empty') {
