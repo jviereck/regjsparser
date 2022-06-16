@@ -817,14 +817,16 @@
       disablingFlags = disablingFlags ? disablingFlags[0] : "";
 
       var flags = enablingFlags + disablingFlags;
-      if(flags.length > 3 || hasDupChar(flags)){
+      if(flags.length > 3 || hasDupChar(flags)) {
         bail('flags cannot be duplicated for modifiers group');
       }
 
       var modifiersGroup = finishGroup("ignore", from);
 
-      modifiersGroup.enablingFlags = enablingFlags;
-      modifiersGroup.disablingFlags = disablingFlags;
+      modifiersGroup.modifierFlags = {
+          enabling: enablingFlags,
+          disabling: disablingFlags
+        };
 
       return modifiersGroup;
     }

@@ -99,17 +99,35 @@ export type CharacterClass<F extends Features = {}> = Base<"characterClass"> & {
   kind: "union" | _If<F["unicodeSet"], "intersection" | "subtraction", never>;
 };
 
-export type NonCapturingGroup<F extends Features = {}> = Base<"group"> & {
-  behavior:
-    | "ignore"
-    | "lookahead"
-    | "lookbehind"
-    | "negativeLookahead"
-    | "negativeLookbehind";
-  body: RootNode<F>[];
-  enablingFlags?: string;
-  disablingFlags?: string;
-};
+export type ModifierFlags = {
+  enabling: string,
+  disabling: string
+}
+
+export type NonCapturingGroup<F extends Features = {}> = Base<"group"> &
+  (
+    | {
+        behavior:
+          | "lookahead"
+          | "lookbehind"
+          | "negativeLookahead"
+          | "negativeLookbehind";
+        body: RootNode<F>[];
+      }
+    | ({
+        behavior: "ignore";
+        body: RootNode<F>[];
+      } & _If<
+        F["modifiers"],
+        {
+          modifierFlags?: ModifierFlags;
+        },
+        {
+          modifierFlags: undefined;
+        }
+      >)
+  );
+
 
 export type CapturingGroup<F extends Features = {}> = Base<"group"> & {
   behavior: "normal";

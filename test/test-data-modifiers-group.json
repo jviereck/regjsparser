@@ -111,8 +111,10 @@
           17
         ],
         "raw": "(?-i:[a-z])",
-        "enablingFlags": "",
-        "disablingFlags": "i"
+        "modifierFlags": {
+          "enabling": "",
+          "disabling": "i"
+        }
       },
       {
         "type": "anchor",
@@ -202,8 +204,10 @@
           11
         ],
         "raw": "(?i:[a-z])",
-        "enablingFlags": "i",
-        "disablingFlags": ""
+        "modifierFlags": {
+          "enabling": "i",
+          "disabling": ""
+        }
       },
       {
         "type": "characterClass",
@@ -333,8 +337,10 @@
           13
         ],
         "raw": "(?i-s:[a-z])",
-        "enablingFlags": "i",
-        "disablingFlags": "s"
+        "modifierFlags": {
+          "enabling": "i",
+          "disabling": "s"
+        }
       },
       {
         "type": "characterClass",
