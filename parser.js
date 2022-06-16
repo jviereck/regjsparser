@@ -728,7 +728,6 @@
       //      \ AtomEscape
       //      CharacterClass
       //      ( GroupSpecifier Disjunction )
-      //      ( ? : Disjunction )
       //      ( ? RegularExpressionFlags : Disjunction )
       //      ( ? RegularExpressionFlags - RegularExpressionFlags : Disjunction )
       // ExtendedAtom ::
@@ -778,7 +777,7 @@
         group.name = name;
         return group;
       }
-      else if (features.modifiersGroup && str.indexOf("(?") == pos && str[pos+2] != ":") {
+      else if (features.modifiers && str.indexOf("(?") == pos && str[pos+2] != ":") {
         return parseModifiersGroup();
       }
       else {
@@ -822,19 +821,11 @@
         bail('flags cannot be duplicated for modifiers group');
       }
 
-      var modifiersGroup = {
-        type: 'modifiersGroup',
-        enablingFlags: enablingFlags,
-        disablingFlags: disablingFlags,
-      };
+      var modifiersGroup = finishGroup("ignore", from);
 
-      skip(":");
-      modifiersGroup.body = parseDisjunction();
-      if (!modifiersGroup.body) {
-        bail('Expected disjunction');
-      }
-      skip(")");
-      modifiersGroup.range = [from, pos];
+      modifiersGroup.enablingFlags = enablingFlags;
+      modifiersGroup.disablingFlags = disablingFlags;
+
       return modifiersGroup;
     }
 

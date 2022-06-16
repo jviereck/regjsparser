@@ -58,5 +58,5 @@ updateFixtures('./test-data-unicode-set.json', 'v', {
   unicodePropertyEscape: true
 });
 updateFixtures('./test-data-modifiers-group.json', '', {
-  modifiersGroup: true,
+  modifiers: true,
 });

@@ -63,11 +63,11 @@ runTests('./test-data-unicode-set.json', 'v', {
   unicodePropertyEscape: true
 });
 runTests('./test-data-modifiers-group.json', '', {
-  modifiersGroup: true,
+  modifiers: true,
   namedGroups: true,
 });
 runTests('./test-data-named-groups.json', '', {
-  modifiersGroup: true,
+  modifiers: true,
   namedGroups: true,
 });
 
