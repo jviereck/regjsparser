@@ -5,6 +5,7 @@ export type Features = {
   namedGroups?: boolean;
   unicodePropertyEscape?: boolean;
   unicodeSet?: boolean;
+  modifiers?: boolean;
 };
 
 export type AstNodeType =
@@ -106,6 +107,8 @@ export type NonCapturingGroup<F extends Features = {}> = Base<"group"> & {
     | "negativeLookahead"
     | "negativeLookbehind";
   body: RootNode<F>[];
+  enablingFlags?: string;
+  disablingFlags?: string;
 };
 
 export type CapturingGroup<F extends Features = {}> = Base<"group"> & {
