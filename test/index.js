@@ -62,6 +62,15 @@ runTests('./test-data-unicode-set.json', 'v', {
   unicodeSet: true,
   unicodePropertyEscape: true
 });
+runTests('./test-data-modifiers-group.json', '', {
+  modifiers: true,
+  namedGroups: true,
+});
+runTests('./test-data-named-groups.json', '', {
+  modifiers: true,
+  namedGroups: true,
+});
+
 
 (function testUVError() {
   var message = 'It should throw an error when using both the "u" and "v" flags.';

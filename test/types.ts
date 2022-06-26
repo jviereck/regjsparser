@@ -1,4 +1,4 @@
-import { AstNodeType, Identifier, parse, RootNode } from "../parser";
+import { AstNodeType, Identifier, ModifierFlags, parse, RootNode } from "../parser";
 
 function assert<T>(input: T): void {}
 
@@ -87,4 +87,16 @@ if (nodeWithUnicodeSet.type === "characterClass") {
   nodeWithUnicodeSet.kind === "intersection";
   nodeWithUnicodeSet.kind === "subtraction";
   assert<"union" | "intersection" | "subtraction">(nodeWithUnicodeSet.kind);
+}
+
+let nodeWithModifiers: RootNode<{ modifiers: true }>;
+nodeWithModifiers = parse("", "", {
+  modifiers: true,
+});
+
+if (
+  nodeWithModifiers.type === "group" &&
+  nodeWithModifiers.behavior === "ignore"
+) {
+  assert<ModifierFlags | undefined>(nodeWithModifiers.modifierFlags);
 }
