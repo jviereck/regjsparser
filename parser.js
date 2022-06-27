@@ -981,11 +981,11 @@
         // ControlEscape
         var codePoint = 0;
         switch (res[0]) {
-        case 't': codePoint = 0x009; break;
-        case 'n': codePoint = 0x00A; break;
-        case 'v': codePoint = 0x00B; break;
-        case 'f': codePoint = 0x00C; break;
-        case 'r': codePoint = 0x00D; break;
+          case 't': codePoint = 0x009; break;
+          case 'n': codePoint = 0x00A; break;
+          case 'v': codePoint = 0x00B; break;
+          case 'f': codePoint = 0x00C; break;
+          case 'r': codePoint = 0x00D; break;
         }
         return createEscaped('singleEscape', codePoint, '\\' + res[0]);
       } else if (res = matchReg(/^c([a-zA-Z])/)) {

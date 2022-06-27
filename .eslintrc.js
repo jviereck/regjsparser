@@ -7,7 +7,7 @@ module.exports = {
   },
 
   rules: {
-    'indent': ['warn', 2],
+    'indent': ['warn', 2, { "SwitchCase": 1 }],
     "space-infix-ops": ["warn", { "int32Hint": false }],
 
     "no-cond-assign": ["off"],
