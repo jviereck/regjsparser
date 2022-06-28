@@ -7,7 +7,7 @@ var version = '11.0.0'; // note: also update `package.json` when this changes
 
 // Shorthand function
 var get = function(what) {
-    return require('unicode-' + version + '/' + what + '/code-points');
+  return require('unicode-' + version + '/' + what + '/code-points');
 };
 
 // Get the Unicode properties needed to construct the regex.

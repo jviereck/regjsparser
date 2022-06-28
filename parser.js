@@ -317,9 +317,9 @@
             // Unicode surrogate pair
             pos++;
             return createValue(
-                'symbol',
-                (first - 0xD800) * 0x400 + second - 0xDC00 + 0x10000,
-                pos - 2, pos);
+              'symbol',
+              (first - 0xD800) * 0x400 + second - 0xDC00 + 0x10000,
+              pos - 2, pos);
           }
         }
       }
@@ -1234,24 +1234,24 @@
 
         // Check if both the from and atomTo have codePoints.
         if (!('codePoint' in atom) || !('codePoint' in atomTo)) {
-            if (!isUnicodeMode) {
-                // If not, don't create a range but treat them as
-                // `atom` `-` `atom` instead.
-                //
-                // SEE: https://tc39.es/ecma262/#sec-regular-expression-patterns-semantics
-                //   NonemptyClassRanges::ClassAtom-ClassAtomClassRanges
-                //   CharacterRangeOrUnion
-                res = [atom, dash, atomTo];
-            } else {
-                // With unicode flag, both sides must have codePoints if
-                // one side has a codePoint.
-                //
-                // SEE: https://tc39.es/ecma262/#sec-patterns-static-semantics-early-errors
-                //   NonemptyClassRanges :: ClassAtom - ClassAtom ClassRanges
-                bail('invalid character class');
-            }
+          if (!isUnicodeMode) {
+            // If not, don't create a range but treat them as
+            // `atom` `-` `atom` instead.
+            //
+            // SEE: https://tc39.es/ecma262/#sec-regular-expression-patterns-semantics
+            //   NonemptyClassRanges::ClassAtom-ClassAtomClassRanges
+            //   CharacterRangeOrUnion
+            res = [atom, dash, atomTo];
+          } else {
+            // With unicode flag, both sides must have codePoints if
+            // one side has a codePoint.
+            //
+            // SEE: https://tc39.es/ecma262/#sec-patterns-static-semantics-early-errors
+            //   NonemptyClassRanges :: ClassAtom - ClassAtom ClassRanges
+            bail('invalid character class');
+          }
         } else {
-            res = [createClassRange(atom, atomTo, from, to)];
+          res = [createClassRange(atom, atomTo, from, to)];
         }
 
         if (classRanges.type === 'empty') {
