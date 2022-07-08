@@ -821,6 +821,8 @@
         bail('flags cannot be duplicated for modifiers group');
       }
 
+      skip(":");
+
       var modifiersGroup = finishGroup("ignore", from);
 
       modifiersGroup.modifierFlags = {
