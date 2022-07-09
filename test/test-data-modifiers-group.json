@@ -56,16 +56,6 @@
         "behavior": "ignore",
         "body": [
           {
-            "type": "value",
-            "kind": "symbol",
-            "codePoint": 58,
-            "range": [
-              10,
-              11
-            ],
-            "raw": ":"
-          },
-          {
             "type": "characterClass",
             "kind": "union",
             "body": [
@@ -148,16 +138,6 @@
         "type": "group",
         "behavior": "ignore",
         "body": [
-          {
-            "type": "value",
-            "kind": "symbol",
-            "codePoint": 58,
-            "range": [
-              4,
-              5
-            ],
-            "raw": ":"
-          },
           {
             "type": "characterClass",
             "kind": "union",
@@ -281,16 +261,6 @@
         "type": "group",
         "behavior": "ignore",
         "body": [
-          {
-            "type": "value",
-            "kind": "symbol",
-            "codePoint": 58,
-            "range": [
-              6,
-              7
-            ],
-            "raw": ":"
-          },
           {
             "type": "characterClass",
             "kind": "union",
