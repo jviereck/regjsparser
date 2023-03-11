@@ -38489,5 +38489,40 @@
       7
     ],
     "raw": "a{1,,2}"
+  },
+  "(?=a)?": {
+    "type": "quantifier",
+    "min": 0,
+    "max": 1,
+    "greedy": true,
+    "body": [
+      {
+        "type": "group",
+        "behavior": "lookahead",
+        "body": [
+          {
+            "type": "value",
+            "kind": "symbol",
+            "codePoint": 97,
+            "range": [
+              3,
+              4
+            ],
+            "raw": "a"
+          }
+        ],
+        "range": [
+          0,
+          5
+        ],
+        "raw": "(?=a)"
+      }
+    ],
+    "symbol": "?",
+    "range": [
+      0,
+      6
+    ],
+    "raw": "(?=a)?"
   }
 }
