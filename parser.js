@@ -20,6 +20,7 @@
 //
 // Term ::
 //      Anchor
+//      Anchor Quantifier (see https://github.com/jviereck/regjsparser/issues/130)
 //      Atom
 //      Atom Quantifier
 //
@@ -559,6 +560,7 @@
     function parseTerm() {
       // Term ::
       //      Anchor
+      //      Anchor Quantifier (see https://github.com/jviereck/regjsparser/issues/130)
       //      Atom
       //      Atom Quantifier
 
@@ -566,42 +568,43 @@
         return null; /* Means: The term is empty */
       }
 
-      var anchor = parseAnchor();
+      var anchorOrAtom = parseAnchor();
 
-      if (anchor) {
-        return anchor;
+      // If there is no Anchor, try to parse an atom.
+      if (!anchorOrAtom) {
+        var atom = parseAtomAndExtendedAtom();
+        var quantifier;
+        if (!atom) {
+          // Check if a quantifier is following. A quantifier without an atom
+          // is an error.
+          var pos_backup = pos
+          quantifier = parseQuantifier() || false;
+          if (quantifier) {
+            pos = pos_backup
+            bail('Expected atom');
+          }
+
+          // If no unicode flag, then try to parse ExtendedAtom -> ExtendedPatternCharacter.
+          //      ExtendedPatternCharacter
+          var res;
+          if (!isUnicodeMode && (res = matchReg(/^{/))) {
+            atom = createCharacter(res);
+          } else {
+            bail('Expected atom');
+          }
+        }
+        anchorOrAtom = atom;
       }
 
-      var atom = parseAtomAndExtendedAtom();
-      var quantifier;
-      if (!atom) {
-        // Check if a quantifier is following. A quantifier without an atom
-        // is an error.
-        var pos_backup = pos
-        quantifier = parseQuantifier() || false;
-        if (quantifier) {
-          pos = pos_backup
-          bail('Expected atom');
-        }
-
-        // If no unicode flag, then try to parse ExtendedAtom -> ExtendedPatternCharacter.
-        //      ExtendedPatternCharacter
-        var res;
-        if (!isUnicodeMode && (res = matchReg(/^{/))) {
-          atom = createCharacter(res);
-        } else {
-          bail('Expected atom');
-        }
-      }
       quantifier = parseQuantifier() || false;
       if (quantifier) {
-        quantifier.body = flattenBody(atom);
+        quantifier.body = flattenBody(anchorOrAtom);
         // The quantifier contains the atom. Therefore, the beginning of the
         // quantifier range is given by the beginning of the atom.
-        updateRawStart(quantifier, atom.range[0]);
+        updateRawStart(quantifier, anchorOrAtom.range[0]);
         return quantifier;
       }
-      return atom;
+      return anchorOrAtom;
     }
 
     function parseGroup(matchA, typeA, matchB, typeB) {
@@ -777,7 +780,7 @@
         group.name = name;
         return group;
       }
-      else if (features.modifiers && str.indexOf("(?") == pos && str[pos+2] != ":") {
+      else if (features.modifiers && str.indexOf("(?") == pos && str[pos + 2] != ":") {
         return parseModifiersGroup();
       }
       else {
@@ -826,9 +829,9 @@
       var modifiersGroup = finishGroup("ignore", from);
 
       modifiersGroup.modifierFlags = {
-          enabling: enablingFlags,
-          disabling: disablingFlags
-        };
+        enabling: enablingFlags,
+        disabling: disablingFlags
+      };
 
       return modifiersGroup;
     }
