@@ -1,4 +1,10 @@
-import { AstNodeType, Identifier, ModifierFlags, parse, RootNode } from "../parser";
+import {
+  AstNodeType,
+  Identifier,
+  ModifierFlags,
+  parse,
+  RootNode,
+} from "../parser";
 
 function assert<T>(input: T): void {}
 
@@ -58,7 +64,8 @@ if (
 
 if (nodeWithNamedGroups.type === "reference") {
   // namedGroups = true
-  assert<Identifier>(nodeWithNamedGroups.name);
+  assert<number | undefined>(nodeWithNamedGroups.matchIndex);
+  assert<Identifier | undefined>(nodeWithNamedGroups.name);
 }
 
 let nodeWithMaybeNamedGroups = parse("", "", {
