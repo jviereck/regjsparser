@@ -598,6 +598,21 @@
 
       quantifier = parseQuantifier() || false;
       if (quantifier) {
+        var type = anchorOrAtom.type, behavior = anchorOrAtom.behavior;
+        if (
+          type === "group" &&
+          (behavior === "negativeLookbehind" ||
+            behavior === "lookbehind" ||
+            (isUnicodeMode &&
+              (behavior === "negativeLookahead" || behavior === "lookahead")))
+        ) {
+          bail(
+            "Invalid quantifier",
+            "",
+            quantifier.range[0],
+            quantifier.range[1]
+          );
+        }
         quantifier.body = flattenBody(anchorOrAtom);
         // The quantifier contains the atom. Therefore, the beginning of the
         // quantifier range is given by the beginning of the atom.
