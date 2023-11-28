@@ -111,5 +111,24 @@
       ],
       "raw": "\\u{102A7}\u0220"
     }
+  },
+  "(?<\\u{2EBF0}\\u{200C}\\u{200D}>)": {
+    "type": "group",
+    "behavior": "normal",
+    "body": [],
+    "range": [
+      0,
+      30
+    ],
+    "raw": "(?<\\u{2EBF0}\\u{200C}\\u{200D}>)",
+    "name": {
+      "type": "identifier",
+      "value": "\uD87A\uDFF0\u200C\u200D",
+      "range": [
+        3,
+        28
+      ],
+      "raw": "\\u{2EBF0}\\u{200C}\\u{200D}"
+    }
   }
 }
