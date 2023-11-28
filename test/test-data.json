@@ -38524,5 +38524,107 @@
       6
     ],
     "raw": "(?=a)?"
+  },
+  ".(?=.){2,3}": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "dot",
+        "range": [
+          0,
+          1
+        ],
+        "raw": "."
+      },
+      {
+        "type": "quantifier",
+        "min": 2,
+        "max": 3,
+        "greedy": true,
+        "body": [
+          {
+            "type": "group",
+            "behavior": "lookahead",
+            "body": [
+              {
+                "type": "dot",
+                "range": [
+                  4,
+                  5
+                ],
+                "raw": "."
+              }
+            ],
+            "range": [
+              1,
+              6
+            ],
+            "raw": "(?=.)"
+          }
+        ],
+        "symbol": null,
+        "range": [
+          1,
+          11
+        ],
+        "raw": "(?=.){2,3}"
+      }
+    ],
+    "range": [
+      0,
+      11
+    ],
+    "raw": ".(?=.){2,3}"
+  },
+  ".(?!.){2,3}": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "dot",
+        "range": [
+          0,
+          1
+        ],
+        "raw": "."
+      },
+      {
+        "type": "quantifier",
+        "min": 2,
+        "max": 3,
+        "greedy": true,
+        "body": [
+          {
+            "type": "group",
+            "behavior": "negativeLookahead",
+            "body": [
+              {
+                "type": "dot",
+                "range": [
+                  4,
+                  5
+                ],
+                "raw": "."
+              }
+            ],
+            "range": [
+              1,
+              6
+            ],
+            "raw": "(?!.)"
+          }
+        ],
+        "symbol": null,
+        "range": [
+          1,
+          11
+        ],
+        "raw": "(?!.){2,3}"
+      }
+    ],
+    "range": [
+      0,
+      11
+    ],
+    "raw": ".(?!.){2,3}"
   }
 }

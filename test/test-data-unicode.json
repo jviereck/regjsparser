@@ -1228,5 +1228,17 @@
     "name": "SyntaxError",
     "message": "Invalid decimal escape in unicode mode at position 1\n    \\2(.)\n     ^",
     "input": "\\2(.)"
+  },
+  ".(?=.){2,3}": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid quantifier at position 6\n    .(?=.){2,3}\n          ^",
+    "input": ".(?=.){2,3}"
+  },
+  ".(?!.){2,3}": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid quantifier at position 6\n    .(?!.){2,3}\n          ^",
+    "input": ".(?!.){2,3}"
   }
 }

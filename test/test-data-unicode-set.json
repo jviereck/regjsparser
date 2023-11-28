@@ -1561,5 +1561,17 @@
       21
     ],
     "raw": "[\\u{14630}-\\u{14633}]"
+  },
+  ".(?=.){2,3}": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid quantifier at position 6\n    .(?=.){2,3}\n          ^",
+    "input": ".(?=.){2,3}"
+  },
+  ".(?!.){2,3}": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid quantifier at position 6\n    .(?!.){2,3}\n          ^",
+    "input": ".(?!.){2,3}"
   }
 }
