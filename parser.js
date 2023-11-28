@@ -795,7 +795,7 @@
         group.name = name;
         return group;
       }
-      else if (features.modifiers && str.indexOf("(?") == pos && str[pos + 2] != ":") {
+      else if (features.modifiers && str.indexOf("(?", pos) === pos && str[pos + 2] != ":") {
         return parseModifiersGroup();
       }
       else {
