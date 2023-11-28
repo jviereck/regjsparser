@@ -52,7 +52,7 @@ export type Anchor = Base<"anchor"> & {
 };
 
 export type CharacterClassEscape = Base<"characterClassEscape"> & {
-  value: string;
+  value: 'd' | 'D' | 'w' | 'W' | 's' | 'S';
 };
 
 export type Value = Base<"value"> & {

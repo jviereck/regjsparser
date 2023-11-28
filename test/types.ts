@@ -1,4 +1,10 @@
-import { AstNodeType, Identifier, ModifierFlags, parse, RootNode } from "../parser";
+import {
+  AstNodeType,
+  Identifier,
+  ModifierFlags,
+  parse,
+  RootNode,
+} from "../parser";
 
 function assert<T>(input: T): void {}
 
@@ -28,6 +34,10 @@ if (defaultNode.type === "reference") {
 if (defaultNode.type === "characterClass") {
   defaultNode.kind === "union";
   assert<"union">(defaultNode.kind);
+}
+
+if (defaultNode.type === "characterClassEscape") {
+  assert<"d" | "D" | "w" | "W" | "s" | "S">(defaultNode.value);
 }
 
 assert<number>(defaultNode.range[0]);
