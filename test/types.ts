@@ -68,7 +68,8 @@ if (
 
 if (nodeWithNamedGroups.type === "reference") {
   // namedGroups = true
-  assert<Identifier>(nodeWithNamedGroups.name);
+  assert<number | undefined>(nodeWithNamedGroups.matchIndex);
+  assert<Identifier | undefined>(nodeWithNamedGroups.name);
 }
 
 let nodeWithMaybeNamedGroups = parse("", "", {
