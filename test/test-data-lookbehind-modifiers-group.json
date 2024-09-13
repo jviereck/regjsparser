@@ -1,0 +1,192 @@
+{
+  "^(?<=(?i:un))parse(?=(?i:able))$": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "anchor",
+        "kind": "start",
+        "range": [
+          0,
+          1
+        ],
+        "raw": "^"
+      },
+      {
+        "type": "group",
+        "behavior": "lookbehind",
+        "body": [
+          {
+            "type": "group",
+            "behavior": "ignore",
+            "body": [
+              {
+                "type": "value",
+                "kind": "symbol",
+                "codePoint": 117,
+                "range": [
+                  9,
+                  10
+                ],
+                "raw": "u"
+              },
+              {
+                "type": "value",
+                "kind": "symbol",
+                "codePoint": 110,
+                "range": [
+                  10,
+                  11
+                ],
+                "raw": "n"
+              }
+            ],
+            "range": [
+              5,
+              12
+            ],
+            "raw": "(?i:un)",
+            "modifierFlags": {
+              "enabling": "i",
+              "disabling": ""
+            }
+          }
+        ],
+        "range": [
+          1,
+          13
+        ],
+        "raw": "(?<=(?i:un))"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 112,
+        "range": [
+          13,
+          14
+        ],
+        "raw": "p"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 97,
+        "range": [
+          14,
+          15
+        ],
+        "raw": "a"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 114,
+        "range": [
+          15,
+          16
+        ],
+        "raw": "r"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 115,
+        "range": [
+          16,
+          17
+        ],
+        "raw": "s"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 101,
+        "range": [
+          17,
+          18
+        ],
+        "raw": "e"
+      },
+      {
+        "type": "group",
+        "behavior": "lookahead",
+        "body": [
+          {
+            "type": "group",
+            "behavior": "ignore",
+            "body": [
+              {
+                "type": "value",
+                "kind": "symbol",
+                "codePoint": 97,
+                "range": [
+                  25,
+                  26
+                ],
+                "raw": "a"
+              },
+              {
+                "type": "value",
+                "kind": "symbol",
+                "codePoint": 98,
+                "range": [
+                  26,
+                  27
+                ],
+                "raw": "b"
+              },
+              {
+                "type": "value",
+                "kind": "symbol",
+                "codePoint": 108,
+                "range": [
+                  27,
+                  28
+                ],
+                "raw": "l"
+              },
+              {
+                "type": "value",
+                "kind": "symbol",
+                "codePoint": 101,
+                "range": [
+                  28,
+                  29
+                ],
+                "raw": "e"
+              }
+            ],
+            "range": [
+              21,
+              30
+            ],
+            "raw": "(?i:able)",
+            "modifierFlags": {
+              "enabling": "i",
+              "disabling": ""
+            }
+          }
+        ],
+        "range": [
+          18,
+          31
+        ],
+        "raw": "(?=(?i:able))"
+      },
+      {
+        "type": "anchor",
+        "kind": "end",
+        "range": [
+          31,
+          32
+        ],
+        "raw": "$"
+      }
+    ],
+    "range": [
+      0,
+      32
+    ],
+    "raw": "^(?<=(?i:un))parse(?=(?i:able))$"
+  }
+}

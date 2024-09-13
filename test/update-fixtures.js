@@ -60,3 +60,7 @@ updateFixtures('./test-data-unicode-set.json', 'v', {
 updateFixtures('./test-data-modifiers-group.json', '', {
   modifiers: true,
 });
+updateFixtures('./test-data-lookbehind-modifiers-group.json', '', {
+  lookbehind: true,
+  modifiers: true,
+});
