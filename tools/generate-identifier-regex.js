@@ -3,7 +3,7 @@
 var regenerate = require('regenerate');
 
 // Which Unicode version should be used?
-var version = '15.1.0'; // note: also update `package.json` when this changes
+var version = '16.0.0'; // note: also update `package.json` when this changes
 
 // Shorthand function
 var get = function(what) {
