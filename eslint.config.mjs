@@ -33,6 +33,7 @@ export default [
       "no-cond-assign": ["off"],
       "no-useless-escape": ["off"],
       "no-empty": ["off"],
+      "no-unused-vars": ["error", { "caughtErrors": "none" }],
     },
   },
 ];
