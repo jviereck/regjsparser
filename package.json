@@ -25,7 +25,7 @@
     "README.md"
   ],
   "dependencies": {
-    "jsesc": "~0.5.0"
+    "jsesc": "~3.0.2"
   },
   "devDependencies": {
     "eslint": "^9.10.0",
