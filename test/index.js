@@ -70,6 +70,10 @@ runTests('./test-data-named-groups.json', '', {
   modifiers: true,
   namedGroups: true,
 });
+runTests('./test-data-lookbehind-modifiers-group.json', '', {
+  lookbehind: true,
+  modifiers: true,
+});
 
 
 (function testUVError() {
