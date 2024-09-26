@@ -1534,7 +1534,7 @@
         return createEscaped('singleEscape', 0x0008, '\\b');
       } else if (match('B')) {
         bail('\\B not possible inside of ClassContents', '', pos - 2);
-      } else if (res = matchReg(/^[&\-!#%,:;<=>@_`~]/)) {
+      } else if (res = matchReg(/^[&\-!#%,:;<=>@`~]/)) {
         return createEscaped('identifier', res[0].codePointAt(0), res[0]);
       } else if (res = parseCharacterEscape()) {
         return res;

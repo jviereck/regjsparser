@@ -1573,5 +1573,11 @@
     "name": "SyntaxError",
     "message": "Invalid quantifier at position 6\n    .(?!.){2,3}\n          ^",
     "input": ".(?!.){2,3}"
+  },
+  "[\\__]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid escape at position 1: \\_\n    [\\__]\n     ^",
+    "input": "[\\__]"
   }
 }
