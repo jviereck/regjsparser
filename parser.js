@@ -1517,6 +1517,9 @@
       //      ...
 
       var res;
+      if (matchReg(/^(?:&&|!!|##|\$\$|%%|\*\*|\+\+|,,|\.\.|::|;;|<<|==|>>|\?\?|@@|\^\^|``|~~)/)) {
+        bail('Invalid set operation in character class');
+      }
       if (res = matchReg(/^[^()[\]{}/\-\\|]/)) {
         return createCharacter(res);
       }

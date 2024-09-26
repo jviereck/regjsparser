@@ -914,76 +914,10 @@
     "raw": "[[a-z]&&[p-s]]"
   },
   "[AB&&CD]": {
-    "type": "characterClass",
-    "kind": "union",
-    "body": [
-      {
-        "type": "value",
-        "kind": "symbol",
-        "codePoint": 65,
-        "range": [
-          1,
-          2
-        ],
-        "raw": "A"
-      },
-      {
-        "type": "value",
-        "kind": "symbol",
-        "codePoint": 66,
-        "range": [
-          2,
-          3
-        ],
-        "raw": "B"
-      },
-      {
-        "type": "value",
-        "kind": "symbol",
-        "codePoint": 38,
-        "range": [
-          3,
-          4
-        ],
-        "raw": "&"
-      },
-      {
-        "type": "value",
-        "kind": "symbol",
-        "codePoint": 38,
-        "range": [
-          4,
-          5
-        ],
-        "raw": "&"
-      },
-      {
-        "type": "value",
-        "kind": "symbol",
-        "codePoint": 67,
-        "range": [
-          5,
-          6
-        ],
-        "raw": "C"
-      },
-      {
-        "type": "value",
-        "kind": "symbol",
-        "codePoint": 68,
-        "range": [
-          6,
-          7
-        ],
-        "raw": "D"
-      }
-    ],
-    "negative": false,
-    "range": [
-      0,
-      8
-    ],
-    "raw": "[AB&&CD]"
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid set operation in character class at position 5\n    [AB&&CD]\n         ^",
+    "input": "[AB&&CD]"
   },
   "[AB--CD]": {
     "type": "error",
@@ -1579,5 +1513,119 @@
     "name": "SyntaxError",
     "message": "Invalid escape at position 1: \\_\n    [\\__]\n     ^",
     "input": "[\\__]"
+  },
+  "[&&]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid set operation in character class at position 3\n    [&&]\n       ^",
+    "input": "[&&]"
+  },
+  "[!!]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid set operation in character class at position 3\n    [!!]\n       ^",
+    "input": "[!!]"
+  },
+  "[##]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid set operation in character class at position 3\n    [##]\n       ^",
+    "input": "[##]"
+  },
+  "[$$]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid set operation in character class at position 3\n    [$$]\n       ^",
+    "input": "[$$]"
+  },
+  "[%%]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid set operation in character class at position 3\n    [%%]\n       ^",
+    "input": "[%%]"
+  },
+  "[**]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid set operation in character class at position 3\n    [**]\n       ^",
+    "input": "[**]"
+  },
+  "[++]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid set operation in character class at position 3\n    [++]\n       ^",
+    "input": "[++]"
+  },
+  "[,,]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid set operation in character class at position 3\n    [,,]\n       ^",
+    "input": "[,,]"
+  },
+  "[..]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid set operation in character class at position 3\n    [..]\n       ^",
+    "input": "[..]"
+  },
+  "[::]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid set operation in character class at position 3\n    [::]\n       ^",
+    "input": "[::]"
+  },
+  "[;;]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid set operation in character class at position 3\n    [;;]\n       ^",
+    "input": "[;;]"
+  },
+  "[<<]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid set operation in character class at position 3\n    [<<]\n       ^",
+    "input": "[<<]"
+  },
+  "[==]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid set operation in character class at position 3\n    [==]\n       ^",
+    "input": "[==]"
+  },
+  "[>>]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid set operation in character class at position 3\n    [>>]\n       ^",
+    "input": "[>>]"
+  },
+  "[??]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid set operation in character class at position 3\n    [??]\n       ^",
+    "input": "[??]"
+  },
+  "[@@]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid set operation in character class at position 3\n    [@@]\n       ^",
+    "input": "[@@]"
+  },
+  "[^^^]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid set operation in character class at position 4\n    [^^^]\n        ^",
+    "input": "[^^^]"
+  },
+  "[``]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid set operation in character class at position 3\n    [``]\n       ^",
+    "input": "[``]"
+  },
+  "[~~]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid set operation in character class at position 3\n    [~~]\n       ^",
+    "input": "[~~]"
   }
 }
