@@ -704,15 +704,15 @@
       else if (match('?')) {
         quantifier = createQuantifier(0, 1, undefined, undefined, "?");
       }
-      else if (res = matchReg(/^\{([0-9]+)\}/)) {
+      else if (res = matchReg(/^\{(\d+)\}/)) {
         min = parseInt(res[1], 10);
         quantifier = createQuantifier(min, min, res.range[0], res.range[1]);
       }
-      else if (res = matchReg(/^\{([0-9]+),\}/)) {
+      else if (res = matchReg(/^\{(\d+),\}/)) {
         min = parseInt(res[1], 10);
         quantifier = createQuantifier(min, undefined, res.range[0], res.range[1]);
       }
-      else if (res = matchReg(/^\{([0-9]+),([0-9]+)\}/)) {
+      else if (res = matchReg(/^\{(\d+),(\d+)\}/)) {
         min = parseInt(res[1], 10);
         max = parseInt(res[2], 10);
         if (min > max) {
@@ -906,7 +906,7 @@
           return createEscaped('singleEscape', 0x0008, '\\b');
         } else if (match('B')) {
           bail('\\B not possible inside of CharacterClass', '', from);
-        } else if (!isUnicodeMode && (res = matchReg(/^c([0-9])/))) {
+        } else if (!isUnicodeMode && (res = matchReg(/^c(\d)/))) {
           // B.1.4
           // c ClassControlLetter, ClassControlLetter = DecimalDigit
           return createEscaped('controlLetter', res[1] + 16, res[1], 2);
