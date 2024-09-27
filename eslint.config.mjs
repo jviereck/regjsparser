@@ -36,6 +36,7 @@ export default [
       "no-useless-escape": ["off"],
       "no-empty": ["off"],
       "no-unused-vars": ["error", { "caughtErrors": "none" }],
+      "regexp/use-ignore-case": ["off"],
     },
   },
 ];
