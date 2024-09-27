@@ -588,7 +588,7 @@
           // If no unicode flag, then try to parse ExtendedAtom -> ExtendedPatternCharacter.
           //      ExtendedPatternCharacter
           var res;
-          if (!isUnicodeMode && (res = matchReg(/^{/))) {
+          if (!isUnicodeMode && (res = matchReg(/^\{/))) {
             atom = createCharacter(res);
           } else {
             bail('Expected atom');
@@ -762,7 +762,7 @@
         //      PatternCharacter
         return createCharacter(res);
       }
-      else if (!isUnicodeMode && (res = matchReg(/^(?:]|})/))) {
+      else if (!isUnicodeMode && (res = matchReg(/^(?:\]|\})/))) {
         //      ExtendedPatternCharacter, first part. See parseTerm.
         return createCharacter(res);
       }
