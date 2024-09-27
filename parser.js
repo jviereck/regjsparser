@@ -1010,7 +1010,7 @@
       var res;
       if (res = matchReg(/^[dDsSwW]/)) {
         return createCharacterClassEscape(res[0]);
-      } else if (features.unicodePropertyEscape && isUnicodeMode && (res = matchReg(/^([pP])\{([^\}]+)\}/))) {
+      } else if (features.unicodePropertyEscape && isUnicodeMode && (res = matchReg(/^([pP])\{([^}]+)\}/))) {
         // https://github.com/jviereck/regjsparser/issues/77
         return addRaw({
           type: 'unicodePropertyEscape',
@@ -1184,7 +1184,7 @@
       var tmp;
       var l = lookahead();
       if (
-        (isUnicodeMode && /[\^\$\.\*\+\?\(\)\\\[\]\{\}\|\/]/.test(l)) ||
+        (isUnicodeMode && /[\^$.*+?()\\[\]{}|/]/.test(l)) ||
         (!isUnicodeMode && l !== "c")
       ) {
         if (l === "k" && features.lookbehind) {
