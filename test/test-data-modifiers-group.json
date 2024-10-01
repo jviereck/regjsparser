@@ -510,5 +510,29 @@
     "name": "SyntaxError",
     "message": "Invalid flags for modifiers group at position 9\n    ^[a-z](?-:[a-z])$\n             ^",
     "input": "^[a-z](?-:[a-z])$"
+  },
+  "^[a-z](?ui:[a-z])$": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid flags for modifiers group at position 8\n    ^[a-z](?ui:[a-z])$\n            ^",
+    "input": "^[a-z](?ui:[a-z])$"
+  },
+  "^[a-z](?-ui:[a-z])$": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid flags for modifiers group at position 9\n    ^[a-z](?-ui:[a-z])$\n             ^",
+    "input": "^[a-z](?-ui:[a-z])$"
+  },
+  "^[a-z](?iu:[a-z])$": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid flags for modifiers group at position 8\n    ^[a-z](?iu:[a-z])$\n            ^",
+    "input": "^[a-z](?iu:[a-z])$"
+  },
+  "^[a-z](?-iu:[a-z])$": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid flags for modifiers group at position 9\n    ^[a-z](?-iu:[a-z])$\n             ^",
+    "input": "^[a-z](?-iu:[a-z])$"
   }
 }
