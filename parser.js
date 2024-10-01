@@ -588,7 +588,7 @@
           // If no unicode flag, then try to parse ExtendedAtom -> ExtendedPatternCharacter.
           //      ExtendedPatternCharacter
           var res;
-          if (!isUnicodeMode && (res = matchReg(/^{/))) {
+          if (!isUnicodeMode && (res = matchReg(/^\{/))) {
             atom = createCharacter(res);
           } else {
             bail('Expected atom');
@@ -704,15 +704,15 @@
       else if (match('?')) {
         quantifier = createQuantifier(0, 1, undefined, undefined, "?");
       }
-      else if (res = matchReg(/^\{([0-9]+)\}/)) {
+      else if (res = matchReg(/^\{(\d+)\}/)) {
         min = parseInt(res[1], 10);
         quantifier = createQuantifier(min, min, res.range[0], res.range[1]);
       }
-      else if (res = matchReg(/^\{([0-9]+),\}/)) {
+      else if (res = matchReg(/^\{(\d+),\}/)) {
         min = parseInt(res[1], 10);
         quantifier = createQuantifier(min, undefined, res.range[0], res.range[1]);
       }
-      else if (res = matchReg(/^\{([0-9]+),([0-9]+)\}/)) {
+      else if (res = matchReg(/^\{(\d+),(\d+)\}/)) {
         min = parseInt(res[1], 10);
         max = parseInt(res[2], 10);
         if (min > max) {
@@ -762,7 +762,7 @@
         //      PatternCharacter
         return createCharacter(res);
       }
-      else if (!isUnicodeMode && (res = matchReg(/^(?:]|})/))) {
+      else if (!isUnicodeMode && (res = matchReg(/^(?:\]|\})/))) {
         //      ExtendedPatternCharacter, first part. See parseTerm.
         return createCharacter(res);
       }
@@ -906,7 +906,7 @@
           return createEscaped('singleEscape', 0x0008, '\\b');
         } else if (match('B')) {
           bail('\\B not possible inside of CharacterClass', '', from);
-        } else if (!isUnicodeMode && (res = matchReg(/^c([0-9])/))) {
+        } else if (!isUnicodeMode && (res = matchReg(/^c(\d)/))) {
           // B.1.4
           // c ClassControlLetter, ClassControlLetter = DecimalDigit
           return createEscaped('controlLetter', res[1] + 16, res[1], 2);
@@ -1010,7 +1010,7 @@
       var res;
       if (res = matchReg(/^[dDsSwW]/)) {
         return createCharacterClassEscape(res[0]);
-      } else if (features.unicodePropertyEscape && isUnicodeMode && (res = matchReg(/^([pP])\{([^\}]+)\}/))) {
+      } else if (features.unicodePropertyEscape && isUnicodeMode && (res = matchReg(/^([pP])\{([^}]+)\}/))) {
         // https://github.com/jviereck/regjsparser/issues/77
         return addRaw({
           type: 'unicodePropertyEscape',
@@ -1184,7 +1184,7 @@
       var tmp;
       var l = lookahead();
       if (
-        (isUnicodeMode && /[\^\$\.\*\+\?\(\)\\\[\]\{\}\|\/]/.test(l)) ||
+        (isUnicodeMode && /[\^$.*+?()\\[\]{}|/]/.test(l)) ||
         (!isUnicodeMode && l !== "c")
       ) {
         if (l === "k" && features.lookbehind) {

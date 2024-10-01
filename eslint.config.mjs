@@ -1,11 +1,13 @@
 import globals from "globals";
 import js from "@eslint/js";
+import * as regexpPlugin from "eslint-plugin-regexp"
 
 export default [
   {
     files: ["**/*.js", "**/*.mjs"],
   },
   js.configs.recommended,
+  regexpPlugin.configs["flat/recommended"],
   {
     languageOptions: {
       globals: {
@@ -34,6 +36,7 @@ export default [
       "no-useless-escape": ["off"],
       "no-empty": ["off"],
       "no-unused-vars": ["error", { "caughtErrors": "none" }],
+      "regexp/use-ignore-case": ["off"],
     },
   },
 ];
