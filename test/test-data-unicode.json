@@ -1240,5 +1240,613 @@
     "name": "SyntaxError",
     "message": "Invalid quantifier at position 6\n    .(?!.){2,3}\n          ^",
     "input": ".(?!.){2,3}"
+  },
+  "[&&]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 38,
+        "range": [
+          1,
+          2
+        ],
+        "raw": "&"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 38,
+        "range": [
+          2,
+          3
+        ],
+        "raw": "&"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      4
+    ],
+    "raw": "[&&]"
+  },
+  "[!!]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 33,
+        "range": [
+          1,
+          2
+        ],
+        "raw": "!"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 33,
+        "range": [
+          2,
+          3
+        ],
+        "raw": "!"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      4
+    ],
+    "raw": "[!!]"
+  },
+  "[##]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 35,
+        "range": [
+          1,
+          2
+        ],
+        "raw": "#"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 35,
+        "range": [
+          2,
+          3
+        ],
+        "raw": "#"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      4
+    ],
+    "raw": "[##]"
+  },
+  "[$$]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 36,
+        "range": [
+          1,
+          2
+        ],
+        "raw": "$"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 36,
+        "range": [
+          2,
+          3
+        ],
+        "raw": "$"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      4
+    ],
+    "raw": "[$$]"
+  },
+  "[%%]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 37,
+        "range": [
+          1,
+          2
+        ],
+        "raw": "%"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 37,
+        "range": [
+          2,
+          3
+        ],
+        "raw": "%"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      4
+    ],
+    "raw": "[%%]"
+  },
+  "[**]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 42,
+        "range": [
+          1,
+          2
+        ],
+        "raw": "*"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 42,
+        "range": [
+          2,
+          3
+        ],
+        "raw": "*"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      4
+    ],
+    "raw": "[**]"
+  },
+  "[++]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 43,
+        "range": [
+          1,
+          2
+        ],
+        "raw": "+"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 43,
+        "range": [
+          2,
+          3
+        ],
+        "raw": "+"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      4
+    ],
+    "raw": "[++]"
+  },
+  "[,,]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 44,
+        "range": [
+          1,
+          2
+        ],
+        "raw": ","
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 44,
+        "range": [
+          2,
+          3
+        ],
+        "raw": ","
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      4
+    ],
+    "raw": "[,,]"
+  },
+  "[..]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 46,
+        "range": [
+          1,
+          2
+        ],
+        "raw": "."
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 46,
+        "range": [
+          2,
+          3
+        ],
+        "raw": "."
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      4
+    ],
+    "raw": "[..]"
+  },
+  "[::]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 58,
+        "range": [
+          1,
+          2
+        ],
+        "raw": ":"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 58,
+        "range": [
+          2,
+          3
+        ],
+        "raw": ":"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      4
+    ],
+    "raw": "[::]"
+  },
+  "[;;]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 59,
+        "range": [
+          1,
+          2
+        ],
+        "raw": ";"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 59,
+        "range": [
+          2,
+          3
+        ],
+        "raw": ";"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      4
+    ],
+    "raw": "[;;]"
+  },
+  "[<<]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 60,
+        "range": [
+          1,
+          2
+        ],
+        "raw": "<"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 60,
+        "range": [
+          2,
+          3
+        ],
+        "raw": "<"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      4
+    ],
+    "raw": "[<<]"
+  },
+  "[==]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 61,
+        "range": [
+          1,
+          2
+        ],
+        "raw": "="
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 61,
+        "range": [
+          2,
+          3
+        ],
+        "raw": "="
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      4
+    ],
+    "raw": "[==]"
+  },
+  "[>>]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 62,
+        "range": [
+          1,
+          2
+        ],
+        "raw": ">"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 62,
+        "range": [
+          2,
+          3
+        ],
+        "raw": ">"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      4
+    ],
+    "raw": "[>>]"
+  },
+  "[??]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 63,
+        "range": [
+          1,
+          2
+        ],
+        "raw": "?"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 63,
+        "range": [
+          2,
+          3
+        ],
+        "raw": "?"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      4
+    ],
+    "raw": "[??]"
+  },
+  "[@@]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 64,
+        "range": [
+          1,
+          2
+        ],
+        "raw": "@"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 64,
+        "range": [
+          2,
+          3
+        ],
+        "raw": "@"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      4
+    ],
+    "raw": "[@@]"
+  },
+  "[^^^]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 94,
+        "range": [
+          2,
+          3
+        ],
+        "raw": "^"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 94,
+        "range": [
+          3,
+          4
+        ],
+        "raw": "^"
+      }
+    ],
+    "negative": true,
+    "range": [
+      0,
+      5
+    ],
+    "raw": "[^^^]"
+  },
+  "[``]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 96,
+        "range": [
+          1,
+          2
+        ],
+        "raw": "`"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 96,
+        "range": [
+          2,
+          3
+        ],
+        "raw": "`"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      4
+    ],
+    "raw": "[``]"
+  },
+  "[~~]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 126,
+        "range": [
+          1,
+          2
+        ],
+        "raw": "~"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 126,
+        "range": [
+          2,
+          3
+        ],
+        "raw": "~"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      4
+    ],
+    "raw": "[~~]"
   }
 }

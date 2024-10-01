@@ -87,23 +87,23 @@
 //      one of d D s S w W
 //
 // CharacterClass ::
-//      [ [lookahead ∉ {^}] ClassRanges ]
-//      [ ^ ClassRanges ]
+//      [ [lookahead ∉ {^}] ClassContents ]
+//      [ ^ ClassContents ]
 //
-// ClassRanges ::
+// ClassContents ::
 //      [empty]
 //      [~V] NonemptyClassRanges
-//      [+V] ClassContents
+//      [+V] ClassSetExpression
 //
 // NonemptyClassRanges ::
 //      ClassAtom
 //      ClassAtom NonemptyClassRangesNoDash
-//      ClassAtom - ClassAtom ClassRanges
+//      ClassAtom - ClassAtom ClassContents
 //
 // NonemptyClassRangesNoDash ::
 //      ClassAtom
 //      ClassAtomNoDash NonemptyClassRangesNoDash
-//      ClassAtomNoDash - ClassAtom ClassRanges
+//      ClassAtomNoDash - ClassAtom ClassContents
 //
 // ClassAtom ::
 //      -
@@ -150,63 +150,64 @@
 //       https://github.com/tc39/proposal-regexp-set-notation
 // --------------------------------------------------------------
 //
-// ClassContents ::
+// ClassSetExpression ::
 //      ClassUnion
 //      ClassIntersection
 //      ClassSubtraction
 //
 // ClassUnion ::
-//      ClassRange ClassUnion?
-//      ClassOperand ClassUnion?
+//      ClassSetRange ClassUnion?
+//      ClassSetOperand ClassUnion?
 //
 // ClassIntersection ::
-//      ClassOperand && [lookahead ≠ &] ClassOperand
-//      ClassIntersection && [lookahead ≠ &] ClassOperand
+//      ClassSetOperand && [lookahead ≠ &] ClassSetOperand
+//      ClassIntersection && [lookahead ≠ &] ClassSetOperand
 //
 // ClassSubtraction ::
-//      ClassOperand -- ClassOperand
-//      ClassSubtraction -- ClassOperand
+//      ClassSetOperand -- ClassSetOperand
+//      ClassSubtraction -- ClassSetOperand
 //
-// ClassOperand ::
-//      ClassCharacter
-//      ClassStrings
+// ClassSetRange ::
+//      ClassSetCharacter - ClassSetCharacter
+//
+// ClassSetOperand ::
+//      ClassSetCharacter
+//      ClassStringDisjunction
 //      NestedClass
 //
 // NestedClass ::
-//      [ [lookahead ≠ ^] ClassRanges[+U,+V] ]
-//      [ ^ ClassRanges[+U,+V] ]
+//      [ [lookahead ≠ ^] ClassContents[+U,+V] ]
+//      [ ^ ClassContents[+U,+V] ]
 //      \ CharacterClassEscape[+U, +V]
 //
-// ClassRange ::
-//      ClassCharacter - ClassCharacter
-//
-// ClassCharacter ::
-//      [lookahead ∉ ClassReservedDouble] SourceCharacter but not ClassSyntaxCharacter
-//      \ CharacterEscape[+U]
-//      \ ClassHalfOfDouble
-//      \ b
-//
-// ClassSyntaxCharacter ::
-//      one of ( ) [ ] { } / - \ |
-//
-// ClassStrings ::
-//      ( ClassString MoreClassStrings? )
-//
-// MoreClassStrings ::
-//      | ClassString MoreClassStrings?
+// ClassStringDisjunction ::
+//      \q{ ClassStringDisjunctionContents }
+// 
+// ClassStringDisjunctionContents ::
+//      ClassString
+//      ClassString | ClassStringDisjunctionContents
 //
 // ClassString ::
 //      [empty]
 //      NonEmptyClassString
 //
 // NonEmptyClassString ::
-//      ClassCharacter NonEmptyClassString?
+//      ClassSetCharacter NonEmptyClassString?
 //
-// ClassReservedDouble ::
-//      one of && !! ## $$ %% ** ++ ,, .. :: ;; << == >> ?? @@ ^^ __ `` ~~
+// ClassSetCharacter ::
+//      [lookahead ∉ ClassSetReservedDoublePunctuator] SourceCharacter but not ClassSetSyntaxCharacter
+//      \ CharacterEscape[+U]
+//      \ ClassSetReservedPunctuator
+//      \b
 //
-// ClassHalfOfDouble ::
-//      one of & - ! # % , : ; < = > @ _ ` ~
+// ClassSetReservedDoublePunctuator ::
+//      one of && !! ## $$ %% ** ++ ,, .. :: ;; << == >> ?? @@ ^^ `` ~~
+//
+// ClassSetSyntaxCharacter ::
+//      one of ( ) [ ] { } / - \ |
+//
+// ClassSetReservedPunctuator ::
+//      one of & - ! # % , : ; < = > @ ` ~
 //
 // --------------------------------------------------------------
 // NOTE: The following productions refer to the
@@ -1019,7 +1020,7 @@
           raw: res[0]
         });
       } else if (features.unicodeSet && hasUnicodeSetFlag && match('q{')) {
-        return parseClassStrings();
+        return parseClassStringDisjunction();
       }
       return false;
     }
@@ -1198,16 +1199,16 @@
 
     function parseCharacterClass() {
       // CharacterClass ::
-      //      [ [lookahead ∉ {^}] ClassRanges ]
-      //      [ ^ ClassRanges ]
+      //      [ [lookahead ∉ {^}] ClassContents ]
+      //      [ ^ ClassContents ]
 
       var res, from = pos;
       if (res = matchReg(/^\[\^/)) {
-        res = parseClassRanges();
+        res = parseClassContents();
         skip(']');
         return createCharacterClass(res, true, from, pos);
       } else if (match('[')) {
-        res = parseClassRanges();
+        res = parseClassContents();
         skip(']');
         return createCharacterClass(res, false, from, pos);
       }
@@ -1215,18 +1216,18 @@
       return null;
     }
 
-    function parseClassRanges() {
-      // ClassRanges ::
+    function parseClassContents() {
+      // ClassContents ::
       //      [empty]
       //      [~V] NonemptyClassRanges
-      //      [+V] ClassContents
+      //      [+V] ClassSetExpression
 
       var res;
       if (current(']')) {
         // Empty array means nothing inside of the ClassRange.
         return { kind: 'union', body: [] };
       } else if (hasUnicodeSetFlag) {
-        return parseClassContents();
+        return parseClassSetExpression();
       } else {
         res = parseNonemptyClassRanges();
         if (!res) {
@@ -1236,10 +1237,10 @@
       }
     }
 
-    function parseHelperClassRanges(atom) {
+    function parseHelperClassContents(atom) {
       var from, to, res, atomTo, dash;
       if (current('-') && !next(']')) {
-        // ClassAtom - ClassAtom ClassRanges
+        // ClassAtom - ClassAtom ClassContents
         from = atom.range[0];
         dash = createCharacter(match('-'));
 
@@ -1250,9 +1251,9 @@
         to = pos;
 
         // Parse the next class range if exists.
-        var classRanges = parseClassRanges();
-        if (!classRanges) {
-          bail('classRanges');
+        var classContents = parseClassContents();
+        if (!classContents) {
+          bail('classContents');
         }
 
         // Check if both the from and atomTo have codePoints.
@@ -1262,7 +1263,7 @@
             // `atom` `-` `atom` instead.
             //
             // SEE: https://tc39.es/ecma262/#sec-regular-expression-patterns-semantics
-            //   NonemptyClassRanges::ClassAtom-ClassAtomClassRanges
+            //   NonemptyClassRanges::ClassAtom - ClassAtom ClassContents
             //   CharacterRangeOrUnion
             res = [atom, dash, atomTo];
           } else {
@@ -1270,17 +1271,17 @@
             // one side has a codePoint.
             //
             // SEE: https://tc39.es/ecma262/#sec-patterns-static-semantics-early-errors
-            //   NonemptyClassRanges :: ClassAtom - ClassAtom ClassRanges
+            //   NonemptyClassRanges :: ClassAtom - ClassAtom ClassContents
             bail('invalid character class');
           }
         } else {
           res = [createClassRange(atom, atomTo, from, to)];
         }
 
-        if (classRanges.type === 'empty') {
+        if (classContents.type === 'empty') {
           return res;
         }
-        return res.concat(classRanges.body);
+        return res.concat(classContents.body);
       }
 
       res = parseNonemptyClassRangesNoDash();
@@ -1295,7 +1296,7 @@
       // NonemptyClassRanges ::
       //      ClassAtom
       //      ClassAtom NonemptyClassRangesNoDash
-      //      ClassAtom - ClassAtom ClassRanges
+      //      ClassAtom - ClassAtom ClassContents
 
       var atom = parseClassAtom();
       if (!atom) {
@@ -1308,15 +1309,15 @@
       }
 
       // ClassAtom NonemptyClassRangesNoDash
-      // ClassAtom - ClassAtom ClassRanges
-      return parseHelperClassRanges(atom);
+      // ClassAtom - ClassAtom ClassContents
+      return parseHelperClassContents(atom);
     }
 
     function parseNonemptyClassRangesNoDash() {
       // NonemptyClassRangesNoDash ::
       //      ClassAtom
       //      ClassAtomNoDash NonemptyClassRangesNoDash
-      //      ClassAtomNoDash - ClassAtom ClassRanges
+      //      ClassAtomNoDash - ClassAtom ClassContents
 
       var res = parseClassAtom();
       if (!res) {
@@ -1328,8 +1329,8 @@
       }
 
       // ClassAtomNoDash NonemptyClassRangesNoDash
-      // ClassAtomNoDash - ClassAtom ClassRanges
-      return parseHelperClassRanges(res);
+      // ClassAtomNoDash - ClassAtom ClassContents
+      return parseHelperClassContents(res);
     }
 
     function parseClassAtom() {
@@ -1361,28 +1362,29 @@
       }
     }
 
-    function parseClassContents() {
-      // ClassContents ::
+    function parseClassSetExpression() {
+      // ClassSetExpression ::
       //      ClassUnion
       //      ClassIntersection
       //      ClassSubtraction
       //
       // ClassUnion ::
-      //      ClassRange ClassUnion?
-      //      ClassOperand ClassUnion?
+      //      ClassSetRange ClassUnion?
+      //      ClassSetOperand ClassUnion?
       //
       // ClassIntersection ::
-      //      ClassOperand && [lookahead ≠ &] ClassOperand
-      //      ClassIntersection && [lookahead ≠ &] ClassOperand
+      //      ClassSetOperand && [lookahead ≠ &] ClassSetOperand
+      //      ClassIntersection && [lookahead ≠ &] ClassSetOperand
       //
       // ClassSubtraction ::
-      //      ClassOperand -- ClassOperand
-      //      ClassSubtraction -- ClassOperand
+      //      ClassSetOperand -- ClassSetOperand
+      //      ClassSubtraction -- ClassSetOperand
+      //
 
       var body = [];
       var kind;
 
-      var operand = parseClassOperand(/* allowRanges*/ true);
+      var operand = parseClassSetOperand(/* allowRanges*/ true);
       body.push(operand);
 
       if (operand.type === 'classRange') {
@@ -1407,29 +1409,29 @@
           skip('-');
         }
 
-        operand = parseClassOperand(/* allowRanges*/ kind === 'union');
+        operand = parseClassSetOperand(/* allowRanges*/ kind === 'union');
         body.push(operand);
       }
 
       return { kind: kind, body: body };
     }
 
-    function parseClassOperand(allowRanges) {
-      // ClassOperand ::
-      //      ClassCharacter
-      //      ClassStrings
+    function parseClassSetOperand(allowRanges) {
+      // ClassSetOperand ::
+      //      ClassSetCharacter
+      //      ClassStringDisjunction
       //      NestedClass
       //
       // NestedClass ::
-      //      [ [lookahead ≠ ^] ClassRanges[+U,+V] ]
-      //      [ ^ ClassRanges[+U,+V] ]
+      //      [ [lookahead ≠ ^] ClassContents[+U,+V] ]
+      //      [ ^ ClassContents[+U,+V] ]
       //      \ CharacterClassEscape[+U, +V]
       //
-      // ClassRange ::
-      //      ClassCharacter - ClassCharacter
+      // ClassSetRange ::
+      //      ClassSetCharacter - ClassSetCharacter
       //
-      // ClassCharacter ::
-      //      [lookahead ∉ ClassReservedDouble] SourceCharacter but not ClassSyntaxCharacter
+      // ClassSetCharacter ::
+      //      [lookahead ∉ ClassReservedDouble] SourceCharacter but not ClassSetSyntaxCharacter
       //      \ CharacterEscape[+U]
       //      \ ClassHalfOfDouble
       //      \ b
@@ -1441,9 +1443,9 @@
       var start, res;
 
       if (match('\\')) {
-        // ClassOperand ::
+        // ClassSetOperand ::
         //      ...
-        //      ClassStrings
+        //      ClassStringDisjunction
         //      NestedClass
         //
         // NestedClass ::
@@ -1451,21 +1453,21 @@
         //      \ CharacterClassEscape[+U, +V]
         if (res = parseClassEscape()) {
           start = res;
-        } else if (res = parseClassCharacterEscapedHelper()) {
+        } else if (res = parseClassSetCharacterEscapedHelper()) {
           return res;
         } else {
           bail('Invalid escape', '\\' + lookahead(), from);
         }
-      } else if (res = parseClassCharacterUnescapedHelper()) {
+      } else if (res = parseClassSetCharacterUnescapedHelper()) {
         start = res;
       } else if (res = parseCharacterClass()) {
-        // ClassOperand ::
+        // ClassSetOperand ::
         //      ...
         //      NestedClass
         //
         // NestedClass ::
-        //      [ [lookahead ≠ ^] ClassRanges[+U,+V] ]
-        //      [ ^ ClassRanges[+U,+V] ]
+        //      [ [lookahead ≠ ^] ClassContents[+U,+V] ]
+        //      [ ^ ClassContents[+U,+V] ]
         //      ...
         return res;
       } else {
@@ -1475,56 +1477,59 @@
       if (allowRanges && current('-') && !next('-')) {
         skip('-');
 
-        if (res = parseClassCharacter()) {
-          // ClassRange ::
-          //      ClassCharacter - ClassCharacter
+        if (res = parseClassSetCharacter()) {
+          // ClassSetRange ::
+          //      ClassSetCharacter - ClassSetCharacter
           return createClassRange(start, res, from, pos);
         }
 
         bail('Invalid range end', lookahead());
       }
 
-      // ClassOperand ::
-      //      ClassCharacter
+      // ClassSetOperand ::
+      //      ClassSetCharacter
       //      ...
       return start;
     }
 
-    function parseClassCharacter() {
-      // ClassCharacter ::
-      //      [lookahead ∉ ClassReservedDouble] SourceCharacter but not ClassSyntaxCharacter
+    function parseClassSetCharacter() {
+      // ClassSetCharacter ::
+      //      [lookahead ∉ ClassReservedDouble] SourceCharacter but not ClassSetSyntaxCharacter
       //      \ CharacterEscape[+U]
       //      \ ClassHalfOfDouble
       //      \ b
 
       if (match('\\')) {
         var res, from = pos;
-        if (res = parseClassCharacterEscapedHelper()) {
+        if (res = parseClassSetCharacterEscapedHelper()) {
           return res;
         } else {
           bail('Invalid escape', '\\' + lookahead(), from);
         }
       }
 
-      return parseClassCharacterUnescapedHelper();
+      return parseClassSetCharacterUnescapedHelper();
     }
 
-    function parseClassCharacterUnescapedHelper() {
-      // ClassCharacter ::
-      //      [lookahead ∉ ClassReservedDouble] SourceCharacter but not ClassSyntaxCharacter
+    function parseClassSetCharacterUnescapedHelper() {
+      // ClassSetCharacter ::
+      //      [lookahead ∉ ClassSetReservedDoublePunctuator] SourceCharacter but not ClassSetSyntaxCharacter
       //      ...
 
       var res;
+      if (matchReg(/^(?:&&|!!|##|\$\$|%%|\*\*|\+\+|,,|\.\.|::|;;|<<|==|>>|\?\?|@@|\^\^|``|~~)/)) {
+        bail('Invalid set operation in character class');
+      }
       if (res = matchReg(/^[^()[\]{}/\-\\|]/)) {
         return createCharacter(res);
       }
     }
 
-    function parseClassCharacterEscapedHelper() {
-      // ClassCharacter ::
+    function parseClassSetCharacterEscapedHelper() {
+      // ClassSetCharacter ::
       //      ...
       //      \ CharacterEscape[+U]
-      //      \ ClassHalfOfDouble
+      //      \ ClassSetReservedPunctuator
       //      \ b
 
       var res;
@@ -1532,7 +1537,7 @@
         return createEscaped('singleEscape', 0x0008, '\\b');
       } else if (match('B')) {
         bail('\\B not possible inside of ClassContents', '', pos - 2);
-      } else if (res = matchReg(/^[&\-!#%,:;<=>@_`~]/)) {
+      } else if (res = matchReg(/^[&\-!#%,:;<=>@`~]/)) {
         return createEscaped('identifier', res[0].codePointAt(0), res[0]);
       } else if (res = parseCharacterEscape()) {
         return res;
@@ -1541,9 +1546,14 @@
       }
     }
 
-    function parseClassStrings() {
-      // ClassStrings ::
-      //      \q{ ClassString MoreClassStrings? }
+    function parseClassStringDisjunction() {
+      // ClassStringDisjunction ::
+      //      \q{ ClassStringDisjunctionContents }
+      //
+      // ClassStringDisjunctionContents ::
+      //      ClassString
+      //      ClassString | ClassStringDisjunctionContents
+      
 
       // When calling this function, \q{ has already been consumed.
       var from = pos - 3;
@@ -1564,12 +1574,12 @@
       //      NonEmptyClassString
       //
       // NonEmptyClassString ::
-      //      ClassCharacter NonEmptyClassString?
+      //      ClassSetCharacter NonEmptyClassString?
 
       var res = [], from = pos;
       var char;
 
-      while (char = parseClassCharacter()) {
+      while (char = parseClassSetCharacter()) {
         res.push(char);
       }
 
