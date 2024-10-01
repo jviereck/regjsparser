@@ -216,9 +216,15 @@
 // --------------------------------------------------------------
 //
 // Atom ::
-//      ( ? RegularExpressionFlags : Disjunction )
-//      ( ? RegularExpressionFlags - RegularExpressionFlags : Disjunction )
+//      ( ? RegularExpressionModifiers : Disjunction )
+//      ( ? RegularExpressionModifiers - RegularExpressionModifiers : Disjunction )
 //
+// RegularExpressionModifiers:
+//      [empty]
+//      RegularExpressionModifiers RegularExpressionModifier
+//
+// RegularExpressionModifier:
+//      one of i m s
 
 "use strict";
 (function() {
@@ -747,8 +753,8 @@
       //      \ AtomEscape
       //      CharacterClass
       //      ( GroupSpecifier Disjunction )
-      //      ( ? RegularExpressionFlags : Disjunction )
-      //      ( ? RegularExpressionFlags - RegularExpressionFlags : Disjunction )
+      //      ( ? RegularExpressionModifiers : Disjunction )
+      //      ( ? RegularExpressionModifiers - RegularExpressionModifiers : Disjunction )
       // ExtendedAtom ::
       //      ExtendedPatternCharacter
       // ExtendedPatternCharacter ::
