@@ -827,25 +827,27 @@
       var from = pos;
       incr(2);
 
-      var enablingFlags = matchReg(/^([sim]*)([:-])/);
-      if(!enablingFlags){
-        bail('Invalid flags for modifiers group');
-      }
-
+      var enablingFlags = matchReg(/^[sim]+/);
       var disablingFlags;
-      if(enablingFlags[2] === "-") {
-        disablingFlags = matchReg(/^([sim]+):/);
+      if(match("-")){
+        disablingFlags = matchReg(/^[sim]+/);
         if (!disablingFlags) {
           bail('Invalid flags for modifiers group');
         }
+      } else if(!enablingFlags){
+        bail('Invalid flags for modifiers group');
       }
 
-      enablingFlags = enablingFlags[1];
-      disablingFlags = disablingFlags ? disablingFlags[1] : "";
+      enablingFlags = enablingFlags ? enablingFlags[0] : "";
+      disablingFlags = disablingFlags ? disablingFlags[0] : "";
 
       var flags = enablingFlags + disablingFlags;
       if(flags.length > 3 || hasDupChar(flags)) {
-        bail('flags cannot be duplicated for modifiers group', '', pos - 1);
+        bail('flags cannot be duplicated for modifiers group');
+      }
+
+      if(!match(":")) {
+        bail('Invalid flags for modifiers group');
       }
 
       var modifiersGroup = finishGroup("ignore", from);
