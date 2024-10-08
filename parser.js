@@ -829,7 +829,7 @@
 
       var enablingFlags = matchReg(/^[sim]+/);
       var disablingFlags;
-      if(match("-")){
+      if(match("-") && lookahead() !== ":"){
         disablingFlags = matchReg(/^[sim]+/);
         if (!disablingFlags) {
           bail('Invalid flags for modifiers group');
