@@ -860,7 +860,7 @@
       return modifiersGroup;
     }
 
-    function parseUnicodeSurrogatePairEscape(firstEscape) {
+    function parseUnicodeSurrogatePairEscape(firstEscape, isUnicodeMode) {
       if (isUnicodeMode) {
         var first, second;
         if (firstEscape.kind == 'unicodeEscape' &&
@@ -1041,12 +1041,13 @@
       }
     }
 
-    function parseRegExpUnicodeEscapeSequence() {
+    function parseRegExpUnicodeEscapeSequence(isUnicodeMode) {
       var res;
       if (res = matchReg(/^u([0-9a-fA-F]{4})/)) {
         // UnicodeEscapeSequence
         return parseUnicodeSurrogatePairEscape(
-          createEscaped('unicodeEscape', parseInt(res[1], 16), res[1], 2)
+          createEscaped('unicodeEscape', parseInt(res[1], 16), res[1], 2),
+          isUnicodeMode
         );
       } else if (isUnicodeMode && (res = matchReg(/^u\{([0-9a-fA-F]+)\}/))) {
         // RegExpUnicodeEscapeSequence (ES6 Unicode code point escape)
@@ -1059,8 +1060,8 @@
       //      ControlEscape
       //      c ControlLetter
       //      HexEscapeSequence
-      //      UnicodeEscapeSequence
-      //      IdentityEscape
+      //      UnicodeEscapeSequence[?UnicodeMode]
+      //      IdentityEscape[?UnicodeMode]
 
       var res;
       var from = pos;
@@ -1081,7 +1082,7 @@
       } else if (res = matchReg(/^x([0-9a-fA-F]{2})/)) {
         // HexEscapeSequence
         return createEscaped('hexadecimalEscape', parseInt(res[1], 16), res[1], 2);
-      } else if (res = parseRegExpUnicodeEscapeSequence()) {
+      } else if (res = parseRegExpUnicodeEscapeSequence(isUnicodeMode)) {
         if (!res || res.codePoint > 0x10FFFF) {
           bail('Invalid escape sequence', null, from, pos);
         }
@@ -1093,11 +1094,22 @@
     }
 
     function parseIdentifierAtom(check) {
+      // RegExpIdentifierStart[UnicodeMode] ::
+      //      IdentifierStartChar
+      //      \ RegExpUnicodeEscapeSequence[+UnicodeMode]
+      //      [~UnicodeMode] UnicodeLeadSurrogate UnicodeTrailSurrogate
+      //
+      // RegExpIdentifierPart[UnicodeMode] ::
+      //      IdentifierPartChar
+      //      \ RegExpUnicodeEscapeSequence[+UnicodeMode]
+      //      [~UnicodeMode] UnicodeLeadSurrogate UnicodeTrailSurrogate
+      
+      
       var ch = lookahead();
       var from = pos;
       if (ch === '\\') {
         incr();
-        var esc = parseRegExpUnicodeEscapeSequence();
+        var esc = parseRegExpUnicodeEscapeSequence(true);
         if (!esc || !check(esc.codePoint)) {
           bail('Invalid escape sequence', null, from, pos);
         }
@@ -1366,7 +1378,7 @@
           bail('classEscape');
         }
 
-        return parseUnicodeSurrogatePairEscape(res);
+        return parseUnicodeSurrogatePairEscape(res, isUnicodeMode);
       }
     }
 
