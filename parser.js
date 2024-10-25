@@ -1386,6 +1386,9 @@
       // ClassAtomNoDash ::
       //      SourceCharacter but not one of \ or ] or -
       //      \ ClassEscape
+      //
+      // ClassAtomNoDash (Annex B)::
+      //      \ [lookahead = c] 
 
       var res;
       if (res = matchReg(/^[^\\\]-]/)) {
@@ -1393,6 +1396,9 @@
       } else if (match('\\')) {
         res = parseClassEscape();
         if (!res) {
+          if (!isUnicodeMode && lookahead() == 'c') {
+            return createCharacter('\\');
+          }
           bail('classEscape');
         }
 

@@ -38627,6 +38627,38 @@
     ],
     "raw": ".(?!.){2,3}"
   },
+  "[\\c]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 92,
+        "range": [
+          1,
+          2
+        ],
+        "raw": "\\"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 99,
+        "range": [
+          2,
+          3
+        ],
+        "raw": "c"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      4
+    ],
+    "raw": "[\\c]"
+  },
   "^*": {
     "type": "error",
     "name": "SyntaxError",

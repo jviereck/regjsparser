@@ -1872,5 +1872,11 @@
     "name": "SyntaxError",
     "message": "Expected atom at position 2\n    \\B{1}\n      ^",
     "input": "\\B{1}"
+  },
+  "[\\c]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "classEscape at position 2\n    [\\c]\n      ^",
+    "input": "[\\c]"
   }
 }
