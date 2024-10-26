@@ -706,16 +706,27 @@
       //      ( ? = Disjunction )
       //      ( ? ! Disjunction )
 
-      if (match('^')) {
-        return createAnchor('start', 1 /* rawLength */);
-      } else if (match('$')) {
-        return createAnchor('end', 1 /* rawLength */);
-      } else if (match('\\b')) {
-        return createAnchor('boundary', 2 /* rawLength */);
-      } else if (match('\\B')) {
-        return createAnchor('not-boundary', 2 /* rawLength */);
-      } else {
-        return parseGroup('(?=', 'lookahead', '(?!', 'negativeLookahead');
+      switch(lookahead()) {
+        case '^':
+          incr();
+          return createAnchor('start', 1 /* rawLength */);
+        case '$':
+          incr();
+          return createAnchor('end', 1 /* rawLength */);
+        case '\\': {
+          if (next('b')) {
+            incr(2);
+            return createAnchor('boundary', 2 /* rawLength */);
+          } else if (next('B')) {
+            incr(2);
+            return createAnchor('not-boundary', 2 /* rawLength */);
+          }
+          break;
+        }
+        case '(':
+          return parseGroup('(?=', 'lookahead', '(?!', 'negativeLookahead');
+        default:
+          return;
       }
     }
 
