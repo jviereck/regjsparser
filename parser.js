@@ -948,39 +948,74 @@
 
       var res, from = pos;
 
-      res = parseDecimalEscape(insideCharacterClass) || parseNamedReference();
-      if (res) {
-        return res;
-      }
-
-      // For ClassEscape
-      if (insideCharacterClass) {
-        //     b
-        if (match('b')) {
-          // 15.10.2.19
-          // The production ClassEscape :: b evaluates by returning the
-          // CharSet containing the one character <BS> (Unicode value 0008).
-          return createEscaped('singleEscape', 0x0008, '\\b');
-        } else if (match('B')) {
-          bail('\\B not possible inside of CharacterClass', '', from);
-        } else if (!isUnicodeMode && (res = matchReg(/^c(\d)/))) {
-          // B.1.4
-          // c ClassControlLetter, ClassControlLetter = DecimalDigit
-          return createEscaped('controlLetter', res[1] + 16, res[1], 2);
-        } else if (!isUnicodeMode && (res = matchReg(/^c_/))) {
-          // B.1.4
-          // c ClassControlLetter, ClassControlLetter = _
-          return createEscaped('controlLetter', 31, '_', 2);
+      switch (lookahead()) {
+        case '0':
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+        case '7':
+        case '8':
+        case '9':
+          return parseDecimalEscape(insideCharacterClass);
+        case 'B': {
+          if (insideCharacterClass) {
+            bail('\\B not possible inside of CharacterClass', '', from);
+            break;
+          } else {
+            return parseIdentityEscape();
+          }
         }
-        //     [+U] -
-        if (isUnicodeMode && match('-')) {
-          return createEscaped('singleEscape', 0x002d, '\\-');
+        case 'b': {
+          if (insideCharacterClass) {
+            // 15.10.2.19
+            // The production ClassEscape :: b evaluates by returning the
+            // CharSet containing the one character <BS> (Unicode value 0008).
+            incr();
+            return createEscaped('singleEscape', 0x0008, '\\b');
+          } else {
+            return parseIdentityEscape();
+          }
         }
+        case 'c': {
+          if (insideCharacterClass) {
+            if (!isUnicodeMode && (res = matchReg(/^c(\d)/))) {
+              // B.1.4
+              // c ClassControlLetter, ClassControlLetter = DecimalDigit
+              return createEscaped('controlLetter', res[1] + 16, res[1], 2);
+            } else if (!isUnicodeMode && match("c_")) {
+              // B.1.4
+              // c ClassControlLetter, ClassControlLetter = _
+              return createEscaped('controlLetter', 31, '_', 2);
+            }
+          }
+          return parseCharacterEscape();
+        }
+        case 'd':
+        case 'D':
+        case 'w':
+        case 'W':
+        case 's':
+        case 'S':
+          return parseCharacterClassEscape();
+        case 'k':
+          return parseNamedReference() || parseIdentityEscape();
+        case 'p':
+        case 'P':
+          return parseCharacterClassEscape() || parseIdentityEscape();
+        case '-': {
+          //     [+U] -
+          if (insideCharacterClass && isUnicodeMode) {
+            incr();
+            return createEscaped('singleEscape', 0x002d, '\\-');
+          }
+          return parseIdentityEscape();
+        }
+        default:
+          return parseCharacterEscape();
       }
-
-      res = parseCharacterClassEscape() || parseCharacterEscape();
-
-      return res;
     }
 
 
@@ -1552,7 +1587,7 @@
       }
 
       if (allowRanges && current('-') && !next('-')) {
-        skip('-');
+        incr();
 
         if (res = parseClassSetCharacter()) {
           // ClassSetRange ::
