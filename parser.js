@@ -279,34 +279,33 @@
     if (!features) {
       features = {};
     }
-    function addRaw(node) {
-      node.raw = str.substring(node.range[0], node.range[1]);
-      return node;
-    }
 
     function updateRawStart(node, start) {
       node.range[0] = start;
-      return addRaw(node);
+      node.raw = str.substring(start, node.range[1]);
+      return node;
     }
 
     function createAnchor(kind, rawLength) {
-      return addRaw({
+      return {
         type: 'anchor',
         kind: kind,
         range: [
           pos - rawLength,
           pos
-        ]
-      });
+        ],
+        raw: str.substring(pos - rawLength, pos)
+      };
     }
 
     function createValue(kind, codePoint, from, to) {
-      return addRaw({
+      return {
         type: 'value',
         kind: kind,
         codePoint: codePoint,
-        range: [from, to]
-      });
+        range: [from, to],
+        raw: str.substring(from, to)
+      };
     }
 
     function createEscaped(kind, codePoint, value, fromOffset) {
@@ -335,69 +334,77 @@
     }
 
     function createDisjunction(alternatives, from, to) {
-      return addRaw({
+      return {
         type: 'disjunction',
         body: alternatives,
         range: [
           from,
           to
-        ]
-      });
+        ],
+        raw: str.substring(from, to)
+      };
     }
 
     function createDot() {
-      return addRaw({
+      return {
         type: 'dot',
         range: [
           pos - 1,
           pos
-        ]
-      });
+        ],
+        raw: '.'
+      };
     }
 
     function createCharacterClassEscape(value) {
-      return addRaw({
+      return {
         type: 'characterClassEscape',
         value: value,
         range: [
           pos - 2,
           pos
-        ]
-      });
+        ],
+        raw: str.substring(pos - 2, pos)
+      };
     }
 
     function createReference(matchIndex) {
-      return addRaw({
+      var start = pos - 1 - matchIndex.length;
+      return {
         type: 'reference',
         matchIndex: parseInt(matchIndex, 10),
         range: [
-          pos - 1 - matchIndex.length,
+          start,
           pos
-        ]
-      });
+        ],
+        raw: str.substring(start, pos)
+      };
     }
 
     function createNamedReference(name) {
-      return addRaw({
+      var start = name.range[0] - 3;
+      return {
         type: 'reference',
         name: name,
         range: [
-          name.range[0] - 3,
+          start,
           pos
-        ]
-      });
+        ],
+        raw: str.substring(start, pos)
+      };
     }
 
     function createGroup(behavior, disjunction, from, to) {
-      return addRaw({
+      return {
         type: 'group',
         behavior: behavior,
         body: disjunction,
         range: [
           from,
           to
-        ]
-      });
+        ],
+        raw: str.substring(from, to)
+      };
     }
 
     function createQuantifier(min, max, from, to, symbol) {
@@ -406,7 +413,7 @@
         to = pos;
       }
 
-      return addRaw({
+      return {
         type: 'quantifier',
         min: min,
         max: max,
@@ -416,23 +423,25 @@
         range: [
           from,
           to
-        ]
-      });
+        ],
+        raw: str.substring(from, to)
+      };
     }
 
     function createAlternative(terms, from, to) {
-      return addRaw({
+      return {
         type: 'alternative',
         body: terms,
         range: [
           from,
           to
-        ]
-      });
+        ],
+        raw: str.substring(from, to)
+      };
     }
 
     function createCharacterClass(contents, negative, from, to) {
-      return addRaw({
+      return {
         type: 'characterClass',
         kind: contents.kind,
         body: contents.body,
@@ -440,8 +449,9 @@
         range: [
           from,
           to
-        ]
-      });
+        ],
+        raw: str.substring(from, to)
+      };
     }
 
     function createClassRange(min, max, from, to) {
@@ -450,31 +460,34 @@
         bail('invalid range in character class', min.raw + '-' + max.raw, from, to);
       }
 
-      return addRaw({
+      return {
         type: 'characterClassRange',
         min: min,
         max: max,
         range: [
           from,
           to
-        ]
-      });
+        ],
+        raw: str.substring(from, to)
+      };
     }
 
     function createClassStrings(strings, from, to) {
-      return addRaw({
+      return {
         type: 'classStrings',
         strings: strings,
-        range: [from, to]
-      });
+        range: [from, to],
+        raw: str.substring(from, to)
+      };
     }
 
     function createClassString(characters, from, to) {
-      return addRaw({
+      return {
         type: 'classString',
         characters: characters,
-        range: [from, to]
-      });
+        range: [from, to],
+        raw: str.substring(from, to)
+      };
     }
 
     function flattenBody(body) {
@@ -893,11 +906,10 @@
           if (secondEscape.kind == 'unicodeEscape' &&
             (second = secondEscape.codePoint) >= 0xDC00 && second <= 0xDFFF) {
             // Unicode surrogate pair
-            firstEscape.range[1] = secondEscape.range[1];
-            firstEscape.codePoint = (first - 0xD800) * 0x400 + second - 0xDC00 + 0x10000;
-            firstEscape.type = 'value';
             firstEscape.kind = 'unicodeCodePointEscape';
-            addRaw(firstEscape);
+            firstEscape.codePoint = (first - 0xD800) * 0x400 + second - 0xDC00 + 0x10000;
+            firstEscape.range[1] = pos;
+            firstEscape.raw = str.substring(firstEscape.range[0], pos)
           }
           else {
             pos = prevPos;
@@ -1041,13 +1053,13 @@
         return createCharacterClassEscape(res[0]);
       } else if (features.unicodePropertyEscape && isUnicodeMode && (res = matchReg(/^([pP])\{([^}]+)\}/))) {
         // https://github.com/jviereck/regjsparser/issues/77
-        return addRaw({
+        return {
           type: 'unicodePropertyEscape',
           negative: res[1] === 'P',
           value: res[2],
           range: [res.range[0] - 1, res.range[1]],
-          raw: res[0]
-        });
+          raw: str.substring(res.range[0] - 1, res.range[1])
+        };
       }
       return false;
     }
@@ -1179,11 +1191,12 @@
         res += ch;
       }
 
-      return addRaw({
+      return {
         type: 'identifier',
         value: res,
-        range: [start, pos]
-      });
+        range: [start, pos],
+        raw: str.substring(start, pos)
+      };
     }
 
     function isIdentifierStart(ch) {
