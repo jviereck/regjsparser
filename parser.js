@@ -534,10 +534,7 @@
       var subStr = str.substring(pos);
       var res = subStr.match(regExp);
       if (res) {
-        res.range = [];
-        res.range[0] = pos;
-        incr(res[0].length);
-        res.range[1] = pos;
+        pos += res[0].length;
       }
       return res;
     }
@@ -746,11 +743,11 @@
       }
       else if (res = matchReg(/^\{(\d+)\}/)) {
         min = parseInt(res[1], 10);
-        quantifier = createQuantifier(min, min, res.range[0], res.range[1]);
+        quantifier = createQuantifier(min, min, from, pos);
       }
       else if (res = matchReg(/^\{(\d+),\}/)) {
         min = parseInt(res[1], 10);
-        quantifier = createQuantifier(min, undefined, res.range[0], res.range[1]);
+        quantifier = createQuantifier(min, undefined, from, pos);
       }
       else if (res = matchReg(/^\{(\d+),(\d+)\}/)) {
         min = parseInt(res[1], 10);
@@ -758,7 +755,7 @@
         if (min > max) {
           bail('numbers out of order in {} quantifier', '', from, pos);
         }
-        quantifier = createQuantifier(min, max, res.range[0], res.range[1]);
+        quantifier = createQuantifier(min, max, from, pos);
       }
 
       if ((min && !Number.isSafeInteger(min)) || (max && !Number.isSafeInteger(max))) {
@@ -1013,8 +1010,9 @@
             // like ordinary characters. Create a character for the
             // first number only here - other number-characters
             // (if available) will be matched later.
+            var start = pos;
             res = createCharacter(matchReg(/^[89]/));
-            return updateRawStart(res, res.range[0] - 1);
+            return updateRawStart(res, start - 1);
           }
         }
       }
@@ -1048,7 +1046,7 @@
 
     function parseCharacterClassEscape() {
       // CharacterClassEscape :: one of d D s S w W
-      var res;
+      var res, from = pos;
       if (res = matchReg(/^[dDsSwW]/)) {
         return createCharacterClassEscape(res[0]);
       } else if (features.unicodePropertyEscape && isUnicodeMode && (res = matchReg(/^([pP])\{([^}]+)\}/))) {
@@ -1057,8 +1055,8 @@
           type: 'unicodePropertyEscape',
           negative: res[1] === 'P',
           value: res[2],
-          range: [res.range[0] - 1, res.range[1]],
-          raw: str.substring(res.range[0] - 1, res.range[1])
+          range: [from - 1, pos],
+          raw: str.substring(from - 1, pos)
         };
       }
       return false;
