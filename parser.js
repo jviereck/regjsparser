@@ -517,12 +517,24 @@
     function match(value) {
       var len = value.length;
       if (str.slice(pos, pos + len) === value) {
-        return consume(len);
+        incr(len);
+        return value;
+      }
+    }
+
+    function matchOne(value) {
+      if (str[pos] === value) {
+        pos++;
+        return value;
       }
     }
 
     function lookahead() {
       return str[pos];
+    }
+
+    function currentOne(value) {
+      return str[pos] === value;
     }
 
     function current(value) {
@@ -550,7 +562,7 @@
       var res = [], from = pos;
       res.push(parseAlternative());
 
-      while (match('|')) {
+      while (matchOne('|')) {
         res.push(parseAlternative());
       }
 
@@ -593,7 +605,7 @@
       //      (?= Disjunction[~UnicodeMode, ~UnicodeSetsMode, ?NamedCaptureGroups] )
       //      (?! Disjunction[~UnicodeMode, ~UnicodeSetsMode, ?NamedCaptureGroups] ) 
 
-      if (pos >= str.length || current('|') || current(')')) {
+      if (pos >= str.length || currentOne('|') || currentOne(')')) {
         return null; /* Means: The term is empty */
       }
 
@@ -633,7 +645,7 @@
         // If no unicode flag, then try to parse ExtendedAtom -> ExtendedPatternCharacter.
         //      ExtendedPatternCharacter
         var res;
-        if (!isUnicodeMode && (res = match("{"))) {
+        if (!isUnicodeMode && (res = matchOne("{"))) {
           atom = createCharacter(res);
         } else {
           bail("Expected atom");
@@ -785,7 +797,7 @@
       } 
 
       if (quantifier) {
-        if (match('?')) {
+        if (matchOne('?')) {
           quantifier.greedy = false;
           quantifier.range[1] += 1;
         }
@@ -897,7 +909,7 @@
 
       var enablingFlags = matchReg(/^[sim]+/);
       var disablingFlags;
-      if(match("-") && lookahead() !== ":"){
+      if(matchOne("-") && lookahead() !== ":"){
         disablingFlags = matchReg(/^[sim]+/);
         if (!disablingFlags) {
           bail('Invalid flags for modifiers group');
@@ -914,7 +926,7 @@
         bail('flags cannot be duplicated for modifiers group');
       }
 
-      if(!match(":")) {
+      if(!matchOne(":")) {
         bail('Invalid flags for modifiers group');
       }
 
@@ -933,7 +945,7 @@
         var first, second;
         if (firstEscape.kind == 'unicodeEscape' &&
           (first = firstEscape.codePoint) >= 0xD800 && first <= 0xDBFF &&
-          current('\\') && next('u') ) {
+          currentOne('\\') && next('u') ) {
           var prevPos = pos;
           pos++;
           var secondEscape = parseClassEscape();
@@ -1329,7 +1341,7 @@
         res = parseClassContents();
         skip(']');
         return createCharacterClass(res, true, from, pos);
-      } else if (match('[')) {
+      } else if (matchOne('[')) {
         res = parseClassContents();
         skip(']');
         return createCharacterClass(res, false, from, pos);
@@ -1345,7 +1357,7 @@
       //      [+V] ClassSetExpression
 
       var res;
-      if (current(']')) {
+      if (currentOne(']')) {
         // Empty array means nothing inside of the ClassRange.
         return { kind: 'union', body: [] };
       } else if (hasUnicodeSetFlag) {
@@ -1361,10 +1373,11 @@
 
     function parseHelperClassContents(atom) {
       var from, to, res, atomTo, dash;
-      if (current('-') && !next(']')) {
+      if (currentOne('-') && !next(']')) {
         // ClassAtom - ClassAtom ClassContents
         from = atom.range[0];
-        dash = createCharacter(match('-'));
+        incr();
+        dash = createCharacter('-');
 
         atomTo = parseClassAtom();
         if (!atomTo) {
@@ -1425,7 +1438,7 @@
         bail('classAtom');
       }
 
-      if (current(']')) {
+      if (currentOne(']')) {
         // ClassAtom
         return [atom];
       }
@@ -1445,7 +1458,7 @@
       if (!res) {
         bail('classAtom');
       }
-      if (current(']')) {
+      if (currentOne(']')) {
         //      ClassAtom
         return res;
       }
@@ -1459,7 +1472,7 @@
       // ClassAtom ::
       //      -
       //      ClassAtomNoDash
-      if (match('-')) {
+      if (matchOne('-')) {
         return createCharacter('-');
       } else {
         return parseClassAtomNoDash();
@@ -1524,19 +1537,19 @@
 
       if (operand.type === 'classRange') {
         kind = 'union';
-      } else if (current('&')) {
+      } else if (currentOne('&')) {
         kind = 'intersection';
-      } else if (current('-')) {
+      } else if (currentOne('-')) {
         kind = 'subtraction';
       } else {
         kind = 'union';
       }
 
-      while (!current(']')) {
+      while (!currentOne(']')) {
         if (kind === 'intersection') {
           skip('&');
           skip('&');
-          if (current('&')) {
+          if (currentOne('&')) {
             bail('&& cannot be followed by &. Wrap it in brackets: &&[&].');
           }
         } else if (kind === 'subtraction') {
@@ -1577,7 +1590,7 @@
       var from = pos;
       var start, res;
 
-      if (match('\\')) {
+      if (matchOne('\\')) {
         // ClassSetOperand ::
         //      ...
         //      ClassStringDisjunction
@@ -1611,7 +1624,7 @@
         bail('Invalid character', lookahead());
       }
 
-      if (allowRanges && current('-') && !next('-')) {
+      if (allowRanges && currentOne('-') && !next('-')) {
         incr();
 
         if (res = parseClassSetCharacter()) {
@@ -1636,7 +1649,7 @@
       //      \ ClassHalfOfDouble
       //      \ b
 
-      if (match('\\')) {
+      if (matchOne('\\')) {
         var res, from = pos;
         if (res = parseClassSetCharacterEscapedHelper()) {
           return res;
@@ -1670,9 +1683,9 @@
       //      \ b
 
       var res;
-      if (match('b')) {
+      if (matchOne('b')) {
         return createEscaped('singleEscape', 0x0008, '\\b');
-      } else if (match('B')) {
+      } else if (matchOne('B')) {
         bail('\\B not possible inside of ClassContents', '', pos - 2);
       } else if (res = matchReg(/^[&\-!#%,:;<=>@`~]/)) {
         return createEscaped('identifier', res[0].codePointAt(0), res[0]);
@@ -1698,7 +1711,7 @@
       var res = [];
       do {
         res.push(parseClassString());
-      } while (match('|'));
+      } while (matchOne('|'));
 
       skip('}');
 
