@@ -487,8 +487,7 @@
 
     function incr(amount) {
       amount = (amount || 1);
-      var res = str.substring(pos, pos + amount);
-      pos += (amount || 1);
+      var res = str.substring(pos, pos += amount);
       return res;
     }
 
@@ -499,8 +498,9 @@
     }
 
     function match(value) {
-      if (str.indexOf(value, pos) === pos) {
-        return incr(value.length);
+      var len = value.length;
+      if (str.slice(pos, pos + len) === value) {
+        return incr(len);
       }
     }
 
@@ -509,7 +509,8 @@
     }
 
     function current(value) {
-      return str.indexOf(value, pos) === pos;
+      var len = value.length;
+      return str.slice(pos, pos + len) === value;
     }
 
     function next(value) {
@@ -822,7 +823,7 @@
         group.name = name;
         return group;
       }
-      else if (features.modifiers && str.indexOf("(?", pos) === pos && str[pos + 2] != ":") {
+      else if (features.modifiers && current("(?") && str[pos + 2] != ":") {
         return parseModifiersGroup();
       }
       else {
