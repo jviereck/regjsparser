@@ -500,6 +500,10 @@
 
     function incr(amount) {
       amount = (amount || 1);
+      pos += amount;
+    }
+
+    function consume(amount) {
       var res = str.substring(pos, pos += amount);
       return res;
     }
@@ -513,7 +517,7 @@
     function match(value) {
       var len = value.length;
       if (str.slice(pos, pos + len) === value) {
-        return incr(len);
+        return consume(len);
       }
     }
 
@@ -1240,7 +1244,7 @@
         if (l === "k" && features.lookbehind) {
           return null;
         }
-        tmp = incr();
+        tmp = consume(1);
         return createEscaped('identifier', tmp.charCodeAt(0), tmp, 1);
       }
 
