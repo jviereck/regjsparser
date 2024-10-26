@@ -797,53 +797,68 @@
 
       var res;
 
-      // jviereck: allow ']', '}' here as well to be compatible with browser's
-      //   implementations: ']'.match(/]/);
-      if (res = matchReg(/^[^^$\\.*+?()[\]{}|]/)) {
-        //      PatternCharacter
-        return createCharacter(res);
-      }
-      else if (!isUnicodeMode && (res = matchReg(/^(?:\]|\})/))) {
-        //      ExtendedPatternCharacter, first part. See parseTerm.
-        return createCharacter(res);
-      }
-      else if (match('.')) {
-        //      .
-        return createDot();
-      }
-      else if (match('\\')) {
-        //      \ AtomEscape
-        res = parseAtomEscape();
-        if (!res) {
-          if (!isUnicodeMode && lookahead() == 'c') {
-            // B.1.4 ExtendedAtom
-            // \[lookahead = c]
-            return createValue('symbol', 92, pos - 1, pos);
+      switch (res = lookahead()) {
+        case '.':
+          //      .
+          incr();
+          return createDot();
+        case '\\': {
+          //      \ AtomEscape
+          incr();
+          res = parseAtomEscape();
+          if (!res) {
+            if (!isUnicodeMode && lookahead() == 'c') {
+              // B.1.4 ExtendedAtom
+              // \[lookahead = c]
+              return createValue('symbol', 92, pos - 1, pos);
+            }
+            bail('atomEscape');
           }
-          bail('atomEscape');
+          return res;
         }
-        return res;
-      }
-      else if (res = parseCharacterClass()) {
-        return res;
-      }
-      else if (features.lookbehind && (res = parseGroup('(?<=', 'lookbehind', '(?<!', 'negativeLookbehind'))) {
-        return res;
-      }
-      else if (features.namedGroups && match("(?<")) {
-        var name = parseIdentifier();
-        skip(">");
-        var group = finishGroup("normal", name.range[0] - 3);
-        group.name = name;
-        return group;
-      }
-      else if (features.modifiers && current("(?") && str[pos + 2] != ":") {
-        return parseModifiersGroup();
-      }
-      else {
-        //      ( Disjunction )
-        //      ( ? : Disjunction )
-        return parseGroup('(?:', 'ignore', '(', 'normal');
+        case '[':
+          return parseCharacterClass();
+        case '(': {
+          if (features.lookbehind && (res = parseGroup('(?<=', 'lookbehind', '(?<!', 'negativeLookbehind'))) {
+            return res;
+          }
+          else if (features.namedGroups && match("(?<")) {
+            var name = parseIdentifier();
+            skip(">");
+            var group = finishGroup("normal", name.range[0] - 3);
+            group.name = name;
+            return group;
+          }
+          else if (features.modifiers && current("(?") && str[pos + 2] != ":") {
+            return parseModifiersGroup();
+          }
+          else {
+            //      ( Disjunction )
+            //      ( ? : Disjunction )
+            return parseGroup('(?:', 'ignore', '(', 'normal');
+          }
+        }
+        case ']':
+        case '}':
+          //      ExtendedPatternCharacter, first part. See parseTerm.
+          if (!isUnicodeMode) {
+            incr();
+            return createCharacter(res);
+          }
+          break;
+        case '^':
+        case '$':
+        case '*':
+        case '+':
+        case '?':
+        case '{':
+        case ')':
+        case '|':
+          break;
+        default:
+          //      PatternCharacter
+          incr();
+          return createCharacter(res);
       }
     }
 
