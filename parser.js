@@ -736,35 +736,42 @@
       var quantifier;
       var min, max;
 
-      if (match('*')) {
-        quantifier = createQuantifier(0, undefined, undefined, undefined, '*');
-      }
-      else if (match('+')) {
-        quantifier = createQuantifier(1, undefined, undefined, undefined, "+");
-      }
-      else if (match('?')) {
-        quantifier = createQuantifier(0, 1, undefined, undefined, "?");
-      }
-      else if (res = matchReg(/^\{(\d+)\}/)) {
-        min = parseInt(res[1], 10);
-        quantifier = createQuantifier(min, min, from, pos);
-      }
-      else if (res = matchReg(/^\{(\d+),\}/)) {
-        min = parseInt(res[1], 10);
-        quantifier = createQuantifier(min, undefined, from, pos);
-      }
-      else if (res = matchReg(/^\{(\d+),(\d+)\}/)) {
-        min = parseInt(res[1], 10);
-        max = parseInt(res[2], 10);
-        if (min > max) {
-          bail('numbers out of order in {} quantifier', '', from, pos);
+      switch(lookahead()) {
+        case '*':
+          incr();
+          quantifier = createQuantifier(0, undefined, undefined, undefined, '*');
+          break;
+        case '+':
+          incr();
+          quantifier = createQuantifier(1, undefined, undefined, undefined, "+");
+          break;
+        case '?':
+          incr();
+          quantifier = createQuantifier(0, 1, undefined, undefined, "?");
+          break;
+        case '{': {
+          if (res = matchReg(/^\{(\d+)\}/)) {
+            min = parseInt(res[1], 10);
+            quantifier = createQuantifier(min, min, from, pos);
+          }
+          else if (res = matchReg(/^\{(\d+),\}/)) {
+            min = parseInt(res[1], 10);
+            quantifier = createQuantifier(min, undefined, from, pos);
+          }
+          else if (res = matchReg(/^\{(\d+),(\d+)\}/)) {
+            min = parseInt(res[1], 10);
+            max = parseInt(res[2], 10);
+            if (min > max) {
+              bail('numbers out of order in {} quantifier', '', from, pos);
+            }
+            quantifier = createQuantifier(min, max, from, pos);
+          }
+    
+          if (min && (!Number.isSafeInteger(min)) || (max && !Number.isSafeInteger(max))) {
+            bail("iterations outside JS safe integer range in quantifier", "", from, pos);
+          }
         }
-        quantifier = createQuantifier(min, max, from, pos);
-      }
-
-      if ((min && !Number.isSafeInteger(min)) || (max && !Number.isSafeInteger(max))) {
-        bail("iterations outside JS safe integer range in quantifier", "", from, pos);
-      }
+      } 
 
       if (quantifier) {
         if (match('?')) {
