@@ -610,7 +610,7 @@
       }
 
       var anchor = parseAnchor();
-
+      var quantifier;
       if (anchor) {
         var pos_backup = pos;
         quantifier = parseQuantifier() || false;
@@ -631,7 +631,6 @@
 
       // If there is no Anchor, try to parse an atom.
       var atom = parseAtomAndExtendedAtom();
-      var quantifier;
       if (!atom) {
         // Check if a quantifier is following. A quantifier without an atom
         // is an error.
@@ -644,9 +643,8 @@
 
         // If no unicode flag, then try to parse ExtendedAtom -> ExtendedPatternCharacter.
         //      ExtendedPatternCharacter
-        var res;
-        if (!isUnicodeMode && (res = matchOne("{"))) {
-          atom = createCharacter(res);
+        if (!isUnicodeMode && matchOne("{")) {
+          atom = createCharacter("{");
         } else {
           bail("Expected atom");
         }
@@ -1178,32 +1176,45 @@
 
       var res;
       var from = pos;
-      if (res = matchReg(/^[fnrtv]/)) {
-        // ControlEscape
-        var codePoint = 0;
-        switch (res[0]) {
-          case 't': codePoint = 0x009; break;
-          case 'n': codePoint = 0x00A; break;
-          case 'v': codePoint = 0x00B; break;
-          case 'f': codePoint = 0x00C; break;
-          case 'r': codePoint = 0x00D; break;
-        }
-        return createEscaped('singleEscape', codePoint, '\\' + res[0]);
-      } else if (res = matchReg(/^c([a-zA-Z])/)) {
-        // c ControlLetter
-        return createEscaped('controlLetter', res[1].charCodeAt(0) % 32, res[1], 2);
-      } else if (res = matchReg(/^x([0-9a-fA-F]{2})/)) {
-        // HexEscapeSequence
-        return createEscaped('hexadecimalEscape', parseInt(res[1], 16), res[1], 2);
-      } else if (res = parseRegExpUnicodeEscapeSequence(isUnicodeMode)) {
-        if (!res || res.codePoint > 0x10FFFF) {
-          bail('Invalid escape sequence', null, from, pos);
-        }
-        return res;
-      } else {
-        // IdentityEscape
-        return parseIdentityEscape();
+      switch (lookahead()) {
+        case 't':
+          incr();
+          return createEscaped('singleEscape', 0x009, '\\t');
+        case 'n':
+          incr();
+          return createEscaped('singleEscape', 0x00A, '\\n');
+        case 'v':
+          incr();
+          return createEscaped('singleEscape', 0x00B, '\\v');
+        case 'f':
+          incr();
+          return createEscaped('singleEscape', 0x00C, '\\f');
+        case 'r':
+          incr();
+          return createEscaped('singleEscape', 0x00D, '\\r');
+        case 'c':
+          if (res = matchReg(/^c([a-zA-Z])/)) {
+            // c ControlLetter
+            return createEscaped('controlLetter', res[1].charCodeAt(0) % 32, res[1], 2);
+          }
+          break;
+        case 'x':
+          if (res = matchReg(/^x([0-9a-fA-F]{2})/)) {
+            // HexEscapeSequence
+            return createEscaped('hexadecimalEscape', parseInt(res[1], 16), res[1], 2);
+          }
+          break;
+        case 'u':
+          if (res = parseRegExpUnicodeEscapeSequence(isUnicodeMode)) {
+            if (!res || res.codePoint > 0x10FFFF) {
+              bail('Invalid escape sequence', null, from, pos);
+            }
+            return res;
+          }
+          break;
       }
+      // IdentityEscape
+      return parseIdentityEscape();
     }
 
     function parseIdentifierAtom(check) {
