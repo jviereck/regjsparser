@@ -633,7 +633,7 @@
         // If no unicode flag, then try to parse ExtendedAtom -> ExtendedPatternCharacter.
         //      ExtendedPatternCharacter
         var res;
-        if (!isUnicodeMode && (res = matchReg(/^\{/))) {
+        if (!isUnicodeMode && (res = match("{"))) {
           atom = createCharacter(res);
         } else {
           bail("Expected atom");
@@ -1307,7 +1307,7 @@
       //      [ ^ ClassContents ]
 
       var res, from = pos;
-      if (res = matchReg(/^\[\^/)) {
+      if (res = match("[^")) {
         res = parseClassContents();
         skip(']');
         return createCharacterClass(res, true, from, pos);
@@ -1457,18 +1457,25 @@
       //      \ [lookahead = c] 
 
       var res;
-      if (res = matchReg(/^[^\\\]-]/)) {
-        return createCharacter(res[0]);
-      } else if (match('\\')) {
-        res = parseClassEscape();
-        if (!res) {
-          if (!isUnicodeMode && lookahead() == 'c') {
-            return createCharacter('\\');
+      switch ((res = lookahead())) {
+        case "\\": {
+          incr();
+          res = parseClassEscape();
+          if (!res) {
+            if (!isUnicodeMode && lookahead() == "c") {
+              return createCharacter("\\");
+            }
+            bail("classEscape");
           }
-          bail('classEscape');
-        }
 
-        return parseUnicodeSurrogatePairEscape(res, isUnicodeMode);
+          return parseUnicodeSurrogatePairEscape(res, isUnicodeMode);
+        }
+        case "]":
+        case "-":
+          break;
+        default:
+          incr();
+          return createCharacter(res);
       }
     }
 
