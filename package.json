@@ -5,11 +5,13 @@
   "license": "BSD-2-Clause",
   "main": "./parser",
   "types": "./parser.d.ts",
-  "bin": "bin/parser",
+  "bin": {
+    "regjsparser": "bin/parser"
+  },
   "homepage": "https://github.com/jviereck/regjsparser",
   "repository": {
     "type": "git",
-    "url": "git@github.com:jviereck/regjsparser.git"
+    "url": "git+ssh://git@github.com/jviereck/regjsparser.git"
   },
   "scripts": {
     "lint": "eslint --max-warnings 0 .",
