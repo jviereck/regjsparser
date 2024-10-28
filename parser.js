@@ -516,7 +516,7 @@
 
     function match(value) {
       var len = value.length;
-      if (str.slice(pos, pos + len) === value) {
+      if (str.substring(pos, pos + len) === value) {
         incr(len);
         return value;
       }
@@ -539,7 +539,7 @@
 
     function current(value) {
       var len = value.length;
-      return str.slice(pos, pos + len) === value;
+      return str.substring(pos, pos + len) === value;
     }
 
     function next(value) {
