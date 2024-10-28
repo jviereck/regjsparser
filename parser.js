@@ -974,9 +974,9 @@
       //      CharacterClassEscape
       //      k GroupName
 
-      var res, from = pos;
+      var res, from = pos, ch;
 
-      switch (lookahead()) {
+      switch (ch = lookahead()) {
         case '0':
         case '1':
         case '2':
@@ -1021,18 +1021,20 @@
           }
           return parseCharacterEscape();
         }
+        // CharacterClassEscape :: one of d D s S w W
         case 'd':
         case 'D':
         case 'w':
         case 'W':
         case 's':
         case 'S':
-          return parseCharacterClassEscape();
+          incr();
+          return createCharacterClassEscape(ch);
         case 'k':
           return parseNamedReference() || parseIdentityEscape();
         case 'p':
         case 'P':
-          return parseCharacterClassEscape() || parseIdentityEscape();
+          return parseUnicodePropertyEscape() || parseIdentityEscape();
         case '-': {
           //     [+U] -
           if (insideCharacterClass && isUnicodeMode) {
@@ -1126,12 +1128,9 @@
       }
     }
 
-    function parseCharacterClassEscape() {
-      // CharacterClassEscape :: one of d D s S w W
+    function parseUnicodePropertyEscape() {
       var res, from = pos;
-      if (res = matchReg(/^[dDsSwW]/)) {
-        return createCharacterClassEscape(res[0]);
-      } else if (features.unicodePropertyEscape && isUnicodeMode && (res = matchReg(/^([pP])\{([^}]+)\}/))) {
+      if (features.unicodePropertyEscape && isUnicodeMode && (res = matchReg(/^([pP])\{([^}]+)\}/))) {
         // https://github.com/jviereck/regjsparser/issues/77
         return {
           type: 'unicodePropertyEscape',
