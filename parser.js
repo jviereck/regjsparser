@@ -279,34 +279,33 @@
     if (!features) {
       features = {};
     }
-    function addRaw(node) {
-      node.raw = str.substring(node.range[0], node.range[1]);
-      return node;
-    }
 
     function updateRawStart(node, start) {
       node.range[0] = start;
-      return addRaw(node);
+      node.raw = str.substring(start, node.range[1]);
+      return node;
     }
 
     function createAnchor(kind, rawLength) {
-      return addRaw({
+      return {
         type: 'anchor',
         kind: kind,
         range: [
           pos - rawLength,
           pos
-        ]
-      });
+        ],
+        raw: str.substring(pos - rawLength, pos)
+      };
     }
 
     function createValue(kind, codePoint, from, to) {
-      return addRaw({
+      return {
         type: 'value',
         kind: kind,
         codePoint: codePoint,
-        range: [from, to]
-      });
+        range: [from, to],
+        raw: str.substring(from, to)
+      };
     }
 
     function createEscaped(kind, codePoint, value, fromOffset) {
@@ -335,69 +334,77 @@
     }
 
     function createDisjunction(alternatives, from, to) {
-      return addRaw({
+      return {
         type: 'disjunction',
         body: alternatives,
         range: [
           from,
           to
-        ]
-      });
+        ],
+        raw: str.substring(from, to)
+      };
     }
 
     function createDot() {
-      return addRaw({
+      return {
         type: 'dot',
         range: [
           pos - 1,
           pos
-        ]
-      });
+        ],
+        raw: '.'
+      };
     }
 
     function createCharacterClassEscape(value) {
-      return addRaw({
+      return {
         type: 'characterClassEscape',
         value: value,
         range: [
           pos - 2,
           pos
-        ]
-      });
+        ],
+        raw: str.substring(pos - 2, pos)
+      };
     }
 
     function createReference(matchIndex) {
-      return addRaw({
+      var start = pos - 1 - matchIndex.length;
+      return {
         type: 'reference',
         matchIndex: parseInt(matchIndex, 10),
         range: [
-          pos - 1 - matchIndex.length,
+          start,
           pos
-        ]
-      });
+        ],
+        raw: str.substring(start, pos)
+      };
     }
 
     function createNamedReference(name) {
-      return addRaw({
+      var start = name.range[0] - 3;
+      return {
         type: 'reference',
         name: name,
         range: [
-          name.range[0] - 3,
+          start,
           pos
-        ]
-      });
+        ],
+        raw: str.substring(start, pos)
+      };
     }
 
     function createGroup(behavior, disjunction, from, to) {
-      return addRaw({
+      return {
         type: 'group',
         behavior: behavior,
         body: disjunction,
         range: [
           from,
           to
-        ]
-      });
+        ],
+        raw: str.substring(from, to)
+      };
     }
 
     function createQuantifier(min, max, from, to, symbol) {
@@ -406,7 +413,7 @@
         to = pos;
       }
 
-      return addRaw({
+      return {
         type: 'quantifier',
         min: min,
         max: max,
@@ -416,23 +423,25 @@
         range: [
           from,
           to
-        ]
-      });
+        ],
+        raw: str.substring(from, to)
+      };
     }
 
     function createAlternative(terms, from, to) {
-      return addRaw({
+      return {
         type: 'alternative',
         body: terms,
         range: [
           from,
           to
-        ]
-      });
+        ],
+        raw: str.substring(from, to)
+      };
     }
 
     function createCharacterClass(contents, negative, from, to) {
-      return addRaw({
+      return {
         type: 'characterClass',
         kind: contents.kind,
         body: contents.body,
@@ -440,8 +449,9 @@
         range: [
           from,
           to
-        ]
-      });
+        ],
+        raw: str.substring(from, to)
+      };
     }
 
     function createClassRange(min, max, from, to) {
@@ -450,31 +460,34 @@
         bail('invalid range in character class', min.raw + '-' + max.raw, from, to);
       }
 
-      return addRaw({
+      return {
         type: 'characterClassRange',
         min: min,
         max: max,
         range: [
           from,
           to
-        ]
-      });
+        ],
+        raw: str.substring(from, to)
+      };
     }
 
     function createClassStrings(strings, from, to) {
-      return addRaw({
+      return {
         type: 'classStrings',
         strings: strings,
-        range: [from, to]
-      });
+        range: [from, to],
+        raw: str.substring(from, to)
+      };
     }
 
     function createClassString(characters, from, to) {
-      return addRaw({
+      return {
         type: 'classString',
         characters: characters,
-        range: [from, to]
-      });
+        range: [from, to],
+        raw: str.substring(from, to)
+      };
     }
 
     function flattenBody(body) {
@@ -487,8 +500,11 @@
 
     function incr(amount) {
       amount = (amount || 1);
-      var res = str.substring(pos, pos + amount);
-      pos += (amount || 1);
+      pos += amount;
+    }
+
+    function consume(amount) {
+      var res = str.substring(pos, pos += amount);
       return res;
     }
 
@@ -499,8 +515,17 @@
     }
 
     function match(value) {
-      if (str.indexOf(value, pos) === pos) {
-        return incr(value.length);
+      var len = value.length;
+      if (str.substring(pos, pos + len) === value) {
+        incr(len);
+        return value;
+      }
+    }
+
+    function matchOne(value) {
+      if (str[pos] === value) {
+        pos++;
+        return value;
       }
     }
 
@@ -508,8 +533,13 @@
       return str[pos];
     }
 
+    function currentOne(value) {
+      return str[pos] === value;
+    }
+
     function current(value) {
-      return str.indexOf(value, pos) === pos;
+      var len = value.length;
+      return str.substring(pos, pos + len) === value;
     }
 
     function next(value) {
@@ -520,10 +550,7 @@
       var subStr = str.substring(pos);
       var res = subStr.match(regExp);
       if (res) {
-        res.range = [];
-        res.range[0] = pos;
-        incr(res[0].length);
-        res.range[1] = pos;
+        pos += res[0].length;
       }
       return res;
     }
@@ -535,7 +562,7 @@
       var res = [], from = pos;
       res.push(parseAlternative());
 
-      while (match('|')) {
+      while (matchOne('|')) {
         res.push(parseAlternative());
       }
 
@@ -578,12 +605,12 @@
       //      (?= Disjunction[~UnicodeMode, ~UnicodeSetsMode, ?NamedCaptureGroups] )
       //      (?! Disjunction[~UnicodeMode, ~UnicodeSetsMode, ?NamedCaptureGroups] ) 
 
-      if (pos >= str.length || current('|') || current(')')) {
+      if (pos >= str.length || currentOne('|') || currentOne(')')) {
         return null; /* Means: The term is empty */
       }
 
       var anchor = parseAnchor();
-
+      var quantifier;
       if (anchor) {
         var pos_backup = pos;
         quantifier = parseQuantifier() || false;
@@ -604,7 +631,6 @@
 
       // If there is no Anchor, try to parse an atom.
       var atom = parseAtomAndExtendedAtom();
-      var quantifier;
       if (!atom) {
         // Check if a quantifier is following. A quantifier without an atom
         // is an error.
@@ -617,9 +643,8 @@
 
         // If no unicode flag, then try to parse ExtendedAtom -> ExtendedPatternCharacter.
         //      ExtendedPatternCharacter
-        var res;
-        if (!isUnicodeMode && (res = matchReg(/^\{/))) {
-          atom = createCharacter(res);
+        if (!isUnicodeMode && matchOne("{")) {
+          atom = createCharacter("{");
         } else {
           bail("Expected atom");
         }
@@ -691,16 +716,27 @@
       //      ( ? = Disjunction )
       //      ( ? ! Disjunction )
 
-      if (match('^')) {
-        return createAnchor('start', 1 /* rawLength */);
-      } else if (match('$')) {
-        return createAnchor('end', 1 /* rawLength */);
-      } else if (match('\\b')) {
-        return createAnchor('boundary', 2 /* rawLength */);
-      } else if (match('\\B')) {
-        return createAnchor('not-boundary', 2 /* rawLength */);
-      } else {
-        return parseGroup('(?=', 'lookahead', '(?!', 'negativeLookahead');
+      switch(lookahead()) {
+        case '^':
+          incr();
+          return createAnchor('start', 1 /* rawLength */);
+        case '$':
+          incr();
+          return createAnchor('end', 1 /* rawLength */);
+        case '\\': {
+          if (next('b')) {
+            incr(2);
+            return createAnchor('boundary', 2 /* rawLength */);
+          } else if (next('B')) {
+            incr(2);
+            return createAnchor('not-boundary', 2 /* rawLength */);
+          }
+          break;
+        }
+        case '(':
+          return parseGroup('(?=', 'lookahead', '(?!', 'negativeLookahead');
+        default:
+          return;
       }
     }
 
@@ -721,38 +757,45 @@
       var quantifier;
       var min, max;
 
-      if (match('*')) {
-        quantifier = createQuantifier(0, undefined, undefined, undefined, '*');
-      }
-      else if (match('+')) {
-        quantifier = createQuantifier(1, undefined, undefined, undefined, "+");
-      }
-      else if (match('?')) {
-        quantifier = createQuantifier(0, 1, undefined, undefined, "?");
-      }
-      else if (res = matchReg(/^\{(\d+)\}/)) {
-        min = parseInt(res[1], 10);
-        quantifier = createQuantifier(min, min, res.range[0], res.range[1]);
-      }
-      else if (res = matchReg(/^\{(\d+),\}/)) {
-        min = parseInt(res[1], 10);
-        quantifier = createQuantifier(min, undefined, res.range[0], res.range[1]);
-      }
-      else if (res = matchReg(/^\{(\d+),(\d+)\}/)) {
-        min = parseInt(res[1], 10);
-        max = parseInt(res[2], 10);
-        if (min > max) {
-          bail('numbers out of order in {} quantifier', '', from, pos);
+      switch(lookahead()) {
+        case '*':
+          incr();
+          quantifier = createQuantifier(0, undefined, undefined, undefined, '*');
+          break;
+        case '+':
+          incr();
+          quantifier = createQuantifier(1, undefined, undefined, undefined, "+");
+          break;
+        case '?':
+          incr();
+          quantifier = createQuantifier(0, 1, undefined, undefined, "?");
+          break;
+        case '{': {
+          if (res = matchReg(/^\{(\d+)\}/)) {
+            min = parseInt(res[1], 10);
+            quantifier = createQuantifier(min, min, from, pos);
+          }
+          else if (res = matchReg(/^\{(\d+),\}/)) {
+            min = parseInt(res[1], 10);
+            quantifier = createQuantifier(min, undefined, from, pos);
+          }
+          else if (res = matchReg(/^\{(\d+),(\d+)\}/)) {
+            min = parseInt(res[1], 10);
+            max = parseInt(res[2], 10);
+            if (min > max) {
+              bail('numbers out of order in {} quantifier', '', from, pos);
+            }
+            quantifier = createQuantifier(min, max, from, pos);
+          }
+    
+          if (min && (!Number.isSafeInteger(min)) || (max && !Number.isSafeInteger(max))) {
+            bail("iterations outside JS safe integer range in quantifier", "", from, pos);
+          }
         }
-        quantifier = createQuantifier(min, max, res.range[0], res.range[1]);
-      }
-
-      if ((min && !Number.isSafeInteger(min)) || (max && !Number.isSafeInteger(max))) {
-        bail("iterations outside JS safe integer range in quantifier", "", from, pos);
-      }
+      } 
 
       if (quantifier) {
-        if (match('?')) {
+        if (matchOne('?')) {
           quantifier.greedy = false;
           quantifier.range[1] += 1;
         }
@@ -782,53 +825,68 @@
 
       var res;
 
-      // jviereck: allow ']', '}' here as well to be compatible with browser's
-      //   implementations: ']'.match(/]/);
-      if (res = matchReg(/^[^^$\\.*+?()[\]{}|]/)) {
-        //      PatternCharacter
-        return createCharacter(res);
-      }
-      else if (!isUnicodeMode && (res = matchReg(/^(?:\]|\})/))) {
-        //      ExtendedPatternCharacter, first part. See parseTerm.
-        return createCharacter(res);
-      }
-      else if (match('.')) {
-        //      .
-        return createDot();
-      }
-      else if (match('\\')) {
-        //      \ AtomEscape
-        res = parseAtomEscape();
-        if (!res) {
-          if (!isUnicodeMode && lookahead() == 'c') {
-            // B.1.4 ExtendedAtom
-            // \[lookahead = c]
-            return createValue('symbol', 92, pos - 1, pos);
+      switch (res = lookahead()) {
+        case '.':
+          //      .
+          incr();
+          return createDot();
+        case '\\': {
+          //      \ AtomEscape
+          incr();
+          res = parseAtomEscape();
+          if (!res) {
+            if (!isUnicodeMode && lookahead() == 'c') {
+              // B.1.4 ExtendedAtom
+              // \[lookahead = c]
+              return createValue('symbol', 92, pos - 1, pos);
+            }
+            bail('atomEscape');
           }
-          bail('atomEscape');
+          return res;
         }
-        return res;
-      }
-      else if (res = parseCharacterClass()) {
-        return res;
-      }
-      else if (features.lookbehind && (res = parseGroup('(?<=', 'lookbehind', '(?<!', 'negativeLookbehind'))) {
-        return res;
-      }
-      else if (features.namedGroups && match("(?<")) {
-        var name = parseIdentifier();
-        skip(">");
-        var group = finishGroup("normal", name.range[0] - 3);
-        group.name = name;
-        return group;
-      }
-      else if (features.modifiers && str.indexOf("(?", pos) === pos && str[pos + 2] != ":") {
-        return parseModifiersGroup();
-      }
-      else {
-        //      ( Disjunction )
-        //      ( ? : Disjunction )
-        return parseGroup('(?:', 'ignore', '(', 'normal');
+        case '[':
+          return parseCharacterClass();
+        case '(': {
+          if (features.lookbehind && (res = parseGroup('(?<=', 'lookbehind', '(?<!', 'negativeLookbehind'))) {
+            return res;
+          }
+          else if (features.namedGroups && match("(?<")) {
+            var name = parseIdentifier();
+            skip(">");
+            var group = finishGroup("normal", name.range[0] - 3);
+            group.name = name;
+            return group;
+          }
+          else if (features.modifiers && current("(?") && str[pos + 2] != ":") {
+            return parseModifiersGroup();
+          }
+          else {
+            //      ( Disjunction )
+            //      ( ? : Disjunction )
+            return parseGroup('(?:', 'ignore', '(', 'normal');
+          }
+        }
+        case ']':
+        case '}':
+          //      ExtendedPatternCharacter, first part. See parseTerm.
+          if (!isUnicodeMode) {
+            incr();
+            return createCharacter(res);
+          }
+          break;
+        case '^':
+        case '$':
+        case '*':
+        case '+':
+        case '?':
+        case '{':
+        case ')':
+        case '|':
+          break;
+        default:
+          //      PatternCharacter
+          incr();
+          return createCharacter(res);
       }
     }
 
@@ -849,7 +907,7 @@
 
       var enablingFlags = matchReg(/^[sim]+/);
       var disablingFlags;
-      if(match("-") && lookahead() !== ":"){
+      if(matchOne("-") && lookahead() !== ":"){
         disablingFlags = matchReg(/^[sim]+/);
         if (!disablingFlags) {
           bail('Invalid flags for modifiers group');
@@ -866,7 +924,7 @@
         bail('flags cannot be duplicated for modifiers group');
       }
 
-      if(!match(":")) {
+      if(!matchOne(":")) {
         bail('Invalid flags for modifiers group');
       }
 
@@ -885,18 +943,17 @@
         var first, second;
         if (firstEscape.kind == 'unicodeEscape' &&
           (first = firstEscape.codePoint) >= 0xD800 && first <= 0xDBFF &&
-          current('\\') && next('u') ) {
+          currentOne('\\') && next('u') ) {
           var prevPos = pos;
           pos++;
           var secondEscape = parseClassEscape();
           if (secondEscape.kind == 'unicodeEscape' &&
             (second = secondEscape.codePoint) >= 0xDC00 && second <= 0xDFFF) {
             // Unicode surrogate pair
-            firstEscape.range[1] = secondEscape.range[1];
-            firstEscape.codePoint = (first - 0xD800) * 0x400 + second - 0xDC00 + 0x10000;
-            firstEscape.type = 'value';
             firstEscape.kind = 'unicodeCodePointEscape';
-            addRaw(firstEscape);
+            firstEscape.codePoint = (first - 0xD800) * 0x400 + second - 0xDC00 + 0x10000;
+            firstEscape.range[1] = pos;
+            firstEscape.raw = str.substring(firstEscape.range[0], pos)
           }
           else {
             pos = prevPos;
@@ -917,41 +974,78 @@
       //      CharacterClassEscape
       //      k GroupName
 
-      var res, from = pos;
+      var res, from = pos, ch;
 
-      res = parseDecimalEscape(insideCharacterClass) || parseNamedReference();
-      if (res) {
-        return res;
-      }
-
-      // For ClassEscape
-      if (insideCharacterClass) {
-        //     b
-        if (match('b')) {
-          // 15.10.2.19
-          // The production ClassEscape :: b evaluates by returning the
-          // CharSet containing the one character <BS> (Unicode value 0008).
-          return createEscaped('singleEscape', 0x0008, '\\b');
-        } else if (match('B')) {
-          bail('\\B not possible inside of CharacterClass', '', from);
-        } else if (!isUnicodeMode && (res = matchReg(/^c(\d)/))) {
-          // B.1.4
-          // c ClassControlLetter, ClassControlLetter = DecimalDigit
-          return createEscaped('controlLetter', res[1] + 16, res[1], 2);
-        } else if (!isUnicodeMode && (res = matchReg(/^c_/))) {
-          // B.1.4
-          // c ClassControlLetter, ClassControlLetter = _
-          return createEscaped('controlLetter', 31, '_', 2);
+      switch (ch = lookahead()) {
+        case '0':
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+        case '7':
+        case '8':
+        case '9':
+          return parseDecimalEscape(insideCharacterClass);
+        case 'B': {
+          if (insideCharacterClass) {
+            bail('\\B not possible inside of CharacterClass', '', from);
+            break;
+          } else {
+            return parseIdentityEscape();
+          }
         }
-        //     [+U] -
-        if (isUnicodeMode && match('-')) {
-          return createEscaped('singleEscape', 0x002d, '\\-');
+        case 'b': {
+          if (insideCharacterClass) {
+            // 15.10.2.19
+            // The production ClassEscape :: b evaluates by returning the
+            // CharSet containing the one character <BS> (Unicode value 0008).
+            incr();
+            return createEscaped('singleEscape', 0x0008, '\\b');
+          } else {
+            return parseIdentityEscape();
+          }
         }
+        case 'c': {
+          if (insideCharacterClass) {
+            if (!isUnicodeMode && (res = matchReg(/^c(\d)/))) {
+              // B.1.4
+              // c ClassControlLetter, ClassControlLetter = DecimalDigit
+              return createEscaped('controlLetter', res[1] + 16, res[1], 2);
+            } else if (!isUnicodeMode && match("c_")) {
+              // B.1.4
+              // c ClassControlLetter, ClassControlLetter = _
+              return createEscaped('controlLetter', 31, '_', 2);
+            }
+          }
+          return parseCharacterEscape();
+        }
+        // CharacterClassEscape :: one of d D s S w W
+        case 'd':
+        case 'D':
+        case 'w':
+        case 'W':
+        case 's':
+        case 'S':
+          incr();
+          return createCharacterClassEscape(ch);
+        case 'k':
+          return parseNamedReference() || parseIdentityEscape();
+        case 'p':
+        case 'P':
+          return parseUnicodePropertyEscape() || parseIdentityEscape();
+        case '-': {
+          //     [+U] -
+          if (insideCharacterClass && isUnicodeMode) {
+            incr();
+            return createEscaped('singleEscape', 0x002d, '\\-');
+          }
+          return parseIdentityEscape();
+        }
+        default:
+          return parseCharacterEscape();
       }
-
-      res = parseCharacterClassEscape() || parseCharacterEscape();
-
-      return res;
     }
 
 
@@ -1000,8 +1094,9 @@
             // like ordinary characters. Create a character for the
             // first number only here - other number-characters
             // (if available) will be matched later.
+            var start = pos;
             res = createCharacter(matchReg(/^[89]/));
-            return updateRawStart(res, res.range[0] - 1);
+            return updateRawStart(res, start - 1);
           }
         }
       }
@@ -1033,20 +1128,17 @@
       }
     }
 
-    function parseCharacterClassEscape() {
-      // CharacterClassEscape :: one of d D s S w W
-      var res;
-      if (res = matchReg(/^[dDsSwW]/)) {
-        return createCharacterClassEscape(res[0]);
-      } else if (features.unicodePropertyEscape && isUnicodeMode && (res = matchReg(/^([pP])\{([^}]+)\}/))) {
+    function parseUnicodePropertyEscape() {
+      var res, from = pos;
+      if (features.unicodePropertyEscape && isUnicodeMode && (res = matchReg(/^([pP])\{([^}]+)\}/))) {
         // https://github.com/jviereck/regjsparser/issues/77
-        return addRaw({
+        return {
           type: 'unicodePropertyEscape',
           negative: res[1] === 'P',
           value: res[2],
-          range: [res.range[0] - 1, res.range[1]],
-          raw: res[0]
-        });
+          range: [from - 1, pos],
+          raw: str.substring(from - 1, pos)
+        };
       }
       return false;
     }
@@ -1083,32 +1175,45 @@
 
       var res;
       var from = pos;
-      if (res = matchReg(/^[fnrtv]/)) {
-        // ControlEscape
-        var codePoint = 0;
-        switch (res[0]) {
-          case 't': codePoint = 0x009; break;
-          case 'n': codePoint = 0x00A; break;
-          case 'v': codePoint = 0x00B; break;
-          case 'f': codePoint = 0x00C; break;
-          case 'r': codePoint = 0x00D; break;
-        }
-        return createEscaped('singleEscape', codePoint, '\\' + res[0]);
-      } else if (res = matchReg(/^c([a-zA-Z])/)) {
-        // c ControlLetter
-        return createEscaped('controlLetter', res[1].charCodeAt(0) % 32, res[1], 2);
-      } else if (res = matchReg(/^x([0-9a-fA-F]{2})/)) {
-        // HexEscapeSequence
-        return createEscaped('hexadecimalEscape', parseInt(res[1], 16), res[1], 2);
-      } else if (res = parseRegExpUnicodeEscapeSequence(isUnicodeMode)) {
-        if (!res || res.codePoint > 0x10FFFF) {
-          bail('Invalid escape sequence', null, from, pos);
-        }
-        return res;
-      } else {
-        // IdentityEscape
-        return parseIdentityEscape();
+      switch (lookahead()) {
+        case 't':
+          incr();
+          return createEscaped('singleEscape', 0x009, '\\t');
+        case 'n':
+          incr();
+          return createEscaped('singleEscape', 0x00A, '\\n');
+        case 'v':
+          incr();
+          return createEscaped('singleEscape', 0x00B, '\\v');
+        case 'f':
+          incr();
+          return createEscaped('singleEscape', 0x00C, '\\f');
+        case 'r':
+          incr();
+          return createEscaped('singleEscape', 0x00D, '\\r');
+        case 'c':
+          if (res = matchReg(/^c([a-zA-Z])/)) {
+            // c ControlLetter
+            return createEscaped('controlLetter', res[1].charCodeAt(0) % 32, res[1], 2);
+          }
+          break;
+        case 'x':
+          if (res = matchReg(/^x([0-9a-fA-F]{2})/)) {
+            // HexEscapeSequence
+            return createEscaped('hexadecimalEscape', parseInt(res[1], 16), res[1], 2);
+          }
+          break;
+        case 'u':
+          if (res = parseRegExpUnicodeEscapeSequence(isUnicodeMode)) {
+            if (!res || res.codePoint > 0x10FFFF) {
+              bail('Invalid escape sequence', null, from, pos);
+            }
+            return res;
+          }
+          break;
       }
+      // IdentityEscape
+      return parseIdentityEscape();
     }
 
     function parseIdentifierAtom(check) {
@@ -1178,11 +1283,12 @@
         res += ch;
       }
 
-      return addRaw({
+      return {
         type: 'identifier',
         value: res,
-        range: [start, pos]
-      });
+        range: [start, pos],
+        raw: str.substring(start, pos)
+      };
     }
 
     function isIdentifierStart(ch) {
@@ -1228,7 +1334,7 @@
         if (l === "k" && features.lookbehind) {
           return null;
         }
-        tmp = incr();
+        tmp = consume(1);
         return createEscaped('identifier', tmp.charCodeAt(0), tmp, 1);
       }
 
@@ -1241,11 +1347,11 @@
       //      [ ^ ClassContents ]
 
       var res, from = pos;
-      if (res = matchReg(/^\[\^/)) {
+      if (res = match("[^")) {
         res = parseClassContents();
         skip(']');
         return createCharacterClass(res, true, from, pos);
-      } else if (match('[')) {
+      } else if (matchOne('[')) {
         res = parseClassContents();
         skip(']');
         return createCharacterClass(res, false, from, pos);
@@ -1261,7 +1367,7 @@
       //      [+V] ClassSetExpression
 
       var res;
-      if (current(']')) {
+      if (currentOne(']')) {
         // Empty array means nothing inside of the ClassRange.
         return { kind: 'union', body: [] };
       } else if (hasUnicodeSetFlag) {
@@ -1277,10 +1383,11 @@
 
     function parseHelperClassContents(atom) {
       var from, to, res, atomTo, dash;
-      if (current('-') && !next(']')) {
+      if (currentOne('-') && !next(']')) {
         // ClassAtom - ClassAtom ClassContents
         from = atom.range[0];
-        dash = createCharacter(match('-'));
+        incr();
+        dash = createCharacter('-');
 
         atomTo = parseClassAtom();
         if (!atomTo) {
@@ -1341,7 +1448,7 @@
         bail('classAtom');
       }
 
-      if (current(']')) {
+      if (currentOne(']')) {
         // ClassAtom
         return [atom];
       }
@@ -1361,7 +1468,7 @@
       if (!res) {
         bail('classAtom');
       }
-      if (current(']')) {
+      if (currentOne(']')) {
         //      ClassAtom
         return res;
       }
@@ -1375,7 +1482,7 @@
       // ClassAtom ::
       //      -
       //      ClassAtomNoDash
-      if (match('-')) {
+      if (matchOne('-')) {
         return createCharacter('-');
       } else {
         return parseClassAtomNoDash();
@@ -1391,18 +1498,25 @@
       //      \ [lookahead = c] 
 
       var res;
-      if (res = matchReg(/^[^\\\]-]/)) {
-        return createCharacter(res[0]);
-      } else if (match('\\')) {
-        res = parseClassEscape();
-        if (!res) {
-          if (!isUnicodeMode && lookahead() == 'c') {
-            return createCharacter('\\');
+      switch ((res = lookahead())) {
+        case "\\": {
+          incr();
+          res = parseClassEscape();
+          if (!res) {
+            if (!isUnicodeMode && lookahead() == "c") {
+              return createCharacter("\\");
+            }
+            bail("classEscape");
           }
-          bail('classEscape');
-        }
 
-        return parseUnicodeSurrogatePairEscape(res, isUnicodeMode);
+          return parseUnicodeSurrogatePairEscape(res, isUnicodeMode);
+        }
+        case "]":
+        case "-":
+          break;
+        default:
+          incr();
+          return createCharacter(res);
       }
     }
 
@@ -1433,19 +1547,19 @@
 
       if (operand.type === 'classRange') {
         kind = 'union';
-      } else if (current('&')) {
+      } else if (currentOne('&')) {
         kind = 'intersection';
-      } else if (current('-')) {
+      } else if (currentOne('-')) {
         kind = 'subtraction';
       } else {
         kind = 'union';
       }
 
-      while (!current(']')) {
+      while (!currentOne(']')) {
         if (kind === 'intersection') {
           skip('&');
           skip('&');
-          if (current('&')) {
+          if (currentOne('&')) {
             bail('&& cannot be followed by &. Wrap it in brackets: &&[&].');
           }
         } else if (kind === 'subtraction') {
@@ -1486,7 +1600,7 @@
       var from = pos;
       var start, res;
 
-      if (match('\\')) {
+      if (matchOne('\\')) {
         // ClassSetOperand ::
         //      ...
         //      ClassStringDisjunction
@@ -1520,8 +1634,8 @@
         bail('Invalid character', lookahead());
       }
 
-      if (allowRanges && current('-') && !next('-')) {
-        skip('-');
+      if (allowRanges && currentOne('-') && !next('-')) {
+        incr();
 
         if (res = parseClassSetCharacter()) {
           // ClassSetRange ::
@@ -1545,7 +1659,7 @@
       //      \ ClassHalfOfDouble
       //      \ b
 
-      if (match('\\')) {
+      if (matchOne('\\')) {
         var res, from = pos;
         if (res = parseClassSetCharacterEscapedHelper()) {
           return res;
@@ -1579,9 +1693,9 @@
       //      \ b
 
       var res;
-      if (match('b')) {
+      if (matchOne('b')) {
         return createEscaped('singleEscape', 0x0008, '\\b');
-      } else if (match('B')) {
+      } else if (matchOne('B')) {
         bail('\\B not possible inside of ClassContents', '', pos - 2);
       } else if (res = matchReg(/^[&\-!#%,:;<=>@`~]/)) {
         return createEscaped('identifier', res[0].codePointAt(0), res[0]);
@@ -1607,7 +1721,7 @@
       var res = [];
       do {
         res.push(parseClassString());
-      } while (match('|'));
+      } while (matchOne('|'));
 
       skip('}');
 
