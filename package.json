@@ -30,7 +30,7 @@
     "README.md"
   ],
   "dependencies": {
-    "jsesc": "~3.0.2"
+    "jsesc": "~3.1.0"
   },
   "devDependencies": {
     "@unicode/unicode-16.0.0": "^1.6.0",
