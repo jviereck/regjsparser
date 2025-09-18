@@ -33,7 +33,7 @@
     "jsesc": "~3.1.0"
   },
   "devDependencies": {
-    "@unicode/unicode-16.0.0": "^1.6.0",
+    "@unicode/unicode-17.0.0": "^1.6.12",
     "eslint": "^9.10.0",
     "eslint-plugin-regexp": "^2.6.0",
     "globals": "^15.9.0",
