@@ -1460,36 +1460,66 @@
       }
     }
 
-    function parseHelperClassContents(atom) {
-      var from, to, res, atomTo, dash;
-      if (currentOne('-') && !next(']')) {
-        // ClassAtom - ClassAtom ClassContents
-        from = atom.range[0];
-        incr();
-        dash = createCharacter('-');
+    function parseNonemptyClassRanges() {
+      // NonemptyClassRanges ::
+      //      ClassAtom
+      //      ClassAtom NonemptyClassRangesNoDash
+      //      ClassAtom - ClassAtom ClassContents
+      //
+      // NonemptyClassRangesNoDash ::
+      //      ClassAtom
+      //      ClassAtomNoDash NonemptyClassRangesNoDash
+      //      ClassAtomNoDash - ClassAtom ClassContents
+      //
+      // Both productions are right-recursive. They are parsed within a loop such
+      // that large classes take linear time and don't overflow the call stack.
 
-        atomTo = parseClassAtom();
-        if (!atomTo) {
+      var contents = [], rangeIndexes = [];
+      var from, to, atom, atomTo, dash, range, i, j;
+
+      do {
+        atom = parseClassAtom();
+        if (!atom) {
           bail('classAtom');
         }
-        to = pos;
 
-        // Parse the next class range if exists.
-        var classContents = parseClassContents();
-        if (!classContents) {
-          bail('classContents');
+        if (currentOne('-') && !next(']')) {
+          // ClassAtom - ClassAtom ClassContents
+          from = atom.range[0];
+          incr();
+          dash = createCharacter('-');
+
+          atomTo = parseClassAtom();
+          if (!atomTo) {
+            bail('classAtom');
+          }
+          to = pos;
+
+          rangeIndexes.push(contents.length);
+          contents.push({ atom: atom, dash: dash, atomTo: atomTo, from: from, to: to });
+        } else {
+          // ClassAtom
+          // ClassAtom NonemptyClassRangesNoDash
+          contents.push(atom);
         }
+      } while (!currentOne(']'));
+
+      // Build the ranges from right to left. This keeps the error precedence
+      // of the recursive grammar, where a range is checked only after the
+      // rest of the class has been parsed.
+      for (i = rangeIndexes.length - 1; i >= 0; i--) {
+        range = contents[rangeIndexes[i]];
 
         // Check if both the from and atomTo have codePoints.
-        if (!('codePoint' in atom) || !('codePoint' in atomTo)) {
+        if (!('codePoint' in range.atom) || !('codePoint' in range.atomTo)) {
           if (!isUnicodeMode) {
             // If not, don't create a range but treat them as
             // `atom` `-` `atom` instead.
             //
-            // SEE: https://tc39.es/ecma262/#sec-runtime-semantics-characterrangeorunion-abstract-operation
-            //   NonemptyClassRanges :: ClassAtom - ClassAtom ClassContents
-            //   CharacterRangeOrUnion (Annex B)
-            res = [atom, dash, atomTo];
+            // SEE: https://tc39.es/ecma262/#sec-regular-expression-patterns-semantics
+            //   NonemptyClassRanges::ClassAtom - ClassAtom ClassContents
+            //   CharacterRangeOrUnion
+            contents[rangeIndexes[i]] = [range.atom, range.dash, range.atomTo];
           } else {
             // With unicode flag, both sides must have codePoints if
             // one side has a codePoint.
@@ -1499,62 +1529,22 @@
             bail('invalid character class');
           }
         } else {
-          res = [createClassRange(atom, atomTo, from, to)];
+          contents[rangeIndexes[i]] = createClassRange(range.atom, range.atomTo, range.from, range.to);
         }
+      }
 
-        if (classContents.type === 'empty') {
-          return res;
+      // Flatten contents to return a single array of class elements.
+      var res = [];
+      for (i = 0; i < contents.length; i++) {
+        if (Array.isArray(contents[i])) {
+          for (j = 0; j < contents[i].length; j++) {
+            res.push(contents[i][j]);
+          }
+        } else {
+          res.push(contents[i]);
         }
-        return res.concat(classContents.body);
       }
-
-      res = parseNonemptyClassRangesNoDash();
-      if (!res) {
-        bail('nonEmptyClassRangesNoDash');
-      }
-
-      return [atom].concat(res);
-    }
-
-    function parseNonemptyClassRanges() {
-      // NonemptyClassRanges ::
-      //      ClassAtom
-      //      ClassAtom NonemptyClassRangesNoDash
-      //      ClassAtom - ClassAtom ClassContents[~UnicodeSetsMode]
-
-      var atom = parseClassAtom();
-      if (!atom) {
-        bail('classAtom');
-      }
-
-      if (currentOne(']')) {
-        // ClassAtom
-        return [atom];
-      }
-
-      // ClassAtom NonemptyClassRangesNoDash
-      // ClassAtom - ClassAtom ClassContents
-      return parseHelperClassContents(atom);
-    }
-
-    function parseNonemptyClassRangesNoDash() {
-      // NonemptyClassRangesNoDash ::
-      //      ClassAtom
-      //      ClassAtomNoDash NonemptyClassRangesNoDash
-      //      ClassAtomNoDash - ClassAtom ClassContents[~UnicodeSetsMode]
-
-      var res = parseClassAtom();
-      if (!res) {
-        bail('classAtom');
-      }
-      if (currentOne(']')) {
-        //      ClassAtom
-        return res;
-      }
-
-      // ClassAtomNoDash NonemptyClassRangesNoDash
-      // ClassAtomNoDash - ClassAtom ClassContents
-      return parseHelperClassContents(res);
+      return res;
     }
 
     function parseClassAtom() {
