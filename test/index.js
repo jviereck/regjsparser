@@ -88,3 +88,10 @@ runTests('./test-data-lookbehind-modifiers-group.json', '', {
 
   throw new Error(message);
 })();
+
+(function testLargeClassContents() {
+  var message = "It should correctly parse large character class contents.";
+
+  parse("[" + Array(8192).fill("a").join("") + "]", "");
+  console.log("  PASSED TEST: " + message);
+})();
