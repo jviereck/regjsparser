@@ -271,6 +271,16 @@
 //
 // ClassSetReservedPunctuator :: one of
 //      & - ! # % , : ; < = > @ ` ~
+//
+// --------------------------------------------------------------
+// NOTE: The following productions refer to the
+//       "Regular Expression Buffer Boundaries for ECMAScript" proposal.
+//       https://github.com/tc39/proposal-regexp-buffer-boundaries
+// --------------------------------------------------------------
+// Assertion ::
+//      [+UnicodeMode] \A
+//      [+UnicodeMode] \z
+//      [+UnicodeMode] \Z
 
 "use strict";
 (function() {
@@ -773,6 +783,9 @@
       //      \B
       //      (?= Disjunction )
       //      (?! Disjunction )
+      //      [+UnicodeMode] \A
+      //      [+UnicodeMode] \z
+      //      [+UnicodeMode] \Z
       //      ...
       //
       // (?<= Disjunction ) and (?<! Disjunction ) are parsed in
@@ -792,6 +805,17 @@
           } else if (next('B')) {
             incr(2);
             return createAnchor('not-boundary', 2 /* rawLength */);
+          } else if (isUnicodeMode && features.bufferBoundaries) {
+            if (next('A')) {
+              incr(2);
+              return createAnchor('start-buffer', 2 /* rawLength */);
+            } else if (next('z')) {
+              incr(2);
+              return createAnchor('end-buffer', 2 /* rawLength */);
+            } else if (next('Z')) {
+              incr(2);
+              return createAnchor('end-buffer-optional-newline', 2 /* rawLength */);
+            }
           }
           break;
         }

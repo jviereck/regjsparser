@@ -77,4 +77,5 @@ updateFixtures('./test-data-lookbehind-modifiers-group.json', '', {
 updateFixtures('./test-data-buffer-boundaries.json', null, {
   unicodeSet: true,
   bufferBoundaries: true,
+  modifiers: true,
 });
