@@ -84,6 +84,11 @@ runTests('./test-data-lookbehind-modifiers-group.json', '', {
   lookbehind: true,
   modifiers: true,
 });
+runTests('./test-data-buffer-boundaries.json', null, {
+  unicodeSet: true,
+  bufferBoundaries: true,
+  modifiers: true,
+});
 
 
 (function testUVError() {

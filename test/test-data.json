@@ -39961,5 +39961,35 @@
       83
     ],
     "raw": "()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()\\40"
+  },
+  "\\A": {
+    "type": "value",
+    "kind": "identifier",
+    "codePoint": 65,
+    "range": [
+      0,
+      2
+    ],
+    "raw": "\\A"
+  },
+  "\\z": {
+    "type": "value",
+    "kind": "identifier",
+    "codePoint": 122,
+    "range": [
+      0,
+      2
+    ],
+    "raw": "\\z"
+  },
+  "\\Z": {
+    "type": "value",
+    "kind": "identifier",
+    "codePoint": 90,
+    "range": [
+      0,
+      2
+    ],
+    "raw": "\\Z"
   }
 }

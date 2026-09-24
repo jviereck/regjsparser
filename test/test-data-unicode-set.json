@@ -2143,5 +2143,23 @@
     "name": "SyntaxError",
     "message": "Invalid range end at position 4: ]\n    [\\:-]\n        ^",
     "input": "[\\:-]"
+  },
+  "\\A": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "atomEscape at position 1\n    \\A\n     ^",
+    "input": "\\A"
+  },
+  "\\z": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "atomEscape at position 1\n    \\z\n     ^",
+    "input": "\\z"
+  },
+  "\\Z": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "atomEscape at position 1\n    \\Z\n     ^",
+    "input": "\\Z"
   }
 }
