@@ -11,19 +11,29 @@ var stringify = function(obj) {
   });
 };
 
+// When `flags` is null, each key is a regex literal such as `/\A/u`, and the
+// pattern and flags are taken from it.
+var splitKey = function(key, flags) {
+  if (flags !== null) {
+    return { pattern: key, flags: flags || '' };
+  }
+  var index = key.lastIndexOf('/');
+  return { pattern: key.slice(1, index), flags: key.slice(index + 1) };
+};
+
 var updateFixtures = function(fileName, flags, options) {
   var data = {};
   Object.keys(require(fileName)).forEach(function(regex) {
-    flags || (flags = '');
+    var input = splitKey(regex, flags);
     var par;
     try {
-      par = parse(regex, flags, options);
+      par = parse(input.pattern, input.flags, options);
     } catch (exception) {
       par = {
         type: 'error',
         name: exception.name,
         message: exception.message,
-        input: regex
+        input: input.pattern
       };
     }
     data[regex] = par;
@@ -63,4 +73,8 @@ updateFixtures('./test-data-modifiers-group.json', '', {
 updateFixtures('./test-data-lookbehind-modifiers-group.json', '', {
   lookbehind: true,
   modifiers: true,
+});
+updateFixtures('./test-data-buffer-boundaries.json', null, {
+  unicodeSet: true,
+  bufferBoundaries: true,
 });
