@@ -10,27 +10,37 @@ var stringify = function(obj) {
   });
 };
 
+// When `flags` is null, each key is a regex literal such as `/\A/u`, and the
+// pattern and flags are taken from it.
+var splitKey = function(key, flags) {
+  if (flags !== null) {
+    return { pattern: key, flags: flags || '' };
+  }
+  var index = key.lastIndexOf('/');
+  return { pattern: key.slice(1, index), flags: key.slice(index + 1) };
+};
+
 var runTests = function(data_path, flags, features) {
   console.log('Testing:', data_path);
   var data = require(data_path)
   Object.keys(data).forEach(function(regex) {
     var results = data[regex];
-    flags || (flags = '');
+    var input = splitKey(regex, flags);
     var par;
     try {
-      par = parse(regex, flags, features);
+      par = parse(input.pattern, input.flags, features);
     } catch (exception) {
       par = {
         type: 'error',
         name: exception.name,
         message: exception.message,
-        input: regex
+        input: input.pattern
       };
     }
 
     if (stringify(par) !== stringify(results)) {
       throw new Error(
-        'Failure parsing string ' + regex + (flags ? '(' + flags + ')' : '') +
+        'Failure parsing string ' + input.pattern + (input.flags ? '(' + input.flags + ')' : '') +
         ':' + JSON.stringify(par) + '\n' + JSON.stringify(results)
       );
     } else {
