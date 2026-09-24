@@ -1326,23 +1326,60 @@
     }
   }
 
+  // Returns the value of the hex digit with the char code `ch`, or -1 if it is
+  // not a hex digit.
+  function hexDigitValue(ch) {
+    if (ch >= 0x30 && ch <= 0x39) { // 0-9
+      return ch - 0x30;
+    } else if (ch >= 0x41 && ch <= 0x46) { // A-F
+      return ch - 0x37;
+    } else if (ch >= 0x61 && ch <= 0x66) { // a-f
+      return ch - 0x57;
+    }
+    return -1;
+  }
+
+  // Returns the value of the `count` hex digits starting at `start`, or -1 if
+  // any of them is not a hex digit.
+  function parseHexDigits(start, count) {
+    var value = 0, digit;
+    for (var i = start; i < start + count; i++) {
+      digit = hexDigitValue(str.charCodeAt(i));
+      if (digit === -1) {
+        return -1;
+      }
+      value = value * 16 + digit;
+    }
+    return value;
+  }
+
   function parseRegExpUnicodeEscapeSequence(isUnicodeMode) {
-    var res;
-    if (res = matchReg(/^u([0-9a-fA-F]{4})/)) {
+    var codeUnit;
+    if (currentOne('u') && (codeUnit = parseHexDigits(pos + 1, 4)) !== -1) {
       // RegExpUnicodeEscapeSequence ::
       //      [+UnicodeMode] u HexLeadSurrogate \u HexTrailSurrogate
       //      [+UnicodeMode] u HexLeadSurrogate
       //      [+UnicodeMode] u HexTrailSurrogate
       //      [+UnicodeMode] u HexNonSurrogate
       //      [~UnicodeMode] u Hex4Digits
+      incr(5);
       return parseUnicodeSurrogatePairEscape(
-        createEscaped('unicodeEscape', parseInt(res[1], 16), res[1], 2),
+        createValue('unicodeEscape', codeUnit, pos - 6, pos),
         isUnicodeMode
       );
-    } else if (isUnicodeMode && (res = matchReg(/^u\{([0-9a-fA-F]+)\}/))) {
+    } else if (isUnicodeMode && currentOne('u') && next('{')) {
       // RegExpUnicodeEscapeSequence ::
       //      [+UnicodeMode] u{ CodePoint }
-      return createEscaped('unicodeCodePointEscape', parseInt(res[1], 16), res[1], 4);
+      var start = pos + 2, end = start;
+      while (hexDigitValue(str.charCodeAt(end)) !== -1) {
+        end++;
+      }
+      if (end > start && str[end] === '}') {
+        pos = end + 1;
+        // CodePoint can have any number of digits. parseInt() rounds a value
+        // above 2^53 correctly, unlike adding up the digits.
+        return createValue('unicodeCodePointEscape', parseInt(str.substring(start, end), 16), start - 3, pos);
+      }
     }
   }
 
@@ -1389,9 +1426,10 @@
         }
         break;
       case 'x':
-        if (res = matchReg(/^x([0-9a-fA-F]{2})/)) {
+        if ((res = parseHexDigits(pos + 1, 2)) !== -1) {
           // HexEscapeSequence
-          return createEscaped('hexadecimalEscape', parseInt(res[1], 16), res[1], 2);
+          incr(3);
+          return createValue('hexadecimalEscape', res, pos - 4, pos);
         }
         break;
       case 'u':
