@@ -3654,5 +3654,23 @@
     "name": "SyntaxError",
     "message": "\\B not possible inside of CharacterClass at position 2\n    [\\B]\n      ^",
     "input": "[\\B]"
+  },
+  "\\A": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "atomEscape at position 1\n    \\A\n     ^",
+    "input": "\\A"
+  },
+  "\\z": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "atomEscape at position 1\n    \\z\n     ^",
+    "input": "\\z"
+  },
+  "\\Z": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "atomEscape at position 1\n    \\Z\n     ^",
+    "input": "\\Z"
   }
 }
