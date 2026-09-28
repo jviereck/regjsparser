@@ -1,4 +1,5 @@
 import {
+  Anchor,
   AstNodeType,
   Identifier,
   ModifierFlags,
@@ -39,6 +40,17 @@ if (defaultNode.type === "characterClass") {
 if (defaultNode.type === "characterClassEscape") {
   assert<"d" | "D" | "w" | "W" | "s" | "S">(defaultNode.value);
 }
+
+if (defaultNode.type === "anchor") {
+  assert<"boundary" | "end" | "not-boundary" | "start">(defaultNode.kind);
+  // bufferBoundaries = false
+  // @ts-expect-error
+  defaultNode.kind === "start-buffer";
+}
+
+// bufferBoundaries = false
+// @ts-expect-error
+assert<Anchor["kind"]>("end-buffer");
 
 assert<number>(defaultNode.range[0]);
 assert<number>(defaultNode.range[1]);
@@ -110,4 +122,43 @@ if (
   nodeWithModifiers.behavior === "ignore"
 ) {
   assert<ModifierFlags | undefined>(nodeWithModifiers.modifierFlags);
+}
+
+let nodeWithBufferBoundaries: RootNode<{ bufferBoundaries: true }>;
+nodeWithBufferBoundaries = parse("", "u", {
+  bufferBoundaries: true,
+});
+
+if (nodeWithBufferBoundaries.type === "anchor") {
+  // bufferBoundaries = true
+  nodeWithBufferBoundaries.kind === "start-buffer";
+  nodeWithBufferBoundaries.kind === "end-buffer";
+  nodeWithBufferBoundaries.kind === "end-buffer-optional-newline";
+  assert<
+    | "boundary"
+    | "end"
+    | "not-boundary"
+    | "start"
+    | "start-buffer"
+    | "end-buffer"
+    | "end-buffer-optional-newline"
+  >(nodeWithBufferBoundaries.kind);
+}
+
+if (nodeWithBufferBoundaries.type === "alternative") {
+  const term = nodeWithBufferBoundaries.body[0];
+  if (term.type === "anchor") {
+    // bufferBoundaries is passed down to nested nodes
+    term.kind === "end-buffer";
+  }
+}
+
+assert<Anchor<{ bufferBoundaries: true }>["kind"]>("end-buffer");
+
+let nodeWithMaybeBufferBoundaries = parse("", "u", {
+  bufferBoundaries: false as boolean,
+});
+
+if (nodeWithMaybeBufferBoundaries.type === "anchor") {
+  nodeWithMaybeBufferBoundaries.kind === "start-buffer";
 }

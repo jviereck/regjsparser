@@ -1633,5 +1633,23 @@
     "name": "SyntaxError",
     "message": "atomEscape at position 1\n    \\q{a}\n     ^",
     "input": "\\q{a}"
+  },
+  "\\A": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "atomEscape at position 1\n    \\A\n     ^",
+    "input": "\\A"
+  },
+  "\\z": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "atomEscape at position 1\n    \\z\n     ^",
+    "input": "\\z"
+  },
+  "\\Z": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "atomEscape at position 1\n    \\Z\n     ^",
+    "input": "\\Z"
   }
 }

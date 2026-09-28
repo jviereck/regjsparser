@@ -25,7 +25,16 @@ var parseTree = parse('^a', '', {
   namedGroups: true,
 
   // SEE: https://github.com/jviereck/regjsparser/pull/89
-  lookbehind: true
+  lookbehind: true,
+
+  // SEE: https://github.com/jviereck/regjsparser/pull/113
+  unicodeSet: true,
+
+  // SEE: https://github.com/jviereck/regjsparser/pull/127
+  modifiers: true,
+
+  // SEE: https://github.com/jviereck/regjsparser/pull/166
+  bufferBoundaries: true
 });
 console.log(parseTree);
 ```
