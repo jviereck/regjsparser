@@ -1712,6 +1712,7 @@
       }
       case "]":
       case "-":
+      case undefined: // End of input, e.g. an unterminated class like `[a`.
         break;
       default:
         incr();
