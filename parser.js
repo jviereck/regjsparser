@@ -1851,6 +1851,37 @@
   }
 
   function parse(input, flags, options) {
+    // The parser state lives at module scope, so parse() saves the state of
+    // any call in progress and restores it on exit. This keeps parse()
+    // reentrant: a nested call, e.g. from input.toString() or from a getter on
+    // the options, must not clobber the state of the outer call.
+    var savedStr = str;
+    var savedFeatures = features;
+    var savedPos = pos;
+    var savedBackrefDenied = backrefDenied;
+    var savedClosedCaptureCounter = closedCaptureCounter;
+    var savedFirstIteration = firstIteration;
+    var savedShouldReparse = shouldReparse;
+    var savedHasUnicodeFlag = hasUnicodeFlag;
+    var savedHasUnicodeSetFlag = hasUnicodeSetFlag;
+    var savedIsUnicodeMode = isUnicodeMode;
+    try {
+      return parseImpl(input, flags, options);
+    } finally {
+      str = savedStr;
+      features = savedFeatures;
+      pos = savedPos;
+      backrefDenied = savedBackrefDenied;
+      closedCaptureCounter = savedClosedCaptureCounter;
+      firstIteration = savedFirstIteration;
+      shouldReparse = savedShouldReparse;
+      hasUnicodeFlag = savedHasUnicodeFlag;
+      hasUnicodeSetFlag = savedHasUnicodeSetFlag;
+      isUnicodeMode = savedIsUnicodeMode;
+    }
+  }
+
+  function parseImpl(input, flags, options) {
     features = options || {};
     backrefDenied = [];
     closedCaptureCounter = 0;
