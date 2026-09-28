@@ -2,10 +2,18 @@
 //
 // ==================================================================
 //
-// See ECMA-262 Standard: 15.10.1
+// See ECMA-262 Standard: https://tc39.es/ecma262/#sec-patterns
 //
-// NOTE: The ECMA-262 standard uses the term "Assertion" for /^/. Here the
-//   term "Anchor" is used.
+// The grammar below follows the standard. For brevity, the grammar parameters
+// that are only passed through ([?UnicodeMode], [?UnicodeSetsMode] and
+// [?NamedCaptureGroups]) are omitted; the parameters that guard an
+// alternative ([+UnicodeMode], [~UnicodeSetsMode], ...) or that are set
+// explicitly are kept.
+//
+// NOTE: Without the u and v flags, the parser also accepts the extended
+//   grammar of Annex B, see
+//   https://tc39.es/ecma262/#sec-regular-expressions-patterns
+//   e.g. quantified lookaheads (https://github.com/jviereck/regjsparser/issues/130).
 //
 // Pattern ::
 //      Disjunction
@@ -19,20 +27,19 @@
 //      Alternative Term
 //
 // Term ::
-//      Anchor
-//      Anchor Quantifier (see https://github.com/jviereck/regjsparser/issues/130)
+//      Assertion
 //      Atom
 //      Atom Quantifier
 //
-// Anchor ::
+// Assertion ::
 //      ^
 //      $
-//      \ b
-//      \ B
-//      ( ? = Disjunction )
-//      ( ? ! Disjunction )
-//      ( ? < = Disjunction )
-//      ( ? < ! Disjunction )
+//      \b
+//      \B
+//      (?= Disjunction )
+//      (?! Disjunction )
+//      (?<= Disjunction )
+//      (?<! Disjunction )
 //
 // Quantifier ::
 //      QuantifierPrefix
@@ -42,68 +49,155 @@
 //      *
 //      +
 //      ?
-//      { DecimalDigits }
-//      { DecimalDigits , }
-//      { DecimalDigits , DecimalDigits }
+//      { DecimalDigits[~Sep] }
+//      { DecimalDigits[~Sep] ,}
+//      { DecimalDigits[~Sep] , DecimalDigits[~Sep] }
 //
 // Atom ::
 //      PatternCharacter
 //      .
 //      \ AtomEscape
 //      CharacterClass
-//      ( GroupSpecifier Disjunction )
-//      ( ? : Disjunction )
+//      ( GroupSpecifier? Disjunction )
+//      (? RegularExpressionModifiers : Disjunction )
+//      (? RegularExpressionModifiers - RegularExpressionModifiers : Disjunction )
+//
+// RegularExpressionModifiers ::
+//      [empty]
+//      RegularExpressionModifiers RegularExpressionModifier
+//
+// RegularExpressionModifier :: one of
+//      i m s
+//
+// SyntaxCharacter :: one of
+//      ^ $ \ . * + ? ( ) [ ] { } |
 //
 // PatternCharacter ::
-//      SourceCharacter but not any of: ^ $ \ . * + ? ( ) [ ] { } |
+//      SourceCharacter but not SyntaxCharacter
 //
 // AtomEscape ::
 //      DecimalEscape
 //      CharacterClassEscape
 //      CharacterEscape
-//      k GroupName
+//      [+NamedCaptureGroups] k GroupName
 //
-// CharacterEscape[U] ::
+// CharacterEscape ::
 //      ControlEscape
-//      c ControlLetter
+//      c AsciiLetter
+//      0 [lookahead ∉ DecimalDigit]
 //      HexEscapeSequence
-//      RegExpUnicodeEscapeSequence[?U] (ES6)
-//      IdentityEscape[?U]
+//      RegExpUnicodeEscapeSequence
+//      IdentityEscape
 //
-// ControlEscape ::
-//      one of f n r t v
-// ControlLetter ::
-//      one of
-//          a b c d e f g h i j k l m n o p q r s t u v w x y z
-//          A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+// ControlEscape :: one of
+//      f n r t v
+//
+// GroupSpecifier ::
+//      ? GroupName
+//
+// GroupName ::
+//      < RegExpIdentifierName >
+//
+// RegExpIdentifierName ::
+//      RegExpIdentifierStart
+//      RegExpIdentifierName RegExpIdentifierPart
+//
+// RegExpIdentifierStart ::
+//      IdentifierStartChar
+//      \ RegExpUnicodeEscapeSequence[+UnicodeMode]
+//      [~UnicodeMode] UnicodeLeadSurrogate UnicodeTrailSurrogate
+//
+// RegExpIdentifierPart ::
+//      IdentifierPartChar
+//      \ RegExpUnicodeEscapeSequence[+UnicodeMode]
+//      [~UnicodeMode] UnicodeLeadSurrogate UnicodeTrailSurrogate
+//
+// RegExpUnicodeEscapeSequence ::
+//      [+UnicodeMode] u HexLeadSurrogate \u HexTrailSurrogate
+//      [+UnicodeMode] u HexLeadSurrogate
+//      [+UnicodeMode] u HexTrailSurrogate
+//      [+UnicodeMode] u HexNonSurrogate
+//      [~UnicodeMode] u Hex4Digits
+//      [+UnicodeMode] u{ CodePoint }
+//
+// UnicodeLeadSurrogate ::
+//      any Unicode code point in the inclusive interval from U+D800 to U+DBFF
+//
+// UnicodeTrailSurrogate ::
+//      any Unicode code point in the inclusive interval from U+DC00 to U+DFFF
+//
+// HexLeadSurrogate ::
+//      Hex4Digits but only if the MV of Hex4Digits is in the inclusive interval from 0xD800 to 0xDBFF
+//
+// HexTrailSurrogate ::
+//      Hex4Digits but only if the MV of Hex4Digits is in the inclusive interval from 0xDC00 to 0xDFFF
+//
+// HexNonSurrogate ::
+//      Hex4Digits but only if the MV of Hex4Digits is not in the inclusive interval from 0xD800 to 0xDFFF
 //
 // IdentityEscape ::
-//      SourceCharacter but not c
+//      [+UnicodeMode] SyntaxCharacter
+//      [+UnicodeMode] /
+//      [~UnicodeMode] SourceCharacter but not UnicodeIDContinue
 //
 // DecimalEscape ::
-//      DecimalIntegerLiteral [lookahead ∉ DecimalDigit]
+//      NonZeroDigit DecimalDigits[~Sep]? [lookahead ∉ DecimalDigit]
 //
 // CharacterClassEscape ::
-//      one of d D s S w W
+//      d
+//      D
+//      s
+//      S
+//      w
+//      W
+//      [+UnicodeMode] p{ UnicodePropertyValueExpression }
+//      [+UnicodeMode] P{ UnicodePropertyValueExpression }
+//
+// UnicodePropertyValueExpression ::
+//      UnicodePropertyName = UnicodePropertyValue
+//      LoneUnicodePropertyNameOrValue
+//
+// UnicodePropertyName ::
+//      UnicodePropertyNameCharacters
+//
+// UnicodePropertyNameCharacters ::
+//      UnicodePropertyNameCharacter UnicodePropertyNameCharacters?
+//
+// UnicodePropertyValue ::
+//      UnicodePropertyValueCharacters
+//
+// LoneUnicodePropertyNameOrValue ::
+//      UnicodePropertyValueCharacters
+//
+// UnicodePropertyValueCharacters ::
+//      UnicodePropertyValueCharacter UnicodePropertyValueCharacters?
+//
+// UnicodePropertyValueCharacter ::
+//      UnicodePropertyNameCharacter
+//      DecimalDigit
+//
+// UnicodePropertyNameCharacter ::
+//      AsciiLetter
+//      _
 //
 // CharacterClass ::
-//      [ [lookahead ∉ {^}] ClassContents ]
-//      [ ^ ClassContents ]
+//      [ [lookahead ≠ ^] ClassContents ]
+//      [^ ClassContents ]
 //
 // ClassContents ::
 //      [empty]
-//      [~V] NonemptyClassRanges
-//      [+V] ClassSetExpression
+//      [~UnicodeSetsMode] NonemptyClassRanges
+//      [+UnicodeSetsMode] ClassSetExpression
 //
 // NonemptyClassRanges ::
 //      ClassAtom
 //      ClassAtom NonemptyClassRangesNoDash
-//      ClassAtom - ClassAtom ClassContents
+//      ClassAtom - ClassAtom ClassContents[~UnicodeSetsMode]
 //
 // NonemptyClassRangesNoDash ::
 //      ClassAtom
 //      ClassAtomNoDash NonemptyClassRangesNoDash
-//      ClassAtomNoDash - ClassAtom ClassContents
+//      ClassAtomNoDash - ClassAtom ClassContents[~UnicodeSetsMode]
 //
 // ClassAtom ::
 //      -
@@ -114,41 +208,10 @@
 //      \ ClassEscape
 //
 // ClassEscape ::
-//      DecimalEscape
 //      b
-//      CharacterEscape
+//      [+UnicodeMode] -
 //      CharacterClassEscape
-//
-// GroupSpecifier ::
-//      [empty]
-//      ? GroupName
-//
-// GroupName ::
-//      < RegExpIdentifierName >
-//
-// RegExpIdentifierName ::
-//      RegExpIdentifierStart
-//      RegExpIdentifierName RegExpIdentifierContinue
-//
-// RegExpIdentifierStart ::
-//      UnicodeIDStart
-//      $
-//      _
-//      \ RegExpUnicodeEscapeSequence
-//
-// RegExpIdentifierContinue ::
-//      UnicodeIDContinue
-//      $
-//      _
-//      \ RegExpUnicodeEscapeSequence
-//      <ZWNJ>
-//      <ZWJ>
-//
-// --------------------------------------------------------------
-// NOTE: The following productions refer to the "set notation and
-//       properties of strings" proposal.
-//       https://github.com/tc39/proposal-regexp-set-notation
-// --------------------------------------------------------------
+//      CharacterEscape
 //
 // ClassSetExpression ::
 //      ClassUnion
@@ -171,14 +234,14 @@
 //      ClassSetCharacter - ClassSetCharacter
 //
 // ClassSetOperand ::
-//      ClassSetCharacter
-//      ClassStringDisjunction
 //      NestedClass
+//      ClassStringDisjunction
+//      ClassSetCharacter
 //
 // NestedClass ::
-//      [ [lookahead ≠ ^] ClassContents[+U,+V] ]
-//      [ ^ ClassContents[+U,+V] ]
-//      \ CharacterClassEscape[+U, +V]
+//      [ [lookahead ≠ ^] ClassContents[+UnicodeMode, +UnicodeSetsMode] ]
+//      [^ ClassContents[+UnicodeMode, +UnicodeSetsMode] ]
+//      \ CharacterClassEscape[+UnicodeMode]
 //
 // ClassStringDisjunction ::
 //      \q{ ClassStringDisjunctionContents }
@@ -196,35 +259,18 @@
 //
 // ClassSetCharacter ::
 //      [lookahead ∉ ClassSetReservedDoublePunctuator] SourceCharacter but not ClassSetSyntaxCharacter
-//      \ CharacterEscape[+U]
+//      \ CharacterEscape[+UnicodeMode]
 //      \ ClassSetReservedPunctuator
 //      \b
 //
-// ClassSetReservedDoublePunctuator ::
-//      one of && !! ## $$ %% ** ++ ,, .. :: ;; << == >> ?? @@ ^^ `` ~~
+// ClassSetReservedDoublePunctuator :: one of
+//      && !! ## $$ %% ** ++ ,, .. :: ;; << == >> ?? @@ ^^ `` ~~
 //
-// ClassSetSyntaxCharacter ::
-//      one of ( ) [ ] { } / - \ |
+// ClassSetSyntaxCharacter :: one of
+//      ( ) [ ] { } / - \ |
 //
-// ClassSetReservedPunctuator ::
-//      one of & - ! # % , : ; < = > @ ` ~
-//
-// --------------------------------------------------------------
-// NOTE: The following productions refer to the
-//       "Regular Expression Pattern Modifiers for ECMAScript" proposal.
-//       https://github.com/tc39/proposal-regexp-modifiers
-// --------------------------------------------------------------
-//
-// Atom ::
-//      ( ? RegularExpressionModifiers : Disjunction )
-//      ( ? RegularExpressionModifiers - RegularExpressionModifiers : Disjunction )
-//
-// RegularExpressionModifiers:
-//      [empty]
-//      RegularExpressionModifiers RegularExpressionModifier
-//
-// RegularExpressionModifier:
-//      one of i m s
+// ClassSetReservedPunctuator :: one of
+//      & - ! # % , : ; < = > @ ` ~
 
 "use strict";
 (function() {
@@ -455,7 +501,11 @@
     }
 
     function createClassRange(min, max, from, to) {
-      // See 15.10.2.15:
+      // NonemptyClassRanges :: ClassAtom - ClassAtom ClassContents
+      // It is a Syntax Error if the CharacterValue of the first ClassAtom is
+      // strictly greater than the CharacterValue of the second ClassAtom.
+      //
+      // SEE: https://tc39.es/ecma262/#sec-patterns-static-semantics-early-errors
       if (min.codePoint > max.codePoint) {
         bail('invalid range in character class', min.raw + '-' + max.raw, from, to);
       }
@@ -593,43 +643,48 @@
 
     function parseTerm() {
       // Term ::
-      //      Anchor
+      //      Assertion
       //      Atom
       //      Atom Quantifier
 
-      // Term (Annex B)::
-      //      [~UnicodeMode] QuantifiableAssertion Quantifier (see https://github.com/jviereck/regjsparser/issues/130)
+      // Term (Annex B) ::
+      //      ...
+      //      [~UnicodeMode] QuantifiableAssertion Quantifier
+      //      [~UnicodeMode] Assertion[~UnicodeMode, ~UnicodeSetsMode]
       //      [~UnicodeMode] ExtendedAtom Quantifier
-
-      // QuantifiableAssertion::
-      //      (?= Disjunction[~UnicodeMode, ~UnicodeSetsMode, ?NamedCaptureGroups] )
-      //      (?! Disjunction[~UnicodeMode, ~UnicodeSetsMode, ?NamedCaptureGroups] )
+      //      [~UnicodeMode] ExtendedAtom
+      //
+      // QuantifiableAssertion (Annex B) ::
+      //      (?= Disjunction[~UnicodeMode, ~UnicodeSetsMode] )
+      //      (?! Disjunction[~UnicodeMode, ~UnicodeSetsMode] )
+      //
+      // SEE: https://github.com/jviereck/regjsparser/issues/130
 
       if (pos >= str.length || currentOne('|') || currentOne(')')) {
         return null; /* Means: The term is empty */
       }
 
-      var anchor = parseAnchor();
+      var assertion = parseAssertion();
       var quantifier;
-      if (anchor) {
+      if (assertion) {
         var pos_backup = pos;
         quantifier = parseQuantifier() || false;
         if (quantifier) {
           // Annex B
-          if (!isUnicodeMode && anchor.type === "group") {
-            quantifier.body = flattenBody(anchor);
-            // The quantifier contains the anchor. Therefore, the beginning of the
-            // quantifier range is given by the beginning of the anchor.
-            updateRawStart(quantifier, anchor.range[0]);
+          if (!isUnicodeMode && assertion.type === "group") {
+            quantifier.body = flattenBody(assertion);
+            // The quantifier contains the assertion. Therefore, the beginning of the
+            // quantifier range is given by the beginning of the assertion.
+            updateRawStart(quantifier, assertion.range[0]);
             return quantifier;
           }
           pos = pos_backup;
           bail("Expected atom");
         }
-        return anchor;
+        return assertion;
       }
 
-      // If there is no Anchor, try to parse an atom.
+      // If there is no Assertion, try to parse an atom.
       var atom = parseAtomAndExtendedAtom();
       if (!atom) {
         // Check if a quantifier is following. A quantifier without an atom
@@ -707,14 +762,21 @@
       return group;
     }
 
-    function parseAnchor() {
-      // Anchor ::
+    // NOTE: parseAssertion() parses ^ $ \b \B and lookaheads; lookbehinds are
+    //   parsed together with the atoms. In the AST, ^ $ \b and \B are "anchor"
+    //   nodes, and lookarounds are "group" nodes.
+    function parseAssertion() {
+      // Assertion ::
       //      ^
       //      $
-      //      \ b
-      //      \ B
-      //      ( ? = Disjunction )
-      //      ( ? ! Disjunction )
+      //      \b
+      //      \B
+      //      (?= Disjunction )
+      //      (?! Disjunction )
+      //      ...
+      //
+      // (?<= Disjunction ) and (?<! Disjunction ) are parsed in
+      // parseAtomAndExtendedAtom().
 
       switch(lookahead()) {
         case '^':
@@ -749,9 +811,9 @@
       //      *
       //      +
       //      ?
-      //      { DecimalDigits }
-      //      { DecimalDigits , }
-      //      { DecimalDigits , DecimalDigits }
+      //      { DecimalDigits[~Sep] }
+      //      { DecimalDigits[~Sep] ,}
+      //      { DecimalDigits[~Sep] , DecimalDigits[~Sep] }
 
       var res, from = pos;
       var quantifier;
@@ -806,22 +868,32 @@
 
     function parseAtomAndExtendedAtom() {
       // Parsing Atom and ExtendedAtom together due to redundancy.
-      // ExtendedAtom is defined in Appendix B of the ECMA-262 standard.
+      // ExtendedAtom is defined in Annex B of the ECMA-262 standard.
       //
-      // SEE: https://www.ecma-international.org/ecma-262/10.0/index.html#prod-annexB-ExtendedPatternCharacter
+      // SEE: https://tc39.es/ecma262/#sec-regular-expressions-patterns
       //
       // Atom ::
       //      PatternCharacter
       //      .
       //      \ AtomEscape
       //      CharacterClass
-      //      ( GroupSpecifier Disjunction )
-      //      ( ? RegularExpressionModifiers : Disjunction )
-      //      ( ? RegularExpressionModifiers - RegularExpressionModifiers : Disjunction )
-      // ExtendedAtom ::
+      //      ( GroupSpecifier? Disjunction )
+      //      (? RegularExpressionModifiers : Disjunction )
+      //      (? RegularExpressionModifiers - RegularExpressionModifiers : Disjunction )
+      //
+      // ExtendedAtom (Annex B) ::
+      //      .
+      //      \ AtomEscape[~UnicodeMode]
+      //      \ [lookahead = c]
+      //      CharacterClass[~UnicodeMode, ~UnicodeSetsMode]
+      //      ( GroupSpecifier[~UnicodeMode]? Disjunction[~UnicodeMode, ~UnicodeSetsMode] )
+      //      (? RegularExpressionModifiers : Disjunction[~UnicodeMode, ~UnicodeSetsMode] )
+      //      (? RegularExpressionModifiers - RegularExpressionModifiers : Disjunction[~UnicodeMode, ~UnicodeSetsMode] )
+      //      InvalidBracedQuantifier
       //      ExtendedPatternCharacter
-      // ExtendedPatternCharacter ::
-      //      SourceCharacter but not one of ^$\.*+?()[|
+      //
+      // ExtendedPatternCharacter (Annex B) ::
+      //      SourceCharacter but not one of ^ $ \ . * + ? ( ) [ |
 
       var res;
 
@@ -862,7 +934,7 @@
           }
           else {
             //      ( Disjunction )
-            //      ( ? : Disjunction )
+            //      (?: Disjunction )
             return parseGroup('(?:', 'ignore', '(', 'normal');
           }
         }
@@ -970,9 +1042,16 @@
     function parseAtomEscape(insideCharacterClass) {
       // AtomEscape ::
       //      DecimalEscape
-      //      CharacterEscape
       //      CharacterClassEscape
-      //      k GroupName
+      //      CharacterEscape
+      //      [+NamedCaptureGroups] k GroupName
+      //
+      // ClassEscape ::
+      //      b
+      //      [+UnicodeMode] -
+      //      [~UnicodeMode] c ClassControlLetter (Annex B)
+      //      CharacterClassEscape
+      //      CharacterEscape
 
       var res, from = pos, ch;
 
@@ -998,9 +1077,10 @@
         }
         case 'b': {
           if (insideCharacterClass) {
-            // 15.10.2.19
-            // The production ClassEscape :: b evaluates by returning the
-            // CharSet containing the one character <BS> (Unicode value 0008).
+            // ClassEscape :: b
+            // The CharSet containing the one character U+0008 (BACKSPACE).
+            //
+            // SEE: https://tc39.es/ecma262/#sec-compiletocharset
             incr();
             return createEscaped('singleEscape', 0x0008, '\\b');
           } else {
@@ -1010,18 +1090,24 @@
         case 'c': {
           if (insideCharacterClass) {
             if (!isUnicodeMode && (res = matchReg(/^c(\d)/))) {
-              // B.1.4
-              // c ClassControlLetter, ClassControlLetter = DecimalDigit
+              // ClassEscape (Annex B) :: [~UnicodeMode] c ClassControlLetter
+              // ClassControlLetter :: DecimalDigit
               return createEscaped('controlLetter', res[1] + 16, res[1], 2);
             } else if (!isUnicodeMode && match("c_")) {
-              // B.1.4
-              // c ClassControlLetter, ClassControlLetter = _
+              // ClassEscape (Annex B) :: [~UnicodeMode] c ClassControlLetter
+              // ClassControlLetter :: _
               return createEscaped('controlLetter', 31, '_', 2);
             }
           }
           return parseCharacterEscape();
         }
-        // CharacterClassEscape :: one of d D s S w W
+        // CharacterClassEscape ::
+        //      d
+        //      D
+        //      s
+        //      S
+        //      w
+        //      W
         case 'd':
         case 'D':
         case 'w':
@@ -1051,7 +1137,7 @@
 
     function parseDecimalEscape(insideCharacterClass) {
       // DecimalEscape ::
-      //      DecimalIntegerLiteral [lookahead ∉ DecimalDigit]
+      //      NonZeroDigit DecimalDigits[~Sep]? [lookahead ∉ DecimalDigit]
 
       var res, match, from = pos;
 
@@ -1154,13 +1240,19 @@
     function parseRegExpUnicodeEscapeSequence(isUnicodeMode) {
       var res;
       if (res = matchReg(/^u([0-9a-fA-F]{4})/)) {
-        // UnicodeEscapeSequence
+        // RegExpUnicodeEscapeSequence ::
+        //      [+UnicodeMode] u HexLeadSurrogate \u HexTrailSurrogate
+        //      [+UnicodeMode] u HexLeadSurrogate
+        //      [+UnicodeMode] u HexTrailSurrogate
+        //      [+UnicodeMode] u HexNonSurrogate
+        //      [~UnicodeMode] u Hex4Digits
         return parseUnicodeSurrogatePairEscape(
           createEscaped('unicodeEscape', parseInt(res[1], 16), res[1], 2),
           isUnicodeMode
         );
       } else if (isUnicodeMode && (res = matchReg(/^u\{([0-9a-fA-F]+)\}/))) {
-        // RegExpUnicodeEscapeSequence (ES6 Unicode code point escape)
+        // RegExpUnicodeEscapeSequence ::
+        //      [+UnicodeMode] u{ CodePoint }
         return createEscaped('unicodeCodePointEscape', parseInt(res[1], 16), res[1], 4);
       }
     }
@@ -1168,10 +1260,12 @@
     function parseCharacterEscape() {
       // CharacterEscape ::
       //      ControlEscape
-      //      c ControlLetter
+      //      c AsciiLetter
+      //      0 [lookahead ∉ DecimalDigit]
       //      HexEscapeSequence
-      //      UnicodeEscapeSequence[?UnicodeMode]
-      //      IdentityEscape[?UnicodeMode]
+      //      RegExpUnicodeEscapeSequence
+      //      [~UnicodeMode] LegacyOctalEscapeSequence (Annex B)
+      //      IdentityEscape
 
       var res;
       var from = pos;
@@ -1217,12 +1311,12 @@
     }
 
     function parseIdentifierAtom(check) {
-      // RegExpIdentifierStart[UnicodeMode] ::
+      // RegExpIdentifierStart ::
       //      IdentifierStartChar
       //      \ RegExpUnicodeEscapeSequence[+UnicodeMode]
       //      [~UnicodeMode] UnicodeLeadSurrogate UnicodeTrailSurrogate
       //
-      // RegExpIdentifierPart[UnicodeMode] ::
+      // RegExpIdentifierPart ::
       //      IdentifierPartChar
       //      \ RegExpUnicodeEscapeSequence[+UnicodeMode]
       //      [~UnicodeMode] UnicodeLeadSurrogate UnicodeTrailSurrogate
@@ -1256,21 +1350,7 @@
     function parseIdentifier() {
       // RegExpIdentifierName ::
       //      RegExpIdentifierStart
-      //      RegExpIdentifierName RegExpIdentifierContinue
-      //
-      // RegExpIdentifierStart ::
-      //      UnicodeIDStart
-      //      $
-      //      _
-      //      \ RegExpUnicodeEscapeSequence
-      //
-      // RegExpIdentifierContinue ::
-      //      UnicodeIDContinue
-      //      $
-      //      _
-      //      \ RegExpUnicodeEscapeSequence
-      //      <ZWNJ>
-      //      <ZWJ>
+      //      RegExpIdentifierName RegExpIdentifierPart
 
       var start = pos;
       var res = parseIdentifierAtom(isIdentifierStart);
@@ -1314,13 +1394,14 @@
     }
 
     function parseIdentityEscape() {
-      // IdentityEscape ::
-      //      [+U] SyntaxCharacter
-      //      [+U] /
-      //      [~U] SourceCharacterIdentityEscape[?N]
-      // SourceCharacterIdentityEscape[?N] ::
-      //      [~N] SourceCharacter but not c
-      //      [+N] SourceCharacter but not one of c or k
+      // IdentityEscape (Annex B) ::
+      //      [+UnicodeMode] SyntaxCharacter
+      //      [+UnicodeMode] /
+      //      [~UnicodeMode] SourceCharacterIdentityEscape
+      //
+      // SourceCharacterIdentityEscape (Annex B) ::
+      //      [~NamedCaptureGroups] SourceCharacter but not c
+      //      [+NamedCaptureGroups] SourceCharacter but not one of c or k
 
 
       var tmp;
@@ -1341,8 +1422,8 @@
 
     function parseCharacterClass() {
       // CharacterClass ::
-      //      [ [lookahead ∉ {^}] ClassContents ]
-      //      [ ^ ClassContents ]
+      //      [ [lookahead ≠ ^] ClassContents ]
+      //      [^ ClassContents ]
 
       var res, from = pos;
       if (match("[^")) {
@@ -1361,8 +1442,8 @@
     function parseClassContents() {
       // ClassContents ::
       //      [empty]
-      //      [~V] NonemptyClassRanges
-      //      [+V] ClassSetExpression
+      //      [~UnicodeSetsMode] NonemptyClassRanges
+      //      [+UnicodeSetsMode] ClassSetExpression
 
       var res;
       if (currentOne(']')) {
@@ -1405,9 +1486,9 @@
             // If not, don't create a range but treat them as
             // `atom` `-` `atom` instead.
             //
-            // SEE: https://tc39.es/ecma262/#sec-regular-expression-patterns-semantics
-            //   NonemptyClassRanges::ClassAtom - ClassAtom ClassContents
-            //   CharacterRangeOrUnion
+            // SEE: https://tc39.es/ecma262/#sec-runtime-semantics-characterrangeorunion-abstract-operation
+            //   NonemptyClassRanges :: ClassAtom - ClassAtom ClassContents
+            //   CharacterRangeOrUnion (Annex B)
             res = [atom, dash, atomTo];
           } else {
             // With unicode flag, both sides must have codePoints if
@@ -1439,7 +1520,7 @@
       // NonemptyClassRanges ::
       //      ClassAtom
       //      ClassAtom NonemptyClassRangesNoDash
-      //      ClassAtom - ClassAtom ClassContents
+      //      ClassAtom - ClassAtom ClassContents[~UnicodeSetsMode]
 
       var atom = parseClassAtom();
       if (!atom) {
@@ -1460,7 +1541,7 @@
       // NonemptyClassRangesNoDash ::
       //      ClassAtom
       //      ClassAtomNoDash NonemptyClassRangesNoDash
-      //      ClassAtomNoDash - ClassAtom ClassContents
+      //      ClassAtomNoDash - ClassAtom ClassContents[~UnicodeSetsMode]
 
       var res = parseClassAtom();
       if (!res) {
@@ -1492,7 +1573,8 @@
       //      SourceCharacter but not one of \ or ] or -
       //      \ ClassEscape
       //
-      // ClassAtomNoDash (Annex B)::
+      // ClassAtomNoDash (Annex B) ::
+      //      ...
       //      \ [lookahead = c]
 
       var res;
@@ -1574,39 +1656,39 @@
 
     function parseClassSetOperand(allowRanges) {
       // ClassSetOperand ::
-      //      ClassSetCharacter
-      //      ClassStringDisjunction
       //      NestedClass
+      //      ClassStringDisjunction
+      //      ClassSetCharacter
       //
       // NestedClass ::
-      //      [ [lookahead ≠ ^] ClassContents[+U,+V] ]
-      //      [ ^ ClassContents[+U,+V] ]
-      //      \ CharacterClassEscape[+U, +V]
+      //      [ [lookahead ≠ ^] ClassContents[+UnicodeMode, +UnicodeSetsMode] ]
+      //      [^ ClassContents[+UnicodeMode, +UnicodeSetsMode] ]
+      //      \ CharacterClassEscape[+UnicodeMode]
       //
       // ClassSetRange ::
       //      ClassSetCharacter - ClassSetCharacter
       //
       // ClassSetCharacter ::
-      //      [lookahead ∉ ClassReservedDouble] SourceCharacter but not ClassSetSyntaxCharacter
-      //      \ CharacterEscape[+U]
-      //      \ ClassHalfOfDouble
-      //      \ b
+      //      [lookahead ∉ ClassSetReservedDoublePunctuator] SourceCharacter but not ClassSetSyntaxCharacter
+      //      \ CharacterEscape[+UnicodeMode]
+      //      \ ClassSetReservedPunctuator
+      //      \b
       //
-      // ClassSyntaxCharacter ::
-      //      one of ( ) [ ] { } / - \ |
+      // ClassSetSyntaxCharacter :: one of
+      //      ( ) [ ] { } / - \ |
 
       var from = pos;
       var start, res;
 
       if (matchOne('\\')) {
         // ClassSetOperand ::
-        //      ...
-        //      ClassStringDisjunction
         //      NestedClass
+        //      ClassStringDisjunction
+        //      ...
         //
         // NestedClass ::
         //      ...
-        //      \ CharacterClassEscape[+U, +V]
+        //      \ CharacterClassEscape[+UnicodeMode]
         if (match('q{')) {
           return parseClassStringDisjunction();
         } else if (res = parseClassEscape()) {
@@ -1620,12 +1702,12 @@
         start = res;
       } else if (res = parseCharacterClass()) {
         // ClassSetOperand ::
-        //      ...
         //      NestedClass
+        //      ...
         //
         // NestedClass ::
-        //      [ [lookahead ≠ ^] ClassContents[+U,+V] ]
-        //      [ ^ ClassContents[+U,+V] ]
+        //      [ [lookahead ≠ ^] ClassContents[+UnicodeMode, +UnicodeSetsMode] ]
+        //      [^ ClassContents[+UnicodeMode, +UnicodeSetsMode] ]
         //      ...
         return res;
       } else {
@@ -1645,17 +1727,17 @@
       }
 
       // ClassSetOperand ::
-      //      ClassSetCharacter
       //      ...
+      //      ClassSetCharacter
       return start;
     }
 
     function parseClassSetCharacter() {
       // ClassSetCharacter ::
-      //      [lookahead ∉ ClassReservedDouble] SourceCharacter but not ClassSetSyntaxCharacter
-      //      \ CharacterEscape[+U]
-      //      \ ClassHalfOfDouble
-      //      \ b
+      //      [lookahead ∉ ClassSetReservedDoublePunctuator] SourceCharacter but not ClassSetSyntaxCharacter
+      //      \ CharacterEscape[+UnicodeMode]
+      //      \ ClassSetReservedPunctuator
+      //      \b
 
       if (matchOne('\\')) {
         var res, from = pos;
@@ -1686,9 +1768,9 @@
     function parseClassSetCharacterEscapedHelper() {
       // ClassSetCharacter ::
       //      ...
-      //      \ CharacterEscape[+U]
+      //      \ CharacterEscape[+UnicodeMode]
       //      \ ClassSetReservedPunctuator
-      //      \ b
+      //      \b
 
       var res;
       if (matchOne('b')) {
