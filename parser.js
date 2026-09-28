@@ -861,6 +861,16 @@
     }
   }
 
+  // Returns the index of the first character at or after `start` that is not a
+  // decimal digit.
+  function skipDecimalDigits(start) {
+    var i = start, ch;
+    while ((ch = str.charCodeAt(i)) >= 0x30 && ch <= 0x39) { // 0-9
+      i++;
+    }
+    return i;
+  }
+
   function parseQuantifier() {
     // Quantifier ::
     //      QuantifierPrefix
@@ -874,9 +884,9 @@
     //      { DecimalDigits[~Sep] ,}
     //      { DecimalDigits[~Sep] , DecimalDigits[~Sep] }
 
-    var res, from = pos;
+    var from = pos;
     var quantifier;
-    var min, max;
+    var min, max, minEnd, maxEnd;
 
     switch(lookahead()) {
       case '*':
@@ -892,19 +902,26 @@
         quantifier = createQuantifier(0, 1, undefined, undefined, "?");
         break;
       case '{': {
-        if (res = matchReg(/^\{(\d+)\}/)) {
-          min = parseInt(res[1], 10);
+        minEnd = skipDecimalDigits(pos + 1);
+        if (minEnd === pos + 1) {
+          break;
+        }
+        if (str[minEnd] === '}') {
+          //      { DecimalDigits }
+          min = parseInt(str.substring(pos + 1, minEnd), 10);
+          pos = minEnd + 1;
           quantifier = createQuantifier(min, min, from, pos);
         }
-        else if (res = matchReg(/^\{(\d+),\}/)) {
-          min = parseInt(res[1], 10);
-          quantifier = createQuantifier(min, undefined, from, pos);
-        }
-        else if (res = matchReg(/^\{(\d+),(\d+)\}/)) {
-          min = parseInt(res[1], 10);
-          max = parseInt(res[2], 10);
-          if (min > max) {
-            bail('numbers out of order in {} quantifier', '', from, pos);
+        else if (str[minEnd] === ',' && str[maxEnd = skipDecimalDigits(minEnd + 1)] === '}') {
+          //      { DecimalDigits ,}
+          //      { DecimalDigits , DecimalDigits }
+          min = parseInt(str.substring(pos + 1, minEnd), 10);
+          pos = maxEnd + 1;
+          if (maxEnd > minEnd + 1) {
+            max = parseInt(str.substring(minEnd + 1, maxEnd), 10);
+            if (min > max) {
+              bail('numbers out of order in {} quantifier', '', from, pos);
+            }
           }
           quantifier = createQuantifier(min, max, from, pos);
         }
