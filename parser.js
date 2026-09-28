@@ -1534,12 +1534,13 @@
       // Flatten contents to return a single array of class elements.
       var res = [];
       for (i = 0; i < contents.length; i++) {
-        if (Array.isArray(contents[i])) {
-          for (j = 0; j < contents[i].length; j++) {
-            res.push(contents[i][j]);
+        var contentsItem = contents[i];
+        if (Array.isArray(contentsItem)) {
+          for (j = 0; j < contentsItem.length; j++) {
+            res.push(contentsItem[j]);
           }
         } else {
-          res.push(contents[i]);
+          res.push(contentsItem);
         }
       }
       return res;
