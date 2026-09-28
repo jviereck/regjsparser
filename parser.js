@@ -1737,7 +1737,7 @@
       case "]":
       case "-":
       case undefined: // End of input, e.g. an unterminated class like `[a`.
-        break;
+        return undefined;
       default:
         incr();
         return createCharacter(res);
