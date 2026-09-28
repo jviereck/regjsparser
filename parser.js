@@ -973,6 +973,15 @@
 
     var res;
 
+    // Fast path for the most common PatternCharacter: ASCII letters and digits
+    // would otherwise go through every case of the switch below before
+    // reaching the default.
+    var ch = str.charCodeAt(pos);
+    if ((ch >= 0x61 && ch <= 0x7A) || (ch >= 0x41 && ch <= 0x5A) || (ch >= 0x30 && ch <= 0x39)) { // a-z A-Z 0-9
+      incr();
+      return createValue('symbol', ch, pos - 1, pos);
+    }
+
     switch (res = lookahead()) {
       case '.':
         //      .
