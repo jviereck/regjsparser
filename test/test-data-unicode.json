@@ -1878,5 +1878,65 @@
     "name": "SyntaxError",
     "message": "classEscape at position 2\n    [\\c]\n      ^",
     "input": "[\\c]"
+  },
+  "[": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "classAtom at position 1\n    [\n     ^",
+    "input": "["
+  },
+  "[a": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "classAtom at position 2\n    [a\n      ^",
+    "input": "[a"
+  },
+  "[^": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "classAtom at position 2\n    [^\n      ^",
+    "input": "[^"
+  },
+  "[^a": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "classAtom at position 3\n    [^a\n       ^",
+    "input": "[^a"
+  },
+  "[a-": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "classAtom at position 3\n    [a-\n       ^",
+    "input": "[a-"
+  },
+  "[a-b": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "classAtom at position 4\n    [a-b\n        ^",
+    "input": "[a-b"
+  },
+  "[a-b-": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "classAtom at position 5\n    [a-b-\n         ^",
+    "input": "[a-b-"
+  },
+  "[\\w-": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "classAtom at position 4\n    [\\w-\n        ^",
+    "input": "[\\w-"
+  },
+  "[\\w-a": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "classAtom at position 5\n    [\\w-a\n         ^",
+    "input": "[\\w-a"
+  },
+  "[\\b": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "classAtom at position 3\n    [\\b\n       ^",
+    "input": "[\\b"
   }
 }
