@@ -1195,11 +1195,14 @@
       //   /\091/.exec('\091')[0].length === 3
       else if (res = matchReg(/^[0-7]{1,3}/)) {
         match = res[0];
-        if (match !== '0') {
+        // CharacterEscape :: 0 [lookahead ∉ DecimalDigit]
+        // A `0` followed by `8` or `9` (e.g. `\08`) is only valid as an Annex B
+        // LegacyOctalEscapeSequence.
+        if (match !== '0' || /\d/.test(lookahead())) {
           bailOctalEscapeIfUnicode(from, pos);
         }
         if (/^0{1,3}$/.test(match)) {
-          // If they are all zeros, then only take the first one.
+          // If they are all zeros, they must be U+0000.
           return createEscaped('null', 0x0000, '0', match.length);
         } else {
           return createEscaped('octal', parseInt(match, 8), match, 1);
