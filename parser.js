@@ -1291,6 +1291,14 @@
             return createEscaped('controlLetter', res[1].charCodeAt(0) % 32, res[1], 2);
           }
           break;
+        case '0':
+          // 0 [lookahead ∉ DecimalDigit]
+          // Only reached from ClassSetCharacter: AtomEscape and ClassEscape
+          // handle decimal digits before trying CharacterEscape.
+          if (matchReg(/^0(?!\d)/)) {
+            return createEscaped('null', 0x0000, '0', 1);
+          }
+          break;
         case 'x':
           if (res = matchReg(/^x([0-9a-fA-F]{2})/)) {
             // HexEscapeSequence

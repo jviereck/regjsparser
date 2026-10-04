@@ -1633,5 +1633,245 @@
     "name": "SyntaxError",
     "message": "atomEscape at position 1\n    \\q{a}\n     ^",
     "input": "\\q{a}"
+  },
+  "[\\q{\\0}]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "classStrings",
+        "strings": [
+          {
+            "type": "classString",
+            "characters": [
+              {
+                "type": "value",
+                "kind": "null",
+                "codePoint": 0,
+                "range": [
+                  4,
+                  6
+                ],
+                "raw": "\\0"
+              }
+            ],
+            "range": [
+              4,
+              6
+            ],
+            "raw": "\\0"
+          }
+        ],
+        "range": [
+          1,
+          7
+        ],
+        "raw": "\\q{\\0}"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      8
+    ],
+    "raw": "[\\q{\\0}]"
+  },
+  "[\\q{a\\0b|\\0x|y}]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "classStrings",
+        "strings": [
+          {
+            "type": "classString",
+            "characters": [
+              {
+                "type": "value",
+                "kind": "symbol",
+                "codePoint": 97,
+                "range": [
+                  4,
+                  5
+                ],
+                "raw": "a"
+              },
+              {
+                "type": "value",
+                "kind": "null",
+                "codePoint": 0,
+                "range": [
+                  5,
+                  7
+                ],
+                "raw": "\\0"
+              },
+              {
+                "type": "value",
+                "kind": "symbol",
+                "codePoint": 98,
+                "range": [
+                  7,
+                  8
+                ],
+                "raw": "b"
+              }
+            ],
+            "range": [
+              4,
+              8
+            ],
+            "raw": "a\\0b"
+          },
+          {
+            "type": "classString",
+            "characters": [
+              {
+                "type": "value",
+                "kind": "null",
+                "codePoint": 0,
+                "range": [
+                  9,
+                  11
+                ],
+                "raw": "\\0"
+              },
+              {
+                "type": "value",
+                "kind": "symbol",
+                "codePoint": 120,
+                "range": [
+                  11,
+                  12
+                ],
+                "raw": "x"
+              }
+            ],
+            "range": [
+              9,
+              12
+            ],
+            "raw": "\\0x"
+          },
+          {
+            "type": "classString",
+            "characters": [
+              {
+                "type": "value",
+                "kind": "symbol",
+                "codePoint": 121,
+                "range": [
+                  13,
+                  14
+                ],
+                "raw": "y"
+              }
+            ],
+            "range": [
+              13,
+              14
+            ],
+            "raw": "y"
+          }
+        ],
+        "range": [
+          1,
+          15
+        ],
+        "raw": "\\q{a\\0b|\\0x|y}"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      16
+    ],
+    "raw": "[\\q{a\\0b|\\0x|y}]"
+  },
+  "[\\q{\\01}]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid escape at position 5: \\0\n    [\\q{\\01}]\n         ^",
+    "input": "[\\q{\\01}]"
+  },
+  "[\\0-\\0]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "characterClassRange",
+        "min": {
+          "type": "value",
+          "kind": "null",
+          "codePoint": 0,
+          "range": [
+            1,
+            3
+          ],
+          "raw": "\\0"
+        },
+        "max": {
+          "type": "value",
+          "kind": "null",
+          "codePoint": 0,
+          "range": [
+            4,
+            6
+          ],
+          "raw": "\\0"
+        },
+        "range": [
+          1,
+          6
+        ],
+        "raw": "\\0-\\0"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      7
+    ],
+    "raw": "[\\0-\\0]"
+  },
+  "[\\x00-\\0]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "characterClassRange",
+        "min": {
+          "type": "value",
+          "kind": "hexadecimalEscape",
+          "codePoint": 0,
+          "range": [
+            1,
+            5
+          ],
+          "raw": "\\x00"
+        },
+        "max": {
+          "type": "value",
+          "kind": "null",
+          "codePoint": 0,
+          "range": [
+            6,
+            8
+          ],
+          "raw": "\\0"
+        },
+        "range": [
+          1,
+          8
+        ],
+        "raw": "\\x00-\\0"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      9
+    ],
+    "raw": "[\\x00-\\0]"
   }
 }
