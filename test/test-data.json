@@ -38682,5 +38682,111 @@
     "name": "SyntaxError",
     "message": "Expected atom at position 2\n    \\B{1}\n      ^",
     "input": "\\B{1}"
+  },
+  "[\\c0]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "value",
+        "kind": "controlLetter",
+        "codePoint": 16,
+        "range": [
+          1,
+          4
+        ],
+        "raw": "\\c0"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      5
+    ],
+    "raw": "[\\c0]"
+  },
+  "[\\c1]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "value",
+        "kind": "controlLetter",
+        "codePoint": 17,
+        "range": [
+          1,
+          4
+        ],
+        "raw": "\\c1"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      5
+    ],
+    "raw": "[\\c1]"
+  },
+  "[\\c9]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "value",
+        "kind": "controlLetter",
+        "codePoint": 25,
+        "range": [
+          1,
+          4
+        ],
+        "raw": "\\c9"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      5
+    ],
+    "raw": "[\\c9]"
+  },
+  "[\\c0-\\c9]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "characterClassRange",
+        "min": {
+          "type": "value",
+          "kind": "controlLetter",
+          "codePoint": 16,
+          "range": [
+            1,
+            4
+          ],
+          "raw": "\\c0"
+        },
+        "max": {
+          "type": "value",
+          "kind": "controlLetter",
+          "codePoint": 25,
+          "range": [
+            5,
+            8
+          ],
+          "raw": "\\c9"
+        },
+        "range": [
+          1,
+          8
+        ],
+        "raw": "\\c0-\\c9"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      9
+    ],
+    "raw": "[\\c0-\\c9]"
   }
 }

@@ -1092,7 +1092,7 @@
             if (!isUnicodeMode && (res = matchReg(/^c(\d)/))) {
               // ClassEscape (Annex B) :: [~UnicodeMode] c ClassControlLetter
               // ClassControlLetter :: DecimalDigit
-              return createEscaped('controlLetter', res[1] + 16, res[1], 2);
+              return createEscaped('controlLetter', res[1].charCodeAt(0) % 32, res[1], 2);
             } else if (!isUnicodeMode && match("c_")) {
               // ClassEscape (Annex B) :: [~UnicodeMode] c ClassControlLetter
               // ClassControlLetter :: _
