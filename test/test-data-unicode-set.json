@@ -818,7 +818,7 @@
   "[a-z&&p-s]": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "character at position 7: &\n    [a-z&&p-s]\n           ^",
+    "message": "Invalid set operation in character class at position 6\n    [a-z&&p-s]\n          ^",
     "input": "[a-z&&p-s]"
   },
   "[[a-z]&&[p-s]]": {
@@ -1873,5 +1873,79 @@
       9
     ],
     "raw": "[\\x00-\\0]"
+  },
+  "[a-z&&b]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid set operation in character class at position 6\n    [a-z&&b]\n          ^",
+    "input": "[a-z&&b]"
+  },
+  "[a-z--b]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid character at position 4: -\n    [a-z--b]\n        ^",
+    "input": "[a-z--b]"
+  },
+  "[a-z&&[b]]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid set operation in character class at position 6\n    [a-z&&[b]]\n          ^",
+    "input": "[a-z&&[b]]"
+  },
+  "[a-z\\q{b}&&c]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid set operation in character class at position 11\n    a-z\\q{b}&&c]\n              ^",
+    "input": "[a-z\\q{b}&&c]"
+  },
+  "[a-zb]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "characterClassRange",
+        "min": {
+          "type": "value",
+          "kind": "symbol",
+          "codePoint": 97,
+          "range": [
+            1,
+            2
+          ],
+          "raw": "a"
+        },
+        "max": {
+          "type": "value",
+          "kind": "symbol",
+          "codePoint": 122,
+          "range": [
+            3,
+            4
+          ],
+          "raw": "z"
+        },
+        "range": [
+          1,
+          4
+        ],
+        "raw": "a-z"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 98,
+        "range": [
+          4,
+          5
+        ],
+        "raw": "b"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      6
+    ],
+    "raw": "[a-zb]"
   }
 }

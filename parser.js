@@ -1622,7 +1622,7 @@
       var operand = parseClassSetOperand(/* allowRanges*/ true);
       body.push(operand);
 
-      if (operand.type === 'classRange') {
+      if (operand.type === 'characterClassRange') {
         kind = 'union';
       } else if (currentOne('&')) {
         kind = 'intersection';
