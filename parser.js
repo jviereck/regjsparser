@@ -1169,10 +1169,10 @@
           }
 
           // Reset the position again, as maybe only parts of the previous
-          // matched numbers are actual octal numbers. E.g. in '019' only
-          // the '01' should be matched.
+          // matched numbers are actual octal numbers. E.g. in '19' only
+          // the '1' should be matched, and in '400' only the '40'.
           incr(-match.length);
-          if (res = matchReg(/^[0-7]{1,3}/)) {
+          if (res = matchLegacyOctalEscapeSequence()) {
             return createEscaped('octal', parseInt(res[0], 8), res[0], 1);
           } else {
             // If we end up here, we have a case like /\91/. Then the
@@ -1193,7 +1193,7 @@
       // characters.
       // Example:
       //   /\091/.exec('\091')[0].length === 3
-      else if (res = matchReg(/^[0-7]{1,3}/)) {
+      else if (res = matchLegacyOctalEscapeSequence()) {
         match = res[0];
         // CharacterEscape :: 0 [lookahead ∉ DecimalDigit]
         // A `0` followed by `8` or `9` (e.g. `\08`) is only valid as an Annex B
@@ -1209,6 +1209,18 @@
         }
       }
       return false;
+    }
+
+    function matchLegacyOctalEscapeSequence() {
+      // LegacyOctalEscapeSequence ::
+      //      0 [lookahead ∈ { 8, 9 }]
+      //      NonZeroOctalDigit [lookahead ∉ OctalDigit]
+      //      ZeroToThree OctalDigit [lookahead ∉ OctalDigit]
+      //      FourToSeven OctalDigit
+      //      ZeroToThree OctalDigit OctalDigit
+      //
+      // The escape is at most \377, e.g. in '\400' only the '\40' is matched.
+      return matchReg(/^(?:[0-3][0-7]{0,2}|[4-7][0-7]?)/);
     }
 
     function bailOctalEscapeIfUnicode(from, pos) {
