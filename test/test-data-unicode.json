@@ -1967,4 +1967,11 @@
     "message": "Invalid decimal escape in unicode mode at position 2\n    [\\400]\n      ^",
     "input": "[\\400]"
   }
+,
+  "[\\B]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "\\B not possible inside of CharacterClass at position 2\n    [\\B]\n      ^",
+    "input": "[\\B]"
+  }
 }
