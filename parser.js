@@ -1068,12 +1068,13 @@
         case '9':
           return parseDecimalEscape(insideCharacterClass);
         case 'B': {
-          if (insideCharacterClass) {
+          // IdentityEscape (Annex B) ::
+          //      [~UnicodeMode] SourceCharacterIdentityEscape
+          // SourceCharacterIdentityEscape (Annex B) :: B
+          if (insideCharacterClass && isUnicodeMode) {
             bail('\\B not possible inside of CharacterClass', '', from);
-            break;
-          } else {
-            return parseIdentityEscape();
           }
+          return parseIdentityEscape();
         }
         case 'b': {
           if (insideCharacterClass) {
