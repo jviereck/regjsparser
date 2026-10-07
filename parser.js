@@ -333,6 +333,9 @@
   var hasUnicodeFlag;
   var hasUnicodeSetFlag;
   var isUnicodeMode;
+  var namedCaptureGroups;
+  var hasGroupName;
+  var hasIdentityEscapeK;
 
   function updateRawStart(node, start) {
     node.range[0] = start;
@@ -935,6 +938,7 @@
           skip(">");
           var group = finishGroup("normal", name.range[0] - 3);
           group.name = name;
+          hasGroupName = true;
           return group;
         }
         else if (features.modifiers && current("(?") && str[pos + 2] != ":") {
@@ -1126,7 +1130,17 @@
         incr();
         return createCharacterClassEscape(ch);
       case 'k':
-        return parseNamedReference() || parseIdentityEscape();
+        if (namedCaptureGroups) {
+          // AtomEscape :: [+NamedCaptureGroups] k GroupName
+          if (!insideCharacterClass && (res = parseNamedReference())) {
+            return res;
+          }
+        } else {
+          // `\k` is an IdentityEscape, unless the pattern contains a
+          // GroupName and is parsed again with NamedCaptureGroups.
+          hasIdentityEscapeK = true;
+        }
+        return parseIdentityEscape();
       case 'p':
       case 'P':
         return parseUnicodePropertyEscape() || parseIdentityEscape();
@@ -1440,11 +1454,8 @@
     var l = lookahead();
     if (
       (isUnicodeMode && /[\^$.*+?()\\[\]{}|/]/.test(l)) ||
-      (!isUnicodeMode && l !== "c")
+      (!isUnicodeMode && l !== "c" && !(namedCaptureGroups && l === "k"))
     ) {
-      if (l === "k" && features.lookbehind) {
-        return null;
-      }
       tmp = consume(1);
       return createEscaped('identifier', tmp.charCodeAt(0), tmp, 1);
     }
@@ -1878,6 +1889,9 @@
     var savedHasUnicodeFlag = hasUnicodeFlag;
     var savedHasUnicodeSetFlag = hasUnicodeSetFlag;
     var savedIsUnicodeMode = isUnicodeMode;
+    var savedNamedCaptureGroups = namedCaptureGroups;
+    var savedHasGroupName = hasGroupName;
+    var savedHasIdentityEscapeK = hasIdentityEscapeK;
     try {
       return parseImpl(input, flags, options);
     } finally {
@@ -1891,6 +1905,9 @@
       hasUnicodeFlag = savedHasUnicodeFlag;
       hasUnicodeSetFlag = savedHasUnicodeSetFlag;
       isUnicodeMode = savedIsUnicodeMode;
+      namedCaptureGroups = savedNamedCaptureGroups;
+      hasGroupName = savedHasGroupName;
+      hasIdentityEscapeK = savedHasIdentityEscapeK;
     }
   }
 
@@ -1903,6 +1920,9 @@
     hasUnicodeFlag = (flags || "").indexOf("u") !== -1;
     hasUnicodeSetFlag = (flags || "").indexOf("v") !== -1;
     isUnicodeMode = hasUnicodeFlag || hasUnicodeSetFlag;
+    namedCaptureGroups = isUnicodeMode;
+    hasGroupName = false;
+    hasIdentityEscapeK = false;
     pos = 0;
 
     if (hasUnicodeSetFlag && !features.unicodeSet) {
@@ -1936,6 +1956,18 @@
     shouldReparse = shouldReparse || backrefDenied.some(function (ref) {
       return ref <= closedCaptureCounter;
     });
+
+    // Without the u and v flags, the pattern is first parsed with
+    // [~NamedCaptureGroups]. If it contains a GroupName, it is parsed again
+    // with [+NamedCaptureGroups]. Only a `\k` is parsed differently, so the
+    // second pass is skipped when there is none.
+    //
+    // SEE: https://tc39.es/ecma262/#sec-parsepattern-annexb
+    if (hasGroupName && hasIdentityEscapeK) {
+      namedCaptureGroups = true;
+      shouldReparse = true;
+    }
+
     if (shouldReparse) {
       // Parse the input a second time.
       pos = 0;
