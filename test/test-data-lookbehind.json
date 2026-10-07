@@ -355,10 +355,14 @@
     "raw": "(?<!.)"
   },
   "\\k": {
-    "type": "error",
-    "name": "SyntaxError",
-    "message": "atomEscape at position 1\n    \\k\n     ^",
-    "input": "\\k"
+    "type": "value",
+    "kind": "identifier",
+    "codePoint": 107,
+    "range": [
+      0,
+      2
+    ],
+    "raw": "\\k"
   },
   "(?<=.){2,3}": {
     "type": "error",
@@ -371,5 +375,26 @@
     "name": "SyntaxError",
     "message": "Invalid quantifier at position 6\n    (?<!.){2,3}\n          ^",
     "input": "(?<!.){2,3}"
+  },
+  "(?<=\\k)": {
+    "type": "group",
+    "behavior": "lookbehind",
+    "body": [
+      {
+        "type": "value",
+        "kind": "identifier",
+        "codePoint": 107,
+        "range": [
+          4,
+          6
+        ],
+        "raw": "\\k"
+      }
+    ],
+    "range": [
+      0,
+      7
+    ],
+    "raw": "(?<=\\k)"
   }
 }

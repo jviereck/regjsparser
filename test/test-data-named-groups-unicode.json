@@ -130,5 +130,11 @@
       ],
       "raw": "\\u{2EBF0}\\u{200C}\\u{200D}"
     }
+  },
+  "(?<a>.)[\\k<a>]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "classEscape at position 9\n    (?<a>.)[\\k<a>]\n             ^",
+    "input": "(?<a>.)[\\k<a>]"
   }
 }
