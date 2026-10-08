@@ -334,7 +334,11 @@
   var hasUnicodeSetFlag;
   var isUnicodeMode;
   var namedCaptureGroups;
-  var hasGroupName;
+  // The declared group names in source order, and whether a name is visible
+  // at the current position. See declareGroupName().
+  var groupNames;
+  var visibleGroupNames;
+  var namedReferences;
   var hasIdentityEscapeK;
 
   function updateRawStart(node, start) {
@@ -620,11 +624,26 @@
     // Disjunction ::
     //      Alternative
     //      Alternative | Disjunction
-    var res = [], from = pos;
+    var res = [], from = pos, i;
+    // Indexes into groupNames of the names declared in this disjunction and
+    // in the current alternative. See declareGroupName().
+    var disjunctionStart = groupNames.length;
+    var alternativeStart = disjunctionStart;
     res.push(parseAlternative());
 
     while (matchOne('|')) {
+      // Groups in different alternatives can't both participate, so the
+      // names of the previous alternative are not visible in the next one.
+      for (i = alternativeStart; i < groupNames.length; i++) {
+        visibleGroupNames[groupNames[i]] = false;
+      }
+      alternativeStart = groupNames.length;
       res.push(parseAlternative());
+    }
+
+    // After the disjunction, the names of all its alternatives are visible.
+    for (i = disjunctionStart; i < alternativeStart; i++) {
+      visibleGroupNames[groupNames[i]] = true;
     }
 
     if (res.length === 1) {
@@ -936,9 +955,9 @@
         else if (features.namedGroups && match("(?<")) {
           var name = parseIdentifier();
           skip(">");
+          declareGroupName(name);
           var group = finishGroup("normal", name.range[0] - 3);
           group.name = name;
-          hasGroupName = true;
           return group;
         }
         else if (features.modifiers && current("(?") && str[pos + 2] != ":") {
@@ -1132,8 +1151,15 @@
       case 'k':
         if (namedCaptureGroups) {
           // AtomEscape :: [+NamedCaptureGroups] k GroupName
-          if (!insideCharacterClass && (res = parseNamedReference())) {
-            return res;
+          if (!insideCharacterClass && features.namedGroups) {
+            if (res = parseNamedReference()) {
+              return res;
+            }
+            // `k` is not an IdentityEscape with NamedCaptureGroups.
+            if (next('<')) {
+              bail('Invalid capture group name', '', from);
+            }
+            bail('Invalid named reference', '', from);
           }
         } else {
           // `\k` is an IdentityEscape, unless the pattern contains a
@@ -1271,6 +1297,7 @@
     if (features.namedGroups && matchReg(/^k<(?=.*?>)/)) {
       var name = parseIdentifier();
       skip('>');
+      namedReferences.push(name);
       return createNamedReference(name);
     }
   }
@@ -1858,6 +1885,43 @@
     return createClassString(res, from, pos);
   }
 
+  function declareGroupName(name) {
+    // Pattern :: Disjunction
+    // It is a Syntax Error if Pattern contains two distinct GroupSpecifiers
+    // x and y such that the CapturingGroupName of x is the CapturingGroupName
+    // of y and such that MightBothParticipate(x, y) is true.
+    //
+    // SEE: https://tc39.es/ecma262/#sec-patterns-static-semantics-early-errors
+    //
+    // MightBothParticipate(x, y) is false only if x and y are in different
+    // alternatives of a Disjunction. A name is visible from the point of
+    // its declaration, except in the following alternatives of the same
+    // Disjunction (see parseDisjunction()). Another group with a visible
+    // name might participate together with this one.
+    if (visibleGroupNames[name.value]) {
+      bail('Duplicate capture group name', name.value, name.range[0], name.range[1]);
+    }
+    visibleGroupNames[name.value] = true;
+    groupNames.push(name.value);
+
+    // The pattern contains a GroupName, so it is parsed with
+    // [+NamedCaptureGroups]. See the second pass in parse().
+    namedCaptureGroups = true;
+  }
+
+  function checkNamedReferences() {
+    // AtomEscape :: k GroupName
+    // It is a Syntax Error if GroupSpecifiersThatMatch(GroupName) is empty.
+    //
+    // SEE: https://tc39.es/ecma262/#sec-patterns-static-semantics-early-errors
+    for (var i = 0; i < namedReferences.length; i++) {
+      var name = namedReferences[i];
+      if (!(name.value in visibleGroupNames)) {
+        bail('Invalid named capture referenced', name.value, name.range[0], name.range[1]);
+      }
+    }
+  }
+
   function bail(message, details, from, to) {
     from = from == null ? pos : from;
     to = to == null ? from : to;
@@ -1890,7 +1954,9 @@
     var savedHasUnicodeSetFlag = hasUnicodeSetFlag;
     var savedIsUnicodeMode = isUnicodeMode;
     var savedNamedCaptureGroups = namedCaptureGroups;
-    var savedHasGroupName = hasGroupName;
+    var savedGroupNames = groupNames;
+    var savedVisibleGroupNames = visibleGroupNames;
+    var savedNamedReferences = namedReferences;
     var savedHasIdentityEscapeK = hasIdentityEscapeK;
     try {
       return parseImpl(input, flags, options);
@@ -1906,7 +1972,9 @@
       hasUnicodeSetFlag = savedHasUnicodeSetFlag;
       isUnicodeMode = savedIsUnicodeMode;
       namedCaptureGroups = savedNamedCaptureGroups;
-      hasGroupName = savedHasGroupName;
+      groupNames = savedGroupNames;
+      visibleGroupNames = savedVisibleGroupNames;
+      namedReferences = savedNamedReferences;
       hasIdentityEscapeK = savedHasIdentityEscapeK;
     }
   }
@@ -1921,7 +1989,9 @@
     hasUnicodeSetFlag = (flags || "").indexOf("v") !== -1;
     isUnicodeMode = hasUnicodeFlag || hasUnicodeSetFlag;
     namedCaptureGroups = isUnicodeMode;
-    hasGroupName = false;
+    groupNames = [];
+    visibleGroupNames = Object.create(null);
+    namedReferences = [];
     hasIdentityEscapeK = false;
     pos = 0;
 
@@ -1959,12 +2029,17 @@
 
     // Without the u and v flags, the pattern is first parsed with
     // [~NamedCaptureGroups]. If it contains a GroupName, it is parsed again
-    // with [+NamedCaptureGroups]. Only a `\k` is parsed differently, so the
-    // second pass is skipped when there is none.
+    // with [+NamedCaptureGroups]. The parser switches to [+NamedCaptureGroups]
+    // at the first GroupName already, and only a `\k` before it is parsed
+    // differently. So the second pass is skipped when there is none.
+    //
+    // This relies on `\k` being the only production that depends on
+    // [NamedCaptureGroups]. If anything else is gated on `namedCaptureGroups`,
+    // it must also trigger a reparse when it appears before the first
+    // GroupName.
     //
     // SEE: https://tc39.es/ecma262/#sec-parsepattern-annexb
-    if (hasGroupName && hasIdentityEscapeK) {
-      namedCaptureGroups = true;
+    if (groupNames.length > 0 && hasIdentityEscapeK) {
       shouldReparse = true;
     }
 
@@ -1972,8 +2047,13 @@
       // Parse the input a second time.
       pos = 0;
       firstIteration = false;
-      return parseDisjunction();
+      groupNames = [];
+      visibleGroupNames = Object.create(null);
+      namedReferences = [];
+      result = parseDisjunction();
     }
+
+    checkNamedReferences();
 
     return result;
   }

@@ -136,5 +136,99 @@
     "name": "SyntaxError",
     "message": "classEscape at position 9\n    (?<a>.)[\\k<a>]\n             ^",
     "input": "(?<a>.)[\\k<a>]"
+  },
+  "(?<a>.)\\k<b>": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid named capture referenced at position 10: b\n    (?<a>.)\\k<b>\n              ^",
+    "input": "(?<a>.)\\k<b>"
+  },
+  "(?<a>(?<a>x))": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Duplicate capture group name at position 8: a\n    (?<a>(?<a>x))\n            ^",
+    "input": "(?<a>(?<a>x))"
+  },
+  "(?<a>x)|(?<a>y)": {
+    "type": "disjunction",
+    "body": [
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [
+          {
+            "type": "value",
+            "kind": "symbol",
+            "codePoint": 120,
+            "range": [
+              5,
+              6
+            ],
+            "raw": "x"
+          }
+        ],
+        "range": [
+          0,
+          7
+        ],
+        "raw": "(?<a>x)",
+        "name": {
+          "type": "identifier",
+          "value": "a",
+          "range": [
+            3,
+            4
+          ],
+          "raw": "a"
+        }
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [
+          {
+            "type": "value",
+            "kind": "symbol",
+            "codePoint": 121,
+            "range": [
+              13,
+              14
+            ],
+            "raw": "y"
+          }
+        ],
+        "range": [
+          8,
+          15
+        ],
+        "raw": "(?<a>y)",
+        "name": {
+          "type": "identifier",
+          "value": "a",
+          "range": [
+            11,
+            12
+          ],
+          "raw": "a"
+        }
+      }
+    ],
+    "range": [
+      0,
+      15
+    ],
+    "raw": "(?<a>x)|(?<a>y)"
+  },
+  "\\k": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid named reference at position 1\n    \\k\n     ^",
+    "input": "\\k"
+  },
+  "\\k<a": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid capture group name at position 1\n    \\k<a\n     ^",
+    "input": "\\k<a"
   }
 }
