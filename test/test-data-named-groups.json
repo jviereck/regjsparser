@@ -820,13 +820,13 @@
   "(?<a>.)\\k": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "atomEscape at position 8\n    (?<a>.)\\k\n            ^",
+    "message": "Invalid named reference at position 8\n    (?<a>.)\\k\n            ^",
     "input": "(?<a>.)\\k"
   },
   "(?<a>.)\\k<b": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "atomEscape at position 8\n    (?<a>.)\\k<b\n            ^",
+    "message": "Invalid capture group name at position 8\n    (?<a>.)\\k<b\n            ^",
     "input": "(?<a>.)\\k<b"
   },
   "\\k<a>(?<a>.)": {
@@ -923,5 +923,585 @@
     "name": "SyntaxError",
     "message": "classEscape at position 9\n    (?<a>.)[\\k<a>]\n             ^",
     "input": "(?<a>.)[\\k<a>]"
+  },
+  "(?<a>.)\\k<b>": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid named capture referenced at position 10: b\n    (?<a>.)\\k<b>\n              ^",
+    "input": "(?<a>.)\\k<b>"
+  },
+  "\\k<a>(?<b>x)": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid named capture referenced at position 3: a\n    \\k<a>(?<b>x)\n       ^",
+    "input": "\\k<a>(?<b>x)"
+  },
+  "(?<a>a)(?<b>b)(?<a>a)": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Duplicate capture group name at position 17: a\n    (?<b>b)(?<a>a)\n              ^",
+    "input": "(?<a>a)(?<b>b)(?<a>a)"
+  },
+  "(?<a>(?<a>x))": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Duplicate capture group name at position 8: a\n    (?<a>(?<a>x))\n            ^",
+    "input": "(?<a>(?<a>x))"
+  },
+  "(?<a>x)(?:(?<a>y)|z)": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Duplicate capture group name at position 13: a\n    a>x)(?:(?<a>y)|z)\n              ^",
+    "input": "(?<a>x)(?:(?<a>y)|z)"
+  },
+  "(?:(?<a>x)|y)(?:(?<a>z)|w)": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Duplicate capture group name at position 19: a\n    )|y)(?:(?<a>z)|w)\n              ^",
+    "input": "(?:(?<a>x)|y)(?:(?<a>z)|w)"
+  },
+  "(?<\\u0061>x)(?<a>y)": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Duplicate capture group name at position 15: a\n    0061>x)(?<a>y)\n              ^",
+    "input": "(?<\\u0061>x)(?<a>y)"
+  },
+  "(?<a>x)|(?<a>y)": {
+    "type": "disjunction",
+    "body": [
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [
+          {
+            "type": "value",
+            "kind": "symbol",
+            "codePoint": 120,
+            "range": [
+              5,
+              6
+            ],
+            "raw": "x"
+          }
+        ],
+        "range": [
+          0,
+          7
+        ],
+        "raw": "(?<a>x)",
+        "name": {
+          "type": "identifier",
+          "value": "a",
+          "range": [
+            3,
+            4
+          ],
+          "raw": "a"
+        }
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [
+          {
+            "type": "value",
+            "kind": "symbol",
+            "codePoint": 121,
+            "range": [
+              13,
+              14
+            ],
+            "raw": "y"
+          }
+        ],
+        "range": [
+          8,
+          15
+        ],
+        "raw": "(?<a>y)",
+        "name": {
+          "type": "identifier",
+          "value": "a",
+          "range": [
+            11,
+            12
+          ],
+          "raw": "a"
+        }
+      }
+    ],
+    "range": [
+      0,
+      15
+    ],
+    "raw": "(?<a>x)|(?<a>y)"
+  },
+  "(?:(?<a>x)|(?<a>y))\\k<a>": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "group",
+        "behavior": "ignore",
+        "body": [
+          {
+            "type": "disjunction",
+            "body": [
+              {
+                "type": "group",
+                "behavior": "normal",
+                "body": [
+                  {
+                    "type": "value",
+                    "kind": "symbol",
+                    "codePoint": 120,
+                    "range": [
+                      8,
+                      9
+                    ],
+                    "raw": "x"
+                  }
+                ],
+                "range": [
+                  3,
+                  10
+                ],
+                "raw": "(?<a>x)",
+                "name": {
+                  "type": "identifier",
+                  "value": "a",
+                  "range": [
+                    6,
+                    7
+                  ],
+                  "raw": "a"
+                }
+              },
+              {
+                "type": "group",
+                "behavior": "normal",
+                "body": [
+                  {
+                    "type": "value",
+                    "kind": "symbol",
+                    "codePoint": 121,
+                    "range": [
+                      16,
+                      17
+                    ],
+                    "raw": "y"
+                  }
+                ],
+                "range": [
+                  11,
+                  18
+                ],
+                "raw": "(?<a>y)",
+                "name": {
+                  "type": "identifier",
+                  "value": "a",
+                  "range": [
+                    14,
+                    15
+                  ],
+                  "raw": "a"
+                }
+              }
+            ],
+            "range": [
+              3,
+              18
+            ],
+            "raw": "(?<a>x)|(?<a>y)"
+          }
+        ],
+        "range": [
+          0,
+          19
+        ],
+        "raw": "(?:(?<a>x)|(?<a>y))"
+      },
+      {
+        "type": "reference",
+        "name": {
+          "type": "identifier",
+          "value": "a",
+          "range": [
+            22,
+            23
+          ],
+          "raw": "a"
+        },
+        "range": [
+          19,
+          24
+        ],
+        "raw": "\\k<a>"
+      }
+    ],
+    "range": [
+      0,
+      24
+    ],
+    "raw": "(?:(?<a>x)|(?<a>y))\\k<a>"
+  },
+  "(?<a>x)|(?:(?<a>y)|(?<a>z))": {
+    "type": "disjunction",
+    "body": [
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [
+          {
+            "type": "value",
+            "kind": "symbol",
+            "codePoint": 120,
+            "range": [
+              5,
+              6
+            ],
+            "raw": "x"
+          }
+        ],
+        "range": [
+          0,
+          7
+        ],
+        "raw": "(?<a>x)",
+        "name": {
+          "type": "identifier",
+          "value": "a",
+          "range": [
+            3,
+            4
+          ],
+          "raw": "a"
+        }
+      },
+      {
+        "type": "group",
+        "behavior": "ignore",
+        "body": [
+          {
+            "type": "disjunction",
+            "body": [
+              {
+                "type": "group",
+                "behavior": "normal",
+                "body": [
+                  {
+                    "type": "value",
+                    "kind": "symbol",
+                    "codePoint": 121,
+                    "range": [
+                      16,
+                      17
+                    ],
+                    "raw": "y"
+                  }
+                ],
+                "range": [
+                  11,
+                  18
+                ],
+                "raw": "(?<a>y)",
+                "name": {
+                  "type": "identifier",
+                  "value": "a",
+                  "range": [
+                    14,
+                    15
+                  ],
+                  "raw": "a"
+                }
+              },
+              {
+                "type": "group",
+                "behavior": "normal",
+                "body": [
+                  {
+                    "type": "value",
+                    "kind": "symbol",
+                    "codePoint": 122,
+                    "range": [
+                      24,
+                      25
+                    ],
+                    "raw": "z"
+                  }
+                ],
+                "range": [
+                  19,
+                  26
+                ],
+                "raw": "(?<a>z)",
+                "name": {
+                  "type": "identifier",
+                  "value": "a",
+                  "range": [
+                    22,
+                    23
+                  ],
+                  "raw": "a"
+                }
+              }
+            ],
+            "range": [
+              11,
+              26
+            ],
+            "raw": "(?<a>y)|(?<a>z)"
+          }
+        ],
+        "range": [
+          8,
+          27
+        ],
+        "raw": "(?:(?<a>y)|(?<a>z))"
+      }
+    ],
+    "range": [
+      0,
+      27
+    ],
+    "raw": "(?<a>x)|(?:(?<a>y)|(?<a>z))"
+  },
+  "(?<a>.)\\kx": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid named reference at position 8\n    (?<a>.)\\kx\n            ^",
+    "input": "(?<a>.)\\kx"
+  },
+  "(?<a>.)\\k<a": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid capture group name at position 8\n    (?<a>.)\\k<a\n            ^",
+    "input": "(?<a>.)\\k<a"
+  },
+  "\\2()(?<a>)\\k<a>": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "reference",
+        "matchIndex": 2,
+        "range": [
+          0,
+          2
+        ],
+        "raw": "\\2"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          2,
+          4
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          4,
+          10
+        ],
+        "raw": "(?<a>)",
+        "name": {
+          "type": "identifier",
+          "value": "a",
+          "range": [
+            7,
+            8
+          ],
+          "raw": "a"
+        }
+      },
+      {
+        "type": "reference",
+        "name": {
+          "type": "identifier",
+          "value": "a",
+          "range": [
+            13,
+            14
+          ],
+          "raw": "a"
+        },
+        "range": [
+          10,
+          15
+        ],
+        "raw": "\\k<a>"
+      }
+    ],
+    "range": [
+      0,
+      15
+    ],
+    "raw": "\\2()(?<a>)\\k<a>"
+  },
+  "\\2()(?<a>)(?<a>)": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Duplicate capture group name at position 13: a\n    )(?<a>)(?<a>)\n              ^",
+    "input": "\\2()(?<a>)(?<a>)"
+  },
+  "\\2()(?<a>)\\k<b>": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid named capture referenced at position 13: b\n    )(?<a>)\\k<b>\n              ^",
+    "input": "\\2()(?<a>)\\k<b>"
+  },
+  "\\8(?<a>)\\k<a>": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 56,
+        "range": [
+          0,
+          2
+        ],
+        "raw": "\\8"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          2,
+          8
+        ],
+        "raw": "(?<a>)",
+        "name": {
+          "type": "identifier",
+          "value": "a",
+          "range": [
+            5,
+            6
+          ],
+          "raw": "a"
+        }
+      },
+      {
+        "type": "reference",
+        "name": {
+          "type": "identifier",
+          "value": "a",
+          "range": [
+            11,
+            12
+          ],
+          "raw": "a"
+        },
+        "range": [
+          8,
+          13
+        ],
+        "raw": "\\k<a>"
+      }
+    ],
+    "range": [
+      0,
+      13
+    ],
+    "raw": "\\8(?<a>)\\k<a>"
+  },
+  "\\k<a>\\2()(?<a>)|(?<a>)": {
+    "type": "disjunction",
+    "body": [
+      {
+        "type": "alternative",
+        "body": [
+          {
+            "type": "reference",
+            "name": {
+              "type": "identifier",
+              "value": "a",
+              "range": [
+                3,
+                4
+              ],
+              "raw": "a"
+            },
+            "range": [
+              0,
+              5
+            ],
+            "raw": "\\k<a>"
+          },
+          {
+            "type": "reference",
+            "matchIndex": 2,
+            "range": [
+              5,
+              7
+            ],
+            "raw": "\\2"
+          },
+          {
+            "type": "group",
+            "behavior": "normal",
+            "body": [],
+            "range": [
+              7,
+              9
+            ],
+            "raw": "()"
+          },
+          {
+            "type": "group",
+            "behavior": "normal",
+            "body": [],
+            "range": [
+              9,
+              15
+            ],
+            "raw": "(?<a>)",
+            "name": {
+              "type": "identifier",
+              "value": "a",
+              "range": [
+                12,
+                13
+              ],
+              "raw": "a"
+            }
+          }
+        ],
+        "range": [
+          0,
+          15
+        ],
+        "raw": "\\k<a>\\2()(?<a>)"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          16,
+          22
+        ],
+        "raw": "(?<a>)",
+        "name": {
+          "type": "identifier",
+          "value": "a",
+          "range": [
+            19,
+            20
+          ],
+          "raw": "a"
+        }
+      }
+    ],
+    "range": [
+      0,
+      22
+    ],
+    "raw": "\\k<a>\\2()(?<a>)|(?<a>)"
   }
 }
