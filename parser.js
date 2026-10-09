@@ -1694,7 +1694,7 @@
         } else if (res = parseClassEscape()) {
           start = res;
         } else if (res = parseClassSetCharacterEscapedHelper()) {
-          return res;
+          start = res;
         } else {
           bail('Invalid escape', '\\' + lookahead(), from);
         }
