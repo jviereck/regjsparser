@@ -22332,15 +22332,31 @@
     "input": "[\\10b-G]"
   },
   "[\\B]": {
-    "type": "error",
-    "name": "SyntaxError",
-    "message": "\\B not possible inside of CharacterClass at position 2\n    [\\B]\n      ^",
-    "input": "[\\B]"
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "value",
+        "kind": "identifier",
+        "codePoint": 66,
+        "range": [
+          1,
+          3
+        ],
+        "raw": "\\B"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      4
+    ],
+    "raw": "[\\B]"
   },
   "[\\Bd-G]": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "\\B not possible inside of CharacterClass at position 2\n    [\\Bd-G]\n      ^",
+    "message": "invalid range in character class at position 3: d-G\n    [\\Bd-G]\n       ^",
     "input": "[\\Bd-G]"
   },
   "[\\Db-G]": {
@@ -30527,7 +30543,7 @@
   "[d-G\\B]": {
     "type": "error",
     "name": "SyntaxError",
-    "message": "\\B not possible inside of CharacterClass at position 5\n    [d-G\\B]\n         ^",
+    "message": "invalid range in character class at position 1: d-G\n    [d-G\\B]\n     ^",
     "input": "[d-G\\B]"
   },
   "[d-G\\a]": {
@@ -38912,5 +38928,67 @@
       5
     ],
     "raw": "[\\09]"
+  },
+  "[\\B-Z]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "characterClassRange",
+        "min": {
+          "type": "value",
+          "kind": "identifier",
+          "codePoint": 66,
+          "range": [
+            1,
+            3
+          ],
+          "raw": "\\B"
+        },
+        "max": {
+          "type": "value",
+          "kind": "symbol",
+          "codePoint": 90,
+          "range": [
+            4,
+            5
+          ],
+          "raw": "Z"
+        },
+        "range": [
+          1,
+          5
+        ],
+        "raw": "\\B-Z"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      6
+    ],
+    "raw": "[\\B-Z]"
+  },
+  "[^\\B]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "value",
+        "kind": "identifier",
+        "codePoint": 66,
+        "range": [
+          2,
+          4
+        ],
+        "raw": "\\B"
+      }
+    ],
+    "negative": true,
+    "range": [
+      0,
+      5
+    ],
+    "raw": "[^\\B]"
   }
 }

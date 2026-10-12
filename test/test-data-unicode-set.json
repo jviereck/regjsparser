@@ -1947,5 +1947,11 @@
       6
     ],
     "raw": "[a-zb]"
+  },
+  "[\\B]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "\\B not possible inside of CharacterClass at position 2\n    [\\B]\n      ^",
+    "input": "[\\B]"
   }
 }
