@@ -38912,5 +38912,1054 @@
       5
     ],
     "raw": "[\\09]"
+  },
+  "\\377": {
+    "type": "value",
+    "kind": "octal",
+    "codePoint": 255,
+    "range": [
+      0,
+      4
+    ],
+    "raw": "\\377"
+  },
+  "\\400": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "value",
+        "kind": "octal",
+        "codePoint": 32,
+        "range": [
+          0,
+          3
+        ],
+        "raw": "\\40"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 48,
+        "range": [
+          3,
+          4
+        ],
+        "raw": "0"
+      }
+    ],
+    "range": [
+      0,
+      4
+    ],
+    "raw": "\\400"
+  },
+  "\\477": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "value",
+        "kind": "octal",
+        "codePoint": 39,
+        "range": [
+          0,
+          3
+        ],
+        "raw": "\\47"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 55,
+        "range": [
+          3,
+          4
+        ],
+        "raw": "7"
+      }
+    ],
+    "range": [
+      0,
+      4
+    ],
+    "raw": "\\477"
+  },
+  "\\777": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "value",
+        "kind": "octal",
+        "codePoint": 63,
+        "range": [
+          0,
+          3
+        ],
+        "raw": "\\77"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 55,
+        "range": [
+          3,
+          4
+        ],
+        "raw": "7"
+      }
+    ],
+    "range": [
+      0,
+      4
+    ],
+    "raw": "\\777"
+  },
+  "\\4000": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "value",
+        "kind": "octal",
+        "codePoint": 32,
+        "range": [
+          0,
+          3
+        ],
+        "raw": "\\40"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 48,
+        "range": [
+          3,
+          4
+        ],
+        "raw": "0"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 48,
+        "range": [
+          4,
+          5
+        ],
+        "raw": "0"
+      }
+    ],
+    "range": [
+      0,
+      5
+    ],
+    "raw": "\\4000"
+  },
+  "[\\400]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "value",
+        "kind": "octal",
+        "codePoint": 32,
+        "range": [
+          1,
+          4
+        ],
+        "raw": "\\40"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 48,
+        "range": [
+          4,
+          5
+        ],
+        "raw": "0"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      6
+    ],
+    "raw": "[\\400]"
+  },
+  "[\\377]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "value",
+        "kind": "octal",
+        "codePoint": 255,
+        "range": [
+          1,
+          5
+        ],
+        "raw": "\\377"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      6
+    ],
+    "raw": "[\\377]"
+  },
+  "[\\47-\\400]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "invalid range in character class at position 1: \\47-\\40\n    [\\47-\\400]\n     ^",
+    "input": "[\\47-\\400]"
+  },
+  "()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()\\400": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          0,
+          2
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          2,
+          4
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          4,
+          6
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          6,
+          8
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          8,
+          10
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          10,
+          12
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          12,
+          14
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          14,
+          16
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          16,
+          18
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          18,
+          20
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          20,
+          22
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          22,
+          24
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          24,
+          26
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          26,
+          28
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          28,
+          30
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          30,
+          32
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          32,
+          34
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          34,
+          36
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          36,
+          38
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          38,
+          40
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          40,
+          42
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          42,
+          44
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          44,
+          46
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          46,
+          48
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          48,
+          50
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          50,
+          52
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          52,
+          54
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          54,
+          56
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          56,
+          58
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          58,
+          60
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          60,
+          62
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          62,
+          64
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          64,
+          66
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          66,
+          68
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          68,
+          70
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          70,
+          72
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          72,
+          74
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          74,
+          76
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          76,
+          78
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          78,
+          80
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "value",
+        "kind": "octal",
+        "codePoint": 32,
+        "range": [
+          80,
+          83
+        ],
+        "raw": "\\40"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 48,
+        "range": [
+          83,
+          84
+        ],
+        "raw": "0"
+      }
+    ],
+    "range": [
+      0,
+      84
+    ],
+    "raw": "()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()\\400"
+  },
+  "()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()\\40": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          0,
+          2
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          2,
+          4
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          4,
+          6
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          6,
+          8
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          8,
+          10
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          10,
+          12
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          12,
+          14
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          14,
+          16
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          16,
+          18
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          18,
+          20
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          20,
+          22
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          22,
+          24
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          24,
+          26
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          26,
+          28
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          28,
+          30
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          30,
+          32
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          32,
+          34
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          34,
+          36
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          36,
+          38
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          38,
+          40
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          40,
+          42
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          42,
+          44
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          44,
+          46
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          46,
+          48
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          48,
+          50
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          50,
+          52
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          52,
+          54
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          54,
+          56
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          56,
+          58
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          58,
+          60
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          60,
+          62
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          62,
+          64
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          64,
+          66
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          66,
+          68
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          68,
+          70
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          70,
+          72
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          72,
+          74
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          74,
+          76
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          76,
+          78
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          78,
+          80
+        ],
+        "raw": "()"
+      },
+      {
+        "type": "reference",
+        "matchIndex": 40,
+        "range": [
+          80,
+          83
+        ],
+        "raw": "\\40"
+      }
+    ],
+    "range": [
+      0,
+      83
+    ],
+    "raw": "()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()\\40"
   }
 }

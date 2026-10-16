@@ -1954,5 +1954,17 @@
       3
     ],
     "raw": "\\0a"
+  },
+  "\\400": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid decimal escape in unicode mode at position 1\n    \\400\n     ^",
+    "input": "\\400"
+  },
+  "[\\400]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid decimal escape in unicode mode at position 2\n    [\\400]\n      ^",
+    "input": "[\\400]"
   }
 }
