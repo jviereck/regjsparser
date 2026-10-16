@@ -95,3 +95,29 @@ runTests('./test-data-lookbehind-modifiers-group.json', '', {
   parse("[" + Array(8192).fill("a").join("") + "]", "");
   console.log("  PASSED TEST: " + message);
 })();
+
+(function testReentrancy() {
+  var message = "It should be reentrant.";
+
+  function check(actual, expected) {
+    if (JSON.stringify(actual) !== JSON.stringify(expected)) {
+      throw new Error(message + '\nExpected:\n' + JSON.stringify(expected) + '\nActual:\n' + JSON.stringify(actual));
+    }
+  }
+
+  // A nested parse() call from input.toString().
+  check(parse({ toString: function() { parse('a'); return 'b'; } }), parse('b'));
+
+  // A nested parse() call that throws.
+  check(parse({ toString: function() {
+    try { parse('('); } catch (e) { /* ignore */ }
+    return 'b';
+  } }), parse('b'));
+
+  // A nested parse() call from a getter on the options, i.e. while parsing.
+  check(parse('(?<=x)y', '', {
+    get lookbehind() { parse('[a-z]{2}', 'u'); return true; }
+  }), parse('(?<=x)y', '', { lookbehind: true }));
+
+  console.log("  PASSED TEST: " + message);
+})();

@@ -7,7 +7,7 @@ import { samples } from "./samples.mjs";
 const parseCurrent = parserCurrent.default.parse;
 const parseBaseline = parserBaseline.default.parse;
 
-const parse = process.argv[2] === "current" ? parseCurrent : parseBaseline;
+const parse = process.argv[2] === "baseline" ? parseBaseline : parseCurrent;
 const bench = new Bench({ name: "benchmark between baseline and current", time: 500 });
 
 for (const [title, sample] of Object.entries(samples)) {
