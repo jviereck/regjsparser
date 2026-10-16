@@ -1947,5 +1947,201 @@
       6
     ],
     "raw": "[a-zb]"
+  },
+  "[\\:-\\xFF]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "characterClassRange",
+        "min": {
+          "type": "value",
+          "kind": "identifier",
+          "codePoint": 58,
+          "range": [
+            2,
+            3
+          ],
+          "raw": ":"
+        },
+        "max": {
+          "type": "value",
+          "kind": "hexadecimalEscape",
+          "codePoint": 255,
+          "range": [
+            4,
+            8
+          ],
+          "raw": "\\xFF"
+        },
+        "range": [
+          1,
+          8
+        ],
+        "raw": "\\:-\\xFF"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      9
+    ],
+    "raw": "[\\:-\\xFF]"
+  },
+  "[\\<-^]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "characterClassRange",
+        "min": {
+          "type": "value",
+          "kind": "identifier",
+          "codePoint": 60,
+          "range": [
+            2,
+            3
+          ],
+          "raw": "<"
+        },
+        "max": {
+          "type": "value",
+          "kind": "symbol",
+          "codePoint": 94,
+          "range": [
+            4,
+            5
+          ],
+          "raw": "^"
+        },
+        "range": [
+          1,
+          5
+        ],
+        "raw": "\\<-^"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      6
+    ],
+    "raw": "[\\<-^]"
+  },
+  "[\\&-\\~]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "characterClassRange",
+        "min": {
+          "type": "value",
+          "kind": "identifier",
+          "codePoint": 38,
+          "range": [
+            2,
+            3
+          ],
+          "raw": "&"
+        },
+        "max": {
+          "type": "value",
+          "kind": "identifier",
+          "codePoint": 126,
+          "range": [
+            5,
+            6
+          ],
+          "raw": "~"
+        },
+        "range": [
+          1,
+          6
+        ],
+        "raw": "\\&-\\~"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      7
+    ],
+    "raw": "[\\&-\\~]"
+  },
+  "[\\~-\\&]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "invalid range in character class at position 1: ~-&\n    [\\~-\\&]\n     ^",
+    "input": "[\\~-\\&]"
+  },
+  "[\\:--a]": {
+    "type": "characterClass",
+    "kind": "subtraction",
+    "body": [
+      {
+        "type": "value",
+        "kind": "identifier",
+        "codePoint": 58,
+        "range": [
+          2,
+          3
+        ],
+        "raw": ":"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 97,
+        "range": [
+          5,
+          6
+        ],
+        "raw": "a"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      7
+    ],
+    "raw": "[\\:--a]"
+  },
+  "[\\:&&a]": {
+    "type": "characterClass",
+    "kind": "intersection",
+    "body": [
+      {
+        "type": "value",
+        "kind": "identifier",
+        "codePoint": 58,
+        "range": [
+          2,
+          3
+        ],
+        "raw": ":"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 97,
+        "range": [
+          5,
+          6
+        ],
+        "raw": "a"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      7
+    ],
+    "raw": "[\\:&&a]"
+  },
+  "[\\:-]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid range end at position 4: ]\n    [\\:-]\n        ^",
+    "input": "[\\:-]"
   }
 }
