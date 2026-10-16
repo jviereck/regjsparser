@@ -1645,11 +1645,14 @@
     var operand = parseClassSetOperand(/* allowRanges*/ true);
     body.push(operand);
 
+    // A single `&` or `-` is not an operator: `&` is an ordinary
+    // ClassSetCharacter and a lone `-` is a syntax error, which the next
+    // parseClassSetOperand() call reports.
     if (operand.type === 'characterClassRange') {
       kind = 'union';
-    } else if (currentOne('&')) {
+    } else if (currentOne('&') && next('&')) {
       kind = 'intersection';
-    } else if (currentOne('-')) {
+    } else if (currentOne('-') && next('-')) {
       kind = 'subtraction';
     } else {
       kind = 'union';
@@ -1712,6 +1715,14 @@
       if (match('q{')) {
         return parseClassStringDisjunction();
       } else if (res = parseClassEscape()) {
+        if (res.type === 'characterClassEscape' || res.type === 'unicodePropertyEscape') {
+          // NestedClass ::
+          //      \ CharacterClassEscape[+UnicodeMode]
+          //
+          // A NestedClass is not a ClassSetCharacter, so it cannot start a
+          // ClassSetRange, e.g. `[\d-a]` is a SyntaxError.
+          return res;
+        }
         start = res;
       } else if (res = parseClassSetCharacterEscapedHelper()) {
         start = res;
