@@ -1966,6 +1966,24 @@
     "name": "SyntaxError",
     "message": "Invalid decimal escape in unicode mode at position 2\n    [\\400]\n      ^",
     "input": "[\\400]"
+  },
+  "\\A": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "atomEscape at position 1\n    \\A\n     ^",
+    "input": "\\A"
+  },
+  "\\z": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "atomEscape at position 1\n    \\z\n     ^",
+    "input": "\\z"
+  },
+  "\\Z": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "atomEscape at position 1\n    \\Z\n     ^",
+    "input": "\\Z"
   }
 ,
   "[\\B]": {
