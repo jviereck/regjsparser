@@ -2032,5 +2032,33 @@
     "name": "SyntaxError",
     "message": "classAtom at position 3\n    [\\b\n       ^",
     "input": "[\\b"
+  },
+  "[\uD800": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "classAtom at position 2\n    [\uD800\n      ^",
+    "input": "[\uD800"
+  },
+  "[a\uD800": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "classAtom at position 3\n    [a\uD800\n       ^",
+    "input": "[a\uD800"
+  },
+  "(\uD800": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "character at position 2: )\n    (\uD800\n      ^",
+    "input": "(\uD800"
+  },
+  "\uD800": {
+    "type": "value",
+    "kind": "symbol",
+    "codePoint": 55296,
+    "range": [
+      0,
+      1
+    ],
+    "raw": "\uD800"
   }
 }
