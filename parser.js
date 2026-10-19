@@ -1079,7 +1079,7 @@
         var prevPos = pos;
         pos++;
         var secondEscape = parseClassEscape();
-        if (secondEscape.kind == 'unicodeEscape' &&
+        if (secondEscape && secondEscape.kind == 'unicodeEscape' &&
           (second = secondEscape.codePoint) >= 0xDC00 && second <= 0xDFFF) {
           // Unicode surrogate pair
           firstEscape.kind = 'unicodeCodePointEscape';

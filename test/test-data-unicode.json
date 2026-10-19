@@ -2078,5 +2078,59 @@
       1
     ],
     "raw": "\uD800"
+  },
+  "\\uD83D\\u": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "atomEscape at position 7\n    \\uD83D\\u\n           ^",
+    "input": "\\uD83D\\u"
+  },
+  "\\uD83D\\uZ": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "atomEscape at position 7\n    \\uD83D\\uZ\n           ^",
+    "input": "\\uD83D\\uZ"
+  },
+  "\\uD83D\\uZZZZ": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "atomEscape at position 7\n    \\uD83D\\uZZZZ\n           ^",
+    "input": "\\uD83D\\uZZZZ"
+  },
+  "[\\uD83D\\u]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "classEscape at position 8\n    [\\uD83D\\u]\n            ^",
+    "input": "[\\uD83D\\u]"
+  },
+  "\\uD83D\\u{DE00}": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "value",
+        "kind": "unicodeEscape",
+        "codePoint": 55357,
+        "range": [
+          0,
+          6
+        ],
+        "raw": "\\uD83D"
+      },
+      {
+        "type": "value",
+        "kind": "unicodeCodePointEscape",
+        "codePoint": 56832,
+        "range": [
+          6,
+          14
+        ],
+        "raw": "\\u{DE00}"
+      }
+    ],
+    "range": [
+      0,
+      14
+    ],
+    "raw": "\\uD83D\\u{DE00}"
   }
 }
