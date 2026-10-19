@@ -62,6 +62,10 @@ runTests('./test-data-unicode-set.json', 'v', {
   unicodeSet: true,
   unicodePropertyEscape: true
 });
+runTests('./test-data-named-groups-unicode-set.json', 'v', {
+  namedGroups: true,
+  unicodeSet: true
+});
 runTests('./test-data-modifiers-group.json', '', {
   modifiers: true,
   namedGroups: true,
@@ -118,6 +122,13 @@ runTests('./test-data-lookbehind-modifiers-group.json', '', {
   check(parse('(?<=x)y', '', {
     get lookbehind() { parse('[a-z]{2}', 'u'); return true; }
   }), parse('(?<=x)y', '', { lookbehind: true }));
+
+  // A nested parse() call must not clobber the group names of the outer call.
+  ['(?<a>x)\\k<a>', '(?<a>x)(?<b>y)', '\\k<a>(?<a>x)'].forEach(function(pattern) {
+    check(parse(pattern, '', {
+      get namedGroups() { parse('(?<b>y)|(?<b>z)', '', { namedGroups: true }); return true; }
+    }), parse(pattern, '', { namedGroups: true }));
+  });
 
   console.log("  PASSED TEST: " + message);
 })();

@@ -1,0 +1,84 @@
+{
+  "(?<a>)\\k<a>": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "group",
+        "behavior": "normal",
+        "body": [],
+        "range": [
+          0,
+          6
+        ],
+        "raw": "(?<a>)",
+        "name": {
+          "type": "identifier",
+          "value": "a",
+          "range": [
+            3,
+            4
+          ],
+          "raw": "a"
+        }
+      },
+      {
+        "type": "reference",
+        "name": {
+          "type": "identifier",
+          "value": "a",
+          "range": [
+            9,
+            10
+          ],
+          "raw": "a"
+        },
+        "range": [
+          6,
+          11
+        ],
+        "raw": "\\k<a>"
+      }
+    ],
+    "range": [
+      0,
+      11
+    ],
+    "raw": "(?<a>)\\k<a>"
+  },
+  "(?<a>)[\\k<a>]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid escape at position 7: \\k\n    (?<a>)[\\k<a>]\n           ^",
+    "input": "(?<a>)[\\k<a>]"
+  },
+  "(?<a>)[\\q{a}\\k<a>]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid escape at position 12: \\k\n    <a>)[\\q{a}\\k<a>]\n              ^",
+    "input": "(?<a>)[\\q{a}\\k<a>]"
+  },
+  "(?<a>)[a-\\k<a>]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid escape at position 10: \\k\n    (?<a>)[a-\\k<a>]\n              ^",
+    "input": "(?<a>)[a-\\k<a>]"
+  },
+  "(?<a>)[\\k<a>&&a]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid escape at position 7: \\k\n    (?<a>)[\\k<a>&&a]\n           ^",
+    "input": "(?<a>)[\\k<a>&&a]"
+  },
+  "[\\k<a>](?<a>)": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid escape at position 1: \\k\n    [\\k<a>](?<a\n     ^",
+    "input": "[\\k<a>](?<a>)"
+  },
+  "\\k<a>": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid named capture referenced at position 3: a\n    \\k<a>\n       ^",
+    "input": "\\k<a>"
+  }
+}
