@@ -3672,5 +3672,69 @@
     "name": "SyntaxError",
     "message": "atomEscape at position 1\n    \\Z\n     ^",
     "input": "\\Z"
+  },
+  "\uD83D": {
+    "type": "value",
+    "kind": "symbol",
+    "codePoint": 55357,
+    "range": [
+      0,
+      1
+    ],
+    "raw": "\uD83D"
+  },
+  "[\uD83D]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 55357,
+        "range": [
+          1,
+          2
+        ],
+        "raw": "\uD83D"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      3
+    ],
+    "raw": "[\uD83D]"
+  },
+  "[a\uD83D]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 97,
+        "range": [
+          1,
+          2
+        ],
+        "raw": "a"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 55357,
+        "range": [
+          2,
+          3
+        ],
+        "raw": "\uD83D"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      4
+    ],
+    "raw": "[a\uD83D]"
   }
 }

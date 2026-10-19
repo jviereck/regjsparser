@@ -390,7 +390,7 @@
     if (isUnicodeMode) {
       var second;
       if (_char.length === 1 && first >= 0xD800 && first <= 0xDBFF) {
-        second = lookahead().charCodeAt(0);
+        second = str.charCodeAt(pos);
         if (second >= 0xDC00 && second <= 0xDFFF) {
           // Unicode surrogate pair
           pos++;
