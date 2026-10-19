@@ -57,6 +57,10 @@ updateFixtures('./test-data-unicode-set.json', 'v', {
   unicodeSet: true,
   unicodePropertyEscape: true
 });
+updateFixtures('./test-data-named-groups-unicode-set.json', 'v', {
+  namedGroups: true,
+  unicodeSet: true
+});
 updateFixtures('./test-data-modifiers-group.json', '', {
   modifiers: true,
 });

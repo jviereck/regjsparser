@@ -230,5 +230,29 @@
     "name": "SyntaxError",
     "message": "Invalid capture group name at position 1\n    \\k<a\n     ^",
     "input": "\\k<a"
+  },
+  "(?<a>)[\\k<a>]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "classEscape at position 8\n    (?<a>)[\\k<a>]\n            ^",
+    "input": "(?<a>)[\\k<a>]"
+  },
+  "[\\k<a>](?<a>)": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "classEscape at position 2\n    [\\k<a>](?<a>\n      ^",
+    "input": "[\\k<a>](?<a>)"
+  },
+  "(?<a>)[a\\k<a>]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "classEscape at position 9\n    (?<a>)[a\\k<a>]\n             ^",
+    "input": "(?<a>)[a\\k<a>]"
+  },
+  "(?<a>)[\\k<a>-b]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "classEscape at position 8\n    (?<a>)[\\k<a>-b]\n            ^",
+    "input": "(?<a>)[\\k<a>-b]"
   }
 }
