@@ -2143,8 +2143,7 @@
     "name": "SyntaxError",
     "message": "Invalid range end at position 4: ]\n    [\\:-]\n        ^",
     "input": "[\\:-]"
-  }
-,
+  },
   "[\\B]": {
     "type": "error",
     "name": "SyntaxError",
