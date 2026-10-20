@@ -3648,8 +3648,7 @@
       12
     ],
     "raw": "[[^a]\\q{ab}]"
-  }
-,
+  },
   "[\\B]": {
     "type": "error",
     "name": "SyntaxError",
