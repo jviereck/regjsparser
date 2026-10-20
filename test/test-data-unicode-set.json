@@ -1377,56 +1377,10 @@
     "raw": "[[b-d]--\\q{a|b|c}]"
   },
   "[^\\q{AB}]": {
-    "type": "characterClass",
-    "kind": "union",
-    "body": [
-      {
-        "type": "classStrings",
-        "strings": [
-          {
-            "type": "classString",
-            "characters": [
-              {
-                "type": "value",
-                "kind": "symbol",
-                "codePoint": 65,
-                "range": [
-                  5,
-                  6
-                ],
-                "raw": "A"
-              },
-              {
-                "type": "value",
-                "kind": "symbol",
-                "codePoint": 66,
-                "range": [
-                  6,
-                  7
-                ],
-                "raw": "B"
-              }
-            ],
-            "range": [
-              5,
-              7
-            ],
-            "raw": "AB"
-          }
-        ],
-        "range": [
-          2,
-          8
-        ],
-        "raw": "\\q{AB}"
-      }
-    ],
-    "negative": true,
-    "range": [
-      0,
-      9
-    ],
-    "raw": "[^\\q{AB}]"
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Negated character class may contain strings at position 0\n    [^\\q{AB}]\n    ^",
+    "input": "[^\\q{AB}]"
   },
   "\\1": {
     "type": "error",
@@ -2143,6 +2097,1557 @@
     "name": "SyntaxError",
     "message": "Invalid range end at position 4: ]\n    [\\:-]\n        ^",
     "input": "[\\:-]"
+  },
+  "[a&]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 97,
+        "range": [
+          1,
+          2
+        ],
+        "raw": "a"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 38,
+        "range": [
+          2,
+          3
+        ],
+        "raw": "&"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      4
+    ],
+    "raw": "[a&]"
+  },
+  "[a&b]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 97,
+        "range": [
+          1,
+          2
+        ],
+        "raw": "a"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 38,
+        "range": [
+          2,
+          3
+        ],
+        "raw": "&"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 98,
+        "range": [
+          3,
+          4
+        ],
+        "raw": "b"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      5
+    ],
+    "raw": "[a&b]"
+  },
+  "[\\:&]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "value",
+        "kind": "identifier",
+        "codePoint": 58,
+        "range": [
+          2,
+          3
+        ],
+        "raw": ":"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 38,
+        "range": [
+          3,
+          4
+        ],
+        "raw": "&"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      5
+    ],
+    "raw": "[\\:&]"
+  },
+  "[[a]&b]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "characterClass",
+        "kind": "union",
+        "body": [
+          {
+            "type": "value",
+            "kind": "symbol",
+            "codePoint": 97,
+            "range": [
+              2,
+              3
+            ],
+            "raw": "a"
+          }
+        ],
+        "negative": false,
+        "range": [
+          1,
+          4
+        ],
+        "raw": "[a]"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 38,
+        "range": [
+          4,
+          5
+        ],
+        "raw": "&"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 98,
+        "range": [
+          5,
+          6
+        ],
+        "raw": "b"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      7
+    ],
+    "raw": "[[a]&b]"
+  },
+  "[\\d&]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "characterClassEscape",
+        "value": "d",
+        "range": [
+          1,
+          3
+        ],
+        "raw": "\\d"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 38,
+        "range": [
+          3,
+          4
+        ],
+        "raw": "&"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      5
+    ],
+    "raw": "[\\d&]"
+  },
+  "[a-z&]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "characterClassRange",
+        "min": {
+          "type": "value",
+          "kind": "symbol",
+          "codePoint": 97,
+          "range": [
+            1,
+            2
+          ],
+          "raw": "a"
+        },
+        "max": {
+          "type": "value",
+          "kind": "symbol",
+          "codePoint": 122,
+          "range": [
+            3,
+            4
+          ],
+          "raw": "z"
+        },
+        "range": [
+          1,
+          4
+        ],
+        "raw": "a-z"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 38,
+        "range": [
+          4,
+          5
+        ],
+        "raw": "&"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      6
+    ],
+    "raw": "[a-z&]"
+  },
+  "[\\q{ab}&]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "classStrings",
+        "strings": [
+          {
+            "type": "classString",
+            "characters": [
+              {
+                "type": "value",
+                "kind": "symbol",
+                "codePoint": 97,
+                "range": [
+                  4,
+                  5
+                ],
+                "raw": "a"
+              },
+              {
+                "type": "value",
+                "kind": "symbol",
+                "codePoint": 98,
+                "range": [
+                  5,
+                  6
+                ],
+                "raw": "b"
+              }
+            ],
+            "range": [
+              4,
+              6
+            ],
+            "raw": "ab"
+          }
+        ],
+        "range": [
+          1,
+          7
+        ],
+        "raw": "\\q{ab}"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 38,
+        "range": [
+          7,
+          8
+        ],
+        "raw": "&"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      9
+    ],
+    "raw": "[\\q{ab}&]"
+  },
+  "[a&&b]": {
+    "type": "characterClass",
+    "kind": "intersection",
+    "body": [
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 97,
+        "range": [
+          1,
+          2
+        ],
+        "raw": "a"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 98,
+        "range": [
+          4,
+          5
+        ],
+        "raw": "b"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      6
+    ],
+    "raw": "[a&&b]"
+  },
+  "[a&&&b]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "&& cannot be followed by &. Wrap it in brackets: &&[&]. at position 4\n    [a&&&b]\n        ^",
+    "input": "[a&&&b]"
+  },
+  "[&&a]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid set operation in character class at position 3\n    [&&a]\n       ^",
+    "input": "[&&a]"
+  },
+  "[a&&]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid character at position 4: ]\n    [a&&]\n        ^",
+    "input": "[a&&]"
+  },
+  "[[a]-b]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid character at position 4: -\n    [[a]-b]\n        ^",
+    "input": "[[a]-b]"
+  },
+  "[\\q{a}-b]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid character at position 6: -\n    [\\q{a}-b]\n          ^",
+    "input": "[\\q{a}-b]"
+  },
+  "[[a]-]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid character at position 4: -\n    [[a]-]\n        ^",
+    "input": "[[a]-]"
+  },
+  "[[a]--b]": {
+    "type": "characterClass",
+    "kind": "subtraction",
+    "body": [
+      {
+        "type": "characterClass",
+        "kind": "union",
+        "body": [
+          {
+            "type": "value",
+            "kind": "symbol",
+            "codePoint": 97,
+            "range": [
+              2,
+              3
+            ],
+            "raw": "a"
+          }
+        ],
+        "negative": false,
+        "range": [
+          1,
+          4
+        ],
+        "raw": "[a]"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 98,
+        "range": [
+          6,
+          7
+        ],
+        "raw": "b"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      8
+    ],
+    "raw": "[[a]--b]"
+  },
+  "[\\d-a]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid character at position 3: -\n    [\\d-a]\n       ^",
+    "input": "[\\d-a]"
+  },
+  "[\\D-\\d]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid character at position 3: -\n    [\\D-\\d]\n       ^",
+    "input": "[\\D-\\d]"
+  },
+  "[\\w-\\:]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid character at position 3: -\n    [\\w-\\:]\n       ^",
+    "input": "[\\w-\\:]"
+  },
+  "[\\s-a]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid character at position 3: -\n    [\\s-a]\n       ^",
+    "input": "[\\s-a]"
+  },
+  "[\\p{L}-a]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid character at position 6: -\n    [\\p{L}-a]\n          ^",
+    "input": "[\\p{L}-a]"
+  },
+  "[\\P{L}-\\xFF]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid character at position 6: -\n    [\\P{L}-\\xFF]\n          ^",
+    "input": "[\\P{L}-\\xFF]"
+  },
+  "[\\d-]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid character at position 3: -\n    [\\d-]\n       ^",
+    "input": "[\\d-]"
+  },
+  "[a-\\d]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid escape at position 4: \\d\n    [a-\\d]\n        ^",
+    "input": "[a-\\d]"
+  },
+  "[\\d--a]": {
+    "type": "characterClass",
+    "kind": "subtraction",
+    "body": [
+      {
+        "type": "characterClassEscape",
+        "value": "d",
+        "range": [
+          1,
+          3
+        ],
+        "raw": "\\d"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 97,
+        "range": [
+          5,
+          6
+        ],
+        "raw": "a"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      7
+    ],
+    "raw": "[\\d--a]"
+  },
+  "[\\d&&a]": {
+    "type": "characterClass",
+    "kind": "intersection",
+    "body": [
+      {
+        "type": "characterClassEscape",
+        "value": "d",
+        "range": [
+          1,
+          3
+        ],
+        "raw": "\\d"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 97,
+        "range": [
+          5,
+          6
+        ],
+        "raw": "a"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      7
+    ],
+    "raw": "[\\d&&a]"
+  },
+  "[\\p{L}--\\q{a}]": {
+    "type": "characterClass",
+    "kind": "subtraction",
+    "body": [
+      {
+        "type": "unicodePropertyEscape",
+        "negative": false,
+        "value": "L",
+        "range": [
+          1,
+          6
+        ],
+        "raw": "\\p{L}"
+      },
+      {
+        "type": "classStrings",
+        "strings": [
+          {
+            "type": "classString",
+            "characters": [
+              {
+                "type": "value",
+                "kind": "symbol",
+                "codePoint": 97,
+                "range": [
+                  11,
+                  12
+                ],
+                "raw": "a"
+              }
+            ],
+            "range": [
+              11,
+              12
+            ],
+            "raw": "a"
+          }
+        ],
+        "range": [
+          8,
+          13
+        ],
+        "raw": "\\q{a}"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      14
+    ],
+    "raw": "[\\p{L}--\\q{a}]"
+  },
+  "[\\da]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "characterClassEscape",
+        "value": "d",
+        "range": [
+          1,
+          3
+        ],
+        "raw": "\\d"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 97,
+        "range": [
+          3,
+          4
+        ],
+        "raw": "a"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      5
+    ],
+    "raw": "[\\da]"
+  },
+  "[\\d\\p{L}]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "characterClassEscape",
+        "value": "d",
+        "range": [
+          1,
+          3
+        ],
+        "raw": "\\d"
+      },
+      {
+        "type": "unicodePropertyEscape",
+        "negative": false,
+        "value": "L",
+        "range": [
+          3,
+          8
+        ],
+        "raw": "\\p{L}"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      9
+    ],
+    "raw": "[\\d\\p{L}]"
+  },
+  "[\\b-a]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "characterClassRange",
+        "min": {
+          "type": "value",
+          "kind": "singleEscape",
+          "codePoint": 8,
+          "range": [
+            1,
+            3
+          ],
+          "raw": "\\b"
+        },
+        "max": {
+          "type": "value",
+          "kind": "symbol",
+          "codePoint": 97,
+          "range": [
+            4,
+            5
+          ],
+          "raw": "a"
+        },
+        "range": [
+          1,
+          5
+        ],
+        "raw": "\\b-a"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      6
+    ],
+    "raw": "[\\b-a]"
+  },
+  "[\\0-a]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "characterClassRange",
+        "min": {
+          "type": "value",
+          "kind": "null",
+          "codePoint": 0,
+          "range": [
+            1,
+            3
+          ],
+          "raw": "\\0"
+        },
+        "max": {
+          "type": "value",
+          "kind": "symbol",
+          "codePoint": 97,
+          "range": [
+            4,
+            5
+          ],
+          "raw": "a"
+        },
+        "range": [
+          1,
+          5
+        ],
+        "raw": "\\0-a"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      6
+    ],
+    "raw": "[\\0-a]"
+  },
+  "[\\--a]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "characterClassRange",
+        "min": {
+          "type": "value",
+          "kind": "singleEscape",
+          "codePoint": 45,
+          "range": [
+            1,
+            3
+          ],
+          "raw": "\\-"
+        },
+        "max": {
+          "type": "value",
+          "kind": "symbol",
+          "codePoint": 97,
+          "range": [
+            4,
+            5
+          ],
+          "raw": "a"
+        },
+        "range": [
+          1,
+          5
+        ],
+        "raw": "\\--a"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      6
+    ],
+    "raw": "[\\--a]"
+  },
+  "[\\n-\\r]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "characterClassRange",
+        "min": {
+          "type": "value",
+          "kind": "singleEscape",
+          "codePoint": 10,
+          "range": [
+            1,
+            3
+          ],
+          "raw": "\\n"
+        },
+        "max": {
+          "type": "value",
+          "kind": "singleEscape",
+          "codePoint": 13,
+          "range": [
+            4,
+            6
+          ],
+          "raw": "\\r"
+        },
+        "range": [
+          1,
+          6
+        ],
+        "raw": "\\n-\\r"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      7
+    ],
+    "raw": "[\\n-\\r]"
+  },
+  "[\\x20-\\xFF]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "characterClassRange",
+        "min": {
+          "type": "value",
+          "kind": "hexadecimalEscape",
+          "codePoint": 32,
+          "range": [
+            1,
+            5
+          ],
+          "raw": "\\x20"
+        },
+        "max": {
+          "type": "value",
+          "kind": "hexadecimalEscape",
+          "codePoint": 255,
+          "range": [
+            6,
+            10
+          ],
+          "raw": "\\xFF"
+        },
+        "range": [
+          1,
+          10
+        ],
+        "raw": "\\x20-\\xFF"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      11
+    ],
+    "raw": "[\\x20-\\xFF]"
+  },
+  "[^\\q{}]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Negated character class may contain strings at position 0\n    [^\\q{}]\n    ^",
+    "input": "[^\\q{}]"
+  },
+  "[^\\q{ab}]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Negated character class may contain strings at position 0\n    [^\\q{ab}]\n    ^",
+    "input": "[^\\q{ab}]"
+  },
+  "[^\\q{a|bc}]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Negated character class may contain strings at position 0\n    [^\\q{a|bc}]\n    ^",
+    "input": "[^\\q{a|bc}]"
+  },
+  "[^[\\q{ab}]]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Negated character class may contain strings at position 0\n    [^[\\q{ab}]]\n    ^",
+    "input": "[^[\\q{ab}]]"
+  },
+  "[^[^\\q{ab}]]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Negated character class may contain strings at position 2\n    [^[^\\q{ab}]]\n      ^",
+    "input": "[^[^\\q{ab}]]"
+  },
+  "[^\\q{a}\\q{bc}]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Negated character class may contain strings at position 0\n    [^\\q{a}\\q{bc}]\n    ^",
+    "input": "[^\\q{a}\\q{bc}]"
+  },
+  "[^a-z\\q{bc}]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Negated character class may contain strings at position 0\n    [^a-z\\q{bc}]\n    ^",
+    "input": "[^a-z\\q{bc}]"
+  },
+  "[^\\q{ab}&&\\q{ab}]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Negated character class may contain strings at position 0\n    [^\\q{ab}&&\\q{ab}]\n    ^",
+    "input": "[^\\q{ab}&&\\q{ab}]"
+  },
+  "[^\\q{ab}--a]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Negated character class may contain strings at position 0\n    [^\\q{ab}--a]\n    ^",
+    "input": "[^\\q{ab}--a]"
+  },
+  "[^[\\q{ab}]--a]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Negated character class may contain strings at position 0\n    [^[\\q{ab}]--a]\n    ^",
+    "input": "[^[\\q{ab}]--a]"
+  },
+  "[^\\q{ab}--\\q{ab}]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Negated character class may contain strings at position 0\n    [^\\q{ab}--\\q{ab}]\n    ^",
+    "input": "[^\\q{ab}--\\q{ab}]"
+  },
+  "[^\\p{RGI_Emoji}]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Negated character class may contain strings at position 0\n    [^\\p{RGI_Emoji}]\n    ^",
+    "input": "[^\\p{RGI_Emoji}]"
+  },
+  "[^\\p{Basic_Emoji}]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Negated character class may contain strings at position 0\n    [^\\p{Basic_Emoji}]\n    ^",
+    "input": "[^\\p{Basic_Emoji}]"
+  },
+  "[^\\q{ab}&&\\p{RGI_Emoji}]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Negated character class may contain strings at position 0\n    [^\\q{ab}&&\\p{RGI_Emoji}]\n    ^",
+    "input": "[^\\q{ab}&&\\p{RGI_Emoji}]"
+  },
+  "[^\\q{a}]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "classStrings",
+        "strings": [
+          {
+            "type": "classString",
+            "characters": [
+              {
+                "type": "value",
+                "kind": "symbol",
+                "codePoint": 97,
+                "range": [
+                  5,
+                  6
+                ],
+                "raw": "a"
+              }
+            ],
+            "range": [
+              5,
+              6
+            ],
+            "raw": "a"
+          }
+        ],
+        "range": [
+          2,
+          7
+        ],
+        "raw": "\\q{a}"
+      }
+    ],
+    "negative": true,
+    "range": [
+      0,
+      8
+    ],
+    "raw": "[^\\q{a}]"
+  },
+  "[^\\q{a|b}]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "classStrings",
+        "strings": [
+          {
+            "type": "classString",
+            "characters": [
+              {
+                "type": "value",
+                "kind": "symbol",
+                "codePoint": 97,
+                "range": [
+                  5,
+                  6
+                ],
+                "raw": "a"
+              }
+            ],
+            "range": [
+              5,
+              6
+            ],
+            "raw": "a"
+          },
+          {
+            "type": "classString",
+            "characters": [
+              {
+                "type": "value",
+                "kind": "symbol",
+                "codePoint": 98,
+                "range": [
+                  7,
+                  8
+                ],
+                "raw": "b"
+              }
+            ],
+            "range": [
+              7,
+              8
+            ],
+            "raw": "b"
+          }
+        ],
+        "range": [
+          2,
+          9
+        ],
+        "raw": "\\q{a|b}"
+      }
+    ],
+    "negative": true,
+    "range": [
+      0,
+      10
+    ],
+    "raw": "[^\\q{a|b}]"
+  },
+  "[^\\q{\\u{1F600}}]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "classStrings",
+        "strings": [
+          {
+            "type": "classString",
+            "characters": [
+              {
+                "type": "value",
+                "kind": "unicodeCodePointEscape",
+                "codePoint": 128512,
+                "range": [
+                  5,
+                  14
+                ],
+                "raw": "\\u{1F600}"
+              }
+            ],
+            "range": [
+              5,
+              14
+            ],
+            "raw": "\\u{1F600}"
+          }
+        ],
+        "range": [
+          2,
+          15
+        ],
+        "raw": "\\q{\\u{1F600}}"
+      }
+    ],
+    "negative": true,
+    "range": [
+      0,
+      16
+    ],
+    "raw": "[^\\q{\\u{1F600}}]"
+  },
+  "[^\\q{ab}&&a]": {
+    "type": "characterClass",
+    "kind": "intersection",
+    "body": [
+      {
+        "type": "classStrings",
+        "strings": [
+          {
+            "type": "classString",
+            "characters": [
+              {
+                "type": "value",
+                "kind": "symbol",
+                "codePoint": 97,
+                "range": [
+                  5,
+                  6
+                ],
+                "raw": "a"
+              },
+              {
+                "type": "value",
+                "kind": "symbol",
+                "codePoint": 98,
+                "range": [
+                  6,
+                  7
+                ],
+                "raw": "b"
+              }
+            ],
+            "range": [
+              5,
+              7
+            ],
+            "raw": "ab"
+          }
+        ],
+        "range": [
+          2,
+          8
+        ],
+        "raw": "\\q{ab}"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 97,
+        "range": [
+          10,
+          11
+        ],
+        "raw": "a"
+      }
+    ],
+    "negative": true,
+    "range": [
+      0,
+      12
+    ],
+    "raw": "[^\\q{ab}&&a]"
+  },
+  "[^a--\\q{ab}]": {
+    "type": "characterClass",
+    "kind": "subtraction",
+    "body": [
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 97,
+        "range": [
+          2,
+          3
+        ],
+        "raw": "a"
+      },
+      {
+        "type": "classStrings",
+        "strings": [
+          {
+            "type": "classString",
+            "characters": [
+              {
+                "type": "value",
+                "kind": "symbol",
+                "codePoint": 97,
+                "range": [
+                  8,
+                  9
+                ],
+                "raw": "a"
+              },
+              {
+                "type": "value",
+                "kind": "symbol",
+                "codePoint": 98,
+                "range": [
+                  9,
+                  10
+                ],
+                "raw": "b"
+              }
+            ],
+            "range": [
+              8,
+              10
+            ],
+            "raw": "ab"
+          }
+        ],
+        "range": [
+          5,
+          11
+        ],
+        "raw": "\\q{ab}"
+      }
+    ],
+    "negative": true,
+    "range": [
+      0,
+      12
+    ],
+    "raw": "[^a--\\q{ab}]"
+  },
+  "[^\\q{ab}&&\\q{ab}&&a]": {
+    "type": "characterClass",
+    "kind": "intersection",
+    "body": [
+      {
+        "type": "classStrings",
+        "strings": [
+          {
+            "type": "classString",
+            "characters": [
+              {
+                "type": "value",
+                "kind": "symbol",
+                "codePoint": 97,
+                "range": [
+                  5,
+                  6
+                ],
+                "raw": "a"
+              },
+              {
+                "type": "value",
+                "kind": "symbol",
+                "codePoint": 98,
+                "range": [
+                  6,
+                  7
+                ],
+                "raw": "b"
+              }
+            ],
+            "range": [
+              5,
+              7
+            ],
+            "raw": "ab"
+          }
+        ],
+        "range": [
+          2,
+          8
+        ],
+        "raw": "\\q{ab}"
+      },
+      {
+        "type": "classStrings",
+        "strings": [
+          {
+            "type": "classString",
+            "characters": [
+              {
+                "type": "value",
+                "kind": "symbol",
+                "codePoint": 97,
+                "range": [
+                  13,
+                  14
+                ],
+                "raw": "a"
+              },
+              {
+                "type": "value",
+                "kind": "symbol",
+                "codePoint": 98,
+                "range": [
+                  14,
+                  15
+                ],
+                "raw": "b"
+              }
+            ],
+            "range": [
+              13,
+              15
+            ],
+            "raw": "ab"
+          }
+        ],
+        "range": [
+          10,
+          16
+        ],
+        "raw": "\\q{ab}"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 97,
+        "range": [
+          18,
+          19
+        ],
+        "raw": "a"
+      }
+    ],
+    "negative": true,
+    "range": [
+      0,
+      20
+    ],
+    "raw": "[^\\q{ab}&&\\q{ab}&&a]"
+  },
+  "[^[\\q{ab}&&a]]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "characterClass",
+        "kind": "intersection",
+        "body": [
+          {
+            "type": "classStrings",
+            "strings": [
+              {
+                "type": "classString",
+                "characters": [
+                  {
+                    "type": "value",
+                    "kind": "symbol",
+                    "codePoint": 97,
+                    "range": [
+                      6,
+                      7
+                    ],
+                    "raw": "a"
+                  },
+                  {
+                    "type": "value",
+                    "kind": "symbol",
+                    "codePoint": 98,
+                    "range": [
+                      7,
+                      8
+                    ],
+                    "raw": "b"
+                  }
+                ],
+                "range": [
+                  6,
+                  8
+                ],
+                "raw": "ab"
+              }
+            ],
+            "range": [
+              3,
+              9
+            ],
+            "raw": "\\q{ab}"
+          },
+          {
+            "type": "value",
+            "kind": "symbol",
+            "codePoint": 97,
+            "range": [
+              11,
+              12
+            ],
+            "raw": "a"
+          }
+        ],
+        "negative": false,
+        "range": [
+          2,
+          13
+        ],
+        "raw": "[\\q{ab}&&a]"
+      }
+    ],
+    "negative": true,
+    "range": [
+      0,
+      14
+    ],
+    "raw": "[^[\\q{ab}&&a]]"
+  },
+  "[^\\p{L}]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "unicodePropertyEscape",
+        "negative": false,
+        "value": "L",
+        "range": [
+          2,
+          7
+        ],
+        "raw": "\\p{L}"
+      }
+    ],
+    "negative": true,
+    "range": [
+      0,
+      8
+    ],
+    "raw": "[^\\p{L}]"
+  },
+  "[^[^a]]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "characterClass",
+        "kind": "union",
+        "body": [
+          {
+            "type": "value",
+            "kind": "symbol",
+            "codePoint": 97,
+            "range": [
+              4,
+              5
+            ],
+            "raw": "a"
+          }
+        ],
+        "negative": true,
+        "range": [
+          2,
+          6
+        ],
+        "raw": "[^a]"
+      }
+    ],
+    "negative": true,
+    "range": [
+      0,
+      7
+    ],
+    "raw": "[^[^a]]"
+  },
+  "[\\q{ab}]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "classStrings",
+        "strings": [
+          {
+            "type": "classString",
+            "characters": [
+              {
+                "type": "value",
+                "kind": "symbol",
+                "codePoint": 97,
+                "range": [
+                  4,
+                  5
+                ],
+                "raw": "a"
+              },
+              {
+                "type": "value",
+                "kind": "symbol",
+                "codePoint": 98,
+                "range": [
+                  5,
+                  6
+                ],
+                "raw": "b"
+              }
+            ],
+            "range": [
+              4,
+              6
+            ],
+            "raw": "ab"
+          }
+        ],
+        "range": [
+          1,
+          7
+        ],
+        "raw": "\\q{ab}"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      8
+    ],
+    "raw": "[\\q{ab}]"
+  },
+  "[[^a]\\q{ab}]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "characterClass",
+        "kind": "union",
+        "body": [
+          {
+            "type": "value",
+            "kind": "symbol",
+            "codePoint": 97,
+            "range": [
+              3,
+              4
+            ],
+            "raw": "a"
+          }
+        ],
+        "negative": true,
+        "range": [
+          1,
+          5
+        ],
+        "raw": "[^a]"
+      },
+      {
+        "type": "classStrings",
+        "strings": [
+          {
+            "type": "classString",
+            "characters": [
+              {
+                "type": "value",
+                "kind": "symbol",
+                "codePoint": 97,
+                "range": [
+                  8,
+                  9
+                ],
+                "raw": "a"
+              },
+              {
+                "type": "value",
+                "kind": "symbol",
+                "codePoint": 98,
+                "range": [
+                  9,
+                  10
+                ],
+                "raw": "b"
+              }
+            ],
+            "range": [
+              8,
+              10
+            ],
+            "raw": "ab"
+          }
+        ],
+        "range": [
+          5,
+          11
+        ],
+        "raw": "\\q{ab}"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      12
+    ],
+    "raw": "[[^a]\\q{ab}]"
   }
 ,
   "[\\B]": {

@@ -1461,6 +1461,13 @@
     if (match("[^")) {
       res = parseClassContents();
       skip(']');
+      // It is a Syntax Error if MayContainStrings of the ClassContents is
+      // true, as a negated class cannot be complemented sensibly.
+      //
+      // SEE: https://tc39.es/ecma262/#sec-patterns-static-semantics-early-errors
+      if (hasUnicodeSetFlag && mayContainStrings(res)) {
+        bail('Negated character class may contain strings', '', from, pos);
+      }
       return createCharacterClass(res, true, from, pos);
     } else if (matchOne('[')) {
       res = parseClassContents();
@@ -1469,6 +1476,59 @@
     }
 
     return null;
+  }
+
+  function mayContainStrings(contents) {
+    // MayContainStrings of ClassContents, i.e. of a ClassUnion,
+    // ClassIntersection or ClassSubtraction.
+    //
+    // SEE: https://tc39.es/ecma262/#sec-static-semantics-maycontainstrings
+    switch (contents.kind) {
+      case 'intersection':
+        // The intersection may contain strings only if all operands may.
+        return contents.body.every(operandMayContainStrings);
+      case 'subtraction':
+        // The subtraction may contain strings only if the first operand may.
+        return operandMayContainStrings(contents.body[0]);
+      default:
+        // The union may contain strings if any operand may.
+        return contents.body.some(operandMayContainStrings);
+    }
+  }
+
+  function operandMayContainStrings(node) {
+    switch (node.type) {
+      case 'classStrings':
+        // ClassStringDisjunction: true if any ClassString is not exactly one
+        // character, which includes the empty string.
+        return node.strings.some(function (string) {
+          return string.characters.length !== 1;
+        });
+      case 'characterClass':
+        // NestedClass :: [^ ClassContents ] is always false.
+        return !node.negative && mayContainStrings(node);
+      case 'unicodePropertyEscape':
+        return !node.negative && isBinaryPropertyOfStrings(node.value);
+      default:
+        // ClassSetCharacter, ClassSetRange, CharacterClassEscape :: d D s S w W
+        return false;
+    }
+  }
+
+  function isBinaryPropertyOfStrings(value) {
+    // SEE: https://tc39.es/ecma262/#table-binary-unicode-properties-of-strings
+    switch (value) {
+      case 'Basic_Emoji':
+      case 'Emoji_Keycap_Sequence':
+      case 'RGI_Emoji_Modifier_Sequence':
+      case 'RGI_Emoji_Flag_Sequence':
+      case 'RGI_Emoji_Tag_Sequence':
+      case 'RGI_Emoji_ZWJ_Sequence':
+      case 'RGI_Emoji':
+        return true;
+      default:
+        return false;
+    }
   }
 
   function parseClassContents() {
@@ -1646,11 +1706,14 @@
     var operand = parseClassSetOperand(/* allowRanges*/ true);
     body.push(operand);
 
+    // A single `&` or `-` is not an operator: `&` is an ordinary
+    // ClassSetCharacter and a lone `-` is a syntax error, which the next
+    // parseClassSetOperand() call reports.
     if (operand.type === 'characterClassRange') {
       kind = 'union';
-    } else if (currentOne('&')) {
+    } else if (currentOne('&') && next('&')) {
       kind = 'intersection';
-    } else if (currentOne('-')) {
+    } else if (currentOne('-') && next('-')) {
       kind = 'subtraction';
     } else {
       kind = 'union';
@@ -1713,6 +1776,14 @@
       if (match('q{')) {
         return parseClassStringDisjunction();
       } else if (res = parseClassEscape()) {
+        if (res.type === 'characterClassEscape' || res.type === 'unicodePropertyEscape') {
+          // NestedClass ::
+          //      \ CharacterClassEscape[+UnicodeMode]
+          //
+          // A NestedClass is not a ClassSetCharacter, so it cannot start a
+          // ClassSetRange, e.g. `[\d-a]` is a SyntaxError.
+          return res;
+        }
         start = res;
       } else if (res = parseClassSetCharacterEscapedHelper()) {
         start = res;
