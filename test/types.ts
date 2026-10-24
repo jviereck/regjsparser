@@ -1,6 +1,7 @@
 import {
   Anchor,
   AstNodeType,
+  Features,
   Identifier,
   ModifierFlags,
   parse,
@@ -160,5 +161,15 @@ let nodeWithMaybeBufferBoundaries = parse("", "u", {
 });
 
 if (nodeWithMaybeBufferBoundaries.type === "anchor") {
+  // bufferBoundaries = boolean
   nodeWithMaybeBufferBoundaries.kind === "start-buffer";
+  assert<typeof nodeWithMaybeBufferBoundaries.kind>("start-buffer");
+  assert<typeof nodeWithMaybeBufferBoundaries.kind>("end-buffer");
+  assert<typeof nodeWithMaybeBufferBoundaries.kind>(
+    "end-buffer-optional-newline"
+  );
 }
+
+// bufferBoundaries = boolean | undefined
+assert<Anchor<Features>["kind"]>("end-buffer");
+assert<Anchor<{ bufferBoundaries?: boolean }>["kind"]>("end-buffer");
