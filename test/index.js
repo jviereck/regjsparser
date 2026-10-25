@@ -1,6 +1,7 @@
 var jsesc = require('jsesc');
 
 var parse = require('../parser').parse;
+var suites = require('./suites');
 
 var stringify = function(obj) {
   return jsesc(obj, {
@@ -39,46 +40,9 @@ var runTests = function(data_path, flags, features) {
   });
 };
 
-runTests('./test-data.json', '');
-runTests('./test-data-lookbehind.json', '', {
-  lookbehind: true
+suites.forEach(function(suite) {
+  runTests(suite.file, suite.flags, suite.features);
 });
-runTests('./test-data-unicode.json', 'u');
-runTests('./test-data-unicode-properties.json', 'u', {
-  unicodePropertyEscape: true
-});
-runTests('./test-data-nonstandard.json', '');
-runTests('./test-data-named-groups.json', '', {
-  namedGroups: true
-});
-runTests('./test-data-named-groups-unicode.json', 'u', {
-  namedGroups: true
-});
-runTests('./test-data-named-groups-unicode-properties.json', 'u', {
-  namedGroups: true,
-  unicodePropertyEscape: true
-});
-runTests('./test-data-unicode-set.json', 'v', {
-  unicodeSet: true,
-  unicodePropertyEscape: true
-});
-runTests('./test-data-named-groups-unicode-set.json', 'v', {
-  namedGroups: true,
-  unicodeSet: true
-});
-runTests('./test-data-modifiers-group.json', '', {
-  modifiers: true,
-  namedGroups: true,
-});
-runTests('./test-data-named-groups.json', '', {
-  modifiers: true,
-  namedGroups: true,
-});
-runTests('./test-data-lookbehind-modifiers-group.json', '', {
-  lookbehind: true,
-  modifiers: true,
-});
-
 
 (function testUVError() {
   var message = 'It should throw an error when using both the "u" and "v" flags.';
