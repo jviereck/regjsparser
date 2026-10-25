@@ -1,0 +1,58 @@
+{
+  "v8": "14.6.202.34-node.34",
+  "entries": [
+    {
+      "pattern": "x{9999999999999999999}",
+      "flags": "",
+      "regjsparser": "SyntaxError",
+      "v8": "ok",
+      "reason": "Quantifier bounds above Number.MAX_SAFE_INTEGER are rejected on purpose."
+    },
+    {
+      "pattern": "x{0,9999999999999999999}",
+      "flags": "",
+      "regjsparser": "SyntaxError",
+      "v8": "ok",
+      "reason": "Quantifier bounds above Number.MAX_SAFE_INTEGER are rejected on purpose."
+    },
+    {
+      "pattern": "x{9999999999999999999,9999999999999999999}",
+      "flags": "",
+      "regjsparser": "SyntaxError",
+      "v8": "ok",
+      "reason": "Quantifier bounds above Number.MAX_SAFE_INTEGER are rejected on purpose."
+    },
+    {
+      "pattern": "(?<\\u{ffffff})",
+      "flags": "u",
+      "features": {
+        "namedGroups": true
+      },
+      "regjsparser": "RangeError",
+      "v8": "SyntaxError",
+      "reason": "Bug: an escape above U+10FFFF in a group name reaches fromCodePoint() unchecked."
+    },
+    {
+      "pattern": "[\\p{White_Space}--\\p{Line_Break=Glue}]",
+      "flags": "v",
+      "features": {
+        "unicodeSet": true,
+        "unicodePropertyEscape": true
+      },
+      "regjsparser": "ok",
+      "v8": "SyntaxError",
+      "reason": "Unicode property names and values are not validated; regjsparser leaves that to regexpu-core."
+    },
+    {
+      "pattern": "[\\P{NFC_Quick_Check=No}--\\p{Script=Common}--\\p{Script=Inherited}--\\p{Script=Unknown}]",
+      "flags": "v",
+      "features": {
+        "unicodeSet": true,
+        "unicodePropertyEscape": true
+      },
+      "regjsparser": "ok",
+      "v8": "SyntaxError",
+      "reason": "Unicode property names and values are not validated; regjsparser leaves that to regexpu-core."
+    }
+  ]
+}
