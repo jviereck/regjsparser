@@ -12,6 +12,12 @@ var parse = require('../parser').parse;
 var suites = require('./suites');
 var allowlist = require('./v8-reference-allowlist.json');
 
+// Parser features that V8 does not support yet. Suites that enable any of them
+// are skipped.
+var unsupportedFeatures = [
+  'bufferBoundaries'
+];
+
 // Returns 'ok', or the name of the error thrown, e.g. 'SyntaxError'.
 function outcome(callback) {
   try {
@@ -44,6 +50,10 @@ var allowedCount = 0;
 var count = 0;
 
 suites.forEach(function(suite) {
+  var features = suite.features || {};
+  if (unsupportedFeatures.some(function(name) { return features[name]; })) {
+    return;
+  }
   var data = require(suite.file);
   Object.keys(data).forEach(function(pattern) {
     var flags = suite.flags;

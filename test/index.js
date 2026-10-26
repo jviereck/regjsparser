@@ -53,13 +53,6 @@ var runTests = function(data_path, flags, features) {
 suites.forEach(function(suite) {
   runTests(suite.file, suite.flags, suite.features);
 });
-// Not in suites.js: its keys are regex literals (flags is null), and V8 does
-// not support buffer boundaries, so test/v8-reference.js does not check it.
-runTests('./test-data-buffer-boundaries.json', null, {
-  unicodeSet: true,
-  bufferBoundaries: true,
-  modifiers: true,
-});
 
 (function testUVError() {
   var message = 'It should throw an error when using both the "u" and "v" flags.';
