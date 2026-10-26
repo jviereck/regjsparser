@@ -18,6 +18,7 @@
     "test": "run-p test:* lint",
     "test:src": "node test/index.js",
     "test:types": "tsc test/types.ts --noEmit",
+    "test-v8-reference": "node test/v8-reference.js",
     "bench:baseline": "node ./tools/bench/index.mjs baseline",
     "bench:current": "node ./tools/bench/index.mjs current",
     "bench": "run-s bench:*"
