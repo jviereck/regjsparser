@@ -1,0 +1,2507 @@
+{
+  "/\\A/": {
+    "type": "value",
+    "kind": "identifier",
+    "codePoint": 65,
+    "range": [
+      0,
+      2
+    ],
+    "raw": "\\A"
+  },
+  "/\\A/u": {
+    "type": "anchor",
+    "kind": "start-buffer",
+    "range": [
+      0,
+      2
+    ],
+    "raw": "\\A"
+  },
+  "/\\A/v": {
+    "type": "anchor",
+    "kind": "start-buffer",
+    "range": [
+      0,
+      2
+    ],
+    "raw": "\\A"
+  },
+  "/\\z/": {
+    "type": "value",
+    "kind": "identifier",
+    "codePoint": 122,
+    "range": [
+      0,
+      2
+    ],
+    "raw": "\\z"
+  },
+  "/\\z/u": {
+    "type": "anchor",
+    "kind": "end-buffer",
+    "range": [
+      0,
+      2
+    ],
+    "raw": "\\z"
+  },
+  "/\\z/v": {
+    "type": "anchor",
+    "kind": "end-buffer",
+    "range": [
+      0,
+      2
+    ],
+    "raw": "\\z"
+  },
+  "/\\Z/": {
+    "type": "value",
+    "kind": "identifier",
+    "codePoint": 90,
+    "range": [
+      0,
+      2
+    ],
+    "raw": "\\Z"
+  },
+  "/\\Z/u": {
+    "type": "anchor",
+    "kind": "end-buffer-optional-newline",
+    "range": [
+      0,
+      2
+    ],
+    "raw": "\\Z"
+  },
+  "/\\Z/v": {
+    "type": "anchor",
+    "kind": "end-buffer-optional-newline",
+    "range": [
+      0,
+      2
+    ],
+    "raw": "\\Z"
+  },
+  "/\\A\\z/": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "value",
+        "kind": "identifier",
+        "codePoint": 65,
+        "range": [
+          0,
+          2
+        ],
+        "raw": "\\A"
+      },
+      {
+        "type": "value",
+        "kind": "identifier",
+        "codePoint": 122,
+        "range": [
+          2,
+          4
+        ],
+        "raw": "\\z"
+      }
+    ],
+    "range": [
+      0,
+      4
+    ],
+    "raw": "\\A\\z"
+  },
+  "/\\A\\z/u": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "anchor",
+        "kind": "start-buffer",
+        "range": [
+          0,
+          2
+        ],
+        "raw": "\\A"
+      },
+      {
+        "type": "anchor",
+        "kind": "end-buffer",
+        "range": [
+          2,
+          4
+        ],
+        "raw": "\\z"
+      }
+    ],
+    "range": [
+      0,
+      4
+    ],
+    "raw": "\\A\\z"
+  },
+  "/\\A\\z/v": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "anchor",
+        "kind": "start-buffer",
+        "range": [
+          0,
+          2
+        ],
+        "raw": "\\A"
+      },
+      {
+        "type": "anchor",
+        "kind": "end-buffer",
+        "range": [
+          2,
+          4
+        ],
+        "raw": "\\z"
+      }
+    ],
+    "range": [
+      0,
+      4
+    ],
+    "raw": "\\A\\z"
+  },
+  "/\\A\\Z/": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "value",
+        "kind": "identifier",
+        "codePoint": 65,
+        "range": [
+          0,
+          2
+        ],
+        "raw": "\\A"
+      },
+      {
+        "type": "value",
+        "kind": "identifier",
+        "codePoint": 90,
+        "range": [
+          2,
+          4
+        ],
+        "raw": "\\Z"
+      }
+    ],
+    "range": [
+      0,
+      4
+    ],
+    "raw": "\\A\\Z"
+  },
+  "/\\A\\Z/u": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "anchor",
+        "kind": "start-buffer",
+        "range": [
+          0,
+          2
+        ],
+        "raw": "\\A"
+      },
+      {
+        "type": "anchor",
+        "kind": "end-buffer-optional-newline",
+        "range": [
+          2,
+          4
+        ],
+        "raw": "\\Z"
+      }
+    ],
+    "range": [
+      0,
+      4
+    ],
+    "raw": "\\A\\Z"
+  },
+  "/\\A\\Z/v": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "anchor",
+        "kind": "start-buffer",
+        "range": [
+          0,
+          2
+        ],
+        "raw": "\\A"
+      },
+      {
+        "type": "anchor",
+        "kind": "end-buffer-optional-newline",
+        "range": [
+          2,
+          4
+        ],
+        "raw": "\\Z"
+      }
+    ],
+    "range": [
+      0,
+      4
+    ],
+    "raw": "\\A\\Z"
+  },
+  "/\\A\\Z\\z/": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "value",
+        "kind": "identifier",
+        "codePoint": 65,
+        "range": [
+          0,
+          2
+        ],
+        "raw": "\\A"
+      },
+      {
+        "type": "value",
+        "kind": "identifier",
+        "codePoint": 90,
+        "range": [
+          2,
+          4
+        ],
+        "raw": "\\Z"
+      },
+      {
+        "type": "value",
+        "kind": "identifier",
+        "codePoint": 122,
+        "range": [
+          4,
+          6
+        ],
+        "raw": "\\z"
+      }
+    ],
+    "range": [
+      0,
+      6
+    ],
+    "raw": "\\A\\Z\\z"
+  },
+  "/\\A\\Z\\z/u": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "anchor",
+        "kind": "start-buffer",
+        "range": [
+          0,
+          2
+        ],
+        "raw": "\\A"
+      },
+      {
+        "type": "anchor",
+        "kind": "end-buffer-optional-newline",
+        "range": [
+          2,
+          4
+        ],
+        "raw": "\\Z"
+      },
+      {
+        "type": "anchor",
+        "kind": "end-buffer",
+        "range": [
+          4,
+          6
+        ],
+        "raw": "\\z"
+      }
+    ],
+    "range": [
+      0,
+      6
+    ],
+    "raw": "\\A\\Z\\z"
+  },
+  "/\\A\\Z\\z/v": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "anchor",
+        "kind": "start-buffer",
+        "range": [
+          0,
+          2
+        ],
+        "raw": "\\A"
+      },
+      {
+        "type": "anchor",
+        "kind": "end-buffer-optional-newline",
+        "range": [
+          2,
+          4
+        ],
+        "raw": "\\Z"
+      },
+      {
+        "type": "anchor",
+        "kind": "end-buffer",
+        "range": [
+          4,
+          6
+        ],
+        "raw": "\\z"
+      }
+    ],
+    "range": [
+      0,
+      6
+    ],
+    "raw": "\\A\\Z\\z"
+  },
+  "/\\Afoo\\z/": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "value",
+        "kind": "identifier",
+        "codePoint": 65,
+        "range": [
+          0,
+          2
+        ],
+        "raw": "\\A"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 102,
+        "range": [
+          2,
+          3
+        ],
+        "raw": "f"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 111,
+        "range": [
+          3,
+          4
+        ],
+        "raw": "o"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 111,
+        "range": [
+          4,
+          5
+        ],
+        "raw": "o"
+      },
+      {
+        "type": "value",
+        "kind": "identifier",
+        "codePoint": 122,
+        "range": [
+          5,
+          7
+        ],
+        "raw": "\\z"
+      }
+    ],
+    "range": [
+      0,
+      7
+    ],
+    "raw": "\\Afoo\\z"
+  },
+  "/\\Afoo\\z/u": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "anchor",
+        "kind": "start-buffer",
+        "range": [
+          0,
+          2
+        ],
+        "raw": "\\A"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 102,
+        "range": [
+          2,
+          3
+        ],
+        "raw": "f"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 111,
+        "range": [
+          3,
+          4
+        ],
+        "raw": "o"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 111,
+        "range": [
+          4,
+          5
+        ],
+        "raw": "o"
+      },
+      {
+        "type": "anchor",
+        "kind": "end-buffer",
+        "range": [
+          5,
+          7
+        ],
+        "raw": "\\z"
+      }
+    ],
+    "range": [
+      0,
+      7
+    ],
+    "raw": "\\Afoo\\z"
+  },
+  "/\\Afoo\\z/v": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "anchor",
+        "kind": "start-buffer",
+        "range": [
+          0,
+          2
+        ],
+        "raw": "\\A"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 102,
+        "range": [
+          2,
+          3
+        ],
+        "raw": "f"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 111,
+        "range": [
+          3,
+          4
+        ],
+        "raw": "o"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 111,
+        "range": [
+          4,
+          5
+        ],
+        "raw": "o"
+      },
+      {
+        "type": "anchor",
+        "kind": "end-buffer",
+        "range": [
+          5,
+          7
+        ],
+        "raw": "\\z"
+      }
+    ],
+    "range": [
+      0,
+      7
+    ],
+    "raw": "\\Afoo\\z"
+  },
+  "/\\Afoo\\Z/": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "value",
+        "kind": "identifier",
+        "codePoint": 65,
+        "range": [
+          0,
+          2
+        ],
+        "raw": "\\A"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 102,
+        "range": [
+          2,
+          3
+        ],
+        "raw": "f"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 111,
+        "range": [
+          3,
+          4
+        ],
+        "raw": "o"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 111,
+        "range": [
+          4,
+          5
+        ],
+        "raw": "o"
+      },
+      {
+        "type": "value",
+        "kind": "identifier",
+        "codePoint": 90,
+        "range": [
+          5,
+          7
+        ],
+        "raw": "\\Z"
+      }
+    ],
+    "range": [
+      0,
+      7
+    ],
+    "raw": "\\Afoo\\Z"
+  },
+  "/\\Afoo\\Z/u": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "anchor",
+        "kind": "start-buffer",
+        "range": [
+          0,
+          2
+        ],
+        "raw": "\\A"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 102,
+        "range": [
+          2,
+          3
+        ],
+        "raw": "f"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 111,
+        "range": [
+          3,
+          4
+        ],
+        "raw": "o"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 111,
+        "range": [
+          4,
+          5
+        ],
+        "raw": "o"
+      },
+      {
+        "type": "anchor",
+        "kind": "end-buffer-optional-newline",
+        "range": [
+          5,
+          7
+        ],
+        "raw": "\\Z"
+      }
+    ],
+    "range": [
+      0,
+      7
+    ],
+    "raw": "\\Afoo\\Z"
+  },
+  "/\\Afoo\\Z/v": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "anchor",
+        "kind": "start-buffer",
+        "range": [
+          0,
+          2
+        ],
+        "raw": "\\A"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 102,
+        "range": [
+          2,
+          3
+        ],
+        "raw": "f"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 111,
+        "range": [
+          3,
+          4
+        ],
+        "raw": "o"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 111,
+        "range": [
+          4,
+          5
+        ],
+        "raw": "o"
+      },
+      {
+        "type": "anchor",
+        "kind": "end-buffer-optional-newline",
+        "range": [
+          5,
+          7
+        ],
+        "raw": "\\Z"
+      }
+    ],
+    "range": [
+      0,
+      7
+    ],
+    "raw": "\\Afoo\\Z"
+  },
+  "/\\A|\\z/": {
+    "type": "disjunction",
+    "body": [
+      {
+        "type": "value",
+        "kind": "identifier",
+        "codePoint": 65,
+        "range": [
+          0,
+          2
+        ],
+        "raw": "\\A"
+      },
+      {
+        "type": "value",
+        "kind": "identifier",
+        "codePoint": 122,
+        "range": [
+          3,
+          5
+        ],
+        "raw": "\\z"
+      }
+    ],
+    "range": [
+      0,
+      5
+    ],
+    "raw": "\\A|\\z"
+  },
+  "/\\A|\\z/u": {
+    "type": "disjunction",
+    "body": [
+      {
+        "type": "anchor",
+        "kind": "start-buffer",
+        "range": [
+          0,
+          2
+        ],
+        "raw": "\\A"
+      },
+      {
+        "type": "anchor",
+        "kind": "end-buffer",
+        "range": [
+          3,
+          5
+        ],
+        "raw": "\\z"
+      }
+    ],
+    "range": [
+      0,
+      5
+    ],
+    "raw": "\\A|\\z"
+  },
+  "/\\A|\\z/v": {
+    "type": "disjunction",
+    "body": [
+      {
+        "type": "anchor",
+        "kind": "start-buffer",
+        "range": [
+          0,
+          2
+        ],
+        "raw": "\\A"
+      },
+      {
+        "type": "anchor",
+        "kind": "end-buffer",
+        "range": [
+          3,
+          5
+        ],
+        "raw": "\\z"
+      }
+    ],
+    "range": [
+      0,
+      5
+    ],
+    "raw": "\\A|\\z"
+  },
+  "/(\\A)/": {
+    "type": "group",
+    "behavior": "normal",
+    "body": [
+      {
+        "type": "value",
+        "kind": "identifier",
+        "codePoint": 65,
+        "range": [
+          1,
+          3
+        ],
+        "raw": "\\A"
+      }
+    ],
+    "range": [
+      0,
+      4
+    ],
+    "raw": "(\\A)"
+  },
+  "/(\\A)/u": {
+    "type": "group",
+    "behavior": "normal",
+    "body": [
+      {
+        "type": "anchor",
+        "kind": "start-buffer",
+        "range": [
+          1,
+          3
+        ],
+        "raw": "\\A"
+      }
+    ],
+    "range": [
+      0,
+      4
+    ],
+    "raw": "(\\A)"
+  },
+  "/(\\A)/v": {
+    "type": "group",
+    "behavior": "normal",
+    "body": [
+      {
+        "type": "anchor",
+        "kind": "start-buffer",
+        "range": [
+          1,
+          3
+        ],
+        "raw": "\\A"
+      }
+    ],
+    "range": [
+      0,
+      4
+    ],
+    "raw": "(\\A)"
+  },
+  "/(?=\\A)/": {
+    "type": "group",
+    "behavior": "lookahead",
+    "body": [
+      {
+        "type": "value",
+        "kind": "identifier",
+        "codePoint": 65,
+        "range": [
+          3,
+          5
+        ],
+        "raw": "\\A"
+      }
+    ],
+    "range": [
+      0,
+      6
+    ],
+    "raw": "(?=\\A)"
+  },
+  "/(?=\\A)/u": {
+    "type": "group",
+    "behavior": "lookahead",
+    "body": [
+      {
+        "type": "anchor",
+        "kind": "start-buffer",
+        "range": [
+          3,
+          5
+        ],
+        "raw": "\\A"
+      }
+    ],
+    "range": [
+      0,
+      6
+    ],
+    "raw": "(?=\\A)"
+  },
+  "/(?=\\A)/v": {
+    "type": "group",
+    "behavior": "lookahead",
+    "body": [
+      {
+        "type": "anchor",
+        "kind": "start-buffer",
+        "range": [
+          3,
+          5
+        ],
+        "raw": "\\A"
+      }
+    ],
+    "range": [
+      0,
+      6
+    ],
+    "raw": "(?=\\A)"
+  },
+  "/\\A*/": {
+    "type": "quantifier",
+    "min": 0,
+    "max": null,
+    "greedy": true,
+    "body": [
+      {
+        "type": "value",
+        "kind": "identifier",
+        "codePoint": 65,
+        "range": [
+          0,
+          2
+        ],
+        "raw": "\\A"
+      }
+    ],
+    "symbol": "*",
+    "range": [
+      0,
+      3
+    ],
+    "raw": "\\A*"
+  },
+  "/\\A*/u": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Expected atom at position 2\n    \\A*\n      ^",
+    "input": "\\A*"
+  },
+  "/\\A*/v": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Expected atom at position 2\n    \\A*\n      ^",
+    "input": "\\A*"
+  },
+  "/\\z+/": {
+    "type": "quantifier",
+    "min": 1,
+    "max": null,
+    "greedy": true,
+    "body": [
+      {
+        "type": "value",
+        "kind": "identifier",
+        "codePoint": 122,
+        "range": [
+          0,
+          2
+        ],
+        "raw": "\\z"
+      }
+    ],
+    "symbol": "+",
+    "range": [
+      0,
+      3
+    ],
+    "raw": "\\z+"
+  },
+  "/\\z+/u": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Expected atom at position 2\n    \\z+\n      ^",
+    "input": "\\z+"
+  },
+  "/\\z+/v": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Expected atom at position 2\n    \\z+\n      ^",
+    "input": "\\z+"
+  },
+  "/\\Z{2}/": {
+    "type": "quantifier",
+    "min": 2,
+    "max": 2,
+    "greedy": true,
+    "body": [
+      {
+        "type": "value",
+        "kind": "identifier",
+        "codePoint": 90,
+        "range": [
+          0,
+          2
+        ],
+        "raw": "\\Z"
+      }
+    ],
+    "symbol": null,
+    "range": [
+      0,
+      5
+    ],
+    "raw": "\\Z{2}"
+  },
+  "/\\Z{2}/u": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Expected atom at position 2\n    \\Z{2}\n      ^",
+    "input": "\\Z{2}"
+  },
+  "/\\Z{2}/v": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Expected atom at position 2\n    \\Z{2}\n      ^",
+    "input": "\\Z{2}"
+  },
+  "/[\\A]/": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "value",
+        "kind": "identifier",
+        "codePoint": 65,
+        "range": [
+          1,
+          3
+        ],
+        "raw": "\\A"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      4
+    ],
+    "raw": "[\\A]"
+  },
+  "/[\\A]/u": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "classEscape at position 2\n    [\\A]\n      ^",
+    "input": "[\\A]"
+  },
+  "/[\\A]/v": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid escape at position 1: \\A\n    [\\A]\n     ^",
+    "input": "[\\A]"
+  },
+  "/[\\z\\Z]/": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "value",
+        "kind": "identifier",
+        "codePoint": 122,
+        "range": [
+          1,
+          3
+        ],
+        "raw": "\\z"
+      },
+      {
+        "type": "value",
+        "kind": "identifier",
+        "codePoint": 90,
+        "range": [
+          3,
+          5
+        ],
+        "raw": "\\Z"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      6
+    ],
+    "raw": "[\\z\\Z]"
+  },
+  "/[\\z\\Z]/u": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "classEscape at position 2\n    [\\z\\Z]\n      ^",
+    "input": "[\\z\\Z]"
+  },
+  "/[\\z\\Z]/v": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid escape at position 1: \\z\n    [\\z\\Z]\n     ^",
+    "input": "[\\z\\Z]"
+  },
+  "/\\\\A/": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "value",
+        "kind": "identifier",
+        "codePoint": 92,
+        "range": [
+          0,
+          2
+        ],
+        "raw": "\\\\"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 65,
+        "range": [
+          2,
+          3
+        ],
+        "raw": "A"
+      }
+    ],
+    "range": [
+      0,
+      3
+    ],
+    "raw": "\\\\A"
+  },
+  "/\\\\A/u": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "value",
+        "kind": "identifier",
+        "codePoint": 92,
+        "range": [
+          0,
+          2
+        ],
+        "raw": "\\\\"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 65,
+        "range": [
+          2,
+          3
+        ],
+        "raw": "A"
+      }
+    ],
+    "range": [
+      0,
+      3
+    ],
+    "raw": "\\\\A"
+  },
+  "/\\\\A/v": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "value",
+        "kind": "identifier",
+        "codePoint": 92,
+        "range": [
+          0,
+          2
+        ],
+        "raw": "\\\\"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 65,
+        "range": [
+          2,
+          3
+        ],
+        "raw": "A"
+      }
+    ],
+    "range": [
+      0,
+      3
+    ],
+    "raw": "\\\\A"
+  },
+  "/a\\Zb/": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 97,
+        "range": [
+          0,
+          1
+        ],
+        "raw": "a"
+      },
+      {
+        "type": "value",
+        "kind": "identifier",
+        "codePoint": 90,
+        "range": [
+          1,
+          3
+        ],
+        "raw": "\\Z"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 98,
+        "range": [
+          3,
+          4
+        ],
+        "raw": "b"
+      }
+    ],
+    "range": [
+      0,
+      4
+    ],
+    "raw": "a\\Zb"
+  },
+  "/a\\Zb/u": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 97,
+        "range": [
+          0,
+          1
+        ],
+        "raw": "a"
+      },
+      {
+        "type": "anchor",
+        "kind": "end-buffer-optional-newline",
+        "range": [
+          1,
+          3
+        ],
+        "raw": "\\Z"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 98,
+        "range": [
+          3,
+          4
+        ],
+        "raw": "b"
+      }
+    ],
+    "range": [
+      0,
+      4
+    ],
+    "raw": "a\\Zb"
+  },
+  "/a\\Zb/v": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 97,
+        "range": [
+          0,
+          1
+        ],
+        "raw": "a"
+      },
+      {
+        "type": "anchor",
+        "kind": "end-buffer-optional-newline",
+        "range": [
+          1,
+          3
+        ],
+        "raw": "\\Z"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 98,
+        "range": [
+          3,
+          4
+        ],
+        "raw": "b"
+      }
+    ],
+    "range": [
+      0,
+      4
+    ],
+    "raw": "a\\Zb"
+  },
+  "/(?i:\\A)/": {
+    "type": "group",
+    "behavior": "ignore",
+    "body": [
+      {
+        "type": "value",
+        "kind": "identifier",
+        "codePoint": 65,
+        "range": [
+          4,
+          6
+        ],
+        "raw": "\\A"
+      }
+    ],
+    "range": [
+      0,
+      7
+    ],
+    "raw": "(?i:\\A)",
+    "modifierFlags": {
+      "enabling": "i",
+      "disabling": ""
+    }
+  },
+  "/(?i:\\A)/u": {
+    "type": "group",
+    "behavior": "ignore",
+    "body": [
+      {
+        "type": "anchor",
+        "kind": "start-buffer",
+        "range": [
+          4,
+          6
+        ],
+        "raw": "\\A"
+      }
+    ],
+    "range": [
+      0,
+      7
+    ],
+    "raw": "(?i:\\A)",
+    "modifierFlags": {
+      "enabling": "i",
+      "disabling": ""
+    }
+  },
+  "/(?i:\\A)/v": {
+    "type": "group",
+    "behavior": "ignore",
+    "body": [
+      {
+        "type": "anchor",
+        "kind": "start-buffer",
+        "range": [
+          4,
+          6
+        ],
+        "raw": "\\A"
+      }
+    ],
+    "range": [
+      0,
+      7
+    ],
+    "raw": "(?i:\\A)",
+    "modifierFlags": {
+      "enabling": "i",
+      "disabling": ""
+    }
+  },
+  "/(?m:\\z)/": {
+    "type": "group",
+    "behavior": "ignore",
+    "body": [
+      {
+        "type": "value",
+        "kind": "identifier",
+        "codePoint": 122,
+        "range": [
+          4,
+          6
+        ],
+        "raw": "\\z"
+      }
+    ],
+    "range": [
+      0,
+      7
+    ],
+    "raw": "(?m:\\z)",
+    "modifierFlags": {
+      "enabling": "m",
+      "disabling": ""
+    }
+  },
+  "/(?m:\\z)/u": {
+    "type": "group",
+    "behavior": "ignore",
+    "body": [
+      {
+        "type": "anchor",
+        "kind": "end-buffer",
+        "range": [
+          4,
+          6
+        ],
+        "raw": "\\z"
+      }
+    ],
+    "range": [
+      0,
+      7
+    ],
+    "raw": "(?m:\\z)",
+    "modifierFlags": {
+      "enabling": "m",
+      "disabling": ""
+    }
+  },
+  "/(?m:\\z)/v": {
+    "type": "group",
+    "behavior": "ignore",
+    "body": [
+      {
+        "type": "anchor",
+        "kind": "end-buffer",
+        "range": [
+          4,
+          6
+        ],
+        "raw": "\\z"
+      }
+    ],
+    "range": [
+      0,
+      7
+    ],
+    "raw": "(?m:\\z)",
+    "modifierFlags": {
+      "enabling": "m",
+      "disabling": ""
+    }
+  },
+  "/(?s:\\Z)/": {
+    "type": "group",
+    "behavior": "ignore",
+    "body": [
+      {
+        "type": "value",
+        "kind": "identifier",
+        "codePoint": 90,
+        "range": [
+          4,
+          6
+        ],
+        "raw": "\\Z"
+      }
+    ],
+    "range": [
+      0,
+      7
+    ],
+    "raw": "(?s:\\Z)",
+    "modifierFlags": {
+      "enabling": "s",
+      "disabling": ""
+    }
+  },
+  "/(?s:\\Z)/u": {
+    "type": "group",
+    "behavior": "ignore",
+    "body": [
+      {
+        "type": "anchor",
+        "kind": "end-buffer-optional-newline",
+        "range": [
+          4,
+          6
+        ],
+        "raw": "\\Z"
+      }
+    ],
+    "range": [
+      0,
+      7
+    ],
+    "raw": "(?s:\\Z)",
+    "modifierFlags": {
+      "enabling": "s",
+      "disabling": ""
+    }
+  },
+  "/(?s:\\Z)/v": {
+    "type": "group",
+    "behavior": "ignore",
+    "body": [
+      {
+        "type": "anchor",
+        "kind": "end-buffer-optional-newline",
+        "range": [
+          4,
+          6
+        ],
+        "raw": "\\Z"
+      }
+    ],
+    "range": [
+      0,
+      7
+    ],
+    "raw": "(?s:\\Z)",
+    "modifierFlags": {
+      "enabling": "s",
+      "disabling": ""
+    }
+  },
+  "/(?-i:\\A)/": {
+    "type": "group",
+    "behavior": "ignore",
+    "body": [
+      {
+        "type": "value",
+        "kind": "identifier",
+        "codePoint": 65,
+        "range": [
+          5,
+          7
+        ],
+        "raw": "\\A"
+      }
+    ],
+    "range": [
+      0,
+      8
+    ],
+    "raw": "(?-i:\\A)",
+    "modifierFlags": {
+      "enabling": "",
+      "disabling": "i"
+    }
+  },
+  "/(?-i:\\A)/u": {
+    "type": "group",
+    "behavior": "ignore",
+    "body": [
+      {
+        "type": "anchor",
+        "kind": "start-buffer",
+        "range": [
+          5,
+          7
+        ],
+        "raw": "\\A"
+      }
+    ],
+    "range": [
+      0,
+      8
+    ],
+    "raw": "(?-i:\\A)",
+    "modifierFlags": {
+      "enabling": "",
+      "disabling": "i"
+    }
+  },
+  "/(?-i:\\A)/v": {
+    "type": "group",
+    "behavior": "ignore",
+    "body": [
+      {
+        "type": "anchor",
+        "kind": "start-buffer",
+        "range": [
+          5,
+          7
+        ],
+        "raw": "\\A"
+      }
+    ],
+    "range": [
+      0,
+      8
+    ],
+    "raw": "(?-i:\\A)",
+    "modifierFlags": {
+      "enabling": "",
+      "disabling": "i"
+    }
+  },
+  "/(?-m:\\Z)/": {
+    "type": "group",
+    "behavior": "ignore",
+    "body": [
+      {
+        "type": "value",
+        "kind": "identifier",
+        "codePoint": 90,
+        "range": [
+          5,
+          7
+        ],
+        "raw": "\\Z"
+      }
+    ],
+    "range": [
+      0,
+      8
+    ],
+    "raw": "(?-m:\\Z)",
+    "modifierFlags": {
+      "enabling": "",
+      "disabling": "m"
+    }
+  },
+  "/(?-m:\\Z)/u": {
+    "type": "group",
+    "behavior": "ignore",
+    "body": [
+      {
+        "type": "anchor",
+        "kind": "end-buffer-optional-newline",
+        "range": [
+          5,
+          7
+        ],
+        "raw": "\\Z"
+      }
+    ],
+    "range": [
+      0,
+      8
+    ],
+    "raw": "(?-m:\\Z)",
+    "modifierFlags": {
+      "enabling": "",
+      "disabling": "m"
+    }
+  },
+  "/(?-m:\\Z)/v": {
+    "type": "group",
+    "behavior": "ignore",
+    "body": [
+      {
+        "type": "anchor",
+        "kind": "end-buffer-optional-newline",
+        "range": [
+          5,
+          7
+        ],
+        "raw": "\\Z"
+      }
+    ],
+    "range": [
+      0,
+      8
+    ],
+    "raw": "(?-m:\\Z)",
+    "modifierFlags": {
+      "enabling": "",
+      "disabling": "m"
+    }
+  },
+  "/(?m-s:\\Afoo\\z)/": {
+    "type": "group",
+    "behavior": "ignore",
+    "body": [
+      {
+        "type": "value",
+        "kind": "identifier",
+        "codePoint": 65,
+        "range": [
+          6,
+          8
+        ],
+        "raw": "\\A"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 102,
+        "range": [
+          8,
+          9
+        ],
+        "raw": "f"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 111,
+        "range": [
+          9,
+          10
+        ],
+        "raw": "o"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 111,
+        "range": [
+          10,
+          11
+        ],
+        "raw": "o"
+      },
+      {
+        "type": "value",
+        "kind": "identifier",
+        "codePoint": 122,
+        "range": [
+          11,
+          13
+        ],
+        "raw": "\\z"
+      }
+    ],
+    "range": [
+      0,
+      14
+    ],
+    "raw": "(?m-s:\\Afoo\\z)",
+    "modifierFlags": {
+      "enabling": "m",
+      "disabling": "s"
+    }
+  },
+  "/(?m-s:\\Afoo\\z)/u": {
+    "type": "group",
+    "behavior": "ignore",
+    "body": [
+      {
+        "type": "anchor",
+        "kind": "start-buffer",
+        "range": [
+          6,
+          8
+        ],
+        "raw": "\\A"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 102,
+        "range": [
+          8,
+          9
+        ],
+        "raw": "f"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 111,
+        "range": [
+          9,
+          10
+        ],
+        "raw": "o"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 111,
+        "range": [
+          10,
+          11
+        ],
+        "raw": "o"
+      },
+      {
+        "type": "anchor",
+        "kind": "end-buffer",
+        "range": [
+          11,
+          13
+        ],
+        "raw": "\\z"
+      }
+    ],
+    "range": [
+      0,
+      14
+    ],
+    "raw": "(?m-s:\\Afoo\\z)",
+    "modifierFlags": {
+      "enabling": "m",
+      "disabling": "s"
+    }
+  },
+  "/(?m-s:\\Afoo\\z)/v": {
+    "type": "group",
+    "behavior": "ignore",
+    "body": [
+      {
+        "type": "anchor",
+        "kind": "start-buffer",
+        "range": [
+          6,
+          8
+        ],
+        "raw": "\\A"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 102,
+        "range": [
+          8,
+          9
+        ],
+        "raw": "f"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 111,
+        "range": [
+          9,
+          10
+        ],
+        "raw": "o"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 111,
+        "range": [
+          10,
+          11
+        ],
+        "raw": "o"
+      },
+      {
+        "type": "anchor",
+        "kind": "end-buffer",
+        "range": [
+          11,
+          13
+        ],
+        "raw": "\\z"
+      }
+    ],
+    "range": [
+      0,
+      14
+    ],
+    "raw": "(?m-s:\\Afoo\\z)",
+    "modifierFlags": {
+      "enabling": "m",
+      "disabling": "s"
+    }
+  },
+  "/(?ims:a\\Zb)/": {
+    "type": "group",
+    "behavior": "ignore",
+    "body": [
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 97,
+        "range": [
+          6,
+          7
+        ],
+        "raw": "a"
+      },
+      {
+        "type": "value",
+        "kind": "identifier",
+        "codePoint": 90,
+        "range": [
+          7,
+          9
+        ],
+        "raw": "\\Z"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 98,
+        "range": [
+          9,
+          10
+        ],
+        "raw": "b"
+      }
+    ],
+    "range": [
+      0,
+      11
+    ],
+    "raw": "(?ims:a\\Zb)",
+    "modifierFlags": {
+      "enabling": "ims",
+      "disabling": ""
+    }
+  },
+  "/(?ims:a\\Zb)/u": {
+    "type": "group",
+    "behavior": "ignore",
+    "body": [
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 97,
+        "range": [
+          6,
+          7
+        ],
+        "raw": "a"
+      },
+      {
+        "type": "anchor",
+        "kind": "end-buffer-optional-newline",
+        "range": [
+          7,
+          9
+        ],
+        "raw": "\\Z"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 98,
+        "range": [
+          9,
+          10
+        ],
+        "raw": "b"
+      }
+    ],
+    "range": [
+      0,
+      11
+    ],
+    "raw": "(?ims:a\\Zb)",
+    "modifierFlags": {
+      "enabling": "ims",
+      "disabling": ""
+    }
+  },
+  "/(?ims:a\\Zb)/v": {
+    "type": "group",
+    "behavior": "ignore",
+    "body": [
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 97,
+        "range": [
+          6,
+          7
+        ],
+        "raw": "a"
+      },
+      {
+        "type": "anchor",
+        "kind": "end-buffer-optional-newline",
+        "range": [
+          7,
+          9
+        ],
+        "raw": "\\Z"
+      },
+      {
+        "type": "value",
+        "kind": "symbol",
+        "codePoint": 98,
+        "range": [
+          9,
+          10
+        ],
+        "raw": "b"
+      }
+    ],
+    "range": [
+      0,
+      11
+    ],
+    "raw": "(?ims:a\\Zb)",
+    "modifierFlags": {
+      "enabling": "ims",
+      "disabling": ""
+    }
+  },
+  "/(?i:\\A|\\z)/": {
+    "type": "group",
+    "behavior": "ignore",
+    "body": [
+      {
+        "type": "disjunction",
+        "body": [
+          {
+            "type": "value",
+            "kind": "identifier",
+            "codePoint": 65,
+            "range": [
+              4,
+              6
+            ],
+            "raw": "\\A"
+          },
+          {
+            "type": "value",
+            "kind": "identifier",
+            "codePoint": 122,
+            "range": [
+              7,
+              9
+            ],
+            "raw": "\\z"
+          }
+        ],
+        "range": [
+          4,
+          9
+        ],
+        "raw": "\\A|\\z"
+      }
+    ],
+    "range": [
+      0,
+      10
+    ],
+    "raw": "(?i:\\A|\\z)",
+    "modifierFlags": {
+      "enabling": "i",
+      "disabling": ""
+    }
+  },
+  "/(?i:\\A|\\z)/u": {
+    "type": "group",
+    "behavior": "ignore",
+    "body": [
+      {
+        "type": "disjunction",
+        "body": [
+          {
+            "type": "anchor",
+            "kind": "start-buffer",
+            "range": [
+              4,
+              6
+            ],
+            "raw": "\\A"
+          },
+          {
+            "type": "anchor",
+            "kind": "end-buffer",
+            "range": [
+              7,
+              9
+            ],
+            "raw": "\\z"
+          }
+        ],
+        "range": [
+          4,
+          9
+        ],
+        "raw": "\\A|\\z"
+      }
+    ],
+    "range": [
+      0,
+      10
+    ],
+    "raw": "(?i:\\A|\\z)",
+    "modifierFlags": {
+      "enabling": "i",
+      "disabling": ""
+    }
+  },
+  "/(?i:\\A|\\z)/v": {
+    "type": "group",
+    "behavior": "ignore",
+    "body": [
+      {
+        "type": "disjunction",
+        "body": [
+          {
+            "type": "anchor",
+            "kind": "start-buffer",
+            "range": [
+              4,
+              6
+            ],
+            "raw": "\\A"
+          },
+          {
+            "type": "anchor",
+            "kind": "end-buffer",
+            "range": [
+              7,
+              9
+            ],
+            "raw": "\\z"
+          }
+        ],
+        "range": [
+          4,
+          9
+        ],
+        "raw": "\\A|\\z"
+      }
+    ],
+    "range": [
+      0,
+      10
+    ],
+    "raw": "(?i:\\A|\\z)",
+    "modifierFlags": {
+      "enabling": "i",
+      "disabling": ""
+    }
+  },
+  "/(?m:\\Z)+/": {
+    "type": "quantifier",
+    "min": 1,
+    "max": null,
+    "greedy": true,
+    "body": [
+      {
+        "type": "group",
+        "behavior": "ignore",
+        "body": [
+          {
+            "type": "value",
+            "kind": "identifier",
+            "codePoint": 90,
+            "range": [
+              4,
+              6
+            ],
+            "raw": "\\Z"
+          }
+        ],
+        "range": [
+          0,
+          7
+        ],
+        "raw": "(?m:\\Z)",
+        "modifierFlags": {
+          "enabling": "m",
+          "disabling": ""
+        }
+      }
+    ],
+    "symbol": "+",
+    "range": [
+      0,
+      8
+    ],
+    "raw": "(?m:\\Z)+"
+  },
+  "/(?m:\\Z)+/u": {
+    "type": "quantifier",
+    "min": 1,
+    "max": null,
+    "greedy": true,
+    "body": [
+      {
+        "type": "group",
+        "behavior": "ignore",
+        "body": [
+          {
+            "type": "anchor",
+            "kind": "end-buffer-optional-newline",
+            "range": [
+              4,
+              6
+            ],
+            "raw": "\\Z"
+          }
+        ],
+        "range": [
+          0,
+          7
+        ],
+        "raw": "(?m:\\Z)",
+        "modifierFlags": {
+          "enabling": "m",
+          "disabling": ""
+        }
+      }
+    ],
+    "symbol": "+",
+    "range": [
+      0,
+      8
+    ],
+    "raw": "(?m:\\Z)+"
+  },
+  "/(?m:\\Z)+/v": {
+    "type": "quantifier",
+    "min": 1,
+    "max": null,
+    "greedy": true,
+    "body": [
+      {
+        "type": "group",
+        "behavior": "ignore",
+        "body": [
+          {
+            "type": "anchor",
+            "kind": "end-buffer-optional-newline",
+            "range": [
+              4,
+              6
+            ],
+            "raw": "\\Z"
+          }
+        ],
+        "range": [
+          0,
+          7
+        ],
+        "raw": "(?m:\\Z)",
+        "modifierFlags": {
+          "enabling": "m",
+          "disabling": ""
+        }
+      }
+    ],
+    "symbol": "+",
+    "range": [
+      0,
+      8
+    ],
+    "raw": "(?m:\\Z)+"
+  },
+  "/(?m:\\A*)/": {
+    "type": "group",
+    "behavior": "ignore",
+    "body": [
+      {
+        "type": "quantifier",
+        "min": 0,
+        "max": null,
+        "greedy": true,
+        "body": [
+          {
+            "type": "value",
+            "kind": "identifier",
+            "codePoint": 65,
+            "range": [
+              4,
+              6
+            ],
+            "raw": "\\A"
+          }
+        ],
+        "symbol": "*",
+        "range": [
+          4,
+          7
+        ],
+        "raw": "\\A*"
+      }
+    ],
+    "range": [
+      0,
+      8
+    ],
+    "raw": "(?m:\\A*)",
+    "modifierFlags": {
+      "enabling": "m",
+      "disabling": ""
+    }
+  },
+  "/(?m:\\A*)/u": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Expected atom at position 6\n    (?m:\\A*)\n          ^",
+    "input": "(?m:\\A*)"
+  },
+  "/(?m:\\A*)/v": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Expected atom at position 6\n    (?m:\\A*)\n          ^",
+    "input": "(?m:\\A*)"
+  },
+  "/(?i:[\\z])/": {
+    "type": "group",
+    "behavior": "ignore",
+    "body": [
+      {
+        "type": "characterClass",
+        "kind": "union",
+        "body": [
+          {
+            "type": "value",
+            "kind": "identifier",
+            "codePoint": 122,
+            "range": [
+              5,
+              7
+            ],
+            "raw": "\\z"
+          }
+        ],
+        "negative": false,
+        "range": [
+          4,
+          8
+        ],
+        "raw": "[\\z]"
+      }
+    ],
+    "range": [
+      0,
+      9
+    ],
+    "raw": "(?i:[\\z])",
+    "modifierFlags": {
+      "enabling": "i",
+      "disabling": ""
+    }
+  },
+  "/(?i:[\\z])/u": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "classEscape at position 6\n    (?i:[\\z])\n          ^",
+    "input": "(?i:[\\z])"
+  },
+  "/(?i:[\\z])/v": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid escape at position 5: \\z\n    (?i:[\\z])\n         ^",
+    "input": "(?i:[\\z])"
+  },
+  "/(?m:(?-m:\\A)\\z)/": {
+    "type": "group",
+    "behavior": "ignore",
+    "body": [
+      {
+        "type": "group",
+        "behavior": "ignore",
+        "body": [
+          {
+            "type": "value",
+            "kind": "identifier",
+            "codePoint": 65,
+            "range": [
+              9,
+              11
+            ],
+            "raw": "\\A"
+          }
+        ],
+        "range": [
+          4,
+          12
+        ],
+        "raw": "(?-m:\\A)",
+        "modifierFlags": {
+          "enabling": "",
+          "disabling": "m"
+        }
+      },
+      {
+        "type": "value",
+        "kind": "identifier",
+        "codePoint": 122,
+        "range": [
+          12,
+          14
+        ],
+        "raw": "\\z"
+      }
+    ],
+    "range": [
+      0,
+      15
+    ],
+    "raw": "(?m:(?-m:\\A)\\z)",
+    "modifierFlags": {
+      "enabling": "m",
+      "disabling": ""
+    }
+  },
+  "/(?m:(?-m:\\A)\\z)/u": {
+    "type": "group",
+    "behavior": "ignore",
+    "body": [
+      {
+        "type": "group",
+        "behavior": "ignore",
+        "body": [
+          {
+            "type": "anchor",
+            "kind": "start-buffer",
+            "range": [
+              9,
+              11
+            ],
+            "raw": "\\A"
+          }
+        ],
+        "range": [
+          4,
+          12
+        ],
+        "raw": "(?-m:\\A)",
+        "modifierFlags": {
+          "enabling": "",
+          "disabling": "m"
+        }
+      },
+      {
+        "type": "anchor",
+        "kind": "end-buffer",
+        "range": [
+          12,
+          14
+        ],
+        "raw": "\\z"
+      }
+    ],
+    "range": [
+      0,
+      15
+    ],
+    "raw": "(?m:(?-m:\\A)\\z)",
+    "modifierFlags": {
+      "enabling": "m",
+      "disabling": ""
+    }
+  },
+  "/(?m:(?-m:\\A)\\z)/v": {
+    "type": "group",
+    "behavior": "ignore",
+    "body": [
+      {
+        "type": "group",
+        "behavior": "ignore",
+        "body": [
+          {
+            "type": "anchor",
+            "kind": "start-buffer",
+            "range": [
+              9,
+              11
+            ],
+            "raw": "\\A"
+          }
+        ],
+        "range": [
+          4,
+          12
+        ],
+        "raw": "(?-m:\\A)",
+        "modifierFlags": {
+          "enabling": "",
+          "disabling": "m"
+        }
+      },
+      {
+        "type": "anchor",
+        "kind": "end-buffer",
+        "range": [
+          12,
+          14
+        ],
+        "raw": "\\z"
+      }
+    ],
+    "range": [
+      0,
+      15
+    ],
+    "raw": "(?m:(?-m:\\A)\\z)",
+    "modifierFlags": {
+      "enabling": "m",
+      "disabling": ""
+    }
+  }
+}

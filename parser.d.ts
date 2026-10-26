@@ -6,6 +6,7 @@ export type Features = {
   unicodePropertyEscape?: boolean;
   unicodeSet?: boolean;
   modifiers?: boolean;
+  bufferBoundaries?: boolean;
 };
 
 export type AstNodeType =
@@ -30,7 +31,7 @@ export type Base<T extends AstNodeType> = {
 
 export type AstNode<F extends Features = {}> =
   | Alternative<F>
-  | Anchor
+  | Anchor<F>
   | CharacterClass<F>
   | CharacterClassEscape
   | CharacterClassRange
@@ -47,8 +48,17 @@ export type RootNode<F extends Features = {}> = Exclude<
   CharacterClassRange
 >;
 
-export type Anchor = Base<"anchor"> & {
-  kind: "boundary" | "end" | "not-boundary" | "start";
+export type Anchor<F extends Features = {}> = Base<"anchor"> & {
+  kind:
+    | "boundary"
+    | "end"
+    | "not-boundary"
+    | "start"
+    | _If<
+        F["bufferBoundaries"],
+        "start-buffer" | "end-buffer" | "end-buffer-optional-newline",
+        never
+      >;
 };
 
 export type CharacterClassEscape = Base<"characterClassEscape"> & {

@@ -40,4 +40,10 @@ module.exports = [
     lookbehind: true,
     modifiers: true,
   } },
+  // `flags` is null: each key is a regex literal such as `/\A/u`.
+  { file: './test-data-buffer-boundaries.json', flags: null, features: {
+    unicodeSet: true,
+    bufferBoundaries: true,
+    modifiers: true,
+  } },
 ];
