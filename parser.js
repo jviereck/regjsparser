@@ -1421,6 +1421,9 @@
 
     var ch = lookahead();
     var from = pos;
+    if (ch === undefined) {
+      return;
+    }
     if (ch === '\\') {
       incr();
       var esc = parseRegExpUnicodeEscapeSequence(true);
