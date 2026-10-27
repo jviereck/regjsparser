@@ -1068,6 +1068,9 @@
         return createDot();
       case 0x5C: { // \
         //      \ AtomEscape
+        if (res = matchUnicodeEscape()) {
+          return res;
+        }
         incr();
         res = parseAtomEscape();
         if (!res) {
@@ -1489,6 +1492,20 @@
       value = value * 16 + digit;
     }
     return value;
+  }
+
+  // Matches `\u Hex4Digits`, the most common escape, at the current `\`, so
+  // that it doesn't have to go through parseAtomEscape(). In unicode mode, a
+  // lead surrogate is combined with a following trail surrogate escape.
+  function matchUnicodeEscape() {
+    var codeUnit;
+    if (next('u') && (codeUnit = parseHexDigits(pos + 2, 4)) !== -1) {
+      incr(6);
+      return parseUnicodeSurrogatePairEscape(
+        createValue('unicodeEscape', codeUnit, pos - 6, pos),
+        isUnicodeMode
+      );
+    }
   }
 
   // Returns whether a `>` follows at or after `start` on the same line.
@@ -1936,6 +1953,9 @@
     var res, ch = str.charCodeAt(pos);
     switch (ch) {
       case 0x5C: { // \
+        if (res = matchUnicodeEscape()) {
+          return res;
+        }
         incr();
         res = parseClassEscape();
         if (!res) {
