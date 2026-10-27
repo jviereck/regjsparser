@@ -455,11 +455,10 @@
     };
   }
 
-  function createReference(matchIndex) {
-    var start = pos - 1 - matchIndex.length;
+  function createReference(matchIndex, start) {
     return {
       type: 'reference',
-      matchIndex: parseInt(matchIndex, 10),
+      matchIndex: matchIndex,
       range: [
         start,
         pos
@@ -1350,7 +1349,7 @@
       if (refIdx <= closedCaptureCounter && !insideCharacterClass) {
         // If the number is smaller than the normal-groups found so
         // far, then it is a reference...
-        return createReference(match);
+        return createReference(refIdx, from - 1);
       } else {
         // ... otherwise it needs to be interpreted as a octal (if the
         // number is in an octal format). If it is NOT octal format,
