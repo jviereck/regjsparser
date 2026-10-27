@@ -705,7 +705,8 @@
     //
     // SEE: https://github.com/jviereck/regjsparser/issues/130
 
-    if (pos >= str.length || currentOne('|') || currentOne(')')) {
+    var ch = str.charCodeAt(pos);
+    if (pos >= str.length || ch === 0x7C /* | */ || ch === 0x29 /* ) */) {
       return null; /* Means: The term is empty */
     }
 
@@ -826,7 +827,12 @@
     // (?<= Disjunction ) and (?<! Disjunction ) are parsed in
     // parseAtomAndExtendedAtom().
 
-    switch(lookahead()) {
+    var ch = str.charCodeAt(pos);
+    if (ch !== 0x5E /* ^ */ && ch !== 0x24 /* $ */ && ch !== 0x5C /* \ */ && ch !== 0x28 /* ( */) {
+      return;
+    }
+
+    switch(str[pos]) {
       case '^':
         incr();
         return createAnchor('start', 1 /* rawLength */);
@@ -855,7 +861,10 @@
         break;
       }
       case '(':
-        return parseGroup('(?=', 'lookahead', '(?!', 'negativeLookahead');
+        if (next('?')) {
+          return parseGroup('(?=', 'lookahead', '(?!', 'negativeLookahead');
+        }
+        break;
       default:
         return;
     }
@@ -888,7 +897,13 @@
     var quantifier;
     var min, max, minEnd, maxEnd;
 
-    switch(lookahead()) {
+    // Most terms are not quantified, so return early in that case.
+    var ch = str.charCodeAt(pos);
+    if (ch !== 0x2A /* * */ && ch !== 0x2B /* + */ && ch !== 0x3F /* ? */ && ch !== 0x7B /* { */) {
+      return;
+    }
+
+    switch(str[pos]) {
       case '*':
         incr();
         quantifier = createQuantifier(0, undefined, undefined, undefined, '*');
@@ -1004,6 +1019,11 @@
       case '[':
         return parseCharacterClass();
       case '(': {
+        if (!next('?')) {
+          //      ( Disjunction )
+          incr();
+          return finishGroup('normal', pos - 1);
+        }
         if (features.lookbehind && (res = parseGroup('(?<=', 'lookbehind', '(?<!', 'negativeLookbehind'))) {
           return res;
         }
