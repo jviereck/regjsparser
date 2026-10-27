@@ -511,7 +511,7 @@
         from,
         to
       ],
-      raw: str.substring(from, to)
+      raw: '' // set later on, see updateRawStart()
     };
   }
 
