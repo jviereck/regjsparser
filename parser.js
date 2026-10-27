@@ -647,13 +647,20 @@
     // Disjunction ::
     //      Alternative
     //      Alternative | Disjunction
-    var res = [], from = pos, i;
+    var res, from = pos, i;
     // Indexes into groupNames of the names declared in this disjunction and
     // in the current alternative. See declareGroupName().
     var disjunctionStart = groupNames.length;
     var alternativeStart = disjunctionStart;
-    res.push(parseAlternative());
+    var alternative = parseAlternative();
 
+    if (!currentOne('|')) {
+      // A single alternative stands for its disjunction, and the names it
+      // declares are visible already.
+      return alternative;
+    }
+
+    res = [alternative];
     while (matchOne('|')) {
       // Groups in different alternatives can't both participate, so the
       // names of the previous alternative are not visible in the next one.
@@ -669,26 +676,29 @@
       visibleGroupNames[groupNames[i]] = true;
     }
 
-    if (res.length === 1) {
-      return res[0];
-    }
-
     return createDisjunction(res, from, pos);
   }
 
   function parseAlternative() {
-    var res = [], from = pos;
-    var term;
+    var res, from = pos;
 
     // Alternative ::
     //      [empty]
     //      Alternative Term
-    while (term = parseTerm()) {
-      res.push(term);
+    var first = parseTerm();
+    if (!first) {
+      return createAlternative([], from, pos);
     }
 
-    if (res.length === 1) {
-      return res[0];
+    var term = parseTerm();
+    if (!term) {
+      // A single term stands for its alternative.
+      return first;
+    }
+
+    res = [first, term];
+    while (term = parseTerm()) {
+      res.push(term);
     }
 
     return createAlternative(res, from, pos);
@@ -761,11 +771,10 @@
 
     quantifier = parseQuantifier() || false;
     if (quantifier) {
-      var type = atom.type, behavior = atom.behavior;
       if (
-        type === "group" &&
-        (behavior === "negativeLookbehind" ||
-          behavior === "lookbehind")
+        atom.type === "group" &&
+        (atom.behavior === "negativeLookbehind" ||
+          atom.behavior === "lookbehind")
       ) {
         bail(
           "Invalid quantifier",
