@@ -2239,11 +2239,35 @@
     throw SyntaxError(message + ' at position ' + from + (details ? ': ' + details : '') + '\n' + context + '\n' + pointer);
   }
 
+  // The number of parse() calls in progress, see parse().
+  var parseDepth = 0;
+
   function parse(input, flags, options) {
-    // The parser state lives at module scope, so parse() saves the state of
-    // any call in progress and restores it on exit. This keeps parse()
-    // reentrant: a nested call, e.g. from input.toString() or from a getter on
-    // the options, must not clobber the state of the outer call.
+    // The parser state lives at module scope. This keeps parse() reentrant: a
+    // nested call, e.g. from input.toString() or from a getter on the options,
+    // must not clobber the state of the outer call, so it saves and restores
+    // that state. The outermost call has no state to preserve, which keeps
+    // the common case cheap.
+    if (parseDepth > 0) {
+      return parseNested(input, flags, options);
+    }
+    parseDepth = 1;
+    try {
+      return parseImpl(input, flags, options);
+    } finally {
+      parseDepth = 0;
+      // Don't keep the input, the options or nodes of the AST alive after
+      // parsing.
+      str = undefined;
+      features = undefined;
+      backrefDenied = undefined;
+      groupNames = undefined;
+      visibleGroupNames = undefined;
+      namedReferences = undefined;
+    }
+  }
+
+  function parseNested(input, flags, options) {
     var savedStr = str;
     var savedFeatures = features;
     var savedPos = pos;
@@ -2259,9 +2283,11 @@
     var savedVisibleGroupNames = visibleGroupNames;
     var savedNamedReferences = namedReferences;
     var savedHasIdentityEscapeK = hasIdentityEscapeK;
+    parseDepth++;
     try {
       return parseImpl(input, flags, options);
     } finally {
+      parseDepth--;
       str = savedStr;
       features = savedFeatures;
       pos = savedPos;
