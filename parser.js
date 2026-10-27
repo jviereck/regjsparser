@@ -390,14 +390,19 @@
     if (isUnicodeMode) {
       var second;
       if (_char.length === 1 && first >= 0xD800 && first <= 0xDBFF) {
-        second = lookahead().charCodeAt(0);
-        if (second >= 0xDC00 && second <= 0xDFFF) {
-          // Unicode surrogate pair
-          pos++;
-          return createValue(
-            'symbol',
-            (first - 0xD800) * 0x400 + second - 0xDC00 + 0x10000,
-            pos - 2, pos);
+        var nextChar = lookahead();
+        // A lead surrogate at the end of the input has no trail surrogate
+        // to pair with, e.g. in an unterminated class like `[\uD800`.
+        if (nextChar !== undefined) {
+          second = nextChar.charCodeAt(0);
+          if (second >= 0xDC00 && second <= 0xDFFF) {
+            // Unicode surrogate pair
+            pos++;
+            return createValue(
+              'symbol',
+              (first - 0xD800) * 0x400 + second - 0xDC00 + 0x10000,
+              pos - 2, pos);
+          }
         }
       }
     }
@@ -1736,7 +1741,8 @@
       }
       case "]":
       case "-":
-        break;
+      case undefined: // End of input, e.g. an unterminated class like `[a`.
+        return undefined;
       default:
         incr();
         return createCharacter(res);
