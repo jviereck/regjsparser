@@ -840,41 +840,49 @@
       return;
     }
 
-    switch(str[pos]) {
-      case '^':
+    switch (ch) {
+      case 0x5E: // ^
         incr();
         return createAnchor('start', 1 /* rawLength */);
-      case '$':
+      case 0x24: // $
         incr();
         return createAnchor('end', 1 /* rawLength */);
-      case '\\': {
-        if (next('b')) {
+      case 0x5C: { // \
+        var escaped = str.charCodeAt(pos + 1);
+        if (escaped === 0x62) { // b
           incr(2);
           return createAnchor('boundary', 2 /* rawLength */);
-        } else if (next('B')) {
+        } else if (escaped === 0x42) { // B
           incr(2);
           return createAnchor('not-boundary', 2 /* rawLength */);
         } else if (isUnicodeMode && features.bufferBoundaries) {
-          if (next('A')) {
+          if (escaped === 0x41) { // A
             incr(2);
             return createAnchor('start-buffer', 2 /* rawLength */);
-          } else if (next('z')) {
+          } else if (escaped === 0x7A) { // z
             incr(2);
             return createAnchor('end-buffer', 2 /* rawLength */);
-          } else if (next('Z')) {
+          } else if (escaped === 0x5A) { // Z
             incr(2);
             return createAnchor('end-buffer-optional-newline', 2 /* rawLength */);
           }
         }
         break;
       }
-      case '(':
+      case 0x28: // (
         if (next('?')) {
-          return parseGroup('(?=', 'lookahead', '(?!', 'negativeLookahead');
+          switch (str.charCodeAt(pos + 2)) {
+            case 0x3D: // =
+              //      (?= Disjunction )
+              incr(3);
+              return finishGroup('lookahead', pos - 3);
+            case 0x21: // !
+              //      (?! Disjunction )
+              incr(3);
+              return finishGroup('negativeLookahead', pos - 3);
+          }
         }
         break;
-      default:
-        return;
     }
   }
 
@@ -919,20 +927,20 @@
       return;
     }
 
-    switch(str[pos]) {
-      case '*':
+    switch (ch) {
+      case 0x2A: // *
         incr();
         quantifier = createQuantifier(0, undefined, undefined, undefined, '*');
         break;
-      case '+':
+      case 0x2B: // +
         incr();
         quantifier = createQuantifier(1, undefined, undefined, undefined, "+");
         break;
-      case '?':
+      case 0x3F: // ?
         incr();
         quantifier = createQuantifier(0, 1, undefined, undefined, "?");
         break;
-      case '{': {
+      case 0x7B: { // {
         minEnd = skipDecimalDigits(pos + 1);
         if (minEnd === pos + 1) {
           break;
@@ -1004,14 +1012,7 @@
 
     var res;
 
-    // Fast path for the most common PatternCharacter: ASCII letters and digits
-    // are never part of a surrogate pair, see createCharacter().
     var ch = str.charCodeAt(pos);
-    if ((ch >= 0x61 && ch <= 0x7A) || (ch >= 0x41 && ch <= 0x5A) || (ch >= 0x30 && ch <= 0x39)) { // a-z A-Z 0-9
-      incr();
-      return createValue('symbol', ch, pos - 1, pos);
-    }
-
     switch (ch) {
       case 0x2E: // .
         //      .
@@ -1038,6 +1039,11 @@
           //      ( Disjunction )
           incr();
           return finishGroup('normal', pos - 1);
+        }
+        if (str.charCodeAt(pos + 2) === 0x3A /* : */) {
+          //      (?: Disjunction )
+          incr(3);
+          return finishGroup('ignore', pos - 3);
         }
         if (features.lookbehind && (res = parseGroup('(?<=', 'lookbehind', '(?<!', 'negativeLookbehind'))) {
           return res;
