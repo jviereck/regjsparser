@@ -409,6 +409,16 @@
     return createValue('symbol', first, pos - 1, pos);
   }
 
+  // Creates the node of the character with the code unit `ch` that has just
+  // been consumed. Surrogates, and the end of the input (`ch` is NaN there),
+  // take the general path of createCharacter().
+  function createSymbol(ch) {
+    if (ch < 0xD800 || ch > 0xDFFF) {
+      return createValue('symbol', ch, pos - 1, pos);
+    }
+    return createCharacter(str[pos - 1]);
+  }
+
   function createDisjunction(alternatives, from, to) {
     return {
       type: 'disjunction',
@@ -531,15 +541,6 @@
   }
 
   function createClassRange(min, max, from, to) {
-    // NonemptyClassRanges :: ClassAtom - ClassAtom ClassContents
-    // It is a Syntax Error if the CharacterValue of the first ClassAtom is
-    // strictly greater than the CharacterValue of the second ClassAtom.
-    //
-    // SEE: https://tc39.es/ecma262/#sec-patterns-static-semantics-early-errors
-    if (min.codePoint > max.codePoint) {
-      bail('invalid range in character class', min.raw + '-' + max.raw, from, to);
-    }
-
     return {
       type: 'characterClassRange',
       min: min,
@@ -550,6 +551,19 @@
       ],
       raw: str.substring(from, to)
     };
+  }
+
+  function checkClassRange(range) {
+    // NonemptyClassRanges :: ClassAtom - ClassAtom ClassContents
+    // It is a Syntax Error if the CharacterValue of the first ClassAtom is
+    // strictly greater than the CharacterValue of the second ClassAtom.
+    //
+    // SEE: https://tc39.es/ecma262/#sec-patterns-static-semantics-early-errors
+    var min = range.min, max = range.max;
+    if (min.codePoint > max.codePoint) {
+      bail('invalid range in character class', min.raw + '-' + max.raw, range.range[0], range.range[1]);
+    }
+    return range;
   }
 
   function createClassStrings(strings, from, to) {
@@ -1050,7 +1064,7 @@
         //      ExtendedPatternCharacter, first part. See parseTerm.
         if (!isUnicodeMode) {
           incr();
-          return createCharacter(str[pos - 1]);
+          return createSymbol(ch);
         }
         break;
       case 0x5E: // ^
@@ -1065,7 +1079,7 @@
       default:
         //      PatternCharacter
         incr();
-        return createCharacter(str[pos - 1]);
+        return createSymbol(ch);
     }
   }
 
@@ -1768,7 +1782,8 @@
     // that large classes take linear time and don't overflow the call stack.
 
     var contents = [], rangeIndexes = [];
-    var atom, atomTo, dash, range, i, j;
+    var atom, atomTo, range, dashIndex, i, j;
+    var hasSplitRanges = false;
 
     do {
       atom = parseClassAtom();
@@ -1779,15 +1794,14 @@
       if (currentOne('-') && !next(']')) {
         // ClassAtom - ClassAtom ClassContents
         incr();
-        dash = createCharacter('-');
-
         atomTo = parseClassAtom();
         if (!atomTo) {
           bail('classAtom');
         }
 
+        // The range is checked once the whole class has been parsed, see below.
         rangeIndexes.push(contents.length);
-        contents.push({ atom: atom, dash: dash, atomTo: atomTo, from: atom.range[0], to: pos });
+        contents.push(createClassRange(atom, atomTo, atom.range[0], pos));
       } else {
         // ClassAtom
         // ClassAtom NonemptyClassRangesNoDash
@@ -1795,22 +1809,28 @@
       }
     } while (!currentOne(']'));
 
-    // Build the ranges from right to left. This keeps the error precedence
+    // Check the ranges from right to left. This keeps the error precedence
     // of the recursive grammar, where a range is checked only after the
     // rest of the class has been parsed.
     for (i = rangeIndexes.length - 1; i >= 0; i--) {
       range = contents[rangeIndexes[i]];
 
-      // Check if both the from and atomTo have codePoints.
-      if (!('codePoint' in range.atom) || !('codePoint' in range.atomTo)) {
+      // Check if both the min and the max have codePoints.
+      if (!('codePoint' in range.min) || !('codePoint' in range.max)) {
         if (!isUnicodeMode) {
           // If not, don't create a range but treat them as
-          // `atom` `-` `atom` instead.
+          // `atom` `-` `atom` instead. The `-` directly follows the first atom.
           //
           // SEE: https://tc39.es/ecma262/#sec-regular-expression-patterns-semantics
           //   NonemptyClassRanges::ClassAtom - ClassAtom ClassContents
           //   CharacterRangeOrUnion
-          contents[rangeIndexes[i]] = [range.atom, range.dash, range.atomTo];
+          dashIndex = range.min.range[1];
+          contents[rangeIndexes[i]] = [
+            range.min,
+            createValue('symbol', 0x2D, dashIndex, dashIndex + 1),
+            range.max
+          ];
+          hasSplitRanges = true;
         } else {
           // With unicode flag, both sides must have codePoints if
           // one side has a codePoint.
@@ -1820,8 +1840,12 @@
           bail('invalid character class');
         }
       } else {
-        contents[rangeIndexes[i]] = createClassRange(range.atom, range.atomTo, range.from, range.to);
+        checkClassRange(range);
       }
+    }
+
+    if (!hasSplitRanges) {
+      return contents;
     }
 
     // Flatten contents to return a single array of class elements.
@@ -1843,14 +1867,7 @@
     // ClassAtom ::
     //      -
     //      ClassAtomNoDash
-    if (matchOne('-')) {
-      return createCharacter('-');
-    } else {
-      return parseClassAtomNoDash();
-    }
-  }
-
-  function parseClassAtomNoDash() {
+    //
     // ClassAtomNoDash ::
     //      SourceCharacter but not one of \ or ] or -
     //      \ ClassEscape
@@ -1858,10 +1875,13 @@
     // ClassAtomNoDash (Annex B) ::
     //      ...
     //      \ [lookahead = c]
+    //
+    // A `-` is parsed like any other character: parseNonemptyClassRanges()
+    // decides whether it forms a range.
 
-    var res;
-    switch ((res = lookahead())) {
-      case "\\": {
+    var res, ch = str.charCodeAt(pos);
+    switch (ch) {
+      case 0x5C: { // \
         incr();
         res = parseClassEscape();
         if (!res) {
@@ -1873,13 +1893,15 @@
 
         return parseUnicodeSurrogatePairEscape(res, isUnicodeMode);
       }
-      case "]":
-      case "-":
-      case undefined: // End of input, e.g. an unterminated class like `[a`.
-        return undefined;
+      case 0x5D: // ]
+        break;
       default:
+        // End of input, e.g. an unterminated class like `[a`.
+        if (pos >= str.length) {
+          break;
+        }
         incr();
-        return createCharacter(res);
+        return createSymbol(ch);
     }
   }
 
@@ -2014,7 +2036,7 @@
       if (res = parseClassSetCharacter()) {
         // ClassSetRange ::
         //      ClassSetCharacter - ClassSetCharacter
-        return createClassRange(start, res, from, pos);
+        return checkClassRange(createClassRange(start, res, from, pos));
       }
 
       bail('Invalid range end', lookahead());
@@ -2053,18 +2075,36 @@
     if (pos >= str.length) {
       return;
     }
-    var ch = str[pos];
+    var ch = str.charCodeAt(pos);
     // ClassSetReservedDoublePunctuator :: one of
     //      && !! ## $$ %% ** ++ ,, .. :: ;; << == >> ?? @@ ^^ `` ~~
-    if (next(ch) && '&!#$%*+,.:;<=>?@^`~'.indexOf(ch) !== -1) {
+    if (str.charCodeAt(pos + 1) === ch && '&!#$%*+,.:;<=>?@^`~'.indexOf(str[pos]) !== -1) {
       incr(2);
       bail('Invalid set operation in character class');
     }
+    if (!isClassSetSyntaxCharacter(ch)) {
+      incr();
+      return createSymbol(ch);
+    }
+  }
+
+  function isClassSetSyntaxCharacter(ch) {
     // ClassSetSyntaxCharacter :: one of
     //      ( ) [ ] { } / - \ |
-    if ('()[]{}/-\\|'.indexOf(ch) === -1) {
-      incr();
-      return createCharacter(ch);
+    switch (ch) {
+      case 0x28: // (
+      case 0x29: // )
+      case 0x5B: // [
+      case 0x5D: // ]
+      case 0x7B: // {
+      case 0x7D: // }
+      case 0x2F: // /
+      case 0x2D: // -
+      case 0x5C: // \
+      case 0x7C: // |
+        return true;
+      default:
+        return false;
     }
   }
 
