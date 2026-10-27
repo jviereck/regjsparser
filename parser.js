@@ -615,8 +615,11 @@
     }
   }
 
+  // matchOne(), currentOne() and next() take a single character. They compare
+  // character codes, because `str[pos]` creates a string for a character
+  // outside of Latin-1.
   function matchOne(value) {
-    if (str[pos] === value) {
+    if (str.charCodeAt(pos) === value.charCodeAt(0)) {
       pos++;
       return value;
     }
@@ -627,7 +630,7 @@
   }
 
   function currentOne(value) {
-    return str[pos] === value;
+    return str.charCodeAt(pos) === value.charCodeAt(0);
   }
 
   function current(value) {
@@ -640,7 +643,7 @@
   }
 
   function next(value) {
-    return str[pos + 1] === value;
+    return str.charCodeAt(pos + 1) === value.charCodeAt(0);
   }
 
   function parseDisjunction() {
