@@ -1470,17 +1470,22 @@
     }
   }
 
+  // The value of each character up to `f` as a hex digit, or -1. It is a
+  // literal so that loading the module doesn't have to build it.
+  var hexDigitValues = [
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+    0, 1, 2, 3, 4, 5, 6, 7, 8, 9, -1, -1, -1, -1, -1, -1, // 0-9
+    -1, 10, 11, 12, 13, 14, 15, -1, -1, -1, -1, -1, -1, -1, -1, -1, // A-F
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+    -1, 10, 11, 12, 13, 14, 15 // a-f
+  ];
+
   // Returns the value of the hex digit with the char code `ch`, or -1 if it is
-  // not a hex digit.
+  // not a hex digit. `ch` is NaN at the end of the input.
   function hexDigitValue(ch) {
-    if (ch >= 0x30 && ch <= 0x39) { // 0-9
-      return ch - 0x30;
-    } else if (ch >= 0x41 && ch <= 0x46) { // A-F
-      return ch - 0x37;
-    } else if (ch >= 0x61 && ch <= 0x66) { // a-f
-      return ch - 0x57;
-    }
-    return -1;
+    return ch <= 0x66 ? hexDigitValues[ch] : -1;
   }
 
   // Returns the value of the `count` hex digits starting at `start`, or -1 if
