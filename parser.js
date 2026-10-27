@@ -345,7 +345,8 @@
   var isUnicodeMode;
   var namedCaptureGroups;
   // The declared group names in source order, and whether a name is visible
-  // at the current position. See declareGroupName().
+  // at the current position. See declareGroupName(), which creates
+  // visibleGroupNames for the first name.
   var groupNames;
   var visibleGroupNames;
   var namedReferences;
@@ -2261,6 +2262,9 @@
     // its declaration, except in the following alternatives of the same
     // Disjunction (see parseDisjunction()). Another group with a visible
     // name might participate together with this one.
+    if (visibleGroupNames === null) {
+      visibleGroupNames = Object.create(null);
+    }
     if (visibleGroupNames[name.value]) {
       bail('Duplicate capture group name', name.value, name.range[0], name.range[1]);
     }
@@ -2279,7 +2283,7 @@
     // SEE: https://tc39.es/ecma262/#sec-patterns-static-semantics-early-errors
     for (var i = 0; i < namedReferences.length; i++) {
       var name = namedReferences[i];
-      if (!(name.value in visibleGroupNames)) {
+      if (visibleGroupNames === null || !(name.value in visibleGroupNames)) {
         bail('Invalid named capture referenced', name.value, name.range[0], name.range[1]);
       }
     }
@@ -2379,7 +2383,7 @@
     isUnicodeMode = hasUnicodeFlag || hasUnicodeSetFlag;
     namedCaptureGroups = isUnicodeMode;
     groupNames = [];
-    visibleGroupNames = Object.create(null);
+    visibleGroupNames = null;
     namedReferences = [];
     hasIdentityEscapeK = false;
     pos = 0;
@@ -2412,9 +2416,9 @@
     // the total number of capture groups set.
     //
     // SEE: https://github.com/jviereck/regjsparser/issues/70
-    shouldReparse = shouldReparse || backrefDenied.some(function (ref) {
-      return ref <= closedCaptureCounter;
-    });
+    for (var i = 0; i < backrefDenied.length && !shouldReparse; i++) {
+      shouldReparse = backrefDenied[i] <= closedCaptureCounter;
+    }
 
     // Without the u and v flags, the pattern is first parsed with
     // [~NamedCaptureGroups]. If it contains a GroupName, it is parsed again
@@ -2437,7 +2441,7 @@
       pos = 0;
       firstIteration = false;
       groupNames = [];
-      visibleGroupNames = Object.create(null);
+      visibleGroupNames = null;
       namedReferences = [];
       result = parseDisjunction();
     }
