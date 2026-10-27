@@ -991,20 +991,19 @@
     var res;
 
     // Fast path for the most common PatternCharacter: ASCII letters and digits
-    // would otherwise go through every case of the switch below before
-    // reaching the default.
+    // are never part of a surrogate pair, see createCharacter().
     var ch = str.charCodeAt(pos);
     if ((ch >= 0x61 && ch <= 0x7A) || (ch >= 0x41 && ch <= 0x5A) || (ch >= 0x30 && ch <= 0x39)) { // a-z A-Z 0-9
       incr();
       return createValue('symbol', ch, pos - 1, pos);
     }
 
-    switch (res = lookahead()) {
-      case '.':
+    switch (ch) {
+      case 0x2E: // .
         //      .
         incr();
         return createDot();
-      case '\\': {
+      case 0x5C: { // \
         //      \ AtomEscape
         incr();
         res = parseAtomEscape();
@@ -1018,9 +1017,9 @@
         }
         return res;
       }
-      case '[':
+      case 0x5B: // [
         return parseCharacterClass();
-      case '(': {
+      case 0x28: { // (
         if (!next('?')) {
           //      ( Disjunction )
           incr();
@@ -1046,27 +1045,27 @@
           return parseGroup('(?:', 'ignore', '(', 'normal');
         }
       }
-      case ']':
-      case '}':
+      case 0x5D: // ]
+      case 0x7D: // }
         //      ExtendedPatternCharacter, first part. See parseTerm.
         if (!isUnicodeMode) {
           incr();
-          return createCharacter(res);
+          return createCharacter(str[pos - 1]);
         }
         break;
-      case '^':
-      case '$':
-      case '*':
-      case '+':
-      case '?':
-      case '{':
-      case ')':
-      case '|':
+      case 0x5E: // ^
+      case 0x24: // $
+      case 0x2A: // *
+      case 0x2B: // +
+      case 0x3F: // ?
+      case 0x7B: // {
+      case 0x29: // )
+      case 0x7C: // |
         break;
       default:
         //      PatternCharacter
         incr();
-        return createCharacter(res);
+        return createCharacter(str[pos - 1]);
     }
   }
 
@@ -1162,21 +1161,21 @@
     //      CharacterClassEscape
     //      CharacterEscape
 
-    var res, from = pos, ch;
+    var res, from = pos;
 
-    switch (ch = lookahead()) {
-      case '0':
-      case '1':
-      case '2':
-      case '3':
-      case '4':
-      case '5':
-      case '6':
-      case '7':
-      case '8':
-      case '9':
+    switch (str.charCodeAt(pos)) {
+      case 0x30: // 0
+      case 0x31: // 1
+      case 0x32: // 2
+      case 0x33: // 3
+      case 0x34: // 4
+      case 0x35: // 5
+      case 0x36: // 6
+      case 0x37: // 7
+      case 0x38: // 8
+      case 0x39: // 9
         return parseDecimalEscape(insideCharacterClass);
-      case 'B': {
+      case 0x42: { // B
         // IdentityEscape (Annex B) ::
         //      [~UnicodeMode] SourceCharacterIdentityEscape
         // SourceCharacterIdentityEscape (Annex B) :: B
@@ -1185,7 +1184,7 @@
         }
         return parseIdentityEscape();
       }
-      case 'b': {
+      case 0x62: { // b
         if (insideCharacterClass) {
           // ClassEscape :: b
           // The CharSet containing the one character U+0008 (BACKSPACE).
@@ -1197,7 +1196,7 @@
           return parseIdentityEscape();
         }
       }
-      case 'c': {
+      case 0x63: { // c
         if (insideCharacterClass) {
           res = str.charCodeAt(pos + 1);
           if (!isUnicodeMode && (isDecimalDigit(res) || res === 0x5F /* _ */)) {
@@ -1218,15 +1217,15 @@
       //      S
       //      w
       //      W
-      case 'd':
-      case 'D':
-      case 'w':
-      case 'W':
-      case 's':
-      case 'S':
+      case 0x64: // d
+      case 0x44: // D
+      case 0x77: // w
+      case 0x57: // W
+      case 0x73: // s
+      case 0x53: // S
         incr();
-        return createCharacterClassEscape(ch);
-      case 'k':
+        return createCharacterClassEscape(str[from]);
+      case 0x6B: // k
         if (namedCaptureGroups) {
           // AtomEscape :: [+NamedCaptureGroups] k GroupName
           if (!insideCharacterClass && features.namedGroups) {
@@ -1245,10 +1244,10 @@
           hasIdentityEscapeK = true;
         }
         return parseIdentityEscape();
-      case 'p':
-      case 'P':
+      case 0x70: // p
+      case 0x50: // P
         return parseUnicodePropertyEscape() || parseIdentityEscape();
-      case '-': {
+      case 0x2D: { // -
         //     [+U] -
         if (insideCharacterClass && isUnicodeMode) {
           incr();
@@ -1482,23 +1481,23 @@
 
     var res;
     var from = pos;
-    switch (lookahead()) {
-      case 't':
+    switch (str.charCodeAt(pos)) {
+      case 0x74: // t
         incr();
         return createEscaped('singleEscape', 0x009, '\\t');
-      case 'n':
+      case 0x6E: // n
         incr();
         return createEscaped('singleEscape', 0x00A, '\\n');
-      case 'v':
+      case 0x76: // v
         incr();
         return createEscaped('singleEscape', 0x00B, '\\v');
-      case 'f':
+      case 0x66: // f
         incr();
         return createEscaped('singleEscape', 0x00C, '\\f');
-      case 'r':
+      case 0x72: // r
         incr();
         return createEscaped('singleEscape', 0x00D, '\\r');
-      case 'c':
+      case 0x63: // c
         res = str.charCodeAt(pos + 1);
         if ((res >= 0x41 && res <= 0x5A) || (res >= 0x61 && res <= 0x7A)) { // A-Z a-z
           // c ControlLetter
@@ -1506,7 +1505,7 @@
           return createValue('controlLetter', res % 32, pos - 3, pos);
         }
         break;
-      case '0':
+      case 0x30: // 0
         // 0 [lookahead ∉ DecimalDigit]
         // Only reached from ClassSetCharacter: AtomEscape and ClassEscape
         // handle decimal digits before trying CharacterEscape.
@@ -1515,14 +1514,14 @@
           return createEscaped('null', 0x0000, '0', 1);
         }
         break;
-      case 'x':
+      case 0x78: // x
         if ((res = parseHexDigits(pos + 1, 2)) !== -1) {
           // HexEscapeSequence
           incr(3);
           return createValue('hexadecimalEscape', res, pos - 4, pos);
         }
         break;
-      case 'u':
+      case 0x75: // u
         if (res = parseRegExpUnicodeEscapeSequence(isUnicodeMode)) {
           if (!res || res.codePoint > 0x10FFFF) {
             bail('Invalid escape sequence', null, from, pos);
