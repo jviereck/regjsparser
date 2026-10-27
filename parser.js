@@ -728,6 +728,14 @@
       return null; /* Means: The term is empty */
     }
 
+    if (!isSyntaxCharacter(ch) && (ch < 0xD800 || ch > 0xDFFF)) {
+      // PatternCharacter, the most common term. A surrogate is left to
+      // parseAtomAndExtendedAtom(), which pairs it with a trail surrogate in
+      // unicode mode.
+      incr();
+      return parseQuantifiedAtom(createValue('symbol', ch, pos - 1, pos));
+    }
+
     var assertion = parseAssertion();
     var quantifier;
     if (assertion) {
@@ -769,7 +777,14 @@
       }
     }
 
-    quantifier = parseQuantifier() || false;
+    return parseQuantifiedAtom(atom);
+  }
+
+  function parseQuantifiedAtom(atom) {
+    // Term ::
+    //      Atom
+    //      Atom Quantifier
+    var quantifier = parseQuantifier();
     if (quantifier) {
       if (
         atom.type === "group" &&
@@ -892,6 +907,30 @@
           }
         }
         break;
+    }
+  }
+
+  function isSyntaxCharacter(ch) {
+    // SyntaxCharacter :: one of
+    //      ^ $ \ . * + ? ( ) [ ] { } |
+    switch (ch) {
+      case 0x5E: // ^
+      case 0x24: // $
+      case 0x5C: // \
+      case 0x2E: // .
+      case 0x2A: // *
+      case 0x2B: // +
+      case 0x3F: // ?
+      case 0x28: // (
+      case 0x29: // )
+      case 0x5B: // [
+      case 0x5D: // ]
+      case 0x7B: // {
+      case 0x7D: // }
+      case 0x7C: // |
+        return true;
+      default:
+        return false;
     }
   }
 
