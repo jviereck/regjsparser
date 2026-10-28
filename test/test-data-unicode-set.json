@@ -3672,5 +3672,17 @@
     "name": "SyntaxError",
     "message": "atomEscape at position 1\n    \\Z\n     ^",
     "input": "\\Z"
+  },
+  "\\uD83D\\uZ": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "atomEscape at position 7\n    \\uD83D\\uZ\n           ^",
+    "input": "\\uD83D\\uZ"
+  },
+  "[\\uD83D\\u]": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid escape at position 7: \\u\n    [\\uD83D\\u]\n           ^",
+    "input": "[\\uD83D\\u]"
   }
 }
