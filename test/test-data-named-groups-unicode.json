@@ -254,5 +254,17 @@
     "name": "SyntaxError",
     "message": "classEscape at position 8\n    (?<a>)[\\k<a>-b]\n            ^",
     "input": "(?<a>)[\\k<a>-b]"
+  },
+  "(?<": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid identifier at position 3\n    (?<\n       ^",
+    "input": "(?<"
+  },
+  "(?<a": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "character at position 4: >\n    (?<a\n        ^",
+    "input": "(?<a"
   }
 }

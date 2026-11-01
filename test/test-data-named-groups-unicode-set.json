@@ -80,5 +80,11 @@
     "name": "SyntaxError",
     "message": "Invalid named capture referenced at position 3: a\n    \\k<a>\n       ^",
     "input": "\\k<a>"
+  },
+  "(?<a": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "character at position 4: >\n    (?<a\n        ^",
+    "input": "(?<a"
   }
 }
