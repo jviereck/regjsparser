@@ -1432,7 +1432,7 @@
     if (ch === '\\') {
       incr();
       var esc = parseRegExpUnicodeEscapeSequence(true);
-      if (!esc || !check(esc.codePoint)) {
+      if (!esc || esc.codePoint > 0x10FFFF || !check(esc.codePoint)) {
         bail('Invalid escape sequence', null, from, pos);
       }
       return fromCodePoint(esc.codePoint);
