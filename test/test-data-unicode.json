@@ -2132,5 +2132,243 @@
       14
     ],
     "raw": "\\uD83D\\u{DE00}"
+  },
+  "\\uD83D\\uD83D\\uDE00": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "value",
+        "kind": "unicodeEscape",
+        "codePoint": 55357,
+        "range": [
+          0,
+          6
+        ],
+        "raw": "\\uD83D"
+      },
+      {
+        "type": "value",
+        "kind": "unicodeCodePointEscape",
+        "codePoint": 128512,
+        "range": [
+          6,
+          18
+        ],
+        "raw": "\\uD83D\\uDE00"
+      }
+    ],
+    "range": [
+      0,
+      18
+    ],
+    "raw": "\\uD83D\\uD83D\\uDE00"
+  },
+  "\\uD83D\\uDE00\\uDE00": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "value",
+        "kind": "unicodeCodePointEscape",
+        "codePoint": 128512,
+        "range": [
+          0,
+          12
+        ],
+        "raw": "\\uD83D\\uDE00"
+      },
+      {
+        "type": "value",
+        "kind": "unicodeEscape",
+        "codePoint": 56832,
+        "range": [
+          12,
+          18
+        ],
+        "raw": "\\uDE00"
+      }
+    ],
+    "range": [
+      0,
+      18
+    ],
+    "raw": "\\uD83D\\uDE00\\uDE00"
+  },
+  "\\uD83D\\uD83D": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "value",
+        "kind": "unicodeEscape",
+        "codePoint": 55357,
+        "range": [
+          0,
+          6
+        ],
+        "raw": "\\uD83D"
+      },
+      {
+        "type": "value",
+        "kind": "unicodeEscape",
+        "codePoint": 55357,
+        "range": [
+          6,
+          12
+        ],
+        "raw": "\\uD83D"
+      }
+    ],
+    "range": [
+      0,
+      12
+    ],
+    "raw": "\\uD83D\\uD83D"
+  },
+  "[\\uD83D\\uD83D\\uDE00]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "value",
+        "kind": "unicodeEscape",
+        "codePoint": 55357,
+        "range": [
+          1,
+          7
+        ],
+        "raw": "\\uD83D"
+      },
+      {
+        "type": "value",
+        "kind": "unicodeCodePointEscape",
+        "codePoint": 128512,
+        "range": [
+          7,
+          19
+        ],
+        "raw": "\\uD83D\\uDE00"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      20
+    ],
+    "raw": "[\\uD83D\\uD83D\\uDE00]"
+  },
+  "[\\uD83D\\uD83D\\uDE00-\\uD83D\\uDE01]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "value",
+        "kind": "unicodeEscape",
+        "codePoint": 55357,
+        "range": [
+          1,
+          7
+        ],
+        "raw": "\\uD83D"
+      },
+      {
+        "type": "characterClassRange",
+        "min": {
+          "type": "value",
+          "kind": "unicodeCodePointEscape",
+          "codePoint": 128512,
+          "range": [
+            7,
+            19
+          ],
+          "raw": "\\uD83D\\uDE00"
+        },
+        "max": {
+          "type": "value",
+          "kind": "unicodeCodePointEscape",
+          "codePoint": 128513,
+          "range": [
+            20,
+            32
+          ],
+          "raw": "\\uD83D\\uDE01"
+        },
+        "range": [
+          7,
+          32
+        ],
+        "raw": "\\uD83D\\uDE00-\\uD83D\\uDE01"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      33
+    ],
+    "raw": "[\\uD83D\\uD83D\\uDE00-\\uD83D\\uDE01]"
+  },
+  "\\uD83D\\u{110000}": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid escape sequence at position 7\n    \\uD83D\\u{110000}\n           ^",
+    "input": "\\uD83D\\u{110000}"
+  },
+  "\\uD83D\\uDBFF": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "value",
+        "kind": "unicodeEscape",
+        "codePoint": 55357,
+        "range": [
+          0,
+          6
+        ],
+        "raw": "\\uD83D"
+      },
+      {
+        "type": "value",
+        "kind": "unicodeEscape",
+        "codePoint": 56319,
+        "range": [
+          6,
+          12
+        ],
+        "raw": "\\uDBFF"
+      }
+    ],
+    "range": [
+      0,
+      12
+    ],
+    "raw": "\\uD83D\\uDBFF"
+  },
+  "\\uD83D\\uE000": {
+    "type": "alternative",
+    "body": [
+      {
+        "type": "value",
+        "kind": "unicodeEscape",
+        "codePoint": 55357,
+        "range": [
+          0,
+          6
+        ],
+        "raw": "\\uD83D"
+      },
+      {
+        "type": "value",
+        "kind": "unicodeEscape",
+        "codePoint": 57344,
+        "range": [
+          6,
+          12
+        ],
+        "raw": "\\uE000"
+      }
+    ],
+    "range": [
+      0,
+      12
+    ],
+    "raw": "\\uD83D\\uE000"
   }
 }

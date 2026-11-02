@@ -59,9 +59,45 @@
   },
   "(?<\\u{ffffff})": {
     "type": "error",
-    "name": "RangeError",
-    "message": "Invalid code point 16777215",
+    "name": "SyntaxError",
+    "message": "Invalid escape sequence at position 3\n    (?<\\u{ffffff})\n       ^",
     "input": "(?<\\u{ffffff})"
+  },
+  "(?<\\u{110000}>)": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid escape sequence at position 3\n    (?<\\u{110000}>)\n       ^",
+    "input": "(?<\\u{110000}>)"
+  },
+  "(?<a\\u{110000}>)": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid escape sequence at position 4\n    (?<a\\u{110000}>)\n        ^",
+    "input": "(?<a\\u{110000}>)"
+  },
+  "(?<\\u{ffffffffffffffff}>)": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid escape sequence at position 3\n    (?<\\u{ffffffffffffffff}>)\n       ^",
+    "input": "(?<\\u{ffffffffffffffff}>)"
+  },
+  "\\k<\\u{110000}>(?<a>)": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid escape sequence at position 3\n    \\k<\\u{110000}>(?<a>)\n       ^",
+    "input": "\\k<\\u{110000}>(?<a>)"
+  },
+  "(?<\\u{10FFFF}>)": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid escape sequence at position 3\n    (?<\\u{10FFFF}>)\n       ^",
+    "input": "(?<\\u{10FFFF}>)"
+  },
+  "(?<\\uD83D\\u{110000}>)": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid escape sequence at position 3\n    (?<\\uD83D\\u{110000}\n       ^",
+    "input": "(?<\\uD83D\\u{110000}>)"
   },
   "(?<$\uD801\uDCA4>a)": {
     "type": "group",

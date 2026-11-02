@@ -1072,24 +1072,19 @@
 
   function parseUnicodeSurrogatePairEscape(firstEscape, isUnicodeMode) {
     if (isUnicodeMode) {
-      var first, second;
+      var first, trail;
+      // Match only \u HexTrailSurrogate here. Parsing the next escape instead
+      // would recurse once per escape in a run of lead surrogates.
       if (firstEscape.kind == 'unicodeEscape' &&
         (first = firstEscape.codePoint) >= 0xD800 && first <= 0xDBFF &&
-        currentOne('\\') && next('u') ) {
-        var prevPos = pos;
-        pos++;
-        var secondEscape = parseClassEscape();
-        if (secondEscape && secondEscape.kind == 'unicodeEscape' &&
-          (second = secondEscape.codePoint) >= 0xDC00 && second <= 0xDFFF) {
-          // Unicode surrogate pair
-          firstEscape.kind = 'unicodeCodePointEscape';
-          firstEscape.codePoint = (first - 0xD800) * 0x400 + second - 0xDC00 + 0x10000;
-          firstEscape.range[1] = pos;
-          firstEscape.raw = str.substring(firstEscape.range[0], pos)
-        }
-        else {
-          pos = prevPos;
-        }
+        currentOne('\\') && next('u') &&
+        /^[dD][c-fC-F][0-9a-fA-F]{2}$/.test(trail = str.substring(pos + 2, pos + 6))) {
+        // Unicode surrogate pair
+        pos += 6;
+        firstEscape.kind = 'unicodeCodePointEscape';
+        firstEscape.codePoint = (first - 0xD800) * 0x400 + parseInt(trail, 16) - 0xDC00 + 0x10000;
+        firstEscape.range[1] = pos;
+        firstEscape.raw = str.substring(firstEscape.range[0], pos)
       }
     }
     return firstEscape;
@@ -1432,7 +1427,7 @@
     if (ch === '\\') {
       incr();
       var esc = parseRegExpUnicodeEscapeSequence(true);
-      if (!esc || !check(esc.codePoint)) {
+      if (!esc || esc.codePoint > 0x10FFFF || !check(esc.codePoint)) {
         bail('Invalid escape sequence', null, from, pos);
       }
       return fromCodePoint(esc.codePoint);
