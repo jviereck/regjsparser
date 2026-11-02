@@ -74,6 +74,16 @@ suites.forEach(function(suite) {
   console.log("  PASSED TEST: " + message);
 })();
 
+(function testLongRunOfLeadSurrogateEscapes() {
+  var message = "It should correctly parse a long run of lead surrogate escapes.";
+  var run = Array(100000).fill("\\uD83D").join("");
+
+  parse(run, "u");
+  parse("[" + run + "]", "u");
+  parse("[" + run + "]", "v", { unicodeSet: true });
+  console.log("  PASSED TEST: " + message);
+})();
+
 (function testReentrancy() {
   var message = "It should be reentrant.";
 

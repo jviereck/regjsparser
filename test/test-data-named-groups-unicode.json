@@ -93,6 +93,12 @@
     "message": "Invalid escape sequence at position 3\n    (?<\\u{10FFFF}>)\n       ^",
     "input": "(?<\\u{10FFFF}>)"
   },
+  "(?<\\uD83D\\u{110000}>)": {
+    "type": "error",
+    "name": "SyntaxError",
+    "message": "Invalid escape sequence at position 3\n    (?<\\uD83D\\u{110000}\n       ^",
+    "input": "(?<\\uD83D\\u{110000}>)"
+  },
   "(?<$\uD801\uDCA4>a)": {
     "type": "group",
     "behavior": "normal",
