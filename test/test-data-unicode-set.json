@@ -3684,5 +3684,127 @@
     "name": "SyntaxError",
     "message": "Invalid escape at position 7: \\u\n    [\\uD83D\\u]\n           ^",
     "input": "[\\uD83D\\u]"
+  },
+  "[\\uD83D\\uD83D\\uDE00]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "value",
+        "kind": "unicodeEscape",
+        "codePoint": 55357,
+        "range": [
+          1,
+          7
+        ],
+        "raw": "\\uD83D"
+      },
+      {
+        "type": "value",
+        "kind": "unicodeCodePointEscape",
+        "codePoint": 128512,
+        "range": [
+          7,
+          19
+        ],
+        "raw": "\\uD83D\\uDE00"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      20
+    ],
+    "raw": "[\\uD83D\\uD83D\\uDE00]"
+  },
+  "[\\uD83D\\uDE00-\\uD83D\\uDE01]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "characterClassRange",
+        "min": {
+          "type": "value",
+          "kind": "unicodeCodePointEscape",
+          "codePoint": 128512,
+          "range": [
+            1,
+            13
+          ],
+          "raw": "\\uD83D\\uDE00"
+        },
+        "max": {
+          "type": "value",
+          "kind": "unicodeCodePointEscape",
+          "codePoint": 128513,
+          "range": [
+            14,
+            26
+          ],
+          "raw": "\\uD83D\\uDE01"
+        },
+        "range": [
+          1,
+          26
+        ],
+        "raw": "\\uD83D\\uDE00-\\uD83D\\uDE01"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      27
+    ],
+    "raw": "[\\uD83D\\uDE00-\\uD83D\\uDE01]"
+  },
+  "[\\uD83D\\uD83D\\uDE00-\\uD83D\\uDE01]": {
+    "type": "characterClass",
+    "kind": "union",
+    "body": [
+      {
+        "type": "value",
+        "kind": "unicodeEscape",
+        "codePoint": 55357,
+        "range": [
+          1,
+          7
+        ],
+        "raw": "\\uD83D"
+      },
+      {
+        "type": "characterClassRange",
+        "min": {
+          "type": "value",
+          "kind": "unicodeCodePointEscape",
+          "codePoint": 128512,
+          "range": [
+            7,
+            19
+          ],
+          "raw": "\\uD83D\\uDE00"
+        },
+        "max": {
+          "type": "value",
+          "kind": "unicodeCodePointEscape",
+          "codePoint": 128513,
+          "range": [
+            20,
+            32
+          ],
+          "raw": "\\uD83D\\uDE01"
+        },
+        "range": [
+          7,
+          32
+        ],
+        "raw": "\\uD83D\\uDE00-\\uD83D\\uDE01"
+      }
+    ],
+    "negative": false,
+    "range": [
+      0,
+      33
+    ],
+    "raw": "[\\uD83D\\uD83D\\uDE00-\\uD83D\\uDE01]"
   }
 }

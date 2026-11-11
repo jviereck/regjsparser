@@ -23,16 +23,6 @@
       "reason": "Quantifier bounds above Number.MAX_SAFE_INTEGER are rejected on purpose."
     },
     {
-      "pattern": "(?<\\u{ffffff})",
-      "flags": "u",
-      "features": {
-        "namedGroups": true
-      },
-      "regjsparser": "RangeError",
-      "v8": "SyntaxError",
-      "reason": "Bug: an escape above U+10FFFF in a group name reaches fromCodePoint() unchecked."
-    },
-    {
       "pattern": "[\\p{White_Space}--\\p{Line_Break=Glue}]",
       "flags": "v",
       "features": {
