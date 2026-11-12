@@ -595,9 +595,8 @@
   }
 
   function match(value) {
-    var len = value.length;
-    if (str.substring(pos, pos + len) === value) {
-      incr(len);
+    if (current(value)) {
+      incr(value.length);
       return value;
     }
   }
@@ -618,21 +617,16 @@
   }
 
   function current(value) {
-    var len = value.length;
-    return str.substring(pos, pos + len) === value;
+    for (var i = 0; i < value.length; i++) {
+      if (str.charCodeAt(pos + i) !== value.charCodeAt(i)) {
+        return false;
+      }
+    }
+    return true;
   }
 
   function next(value) {
     return str[pos + 1] === value;
-  }
-
-  function matchReg(regExp) {
-    var subStr = str.substring(pos);
-    var res = subStr.match(regExp);
-    if (res) {
-      pos += res[0].length;
-    }
-    return res;
   }
 
   function parseDisjunction() {
@@ -705,7 +699,8 @@
     //
     // SEE: https://github.com/jviereck/regjsparser/issues/130
 
-    if (pos >= str.length || currentOne('|') || currentOne(')')) {
+    var ch = str.charCodeAt(pos);
+    if (pos >= str.length || ch === 0x7C /* | */ || ch === 0x29 /* ) */) {
       return null; /* Means: The term is empty */
     }
 
@@ -826,7 +821,12 @@
     // (?<= Disjunction ) and (?<! Disjunction ) are parsed in
     // parseAtomAndExtendedAtom().
 
-    switch(lookahead()) {
+    var ch = str.charCodeAt(pos);
+    if (ch !== 0x5E /* ^ */ && ch !== 0x24 /* $ */ && ch !== 0x5C /* \ */ && ch !== 0x28 /* ( */) {
+      return;
+    }
+
+    switch(str[pos]) {
       case '^':
         incr();
         return createAnchor('start', 1 /* rawLength */);
@@ -855,10 +855,31 @@
         break;
       }
       case '(':
-        return parseGroup('(?=', 'lookahead', '(?!', 'negativeLookahead');
+        if (next('?')) {
+          return parseGroup('(?=', 'lookahead', '(?!', 'negativeLookahead');
+        }
+        break;
       default:
         return;
     }
+  }
+
+  function isDecimalDigit(ch) {
+    return ch >= 0x30 && ch <= 0x39; // 0-9
+  }
+
+  function isOctalDigit(ch) {
+    return ch >= 0x30 && ch <= 0x37; // 0-7
+  }
+
+  // Returns the index of the first character at or after `start` that is not a
+  // decimal digit.
+  function skipDecimalDigits(start) {
+    var i = start;
+    while (isDecimalDigit(str.charCodeAt(i))) {
+      i++;
+    }
+    return i;
   }
 
   function parseQuantifier() {
@@ -874,11 +895,17 @@
     //      { DecimalDigits[~Sep] ,}
     //      { DecimalDigits[~Sep] , DecimalDigits[~Sep] }
 
-    var res, from = pos;
+    var from = pos;
     var quantifier;
-    var min, max;
+    var min, max, minEnd, maxEnd;
 
-    switch(lookahead()) {
+    // Most terms are not quantified, so return early in that case.
+    var ch = str.charCodeAt(pos);
+    if (ch !== 0x2A /* * */ && ch !== 0x2B /* + */ && ch !== 0x3F /* ? */ && ch !== 0x7B /* { */) {
+      return;
+    }
+
+    switch(str[pos]) {
       case '*':
         incr();
         quantifier = createQuantifier(0, undefined, undefined, undefined, '*');
@@ -892,19 +919,26 @@
         quantifier = createQuantifier(0, 1, undefined, undefined, "?");
         break;
       case '{': {
-        if (res = matchReg(/^\{(\d+)\}/)) {
-          min = parseInt(res[1], 10);
+        minEnd = skipDecimalDigits(pos + 1);
+        if (minEnd === pos + 1) {
+          break;
+        }
+        if (str[minEnd] === '}') {
+          //      { DecimalDigits }
+          min = parseInt(str.substring(pos + 1, minEnd), 10);
+          pos = minEnd + 1;
           quantifier = createQuantifier(min, min, from, pos);
         }
-        else if (res = matchReg(/^\{(\d+),\}/)) {
-          min = parseInt(res[1], 10);
-          quantifier = createQuantifier(min, undefined, from, pos);
-        }
-        else if (res = matchReg(/^\{(\d+),(\d+)\}/)) {
-          min = parseInt(res[1], 10);
-          max = parseInt(res[2], 10);
-          if (min > max) {
-            bail('numbers out of order in {} quantifier', '', from, pos);
+        else if (str[minEnd] === ',' && str[maxEnd = skipDecimalDigits(minEnd + 1)] === '}') {
+          //      { DecimalDigits ,}
+          //      { DecimalDigits , DecimalDigits }
+          min = parseInt(str.substring(pos + 1, minEnd), 10);
+          pos = maxEnd + 1;
+          if (maxEnd > minEnd + 1) {
+            max = parseInt(str.substring(minEnd + 1, maxEnd), 10);
+            if (min > max) {
+              bail('numbers out of order in {} quantifier', '', from, pos);
+            }
           }
           quantifier = createQuantifier(min, max, from, pos);
         }
@@ -956,6 +990,15 @@
 
     var res;
 
+    // Fast path for the most common PatternCharacter: ASCII letters and digits
+    // would otherwise go through every case of the switch below before
+    // reaching the default.
+    var ch = str.charCodeAt(pos);
+    if ((ch >= 0x61 && ch <= 0x7A) || (ch >= 0x41 && ch <= 0x5A) || (ch >= 0x30 && ch <= 0x39)) { // a-z A-Z 0-9
+      incr();
+      return createValue('symbol', ch, pos - 1, pos);
+    }
+
     switch (res = lookahead()) {
       case '.':
         //      .
@@ -978,6 +1021,11 @@
       case '[':
         return parseCharacterClass();
       case '(': {
+        if (!next('?')) {
+          //      ( Disjunction )
+          incr();
+          return finishGroup('normal', pos - 1);
+        }
         if (features.lookbehind && (res = parseGroup('(?<=', 'lookbehind', '(?<!', 'negativeLookbehind'))) {
           return res;
         }
@@ -1022,6 +1070,15 @@
     }
   }
 
+  // Matches RegularExpressionModifiers and returns them, or "" if there are none.
+  function matchModifierFlags() {
+    var start = pos, ch;
+    while ((ch = str[pos]) === 's' || ch === 'i' || ch === 'm') {
+      pos++;
+    }
+    return str.substring(start, pos);
+  }
+
   function parseModifiersGroup() {
     function hasDupChar(str) {
       var i = 0;
@@ -1037,19 +1094,16 @@
     var from = pos;
     incr(2);
 
-    var enablingFlags = matchReg(/^[sim]+/);
-    var disablingFlags;
+    var enablingFlags = matchModifierFlags();
+    var disablingFlags = "";
     if(matchOne("-") && lookahead() !== ":"){
-      disablingFlags = matchReg(/^[sim]+/);
+      disablingFlags = matchModifierFlags();
       if (!disablingFlags) {
         bail('Invalid flags for modifiers group');
       }
     } else if(!enablingFlags){
       bail('Invalid flags for modifiers group');
     }
-
-    enablingFlags = enablingFlags ? enablingFlags[0] : "";
-    disablingFlags = disablingFlags ? disablingFlags[0] : "";
 
     var flags = enablingFlags + disablingFlags;
     if(flags.length > 3 || hasDupChar(flags)) {
@@ -1145,14 +1199,14 @@
       }
       case 'c': {
         if (insideCharacterClass) {
-          if (!isUnicodeMode && (res = matchReg(/^c(\d)/))) {
+          res = str.charCodeAt(pos + 1);
+          if (!isUnicodeMode && (isDecimalDigit(res) || res === 0x5F /* _ */)) {
             // ClassEscape (Annex B) :: [~UnicodeMode] c ClassControlLetter
-            // ClassControlLetter :: DecimalDigit
-            return createEscaped('controlLetter', res[1].charCodeAt(0) % 32, res[1], 2);
-          } else if (!isUnicodeMode && match("c_")) {
-            // ClassEscape (Annex B) :: [~UnicodeMode] c ClassControlLetter
-            // ClassControlLetter :: _
-            return createEscaped('controlLetter', 31, '_', 2);
+            // ClassControlLetter ::
+            //      DecimalDigit
+            //      _
+            incr(2);
+            return createValue('controlLetter', res % 32, pos - 3, pos);
           }
         }
         return parseCharacterEscape();
@@ -1213,9 +1267,11 @@
     //      NonZeroDigit DecimalDigits[~Sep]? [lookahead ∉ DecimalDigit]
 
     var res, match, from = pos;
+    var end = skipDecimalDigits(pos);
 
-    if (res = matchReg(/^(?!0)\d+/)) {
-      match = res[0];
+    if (end > pos && !currentOne('0')) {
+      match = str.substring(pos, end);
+      pos = end;
       var refIdx = parseInt(match, 10);
       if (refIdx <= closedCaptureCounter && !insideCharacterClass) {
         // If the number is smaller than the normal-groups found so
@@ -1246,7 +1302,7 @@
         // the '1' should be matched, and in '400' only the '40'.
         incr(-match.length);
         if (res = matchLegacyOctalEscapeSequence()) {
-          return createEscaped('octal', parseInt(res[0], 8), res[0], 1);
+          return createEscaped('octal', parseInt(res, 8), res, 1);
         } else {
           // If we end up here, we have a case like /\91/. Then the
           // first slash is to be ignored and the 9 & 1 to be treated
@@ -1254,7 +1310,8 @@
           // first number only here - other number-characters
           // (if available) will be matched later.
           var start = pos;
-          res = createCharacter(matchReg(/^[89]/));
+          incr();
+          res = createCharacter(str[start]);
           return updateRawStart(res, start - 1);
         }
       }
@@ -1266,19 +1323,19 @@
     // characters.
     // Example:
     //   /\091/.exec('\091')[0].length === 3
-    else if (res = matchLegacyOctalEscapeSequence()) {
-      match = res[0];
+    else if (match = matchLegacyOctalEscapeSequence()) {
       // CharacterEscape :: 0 [lookahead ∉ DecimalDigit]
       // A `0` followed by `8` or `9` (e.g. `\08`) is only valid as an Annex B
       // LegacyOctalEscapeSequence.
-      if (match !== '0' || /\d/.test(lookahead())) {
+      if (match !== '0' || isDecimalDigit(str.charCodeAt(pos))) {
         bailOctalEscapeIfUnicode(from, pos);
       }
-      if (/^0{1,3}$/.test(match)) {
+      var codePoint = parseInt(match, 8);
+      if (codePoint === 0) {
         // If they are all zeros, they must be U+0000.
         return createEscaped('null', 0x0000, '0', match.length);
       } else {
-        return createEscaped('octal', parseInt(match, 8), match, 1);
+        return createEscaped('octal', codePoint, match, 1);
       }
     }
     return false;
@@ -1293,7 +1350,17 @@
     //      ZeroToThree OctalDigit OctalDigit
     //
     // The escape is at most \377, e.g. in '\400' only the '\40' is matched.
-    return matchReg(/^(?:[0-3][0-7]{0,2}|[4-7][0-7]?)/);
+    var ch = str.charCodeAt(pos);
+    if (!isOctalDigit(ch)) {
+      return;
+    }
+    var start = pos;
+    var end = pos + (ch <= 0x33 /* 3 */ ? 3 : 2);
+    pos++;
+    while (pos < end && isOctalDigit(str.charCodeAt(pos))) {
+      pos++;
+    }
+    return str.substring(start, pos);
   }
 
   function bailOctalEscapeIfUnicode(from, pos) {
@@ -1303,13 +1370,16 @@
   }
 
   function parseUnicodePropertyEscape() {
-    var res, from = pos;
-    if (features.unicodePropertyEscape && isUnicodeMode && (res = matchReg(/^([pP])\{([^}]+)\}/))) {
+    // Called with `p` or `P` as the current character.
+    var end, from = pos;
+    if (features.unicodePropertyEscape && isUnicodeMode && next('{') &&
+      (end = str.indexOf('}', pos + 2)) > pos + 2) {
       // https://github.com/jviereck/regjsparser/issues/77
+      pos = end + 1;
       return {
         type: 'unicodePropertyEscape',
-        negative: res[1] === 'P',
-        value: res[2],
+        negative: str[from] === 'P',
+        value: str.substring(from + 2, end),
         range: [from - 1, pos],
         raw: str.substring(from - 1, pos)
       };
@@ -1318,7 +1388,8 @@
   }
 
   function parseNamedReference() {
-    if (features.namedGroups && matchReg(/^k<(?=.*?>)/)) {
+    if (features.namedGroups && currentOne('k') && next('<') && hasGroupNameEnd(pos + 2)) {
+      incr(2);
       var name = parseIdentifier();
       skip('>');
       namedReferences.push(name);
@@ -1326,23 +1397,76 @@
     }
   }
 
+  // Returns the value of the hex digit with the char code `ch`, or -1 if it is
+  // not a hex digit.
+  function hexDigitValue(ch) {
+    if (ch >= 0x30 && ch <= 0x39) { // 0-9
+      return ch - 0x30;
+    } else if (ch >= 0x41 && ch <= 0x46) { // A-F
+      return ch - 0x37;
+    } else if (ch >= 0x61 && ch <= 0x66) { // a-f
+      return ch - 0x57;
+    }
+    return -1;
+  }
+
+  // Returns the value of the `count` hex digits starting at `start`, or -1 if
+  // any of them is not a hex digit.
+  function parseHexDigits(start, count) {
+    var value = 0, digit;
+    for (var i = start; i < start + count; i++) {
+      digit = hexDigitValue(str.charCodeAt(i));
+      if (digit === -1) {
+        return -1;
+      }
+      value = value * 16 + digit;
+    }
+    return value;
+  }
+
+  // Returns whether a `>` follows at or after `start` on the same line.
+  function hasGroupNameEnd(start) {
+    for (var i = start; i < str.length; i++) {
+      switch (str.charCodeAt(i)) {
+        case 0x3E: // >
+          return true;
+        case 0x0A: // LINE FEED
+        case 0x0D: // CARRIAGE RETURN
+        case 0x2028: // LINE SEPARATOR
+        case 0x2029: // PARAGRAPH SEPARATOR
+          return false;
+      }
+    }
+    return false;
+  }
+
   function parseRegExpUnicodeEscapeSequence(isUnicodeMode) {
-    var res;
-    if (res = matchReg(/^u([0-9a-fA-F]{4})/)) {
+    var codeUnit;
+    if (currentOne('u') && (codeUnit = parseHexDigits(pos + 1, 4)) !== -1) {
       // RegExpUnicodeEscapeSequence ::
       //      [+UnicodeMode] u HexLeadSurrogate \u HexTrailSurrogate
       //      [+UnicodeMode] u HexLeadSurrogate
       //      [+UnicodeMode] u HexTrailSurrogate
       //      [+UnicodeMode] u HexNonSurrogate
       //      [~UnicodeMode] u Hex4Digits
+      incr(5);
       return parseUnicodeSurrogatePairEscape(
-        createEscaped('unicodeEscape', parseInt(res[1], 16), res[1], 2),
+        createValue('unicodeEscape', codeUnit, pos - 6, pos),
         isUnicodeMode
       );
-    } else if (isUnicodeMode && (res = matchReg(/^u\{([0-9a-fA-F]+)\}/))) {
+    } else if (isUnicodeMode && currentOne('u') && next('{')) {
       // RegExpUnicodeEscapeSequence ::
       //      [+UnicodeMode] u{ CodePoint }
-      return createEscaped('unicodeCodePointEscape', parseInt(res[1], 16), res[1], 4);
+      var start = pos + 2, end = start;
+      while (hexDigitValue(str.charCodeAt(end)) !== -1) {
+        end++;
+      }
+      if (end > start && str[end] === '}') {
+        pos = end + 1;
+        // CodePoint can have any number of digits. parseInt() rounds a value
+        // above 2^53 correctly, unlike adding up the digits.
+        return createValue('unicodeCodePointEscape', parseInt(str.substring(start, end), 16), start - 3, pos);
+      }
     }
   }
 
@@ -1375,23 +1499,27 @@
         incr();
         return createEscaped('singleEscape', 0x00D, '\\r');
       case 'c':
-        if (res = matchReg(/^c([a-zA-Z])/)) {
+        res = str.charCodeAt(pos + 1);
+        if ((res >= 0x41 && res <= 0x5A) || (res >= 0x61 && res <= 0x7A)) { // A-Z a-z
           // c ControlLetter
-          return createEscaped('controlLetter', res[1].charCodeAt(0) % 32, res[1], 2);
+          incr(2);
+          return createValue('controlLetter', res % 32, pos - 3, pos);
         }
         break;
       case '0':
         // 0 [lookahead ∉ DecimalDigit]
         // Only reached from ClassSetCharacter: AtomEscape and ClassEscape
         // handle decimal digits before trying CharacterEscape.
-        if (matchReg(/^0(?!\d)/)) {
+        if (!isDecimalDigit(str.charCodeAt(pos + 1))) {
+          incr();
           return createEscaped('null', 0x0000, '0', 1);
         }
         break;
       case 'x':
-        if (res = matchReg(/^x([0-9a-fA-F]{2})/)) {
+        if ((res = parseHexDigits(pos + 1, 2)) !== -1) {
           // HexEscapeSequence
-          return createEscaped('hexadecimalEscape', parseInt(res[1], 16), res[1], 2);
+          incr(3);
+          return createValue('hexadecimalEscape', res, pos - 4, pos);
         }
         break;
       case 'u':
@@ -1507,7 +1635,7 @@
     var tmp;
     var l = lookahead();
     if (
-      (isUnicodeMode && /[\^$.*+?()\\[\]{}|/]/.test(l)) ||
+      (isUnicodeMode && l !== undefined && '^$.*+?()\\[]{}|/'.indexOf(l) !== -1) ||
       (!isUnicodeMode && l !== "c" && !(namedCaptureGroups && l === "k"))
     ) {
       tmp = consume(1);
@@ -1914,12 +2042,21 @@
     //      [lookahead ∉ ClassSetReservedDoublePunctuator] SourceCharacter but not ClassSetSyntaxCharacter
     //      ...
 
-    var res;
-    if (matchReg(/^(?:&&|!!|##|\$\$|%%|\*\*|\+\+|,,|\.\.|::|;;|<<|==|>>|\?\?|@@|\^\^|``|~~)/)) {
+    if (pos >= str.length) {
+      return;
+    }
+    var ch = str[pos];
+    // ClassSetReservedDoublePunctuator :: one of
+    //      && !! ## $$ %% ** ++ ,, .. :: ;; << == >> ?? @@ ^^ `` ~~
+    if (next(ch) && '&!#$%*+,.:;<=>?@^`~'.indexOf(ch) !== -1) {
+      incr(2);
       bail('Invalid set operation in character class');
     }
-    if (res = matchReg(/^[^()[\]{}/\-\\|]/)) {
-      return createCharacter(res);
+    // ClassSetSyntaxCharacter :: one of
+    //      ( ) [ ] { } / - \ |
+    if ('()[]{}/-\\|'.indexOf(ch) === -1) {
+      incr();
+      return createCharacter(ch);
     }
   }
 
@@ -1935,8 +2072,10 @@
       return createEscaped('singleEscape', 0x0008, '\\b');
     } else if (matchOne('B')) {
       bail('\\B not possible inside of ClassContents', '', pos - 2);
-    } else if (res = matchReg(/^[&\-!#%,:;<=>@`~]/)) {
-      return createEscaped('identifier', res[0].codePointAt(0), res[0]);
+    } else if (pos < str.length && '&-!#%,:;<=>@`~'.indexOf(res = str[pos]) !== -1) {
+      // ClassSetReservedPunctuator
+      incr();
+      return createEscaped('identifier', res.charCodeAt(0), res);
     } else if (res = parseCharacterEscape()) {
       return res;
     } else {
