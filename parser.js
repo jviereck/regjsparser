@@ -1205,7 +1205,7 @@
             // ClassControlLetter ::
             //      DecimalDigit
             //      _
-            incr(2);
+            incr(2); // eat 'c' and the following control letter
             return createValue('controlLetter', res % 32, pos - 3, pos);
           }
         }
