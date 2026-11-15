@@ -493,6 +493,40 @@
     };
   }
 
+  // A named group and a modifiers group have one more property than other
+  // groups. Each is created with it in its own object literal, because adding
+  // the property later would change the hidden class of the group node.
+  function createNamedGroup(name, disjunction, from, to) {
+    return {
+      type: 'group',
+      behavior: 'normal',
+      body: disjunction,
+      range: [
+        from,
+        to
+      ],
+      raw: str.substring(from, to),
+      name: name
+    };
+  }
+
+  function createModifiersGroup(enabling, disabling, disjunction, from, to) {
+    return {
+      type: 'group',
+      behavior: 'ignore',
+      body: disjunction,
+      range: [
+        from,
+        to
+      ],
+      raw: str.substring(from, to),
+      modifierFlags: {
+        enabling: enabling,
+        disabling: disabling
+      }
+    };
+  }
+
   function createQuantifier(min, max, from, to, symbol) {
     if (to == null) {
       from = pos - 1;
@@ -825,12 +859,18 @@
   }
 
   function finishGroup(type, from) {
+    var body = parseGroupBody(type);
+    return createGroup(type, body, from, pos);
+  }
+
+  // Parses the disjunction and the closing parenthesis of a group, and returns
+  // the body of the group.
+  function parseGroupBody(type) {
     var body = parseDisjunction();
     if (!body) {
       bail('Expected disjunction');
     }
     skip(')');
-    var group = createGroup(type, flattenBody(body), from, pos);
 
     if (type == 'normal') {
       // Keep track of the number of closed groups. This is required for
@@ -840,7 +880,7 @@
         closedCaptureCounter++;
       }
     }
-    return group;
+    return flattenBody(body);
   }
 
   // NOTE: parseAssertion() parses ^ $ \b \B and lookaheads; lookbehinds are
@@ -998,9 +1038,8 @@
         }
         if (str[minEnd] === '}') {
           //      { DecimalDigits }
-          min = parseInt(str.substring(pos + 1, minEnd), 10);
+          min = max = parseInt(str.substring(pos + 1, minEnd), 10);
           pos = minEnd + 1;
-          quantifier = createQuantifier(min, min, from, pos);
         }
         else if (str[minEnd] === ',' && str[maxEnd = skipDecimalDigits(minEnd + 1)] === '}') {
           //      { DecimalDigits ,}
@@ -1013,12 +1052,17 @@
               bail('numbers out of order in {} quantifier', '', from, pos);
             }
           }
-          quantifier = createQuantifier(min, max, from, pos);
+        }
+        else {
+          break;
         }
 
+        // Check the bounds before the node is created: a number that is not
+        // a small integer changes the hidden class of every later quantifier.
         if (min && (!Number.isSafeInteger(min)) || (max && !Number.isSafeInteger(max))) {
           bail("iterations outside JS safe integer range in quantifier", "", from, pos);
         }
+        quantifier = createQuantifier(min, max, from, pos);
       }
     }
 
@@ -1106,9 +1150,8 @@
           var name = parseIdentifier();
           skip(">");
           declareGroupName(name);
-          var group = finishGroup("normal", name.range[0] - 3);
-          group.name = name;
-          return group;
+          var body = parseGroupBody('normal');
+          return createNamedGroup(name, body, name.range[0] - 3, pos);
         }
         else if (features.modifiers && current("(?") && str[pos + 2] != ":") {
           return parseModifiersGroup();
@@ -1187,14 +1230,8 @@
       bail('Invalid flags for modifiers group');
     }
 
-    var modifiersGroup = finishGroup("ignore", from);
-
-    modifiersGroup.modifierFlags = {
-      enabling: enablingFlags,
-      disabling: disablingFlags
-    };
-
-    return modifiersGroup;
+    var body = parseGroupBody('ignore');
+    return createModifiersGroup(enablingFlags, disablingFlags, body, from, pos);
   }
 
   function parseUnicodeSurrogatePairEscape(firstEscape, isUnicodeMode) {
@@ -1557,7 +1594,12 @@
         pos = end + 1;
         // CodePoint can have any number of digits. parseInt() rounds a value
         // above 2^53 correctly, unlike adding up the digits.
-        return createValue('unicodeCodePointEscape', parseInt(str.substring(start, end), 16), start - 3, pos);
+        var codePoint = parseInt(str.substring(start, end), 16);
+        // Every caller throws for a value above 0x10FFFF. Such a value is
+        // replaced with 0x110000 before the node is created, because a number
+        // that is not a small integer would change the hidden class of every
+        // later value node.
+        return createValue('unicodeCodePointEscape', codePoint > 0x10FFFF ? 0x110000 : codePoint, start - 3, pos);
       }
     }
   }
@@ -1764,7 +1806,11 @@
       (!isUnicodeMode && l !== "c" && !(namedCaptureGroups && l === "k"))
     ) {
       tmp = consume(1);
-      return createEscaped('identifier', tmp.charCodeAt(0), tmp, 1);
+      // At the end of the input `tmp` is empty, and the parse fails later.
+      // The code point is 0 then instead of NaN, because a number that is
+      // not a small integer would change the hidden class of every later
+      // value node.
+      return createEscaped('identifier', tmp ? tmp.charCodeAt(0) : 0, tmp, 1);
     }
 
     return null;
