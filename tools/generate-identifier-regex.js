@@ -33,14 +33,20 @@ var generateRegex = function() {
   };
 };
 
+// parser.js creates the regexes from strings on first use, because a regex
+// literal of this size would be parsed on every load.
+var toStringLiteral = function(regex) {
+  return "'" + regex.replace(/\\/g, '\\\\') + "'";
+};
+
 var result = generateRegex();
 console.log(
   '// ECMAScript (Unicode v%s) NonAsciiIdentifierStart:\n\n%s\n',
   version,
-  result.NonAsciiIdentifierStart
+  toStringLiteral(result.NonAsciiIdentifierStart)
 );
 console.log(
   '// ECMAScript (Unicode v%s) NonAsciiIdentifierPartOnly:\n\n%s',
   version,
-  result.NonAsciiIdentifierPartOnly
+  toStringLiteral(result.NonAsciiIdentifierPartOnly)
 );
