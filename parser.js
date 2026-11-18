@@ -2229,7 +2229,7 @@
     } else if (pos < str.length && '&-!#%,:;<=>@`~'.indexOf(res = str[pos]) !== -1) {
       // ClassSetReservedPunctuator
       incr();
-      return createEscaped('identifier', res.charCodeAt(0), res);
+      return createEscaped('identifier', res.charCodeAt(0), res, 1);
     } else if (res = parseCharacterEscape()) {
       return res;
     } else {
