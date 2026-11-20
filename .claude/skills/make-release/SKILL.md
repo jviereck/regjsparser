@@ -1,9 +1,9 @@
 ---
 name: make-release
-description: Bump the package version, commit, tag the release and push it to origin.
+description: Bump the package version, commit, tag the release, push it to origin and create the GitHub release.
 argument-hint: <version_number>
 disable-model-invocation: true
-allowed-tools: Bash(git *), Bash(npm *), Bash(node *)
+allowed-tools: Bash(git *), Bash(npm *), Bash(node *), Bash(gh *)
 ---
 
 Make a release of regjsparser for version `$ARGUMENTS`.
@@ -31,5 +31,8 @@ Check all of these and stop with an explanation if any fails:
    `git tag -a vVERSION -m "Release of vVERSION."`
 5. Push the commit and the tag:
    `git push origin gh-pages && git push origin vVERSION`
+6. Create the GitHub release for the pushed tag, with GitHub's auto-generated release notes:
+   `gh release create vVERSION --repo jviereck/regjsparser --title vVERSION --generate-notes --verify-tag`
+   If this fails (e.g. `gh` is not authenticated), the commit and tag are already pushed; report the error and the command to rerun instead of undoing anything.
 
-Report the commit hash, the tag and the push results. Publishing to npm is not part of this command; mention that `npm publish` is still a separate step.
+Report the commit hash, the tag, the push results and the GitHub release URL. Publishing to npm is not part of this command; mention that `npm publish` is still a separate step.
