@@ -17,6 +17,7 @@
     "lint": "eslint --max-warnings 0 .",
     "test": "run-p test:* lint",
     "test:src": "node test/index.js",
+    "test:hidden-classes": "node test/hidden-classes.js",
     "test:types": "tsc test/types.ts --noEmit",
     "test-v8-reference": "node test/v8-reference.js",
     "bench": "node --experimental-bench --bench tools/bench/index.mjs"
